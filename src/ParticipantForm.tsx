@@ -63,7 +63,7 @@ const ParticipantForm: React.FC<Props> = ({ onAddParticipant }) => {
                     <input className="inputField" type="string" id="birthDate" value={birthDate} onChange={e => setBirthDate(e.target.value)} required />
                 </div>
                 <div className="inputContainer halfWidth">
-                    <label className="inputLabel" htmlFor="weight">GewichtTest</label>
+                    <label className="inputLabel" htmlFor="weight">Gewicht</label>
                     <input className="inputField" type="string" id="weight" value={weight} onChange={e => setWeight(parseFloat(e.target.value))} required />
                 </div>
             </div>
