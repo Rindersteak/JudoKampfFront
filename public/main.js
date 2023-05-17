@@ -1,46 +1,79 @@
-import React, { useState } from 'react';
+import React, { CSSProperties } from 'react';
+import { Link } from 'react-router-dom';
+import logo from './img/kadokan_logo.png';
 
-const ParticipantForm = () => {
-    const [participant, setParticipant] = useState({
-        firstName: '',
-        lastName: '',
-        club: '',
-        regionalAssociation: '',
-        birthDate: '',
-        weight: ''
-    });
-
-    const handleInputChange = (e) => {
-        setParticipant({
-            ...participant,
-            [e.target.name]: e.target.value
-        });
+const HomePage: React.FC = () => {
+    const mainContainerStyle: CSSProperties = {
+        width: '100%',
+        height: '100vh', // Add this to fill the entire height of the screen
+        display: 'flex',
+        flexDirection: 'column',
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Hier können Sie die Teilnehmerdaten an Ihren Backend-Service senden
-        console.log(participant);
+    const logoStyle: CSSProperties = {
+        height: '50px', // Adjust this to change the logo size
+        position: 'absolute', // Position the logo absolutely within the topBanner div
+        left: '10px', // Add some margin from the left side of the screen
+    };
+
+    const topBannerStyle: CSSProperties = {
+        backgroundColor: 'gray',
+        height: '20vh',
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
+        position: 'relative', // Make the topBanner div a relative container for the absolutely positioned logo
+    };
+
+    const lowerContainerStyle: CSSProperties = {
+        display: 'flex',
+        flexDirection: 'row',
+        width: '100%',
+        height: '80vh', // Add this to fill the remaining height of the screen
+    };
+
+    const leftContainerStyle: CSSProperties = {
+        backgroundColor: 'white',
+        width: '50%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
+        textAlign: 'center',
+    };
+
+    const rightContainerStyle: CSSProperties = {
+        backgroundColor: 'blue',
+        color: 'white',
+        width: '50%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
+        textAlign: 'center',
     };
 
     return (
-        <div>
-            <h2 style={{color: 'blue'}}>Neuen Teilnehmer hinzufügen</h2>
-            <form onSubmit={handleSubmit}>
-                <input type="text" name="firstName" placeholder="Vorname" onChange={handleInputChange} required />
-                <input type="text" name="lastName" placeholder="Nachname" onChange={handleInputChange} required />
-                <input type="text" name="club" placeholder="Verein" onChange={handleInputChange} required />
-                <select name="regionalAssociation" onChange={handleInputChange} required>
-                    <option value="">Landesverband wählen</option>
-                    {/* Hier können Sie die Liste der Landesverbände einfügen */}
-                    <option value="beispiel">Beispielverband</option>
-                </select>
-                <input type="date" name="birthDate" placeholder="Geburtsdatum" onChange={handleInputChange} required />
-                <input type="number" name="weight" placeholder="Gewicht" onChange={handleInputChange} required />
-                <button style={{backgroundColor: 'blue', color: 'white'}}>Hinzufügen</button>
-            </form>
+        <div style={mainContainerStyle}>
+            <div style={topBannerStyle}>
+                <img src={logo} alt="Logo" style={logoStyle} />
+                <h1>Willkommen bei</h1>
+                <h2>kadokan</h2>
+            </div>
+            <div style={lowerContainerStyle}>
+                <Link to="/participant-manager" style={leftContainerStyle}>
+                    <h1>Neues Turnier</h1>
+                    <h2>anlegen</h2>
+                </Link>
+                <Link to="/participant-manager" style={rightContainerStyle}>
+                    <h1>Bestehendes</h1>
+                    <h2>Turnier öffnen</h2>
+                </Link>
+            </div>
         </div>
     );
 };
 
-export default ParticipantForm;
+export default HomePage;
