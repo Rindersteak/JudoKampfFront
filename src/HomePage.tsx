@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
-import logo from './img/kadokan_logo.png';
+import logo from './img/kadokan_logo.svg';
 import './HomePage.css';
 
 const HomePage: React.FC = () => {
