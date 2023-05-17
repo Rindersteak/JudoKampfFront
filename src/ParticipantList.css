@@ -1,35 +1,44 @@
+// ParticipantList.css
 .listContainer {
-    background-color: f2f2f2;
     padding: 20px;
     border-radius: 10px;
     max-height: 500px;
     overflow-y: scroll;
     scrollbar-width: thin;
-    scrollbar-color: lightgray;
+    scrollbar-color: lightgray transparent;
     max-width: 400px;
 }
 
 .titleStyle {
+    background-color: #ffffff;
     color: blue;
     text-align: center;
     margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.entryList {
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    padding: 20px;
 }
 
 .entryStyle {
     margin-bottom: 10px;
     display: flex;
     align-items: center;
-    background-color: #f2f2f2;
-    padding: 10px;
-    border-radius: 5px;
-    height: 10px;
-}
-
-.nameStyle {
-    margin-right: 10px;
+    border-bottom: 1px solid gray;
 }
 
 .headerStyle {
     font-weight: bold;
-    margin-right: 10px;
+}
+
+.nameStyle {
+    flex-basis: 50%;
+}
+
+.clubStyle {
+    flex-basis: 50%;
 }

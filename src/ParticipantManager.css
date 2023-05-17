@@ -6,8 +6,3 @@
 .formContainer {
     margin-right: 20px; /* Abstand zwischen Teilnehmer hinzufügen und Liste */
 }
-
-.listContainer {
-    flex: 1; /* Die Liste nimmt den verfügbaren Platz ein */
-    overflow-y: auto; /* Scrollbar anzeigen, falls Inhalt zu groß ist */
-}

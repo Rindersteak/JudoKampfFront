@@ -1,3 +1,5 @@
+/* ParticipantForm.tsx */
+
 import React, { useState } from 'react';
 import { Participant } from './types';
 import './ParticipantForm.css';
@@ -7,113 +9,55 @@ type Props = {
 };
 
 const ParticipantForm: React.FC<Props> = ({ onAddParticipant }) => {
-    const initialParticipant: Participant = {
-        firstName: '',
-        lastName: '',
-        regionalAssociation: '',
-        birthDate: '',
-        weight: 0,
-        club: ''
-    };
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [club, setClub] = useState("");
+    const [regionalAssociation, setRegionalAssociation] = useState("");
+    const [birthDate, setBirthDate] = useState("");
+    const [weight, setWeight] = useState(0);
 
-    const [participant, setParticipant] = useState<Participant>(initialParticipant);
-
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        setParticipant({
-            ...participant,
-            [e.target.name]: e.target.value,
-        });
-    };
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        onAddParticipant(participant);
-        setParticipant(initialParticipant);
-    };
+        onAddParticipant({ firstName, lastName, club, regionalAssociation, birthDate, weight });
+    }
 
     return (
-        <div className="form-container">
-            <h2 className="form-title">Neuen Teilnehmer hinzufügen</h2>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="firstName" className="form-label">Vorname</label>
-                <input
-                    type="text"
-                    id="firstName"
-                    name="firstName"
-                    className="form-input"
-                    onChange={handleInputChange}
-                    required
-                />
-
-                <label htmlFor="lastName" className="form-label">Nachname</label>
-                <input
-                    type="text"
-                    id="lastName"
-                    name="lastName"
-                    className="form-input"
-                    onChange={handleInputChange}
-                    required
-                />
-
-                <label htmlFor="club" className="form-label">Verein</label>
-                <input
-                    type="text"
-                    id="club"
-                    name="club"
-                    className="form-input"
-                    onChange={handleInputChange}
-                    required
-                />
-
-                <label htmlFor="association" className="form-label">Landesverband</label>
-                <div className="select-container">
-                    <select
-                        id="association"
-                        name="association"
-                        className="form-select"
-                        onChange={handleInputChange}
-                        required
-                        defaultValue=""
-                    >
-                        <option value=""></option>
-                        <option value="beispiel">Beispielverband</option>
+        <form onSubmit={handleSubmit} className="formContainer">
+            <h1 className="titleStyle">Neuen Teilnehmer hinzufügen</h1>
+            <div>
+                <div className="inputContainer">
+                    <label className="inputLabel" htmlFor="firstName">Vorname</label>
+                    <input className="inputField" type="text" id="firstName" value={firstName} onChange={e => setFirstName(e.target.value)} required />
+                </div>
+                <div className="inputContainer">
+                    <label className="inputLabel" htmlFor="lastName">Nachname</label>
+                    <input className="inputField" type="text" id="lastName" value={lastName} onChange={e => setLastName(e.target.value)} required />
+                </div>
+            </div>
+            <div>
+                <div className="inputContainer">
+                    <label className="inputLabel" htmlFor="club">Verein</label>
+                    <input className="inputField" type="text" id="club" value={club} onChange={e => setClub(e.target.value)} required />
+                </div>
+                <div className="inputContainer">
+                    <label className="inputLabel" htmlFor="regionalAssociation">Landesverband</label>
+                    <select className="selectField" id="regionalAssociation" value={regionalAssociation} onChange={e => setRegionalAssociation(e.target.value)} required>
+                        {/* Hier können Sie die Optionen für die Landesverbände hinzufügen */}
                     </select>
-                    <span className="select-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 12 12" fill="blue">
-              <path d="M0 9L6 0 12 9H0z" transform="rotate(180 6 4.5)" />
-            </svg>
-          </span>
                 </div>
-
-                <div className="flex-container">
-                    <div className="input-container">
-                        <label htmlFor="birthDate" className="form-label">Geburtsdatum</label>
-                        <input
-                            type="string"
-                            id="birthDate"
-                            name="birthDate"
-                            className="form-input"
-                            onChange={handleInputChange}
-                            required
-                        />
-                    </div>
-
-                    <div className="input-container">
-                        <label htmlFor="weight" className="form-label">Gewicht</label>
-                        <input
-                            type="number"
-                            id="weight"
-                            name="weight"
-                            className="form-input"
-                            onChange={handleInputChange}
-                            required
-                        />
-                    </div>
+            </div>
+            <div className="halfWidthWrapper">
+                <div className="inputContainer halfWidth">
+                    <label className="inputLabel" htmlFor="birthDate">Geburtsdatum</label>
+                    <input className="inputField" type="date" id="birthDate" value={birthDate} onChange={e => setBirthDate(e.target.value)} required />
                 </div>
-
-                <button className="form-button">Hinzufügen</button>
-            </form>
-        </div>
+                <div className="inputContainer halfWidth">
+                    <label className="inputLabel" htmlFor="weight">Gewicht</label>
+                    <input className="inputField" type="number" id="weight" value={weight} onChange={e => setWeight(parseFloat(e.target.value))} required />
+                </div>
+            </div>
+            <button className="addButton" type="submit">Hinzufügen</button>
+        </form>
     );
 };
 

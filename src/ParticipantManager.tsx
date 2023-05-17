@@ -2,6 +2,7 @@ import React from 'react';
 import ParticipantForm from './ParticipantForm';
 import ParticipantList from './ParticipantList';
 import { Participant } from './types';
+
 import './ParticipantManager.css';
 
 const ParticipantManager: React.FC = () => {
@@ -16,7 +17,7 @@ const ParticipantManager: React.FC = () => {
             <div className="formContainer">
                 <ParticipantForm onAddParticipant={addParticipant} />
             </div>
-            <div className="listContainer">
+            <div>
                 <ParticipantList participants={participants} />
             </div>
         </div>

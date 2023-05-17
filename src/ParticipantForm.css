@@ -1,73 +1,112 @@
+/* ParticipantForm.css */
 
-.form-container {
-    background-color: #ffffff;
-    padding: 20px;
-    width: 40%;
-    border: none;
-}
-
-.form-title {
-    color: blue;
+.titleStyle {
+    font-family: 'Nunito', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 33px;
+    letter-spacing: 0em;
     text-align: center;
+    color: #001AFF;
+    width: 333px;
+    height: 33px;
+    margin: 46px auto 0px auto;
 }
 
-.form-label {
-    color: black;
-    font-weight: bold;
+.inputLabel {
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 27px;
+    letter-spacing: -0.02em;
+    color: #000000;
+    position: absolute;
+    top: 10px;
+    left: 15px;
 }
 
-.form-input {
-    padding: 10px;
+.inputField {
+    font-size: 20px;
+    padding: 10px 15px;
     width: 100%;
-    margin-bottom: 10px;
-    background-color: #f2f2f2;
-    border: none;
-    border-radius: 5px;
     box-sizing: border-box;
-    height: 35px;
+    border: none;
+    background: none;
 }
 
-.form-select {
-    padding: 10px;
-    width: 100%;
-    margin-bottom: 10px;
-    background-color: #f2f2f2;
+.addButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 367px;
+    height: 43px;
+    background: #001AFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 2px;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 27px;
+    letter-spacing: -0.02em;
     border: none;
-    border-radius: 5px;
-    box-sizing: border-box;
-    height: 35px;
+    cursor: pointer;
+    margin-top: 20px;
+    padding: 5px 10px;
+    clear: both;
 }
 
-.select-container {
+.addButton:hover {
+    background: #000A91;
+}
+
+.addButton:active {
+    background: #00056D;
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 60.28px;
+    width: 367px;
     position: relative;
 }
 
-.select-icon {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.flex-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.inputField,
+.selectField {
+    height: 48px;
+    border-radius: 12px;
     border: none;
-    flex-wrap: wrap;
+    padding: 0 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    background: #EDEFF2;
 }
 
-.input-container {
-    width: 45%;
+.formContainer {
+    display: flex;
+    flex-direction: column;
+flex-wrap: wrap;
 }
 
-.form-button {
-    background-color: blue;
-    color: white;
-    padding: 10px 20px;
-    margin-top: 10px;
-    width: 100%;
-    border-radius: 5px;
-    font-size: 18px;
-    font-weight: bold;
+.halfWidthWrapper {
+    display: flex;
+justify-content: space-between;
+}
+
+.inputContainer.halfWidth {
+    width: 160px;
+    margin-right: 47px;
+}
+
+.inputContainer.halfWidth:last-of-type {
+    margin-right: 0;
+}
+
+.inputLabel {
+    position: absolute;
+    top: -30px;
+    left: 10px;
 }
