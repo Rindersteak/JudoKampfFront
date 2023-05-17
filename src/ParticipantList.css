@@ -1,0 +1,35 @@
+.listContainer {
+    background-color: f2f2f2;
+    padding: 20px;
+    border-radius: 10px;
+    max-height: 500px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: lightgray;
+    max-width: 400px;
+}
+
+.titleStyle {
+    color: blue;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.entryStyle {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 5px;
+    height: 10px;
+}
+
+.nameStyle {
+    margin-right: 10px;
+}
+
+.headerStyle {
+    font-weight: bold;
+    margin-right: 10px;
+}

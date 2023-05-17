@@ -2,25 +2,13 @@ import React, { CSSProperties } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './HomePage';
 import ParticipantManager from './ParticipantManager';
+import './App.css';
 
 const App: React.FC = () => {
-    const appContainer: CSSProperties = {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'flex-start',
-        backgroundColor: 'white',
-        height: '100vh',
-        width: '100%',
-    };
-
-    const contentContainer: CSSProperties = {
-        maxWidth: '100%',
-    };
-
     return (
         <Router>
-            <div style={appContainer}>
-                <div style={contentContainer}>
+            <div className="container">
+                <div className="content">
                     <Routes>
                         <Route path="/" element={<HomePage />} />
                         <Route path="/participant-manager" element={<ParticipantManager />} />

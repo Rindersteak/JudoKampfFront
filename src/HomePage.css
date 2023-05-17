@@ -1,0 +1,46 @@
+.top-banner {
+    background-color: gray;
+    height: 15vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+}
+
+.logo {
+    height: 80px; /* Größe des Logos */
+    position: absolute;
+    left: 10px;
+}
+
+.lower-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.left-container {
+    background-color: white;
+    height: 80vh;
+    width: 50vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    color: blue;
+}
+
+.right-container {
+    background-color: blue;
+    color: white;
+    height: 80vh;
+    width: 50vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
