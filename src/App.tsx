@@ -1,4 +1,6 @@
 import React, { CSSProperties } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import HomePage from './HomePage';
 import ParticipantManager from './ParticipantManager';
 
 const App: React.FC = () => {
@@ -8,19 +10,24 @@ const App: React.FC = () => {
         alignItems: 'flex-start',
         backgroundColor: 'white',
         height: '100vh',
-        padding: '50px'
+        width: '100%',
     };
 
     const contentContainer: CSSProperties = {
-        maxWidth: '100%'
+        maxWidth: '100%',
     };
 
     return (
-        <div style={appContainer}>
-            <div style={contentContainer}>
-                <ParticipantManager />
+        <Router>
+            <div style={appContainer}>
+                <div style={contentContainer}>
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/participant-manager" element={<ParticipantManager />} />
+                    </Routes>
+                </div>
             </div>
-        </div>
+        </Router>
     );
 };
 
