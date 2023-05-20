@@ -1,4 +1,4 @@
-export type Participant = {
+export type Fighter = {
     firstName: string;
     lastName: string;
     club: string;

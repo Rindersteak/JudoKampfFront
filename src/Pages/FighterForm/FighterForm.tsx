@@ -2,16 +2,16 @@
 
 // Importieren der notwendigen Abhängigkeiten und Dateien
 import React, { useState } from 'react';
-import { Participant } from '../../types';
-import './ParticipantForm.css';
+import { Fighter } from '../../types';
+import './FighterForm.css';
 
 // Definition der Props für die Komponente. Hier wird eine Funktion erwartet, die einen Teilnehmer hinzufügt
 type Props = {
-    onAddParticipant: (participant: Participant) => void;
+    onAddFighter: (participant: Fighter) => void;
 };
 
 // Hauptkomponente, welche das Formular rendert
-const ParticipantForm: React.FC<Props> = ({ onAddParticipant }) => {
+const FighterForm: React.FC<Props> = ({ onAddFighter }) => {
 
     // State-Variablen für die Formularfelder
     const [firstName, setFirstName] = useState("");
@@ -26,7 +26,7 @@ const ParticipantForm: React.FC<Props> = ({ onAddParticipant }) => {
         e.preventDefault();
 
         // Aufrufen der "onAddParticipant"-Funktion mit den aktuellen Werten der Formularfelder
-        onAddParticipant({ firstName, lastName, club, regionalAssociation, birthDate, weight });
+        onAddFighter({ firstName, lastName, club, regionalAssociation, birthDate, weight });
     }
 
     // Das gerenderte Formular
@@ -73,4 +73,4 @@ const ParticipantForm: React.FC<Props> = ({ onAddParticipant }) => {
 };
 
 // Exportieren der Komponente
-export default ParticipantForm;
+export default FighterForm;
