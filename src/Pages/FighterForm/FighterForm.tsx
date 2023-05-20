@@ -63,4 +63,5 @@ const FighterForm: React.FC<Props> = ({ onAddFighter }) => { // Deklaration der 
     );
 };
 
+
 export default FighterForm; // Export der FighterForm-Komponente als Standardexport
