@@ -3,7 +3,6 @@
 import React, { CSSProperties } from 'react';
 import logo from '../../img/kadokan_logo.svg';
 import './HomePage.css';
-import '../../styles.css'
 
 interface HomePageProps {
     onOpenFighterManager: () => void;

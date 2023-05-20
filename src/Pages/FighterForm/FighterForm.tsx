@@ -1,19 +1,12 @@
-/* FighterForm.tsx */
-
-// Importieren der notwendigen Abhängigkeiten und Dateien
 import React, { useState } from 'react';
 import { Fighter } from '../../types';
 import './FighterForm.css';
 
-// Definition der Props für die Komponente. Hier wird eine Funktion erwartet, die einen Teilnehmer hinzufügt
 type Props = {
     onAddFighter: (fighter: Fighter) => void;
 };
 
-// Hauptkomponente, welche das Formular rendert
 const FighterForm: React.FC<Props> = ({ onAddFighter }) => {
-
-    // State-Variablen für die Formularfelder
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [club, setClub] = useState("");
@@ -21,15 +14,11 @@ const FighterForm: React.FC<Props> = ({ onAddFighter }) => {
     const [birthDate, setBirthDate] = useState("");
     const [weight, setWeight] = useState(0);
 
-    // Funktion, die ausgeführt wird, wenn das Formular abgeschickt wird
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-
-        // Aufrufen der "onAddFighter"-Funktion mit den aktuellen Werten der Formularfelder
         onAddFighter({ firstName, lastName, club, regionalAssociation, birthDate, weight });
     }
 
-    // Das gerenderte Formular
     return (
         <form onSubmit={handleSubmit} className="formContainer">
             <h1 className="titleStyle">Neuen Teilnehmer hinzufügen</h1>
@@ -52,7 +41,9 @@ const FighterForm: React.FC<Props> = ({ onAddFighter }) => {
                     <label className="inputLabel" htmlFor="regionalAssociation">Landesverband</label>
                     <div className="selectContainer">
                         <select className="selectField" id="regionalAssociation" value={regionalAssociation} onChange={e => setRegionalAssociation(e.target.value)} required>
-                            {/* Hier können Sie die Optionen für die Landesverbände hinzufügen */}
+                            <option value=""></option>
+                            <option value="Landesverband A">Landesverband A</option>
+                            <option value="Landesverband B">Landesverband B</option>
                         </select>
                     </div>
                 </div>
@@ -72,5 +63,4 @@ const FighterForm: React.FC<Props> = ({ onAddFighter }) => {
     );
 };
 
-// Exportieren der Komponente
 export default FighterForm;
