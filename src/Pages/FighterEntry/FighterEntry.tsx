@@ -1,18 +1,18 @@
-import React from 'react'; // React importieren
-import { Fighter } from '../../types'; // Importieren des Fighter-Typs aus einer externen Datei
-import './FighterEntry.css'; // Importieren von Styling für FighterEntry
+import React from 'react';
+import { Fighter } from '../../types';
+import './FighterEntry.css';
 
 type Props = {
-    fighter: Fighter; // Props-Typ definieren, der einen Kämpfer erwartet
+    fighter: Fighter;
 };
 
-const FighterEntry: React.FC<Props> = ({ fighter }) => { // Deklaration der FighterEntry-Komponente als Funktionskomponente
+const FighterEntry: React.FC<Props> = ({ fighter }) => {
     return (
-        <div className="participantEntry"> {/* Div-Container mit der Klasse "participantEntry" */}
-            <span className="name">{fighter.firstName} {fighter.lastName}</span> {/* Anzeige des Vor- und Nachnamens des Kämpfers */}
-            <span className="club">{fighter.club}</span> {/* Anzeige des Clubs des Kämpfers */}
+        <div className="participantEntry">
+            <span className="name">{fighter.firstName} {fighter.lastName}</span>
+            <span className="club">{fighter.club}</span>
         </div>
     );
 };
 
-export default FighterEntry; // Export der FighterEntry-Komponente als Standardexport
+export default FighterEntry;
