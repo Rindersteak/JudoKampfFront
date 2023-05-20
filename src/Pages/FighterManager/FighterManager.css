@@ -1,0 +1,11 @@
+.innerContainer {
+    display: flex;
+    justify-content: space-between; /* zentriert die Elemente links und rechts mit maximalem Zwischenraum */
+    align-items: center; /* zentriert die Elemente vertikal */
+}
+
+.formContainer,
+.listContainer {
+    flex: 1; /* nimmt den verfügbaren Platz ein */
+    margin: 0 10px; /* fügt einen horizontalen Abstand zwischen den Elementen hinzu */
+}
