@@ -14,7 +14,7 @@ body {
 .top-banner {
     position: absolute;
     width: 100%;
-    height: 202px;
+    height: 20%;
     left: 0px;
     top: 0px;
     background-color: rgba(39, 39, 39, 0.5);
@@ -34,9 +34,9 @@ body {
 .lower-container {
     position: absolute;
     width: 100%;
-    height: 711px;
+    height: 80%;
     left: 0px;
-    top: 202px;
+    top: 20%;
     display: flex;
     flex-direction: row;
     width: 100%;
