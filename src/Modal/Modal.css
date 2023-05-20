@@ -32,5 +32,5 @@
     position: absolute;
     top: 2vh; /* 2% der Viewport-Höhe */
     right: 2vh; /* 2% der Viewport-Höhe */
-    transform: translate(50%, -50%); /* Zentriert das X-Symbol relativ zur modal-content-Box */
+    transform: translate(50%, -50%); /* Zentriert das X-Symbol relativ zur modal-content-Box*/
 }
