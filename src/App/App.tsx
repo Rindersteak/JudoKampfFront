@@ -9,14 +9,12 @@ const App: React.FC = () => {
     return (
         <Router>
             <div className="container">
-                <div className="content">
                     <Routes>
                         <Route path="/" element={<HomePage />} />
                         <Route path="/participant-manager" element={<ParticipantManager />} />
                         <Route path="/selected-tournament" element={<SelectedTournament />} />
                     </Routes>
                 </div>
-            </div>
         </Router>
     );
 };

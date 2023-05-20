@@ -5,7 +5,7 @@ import './HomePage.css';
 
 const HomePage: React.FC = () => {
     return (
-        <div>
+        <div className="content">
             <div className="top-banner">
                 <img src={logo} alt="Logo" className="logo" />
                 <h1 style={{ textAlign: 'center' }}>Willkommen bei<br />kadokan</h1>
