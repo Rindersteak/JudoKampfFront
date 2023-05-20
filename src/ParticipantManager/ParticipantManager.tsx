@@ -1,7 +1,7 @@
 import React from 'react';
-import ParticipantForm from './ParticipantForm';
-import ParticipantList from './ParticipantList';
-import { Participant } from './types';
+import ParticipantForm from '../ParticipantForm/ParticipantForm';
+import ParticipantList from '../ParticipantList/ParticipantList';
+import { Participant } from '../types';
 
 import './ParticipantManager.css';
 

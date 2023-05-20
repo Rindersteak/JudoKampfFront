@@ -1,8 +1,8 @@
 import React, { CSSProperties } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from './HomePage';
-import ParticipantManager from './ParticipantManager';
-import SelectedTournament from './selectedTournament';
+import HomePage from '../HomePage/HomePage';
+import ParticipantManager from '../ParticipantManager/ParticipantManager';
+import SelectedTournament from '../selectedTournament';
 import './App.css';
 
 const App: React.FC = () => {

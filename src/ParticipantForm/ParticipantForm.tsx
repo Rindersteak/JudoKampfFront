@@ -2,7 +2,7 @@
 
 // Importieren der notwendigen Abhängigkeiten und Dateien
 import React, { useState } from 'react';
-import { Participant } from './types';
+import { Participant } from '../types';
 import './ParticipantForm.css';
 
 // Definition der Props für die Komponente. Hier wird eine Funktion erwartet, die einen Teilnehmer hinzufügt
