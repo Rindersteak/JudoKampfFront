@@ -1,31 +1,36 @@
+// App.tsx
+
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from '../Pages/HomePage/HomePage';
-import FighterManager from '../Pages/FighterManager/FighterManager';
-import SelectedTournament from '../selectedTournament';
+import { BrowserRouter as Router } from 'react-router-dom';
+import AppRoutes from '../Routes/Routes';
 import Modal from '../Modal/Modal';
-import './App.css';
+import TournamentForm from '../Pages/TournamentForm/TournamentForm';
+import FighterManager from '../Pages/FighterManager/FighterManager';
 
 const App: React.FC = () => {
     const [modalOpen, setModalOpen] = useState(false);
+    const [modalContent, setModalContent] = useState<React.ReactNode | null>(null);
+
+    const handleOpenTournamentForm = () => {
+        setModalContent(<TournamentForm />);
+        setModalOpen(true);
+    };
 
     const handleOpenFighterManager = () => {
+        setModalContent(<FighterManager />);
         setModalOpen(true);
     };
 
     return (
         <Router>
             <div className="container">
-                    <Routes>
-                        <Route path="/" element={<HomePage onOpenFighterManager={handleOpenFighterManager} />} />
-                        <Route path="/selected-tournament" element={<SelectedTournament />} />
-                    </Routes>
-                    {modalOpen &&
-                        <Modal onClose={() => setModalOpen(false)}>
-                            <FighterManager />
-                        </Modal>
-                    }
-                </div>
+                <AppRoutes onOpenTournamentForm={handleOpenTournamentForm} onOpenFighterManager={handleOpenFighterManager} />
+                {modalOpen &&
+                    <Modal onClose={() => setModalOpen(false)}>
+                        {modalContent}
+                    </Modal>
+                }
+            </div>
         </Router>
     );
 };
