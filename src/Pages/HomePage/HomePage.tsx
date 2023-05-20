@@ -1,28 +1,31 @@
-import React, { CSSProperties } from 'react'; // React und CSSProperties importieren
-import logo from '../../img/kadokan_logo.svg'; // Importieren des Logos als Bild
-import './HomePage.css'; // Importieren von Styling für HomePage
+// HomePage.tsx
+
+import React, { CSSProperties } from 'react';
+import logo from '../../img/kadokan_logo.svg';
+import './HomePage.css';
 
 interface HomePageProps {
-    onOpenFighterManager: () => void; // Props-Typ definieren, der eine Funktion erwartet
+    onOpenFighterManager: () => void;
+    onOpenTournamentForm: () => void; // Add this line
 }
 
-const HomePage: React.FC<HomePageProps> = ({ onOpenFighterManager }) => { // Deklaration der HomePage-Komponente als Funktionskomponente
+const HomePage: React.FC<HomePageProps> = ({ onOpenFighterManager, onOpenTournamentForm }) => {
     return (
-        <div className="content"> {/* Div-Container mit der Klasse "content" */}
-            <div className="top-banner"> {/* Div-Container für den oberen Banner */}
-                <img src={logo} alt="Logo" className="logo" /> {/* Logo-Bild */}
-                <h1 style={{ textAlign: 'center' }}>Willkommen bei<br />kodokan</h1> {/* Überschrift für die Startseite */}
+        <div className="content">
+            <div className="top-banner">
+                <img src={logo} alt="Logo" className="logo" />
+                <h1 style={{ textAlign: 'center' }}>Willkommen bei<br />kodokan</h1>
             </div>
-            <div className="lower-container"> {/* Div-Container für den unteren Bereich */}
-                <div onClick={onOpenFighterManager} className="left-container"> {/* Div-Container für den linken Bereich */}
-                    <h1>Neues Turnier<br />anlegen</h1> {/* Überschrift für die Option, ein neues Turnier anzulegen */}
+            <div className="lower-container">
+                <div onClick={onOpenTournamentForm} className="left-container">
+                    <h1>Neues Turnier<br />anlegen</h1>
                 </div>
-                <div onClick={onOpenFighterManager} className="right-container"> {/* Div-Container für den rechten Bereich */}
-                    <h1>Bestehendes<br />Turnier öffnen</h1> {/* Überschrift für die Option, ein bestehendes Turnier zu öffnen */}
+                <div onClick={onOpenFighterManager} className="right-container">
+                    <h1>Bestehendes<br />Turnier öffnen</h1>
                 </div>
             </div>
         </div>
     );
 };
 
-export default HomePage; // Export der HomePage-Komponente als Standardexport
+export default HomePage;
