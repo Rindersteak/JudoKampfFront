@@ -1,7 +1,9 @@
+// ParticipantManager.tsx
+
 import React from 'react';
 import ParticipantForm from '../ParticipantForm/ParticipantForm';
 import ParticipantList from '../ParticipantList/ParticipantList';
-import { Participant } from '../types';
+import { Participant } from '../../types';
 
 import './ParticipantManager.css';
 
@@ -17,11 +19,12 @@ const ParticipantManager: React.FC = () => {
             <div className="formContainer">
                 <ParticipantForm onAddParticipant={addParticipant} />
             </div>
-            <div>
+            <div className="listContainer">
                 <ParticipantList participants={participants} />
             </div>
         </div>
     );
 };
+
 
 export default ParticipantManager;

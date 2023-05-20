@@ -1,9 +1,14 @@
+// HomePage.tsx
+
 import React, { CSSProperties } from 'react';
-import { Link } from 'react-router-dom';
-import logo from '../img/kadokan_logo.svg';
+import logo from '../../img/kadokan_logo.svg';
 import './HomePage.css';
 
-const HomePage: React.FC = () => {
+interface HomePageProps {
+    onOpenParticipantManager: () => void;
+}
+
+const HomePage: React.FC<HomePageProps> = ({ onOpenParticipantManager }) => {
     return (
         <div className="content">
             <div className="top-banner">
@@ -11,12 +16,12 @@ const HomePage: React.FC = () => {
                 <h1 style={{ textAlign: 'center' }}>Willkommen bei<br />kadokan</h1>
             </div>
             <div className="lower-container">
-                <Link to="/participant-manager" className="left-container">
+                <div onClick={onOpenParticipantManager} className="left-container">
                     <h1>Neues Turnier<br />anlegen</h1>
-                </Link>
-                <Link to="/participant-manager" className="right-container">
+                </div>
+                <div onClick={onOpenParticipantManager} className="right-container">
                     <h1>Bestehendes<br />Turnier öffnen</h1>
-                </Link>
+                </div>
             </div>
         </div>
     );

@@ -8,24 +8,23 @@
     font-family: 'Nunito';
     font-style: normal;
     font-weight: 700;
-    font-size: 24px;
-    line-height: 93px;
+    font-size: 1.5em;
+    line-height: 1.5em;
     text-align: center;
+    margin-bottom: 1em;
 }
 
 /* Styling für die Beschriftung der Eingabefelder */
 .inputLabel {
     font-family: 'Nunito', sans-serif;
-    font-size: 20px;
+    font-size: 1.25em;
     font-weight: 700;
-    line-height: 27px;
+    line-height: 1.35em;
     letter-spacing: -0.02em;
     color: #000000;
     position: absolute;
-    top: 10px;
-    margin-top: -38px;
-    font-style: normal;
-    left: 0px;
+    top: -1.875em; /* Abstand nach oben anpassen */
+    left: 0;
 }
 
 /* Styling für Eingabefelder */
@@ -34,11 +33,11 @@
     box-sizing: border-box;
     border: none;
     background: none;
-    height: 48px;
+    height: 3em;
     border-radius: 5px;
-    padding: 0 10px;
+    padding: 0 0.625em;
     font-family: 'Nunito', sans-serif;
-    font-size: 16px;
+    font-size: 1em;
     background: #EDEFF2;
 }
 
@@ -49,20 +48,20 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 43px;
+    height: 1.6875em;
     background: #001AFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 2px;
     color: white;
     font-family: 'Nunito', sans-serif;
     font-style: normal;
-    font-size: 24px;
+    font-size: 1.5em;
     font-weight: 900;
-    line-height: 33px;
+    line-height: 2.0625em;
     letter-spacing: -0.02em;
     border: none;
     cursor: pointer;
-    margin-top: -18px;
+    margin-top: -1.125em;
 }
 
 /* Styling für den "Hinzufügen" Button beim Mouseover */
@@ -79,11 +78,17 @@
 .inputContainer {
     display: flex;
     flex-direction: column;
-    margin-bottom: 60.28px;
-    width: 367px;
+    margin-bottom: 3.76em;
+    width: 100%;
     position: relative;
-    height: 31px;
+    height: 1.9375em;
     border-radius: 5px;
+}
+
+@media (min-width: 768px) {
+    .inputContainer {
+        width: 22.9375em; /* 367px */
+    }
 }
 
 /* Styling für Dropdown-Felder */
@@ -91,13 +96,13 @@
     width: 100%;
     border-radius: 5px;
     border: none;
-    padding: 0 10px;
+    padding: 0 0.625em;
     font-family: 'Nunito', sans-serif;
-    font-size: 16px;
+    font-size: 1em;
     background: #EDEFF2;
     appearance: none;
     position: relative;
-    height: 31px;
+    height: 1.9375em;
     -moz-appearance: none;
     -webkit-appearance: none;
 }
@@ -107,7 +112,7 @@
     content: "";
     position: absolute;
     top: 50%;
-    right: 10px;
+    right: 0.625em;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     border-top: 6px solid #001AFF;
@@ -119,6 +124,7 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    align-items: center; /* zentriert die Elemente horizontal */
 }
 
 /* Styling für den Container der Dropdown-Felder */
@@ -128,13 +134,12 @@
     width: 100%;
 }
 
-
 /* Styling für das Pfeil-Icon von Dropdown-Feldern */
 .selectContainer:after {
     content: "";
     position: absolute;
     top: 50%;
-    right: 10px;
+    right: 0.625em;
     border-left: 12px solid transparent;
     border-right: 12px solid transparent;
     border-top: 12px solid #001AFF;
@@ -144,18 +149,32 @@
 /* Styling für den Container der zwei Eingabefelder nebeneinander anordnet */
 .halfWidthWrapper {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
+    align-items: center; /* zentriert die Elemente horizontal */
+}
+
+@media (min-width: 768px) {
+    .halfWidthWrapper {
+        flex-direction: row;
+    }
 }
 
 /* Styling für die Eingabefelder in dem "halbe Breite" Container */
 .inputContainer.halfWidth {
-    width: 160px;
-    margin-right: 47px;
-    height: 31px;
+    width: 100%;
+    margin-bottom: 2.9375em;
+    height: 1.9375em;
+}
+
+@media (min-width: 768px) {
+    .inputContainer.halfWidth {
+        width: 10em; /* 160px */
+        margin-right: 2.9375em;
+    }
 }
 
 /* Entfernt den rechten Abstand vom letzten Eingabefeld in dem "halbe Breite" Container */
 .inputContainer.halfWidth:last-of-type {
     margin-right: 0;
 }
-

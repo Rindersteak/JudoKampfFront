@@ -1,7 +1,7 @@
 // ParticipantList.tsx
 import React from 'react';
 import ParticipantEntry from '../ParticipantEntry/ParticipantEntry';
-import { Participant } from '../types';
+import { Participant } from '../../types';
 import './ParticipantList.css';
 
 type Props = {
