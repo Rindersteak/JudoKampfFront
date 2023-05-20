@@ -1,8 +1,0 @@
-.innerContainer {
-    display: flex;
-    align-items: flex-start;
-}
-
-.formContainer {
-    margin-right: 20px; /* Abstand zwischen Teilnehmer hinzufügen und Liste */
-}
