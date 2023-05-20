@@ -1,4 +1,4 @@
-/* ParticipantForm.tsx */
+/* FighterForm.tsx */
 
 // Importieren der notwendigen Abhängigkeiten und Dateien
 import React, { useState } from 'react';
@@ -7,7 +7,7 @@ import './FighterForm.css';
 
 // Definition der Props für die Komponente. Hier wird eine Funktion erwartet, die einen Teilnehmer hinzufügt
 type Props = {
-    onAddFighter: (participant: Fighter) => void;
+    onAddFighter: (fighter: Fighter) => void;
 };
 
 // Hauptkomponente, welche das Formular rendert
@@ -25,7 +25,7 @@ const FighterForm: React.FC<Props> = ({ onAddFighter }) => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        // Aufrufen der "onAddParticipant"-Funktion mit den aktuellen Werten der Formularfelder
+        // Aufrufen der "onAddFighter"-Funktion mit den aktuellen Werten der Formularfelder
         onAddFighter({ firstName, lastName, club, regionalAssociation, birthDate, weight });
     }
 
