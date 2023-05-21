@@ -152,12 +152,12 @@ body .titleStyle {
     justify-content: space-between;
     align-items: center; /* zentriert die Elemente horizontal */
 }
-
 @media (min-width: 768px) {
     .halfWidthWrapper {
         flex-direction: row;
     }
 }
+
 
 /* Styling für die Eingabefelder in dem "halbe Breite" Container */
 .inputContainer.halfWidth {
@@ -177,3 +177,13 @@ body .titleStyle {
 .inputContainer.halfWidth:last-of-type {
     margin-right: 0;
 }
+.separator {
+    flex-grow: 1;
+    height: 3px;
+    width: 10px;
+    background-color: black;
+    margin: 10px;
+    margin-bottom: 3.75em;
+    display: flex;
+    align-items: center;
+  }
