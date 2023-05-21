@@ -21,7 +21,7 @@ const App = () => {
         <div className="top-banner">
           <img src={logo} alt="Logo" className="logo" />
           <h1>Turnier "XXXX"</h1>
-          <span>IDXXXX</span>
+          <h1>IDXXXX</h1>
         </div>
       </div>
       <div className='middleContainer'>
