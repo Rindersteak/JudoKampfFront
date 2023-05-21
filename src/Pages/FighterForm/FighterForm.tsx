@@ -68,8 +68,7 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
         },
       },
     };
-  
-    onAddFighter(fighter);  
+
 
     try {
       const response = await fetch('http://localhost:8081/fighters/', {
@@ -94,6 +93,7 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
       setErrorMessage("Es gab ein Problem beim Hinzufügen des Kämpfers.");
       setLoading(false);
     }
+
   };
 
   return (
