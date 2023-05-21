@@ -3,16 +3,19 @@ import { Fighter } from '../../types';
 import './Fighter.css';
 
 type Props = {
-    fighter: Fighter;
+  fighter: Fighter;
+  className?: string;
 };
 
-const FighterEntry: React.FC<Props> = ({ fighter }) => {
-    return (
-        <div className="entryStyle"> {/* Div-Container mit der Klasse "entryStyle" */}
-            <span className="nameStyle">{fighter.firstName} {fighter.lastName}</span> {/* Anzeige des Vor- und Nachnamens des Kämpfers */}
-            <span className="clubStyle">{fighter.club}</span> {/* Anzeige des Clubs des Kämpfers */}
-        </div>
-    );
+const FighterEntry: React.FC<Props> = ({ fighter, className }) => {
+  const entryClassName = className ? `entryStyle ${className}` : 'entryStyle';
+
+  return (
+    <div className={entryClassName}>
+      <span className="nameStyle">{fighter.firstname} {fighter.lastname}</span>
+      <span className="clubStyle">{fighter.club.name}</span>
+    </div>
+  );
 };
 
 export default FighterEntry;

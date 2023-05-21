@@ -21,20 +21,41 @@
 
 
 .entryStyle {
+    font-family: 'Nunito';
     display: flex;
+    font-weight: 400;
     align-items: stretch;
     border-bottom: 0.063em solid #EEEEF2;
+    color: #242533;
+    
 }
 
 
 .headerStyle {
-    font-weight: bold;
+    font-family: 'Nunito';
+    font-weight: 700;
+    color: #484964;
 }
 
-.nameStyle, .clubStyle {
+.nameStyle {
     flex-basis: 50%;
-    width: 15em; /* 240px/16 */
-    height: 2.25em; /* 36px/16 */
+    width: 15em; 
+    height: 2.25em; 
     background-color: #f9f9fc;
-    padding: 0.313em; /* 5px/16 */
-}
+    padding: 0.6em; 
+    text-indent: 1em; /* Verschiebt den Text nach rechts */
+    }
+    
+    .clubStyle {
+    flex-basis: 50%;
+    width: 15em; 
+    height: 2.25em; 
+    background-color: #f9f9fc;
+    padding: 0.6em; 
+    text-indent: 1em; /* Verschiebt den Text nach rechts */
+    }
+    
+    .highlighted {
+        background-color: yellow;
+      }
+      

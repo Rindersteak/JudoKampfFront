@@ -1,75 +1,136 @@
-import React, { useState } from 'react'; // React und useState importieren
-import { Fighter } from '../../types'; // Importieren des Fighter-Typs aus einer externen Datei
-import './FighterForm.css'; // Importieren von Styling für FighterForm
+import React, { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { Fighter } from '../../types';
+import './FighterForm.css';
 
 type Props = {
-    onAddFighter: (fighter: Fighter) => void; // Props-Typ definieren, der eine Funktion onAddFighter erwartet, die einen Kämpfer entgegennimmt und nichts zurückgibt
+  onAddFighter: (fighter: Fighter) => void;
 };
 
-const FighterForm: React.FC<Props> = ({ onAddFighter }) => { // Deklaration der FighterForm-Komponente als Funktionskomponente
-    const [firstName, setFirstName] = useState(""); // State-Hook für den Vornamen des Kämpfers
-    const [lastName, setLastName] = useState(""); // State-Hook für den Nachnamen des Kämpfers
-    const [club, setClub] = useState(""); // State-Hook für den Club des Kämpfers
-    const [regionalAssociation, setRegionalAssociation] = useState(""); // State-Hook für den Landesverband des Kämpfers
-    const [birthDate, setBirthDate] = useState(""); // State-Hook für das Geburtsdatum des Kämpfers
-    const [weight, setWeight] = useState(0); // State-Hook für das Gewicht des Kämpfers
+const FighterForm: React.FC<Props> = ({ onAddFighter }) => {
+  const [firstname, setFirstName] = useState("");
+  const [lastname, setLastName] = useState("");
+  const [clubname, setClubName] = useState("");
+  const [birthdate, setBirthDate] = useState<Date | null>(null);
+  const [weight, setWeight] = useState(0);
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        onAddFighter({
-          id: 0, // ID entsprechend Ihrer Datenstruktur
-          firstName: firstName,
-          lastName: lastName,
-          club: club,
-          regionalAssociation: regionalAssociation,
-          birthDate: birthDate,
-          weight: weight,
-        });
-      };
-      
 
-    return (
-        <form onSubmit={handleSubmit} className="formContainer"> {/* Formular-Container mit der Klasse "formContainer" */}
-            <h1 className="titleStyle">Neuen Teilnehmer hinzufügen</h1> {/* Überschrift für das Formular */}
-            <div>
-                <div className="inputContainer"> {/* Container für den Vornamen-Eingabebereich */}
-                    <label className="inputLabel" htmlFor="firstName">Vorname</label> {/* Label für den Vornamen */}
-                    <input className="inputField" type="text" id="firstName" value={firstName} onChange={e => setFirstName(e.target.value)} required /> {/* Eingabefeld für den Vornamen, das den firstName-Status aktualisiert */}
-                </div>
-                <div className="inputContainer"> {/* Container für den Nachnamen-Eingabebereich */}
-                    <label className="inputLabel" htmlFor="lastName">Nachname</label> {/* Label für den Nachnamen */}
-                    <input className="inputField" type="text" id="lastName" value={lastName} onChange={e => setLastName(e.target.value)} required /> {/* Eingabefeld für den Nachnamen, das den lastName-Status aktualisiert */}
-                </div>
-            </div>
-            <div>
-                <div className="inputContainer"> {/* Container für den Vereins-Eingabebereich */}
-                    <label className="inputLabel" htmlFor="club">Verein</label> {/* Label für den Verein */}
-                    <input className="inputField" type="text" id="club" value={club} onChange={e => setClub(e.target.value)} required /> {/* Eingabefeld für den Verein, das den club-Status aktualisiert */}
-                </div>
-                <div className="inputContainer"> {/* Container für den Landesverband-Auswahlbereich */}
-                    <label className="inputLabel" htmlFor="regionalAssociation">Landesverband</label> {/* Label für den Landesverband */}
-                    <div className="selectContainer"> {/* Container für die Auswahlliste */}
-                        <select className="selectField" id="regionalAssociation" value={regionalAssociation} onChange={e => setRegionalAssociation(e.target.value)} required> {/* Auswahlliste für den Landesverband, die den regionalAssociation-Status aktualisiert */}
-                            <option value=""></option> {/* Standardoption */}
-                            <option value="Landesverband A">Landesverband A</option> {/* Option für Landesverband A */}
-                            <option value="Landesverband B">Landesverband B</option> {/* Option für Landesverband B */}
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div className="halfWidthWrapper"> {/* Wrapper für den Geburtsdatum- und Gewichtsbereich */}
-                <div className="inputContainer halfWidth"> {/* Container für das Geburtsdatum */}
-                    <label className="inputLabel" htmlFor="birthDate">Geburtsdatum</label> {/* Label für das Geburtsdatum */}
-                    <input className="inputField" type="string" id="birthDate" value={birthDate} onChange={e => setBirthDate(e.target.value)} required /> {/* Eingabefeld für das Geburtsdatum, das den birthDate-Status aktualisiert */}
-                </div>
-                <div className="inputContainer halfWidth"> {/* Container für das Gewicht */}
-                    <label className="inputLabel" htmlFor="weight">Gewicht</label> {/* Label für das Gewicht */}
-                    <input className="inputField" type="string" id="weight" value={weight} onChange={e => setWeight(parseFloat(e.target.value))} required /> {/* Eingabefeld für das Gewicht, das den weight-Status aktualisiert */}
-                </div>
-            </div>
-            <button className="addButton" type="submit">Hinzufügen</button> {/* Submit-Button zum Hinzufügen des Teilnehmers */}
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const fighter = {
+      id: 0,
+      sex: "m",
+      firstname: firstname,
+      lastname: lastname,
+      birthdate: new Date(),
+      ageclass: {
+        id: 0,
+        name: "",
+        lowerAge: 0,
+        upperAge: 0,
+      },
+      weight: weight,
+      weightclass: {
+        id: 0,
+        name: "",
+        upperBoundary: 0,
+        lowerBoundary: 0,
+      },
+      club: {
+        id: 0,
+        shortName: clubname,
+        name: clubname,
+        address: {
+          id: 0,
+          street: "",
+          houseNumber: "",
+          city: "",
+          state: "",
+          postalCode: "",
+        },
+      },
+    };
+  
+    onAddFighter(fighter);
+  
+    try {
+      const response = await fetch('http://localhost:8081/fighters/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(fighter)
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error('An error occurred while submitting the fighter:', error);
+    }
+  };
+  
+
+
+  return (
+    <form onSubmit={handleSubmit} className="formContainer">
+      <h1 className="titleStyle">Neuen Teilnehmer hinzufügen</h1>
+      <div>
+        <div className="inputContainer">
+          <label className="inputLabel" htmlFor="firstName">Vorname</label>
+          <input className="inputField" type="text" id="firstName" value={firstname} onChange={e => setFirstName(e.target.value)} required />
+        </div>
+        <div className="inputContainer">
+          <label className="inputLabel" htmlFor="lastName">Nachname</label>
+          <input className="inputField" type="text" id="lastName" value={lastname} onChange={e => setLastName(e.target.value)} required />
+        </div>
+      </div>
+
+      <div className="inputContainer">
+        <label className="inputLabel" htmlFor="club">Verein</label>
+        <div className="selectContainer">
+          <select className="selectField" id="club" value={clubname} onChange={e => setClubName(e.target.value)} required>
+            <option value=""></option>
+            <option value="Verein 1">Verein 1</option>
+            <option value="Verein 2">Verein 2</option>
+          </select>
+        </div>
+      </div>
+
+
+      <div className="halfWidthWrapper">
+  <div className="inputContainer halfWidth">
+    <label className="inputLabel" htmlFor="birthDate">Geburtsdatum</label>
+    <DatePicker
+      id="birthDate"
+      selected={birthdate}
+      onChange={(date: Date | null) => setBirthDate(date)}
+      dateFormat="dd.MM.yyyy"
+      required
+    />
+  </div>
+  <div className="inputContainer halfWidth"> {/* Container für das Gewicht */}
+    <label className="inputLabel" htmlFor="weight">Gewicht</label> {/* Label für das Gewicht */}
+    <input className="inputField" type="number" id="weight" value={weight} onChange={e => setWeight(parseFloat(e.target.value))} required /> {/* Eingabefeld für das Gewicht, das den weight-Status aktualisiert */}
+  </div>
+</div>
+
+<button className="addButton" type="submit" onClick={handleSubmit}>
+  Hinzufügen
+</button>
+
         </form>
-    );
+  );
+
+    
+
+    
+
+
 };
 
 
