@@ -1,4 +1,4 @@
-/* FighterForm.css */
+/* TournamentForm.css */
 
 /* Importiert die Nunito Schriftart von Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
@@ -122,9 +122,11 @@ body .titleStyle {
 .formContainer {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    justify-content: center;
     align-items: center; /* zentriert die Elemente horizontal */
+    height: 100%; /* Füllt die gesamte verfügbare Höhe des übergeordneten Containers aus */
 }
+
 
 /* Styling für den Container der Dropdown-Felder */
 .selectContainer {

@@ -1,34 +1,39 @@
 .modal {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; /* Zentriert das Modal vertikal */
     position: fixed;
     z-index: 1;
     left: 0;
     top: 0;
-    width: 100vw; /* 100% der Viewport-Breite */
-    height: 100vh; /* 100% der Viewport-Höhe */
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.4);
 }
 
+
 .modal-content {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-color: #fefefe;
     margin: auto;
     padding: 4vh;
     border: 1px solid #888;
-    width: 80vw;
+    width: 90vw;
+    height: 90vh;
     position: relative;
-    max-height: 92vh;
+    overflow-y: auto;
 }
-
 
 .close {
     color: #56595E;
-    font-size: 2.8vh; /* 2.8% der Viewport-Höhe */
+    font-size: 2.8vh;
     font-weight: bold;
     position: absolute;
-    top: 2vh; /* 2% der Viewport-Höhe */
-    right: 2vh; /* 2% der Viewport-Höhe */
-    transform: translate(50%, -50%); /* Zentriert das X-Symbol relativ zur modal-content-Box*/
+    top: 2vh;
+    right: 2vh;
+    transform: translate(50%, -50%);
 }
+
