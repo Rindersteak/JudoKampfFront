@@ -1,32 +1,46 @@
-// ParticipantList.tsx
-import React from 'react';
-import FighterEntry from '../FighterEntry/FighterEntry';
+import React, { useEffect, useState } from 'react';
+import FighterEntry from '../../Objects/Fighter/Fighter';
 import { Fighter } from '../../types';
 import './FighterList.css';
 
 type Props = {
-    fighters: Fighter[];
+  fighters: Fighter[];
 };
 
 const FighterList: React.FC<Props> = ({ fighters }) => {
-    return (
-        <div className="listContainer">
-            <h2 className="titleStyle">Teilnehmerliste</h2>
-            <div className="entryList">
-                <div className="entryStyle headerStyle">
-                    <span className="nameStyle">Name</span>
-                    <span className="clubStyle">Verein</span>
-                </div>
-                {fighters.map((fighters, index) => (
-                    <FighterEntry key={index} fighter={fighters} />
-                ))}
-                {/* Testeinträge */}
-                {Array.from({ length: 10 }).map((_, index) => (
-                    <FighterEntry key={`test-${index}`} fighter={{ firstName: 'Vorname', lastName: 'Nachname', club: 'Beispielverein', regionalAssociation: '', birthDate: '2023-05-17', weight: 0 }} />
-                ))}
-            </div>
-        </div>
-    );
+  const [backendFighters, setBackendFighters] = useState<Fighter[]>([]);
+
+  useEffect(() => {
+    const loadBackendFighters = async () => {
+      try {
+        const response = await fetch('http://localhost:8081/fighters/');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setBackendFighters(data);
+      } catch (error) {
+        console.error('Error loading backend fighters:', error);
+      }
+    };
+
+    loadBackendFighters();
+  }, []);
+
+  return (
+    <div className="entryList">
+      <div className="entryStyle headerStyle">
+        <span className="nameStyle">Name</span>
+        <span className="clubStyle">Verein</span>
+      </div>
+      {fighters.map((fighter) => (
+        <FighterEntry key={fighter.id} fighter={fighter} />
+      ))}
+      {backendFighters.map((fighter) => (
+        <FighterEntry key={fighter.id} fighter={fighter} />
+      ))}
+    </div>
+  );
 };
 
 export default FighterList;

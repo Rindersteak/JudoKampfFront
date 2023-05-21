@@ -1,0 +1,30 @@
+.middleContainer {
+    background-color: rgba(39, 39, 39, 0.5);
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    top: 20%;
+    display: flex;
+    flex-direction: row;
+}
+
+.cards-container{
+    padding: 1.3%;
+    width: 100%;
+    height: 50%;
+}
+
+.card-one{
+    background-color: blue;
+    width: 20%;
+    height: 50%;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.card-two{
+    background-color: white;
+    width: 20%;
+    height: 50%;
+    text-align: center;
+}

@@ -4,13 +4,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
 
 /* Styling für den Formulartitel */
-body .titleStyle {
+.titleStyle {
     font-family: 'Nunito';
     font-style: normal;
     font-weight: 700;
     font-size: 1.5em;
     text-align: center;
     padding-bottom: 2em;
+    color: #001AFF;
 }
 
 /* Styling für die Beschriftung der Eingabefelder */
@@ -176,4 +177,18 @@ body .titleStyle {
 /* Entfernt den rechten Abstand vom letzten Eingabefeld in dem "halbe Breite" Container */
 .inputContainer.halfWidth:last-of-type {
     margin-right: 0;
+}
+
+
+.react-datepicker__input-container input {
+    width: 100%;
+    margin-bottom: 2.9375em;
+    height: 1.9375em;
+    border: none;
+    background: none;
+    border-radius: 5px;
+    padding: 0 0.625em;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1em;
+    background: #EDEFF2;
 }

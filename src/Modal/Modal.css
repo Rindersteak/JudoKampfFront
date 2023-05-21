@@ -8,7 +8,6 @@
     top: 0;
     width: 100vw; /* 100% der Viewport-Breite */
     height: 100vh; /* 100% der Viewport-Höhe */
-    overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
 }
 
@@ -21,7 +20,6 @@
     width: 80vw;
     position: relative;
     max-height: 92vh;
-    overflow: auto;
 }
 
 
