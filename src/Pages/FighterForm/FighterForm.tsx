@@ -6,24 +6,41 @@ import './FighterForm.css';
 
 type Props = {
   onAddFighter: (fighter: Fighter) => void;
+  onShowSuccessPopup: (status: boolean) => void;
 };
 
-const FighterForm: React.FC<Props> = ({ onAddFighter }) => {
+const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [clubname, setClubName] = useState("");
   const [birthdate, setBirthDate] = useState<Date | null>(null);
   const [weight, setWeight] = useState(0);
-
+  const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
+    setErrorMessage("");
+
+    if (!birthdate) {
+      setErrorMessage("Bitte Geburtsdatum eingeben.");
+      setLoading(false);
+      return;
+    }
+  
+    if (weight > 300) {
+      setErrorMessage("Max. 300");
+      setLoading(false);
+      return;
+    }
+
     const fighter = {
       id: 0,
       sex: "m",
       firstname: firstname,
       lastname: lastname,
-      birthdate: new Date(),
+      birthdate: birthdate,
       ageclass: {
         id: 0,
         name: "",
@@ -52,8 +69,8 @@ const FighterForm: React.FC<Props> = ({ onAddFighter }) => {
       },
     };
   
-    onAddFighter(fighter);
-  
+    onAddFighter(fighter);  
+
     try {
       const response = await fetch('http://localhost:8081/fighters/', {
         method: 'POST',
@@ -62,19 +79,22 @@ const FighterForm: React.FC<Props> = ({ onAddFighter }) => {
         },
         body: JSON.stringify(fighter)
       });
-  
+
+      setLoading(false);
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-  
-      const data = await response.json();
-      console.log(data);
+
+      // Nur wenn der POST-Aufruf erfolgreich war, den Kämpfer zur Liste hinzufügen und Popup anzeigen
+      onAddFighter(fighter);
+      onShowSuccessPopup(true);
     } catch (error) {
       console.error('An error occurred while submitting the fighter:', error);
+      setErrorMessage("Es gab ein Problem beim Hinzufügen des Kämpfers.");
+      setLoading(false);
     }
   };
-  
-
 
   return (
     <form onSubmit={handleSubmit} className="formContainer">
@@ -103,35 +123,28 @@ const FighterForm: React.FC<Props> = ({ onAddFighter }) => {
 
 
       <div className="halfWidthWrapper">
-  <div className="inputContainer halfWidth">
-    <label className="inputLabel" htmlFor="birthDate">Geburtsdatum</label>
-    <DatePicker
-      id="birthDate"
-      selected={birthdate}
-      onChange={(date: Date | null) => setBirthDate(date)}
-      dateFormat="dd.MM.yyyy"
-      required
-    />
-  </div>
-  <div className="inputContainer halfWidth"> {/* Container für das Gewicht */}
-    <label className="inputLabel" htmlFor="weight">Gewicht</label> {/* Label für das Gewicht */}
-    <input className="inputField" type="number" id="weight" value={weight} onChange={e => setWeight(parseFloat(e.target.value))} required /> {/* Eingabefeld für das Gewicht, das den weight-Status aktualisiert */}
-  </div>
-</div>
+        <div className="inputContainer halfWidth">
+          <label className="inputLabel" htmlFor="birthDate">Geburtsdatum</label>
+          <DatePicker
+            id="birthDate"
+            selected={birthdate}
+            onChange={(date: Date | null) => setBirthDate(date)}
+            dateFormat="dd.MM.yyyy"
+            required
+          />
+        </div>
+        <div className="inputContainer halfWidth">
+          <label className="inputLabel" htmlFor="weight">Gewicht</label>
+          <input className="inputField" type="number" id="weight" value={weight} onChange={e => setWeight(parseFloat(e.target.value))} required />
+        </div>
+      </div>
 
-<button className="addButton" type="submit" onClick={handleSubmit}>
-  Hinzufügen
-</button>
-
-        </form>
+      <button className="addButton" type="submit" disabled={loading}>
+        {loading ? "Laden..." : "Hinzufügen"}
+      </button>
+      {errorMessage && <div className="errorMessage">{errorMessage}</div>}
+    </form>
   );
-
-    
-
-    
-
-
 };
 
-
-export default FighterForm; // Export der FighterForm-Komponente als Standardexport
+export default FighterForm;
