@@ -27,9 +27,14 @@
     align-items: stretch;
     border-bottom: 0.063em solid #EEEEF2;
     color: #242533;
+    transition: background-color 0.3s ease;
     
 }
 
+.entryStyle.highlighted {
+    background-color: yellow;
+    transform: scale(1.05);
+  }
 
 .headerStyle {
     font-family: 'Nunito';
@@ -55,7 +60,3 @@
     text-indent: 1em; /* Verschiebt den Text nach rechts */
     }
     
-    .highlighted {
-        background-color: yellow;
-      }
-      
