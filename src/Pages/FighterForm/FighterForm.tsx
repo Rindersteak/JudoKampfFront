@@ -14,10 +14,19 @@ const FighterForm: React.FC<Props> = ({ onAddFighter }) => { // Deklaration der 
     const [birthDate, setBirthDate] = useState(""); // State-Hook für das Geburtsdatum des Kämpfers
     const [weight, setWeight] = useState(0); // State-Hook für das Gewicht des Kämpfers
 
-    const handleSubmit = (e: React.FormEvent) => { // Funktion zum Behandeln des Formularabsendens
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        onAddFighter({ firstName, lastName, club, regionalAssociation, birthDate, weight }); // Aufruf der onAddFighter-Funktion aus den Props und Übergabe der Kämpferdaten
-    }
+        onAddFighter({
+          id: 0, // ID entsprechend Ihrer Datenstruktur
+          firstName: firstName,
+          lastName: lastName,
+          club: club,
+          regionalAssociation: regionalAssociation,
+          birthDate: birthDate,
+          weight: weight,
+        });
+      };
+      
 
     return (
         <form onSubmit={handleSubmit} className="formContainer"> {/* Formular-Container mit der Klasse "formContainer" */}

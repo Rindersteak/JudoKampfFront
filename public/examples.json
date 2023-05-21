@@ -1,0 +1,272 @@
+[
+  {
+  "id": 1,
+  "firstName": "Max",
+  "lastName": "Mustermann",
+  "club": "Verein 1",
+  "regionalAssociation": "Regionalverband 1",
+  "birthDate": "1995-01-01",
+  "weight": 70
+  },
+  {
+  "id": 2,
+  "firstName": "Laura",
+  "lastName": "Müller",
+  "club": "Verein 2",
+  "regionalAssociation": "Regionalverband 2",
+  "birthDate": "1996-02-02",
+  "weight": 65
+  },
+  {
+  "id": 3,
+  "firstName": "Jan",
+  "lastName": "Schulz",
+  "club": "Verein 3",
+  "regionalAssociation": "Regionalverband 3",
+  "birthDate": "1997-03-03",
+  "weight": 72
+  },
+  {
+  "id": 4,
+  "firstName": "Sophie",
+  "lastName": "Fischer",
+  "club": "Verein 4",
+  "regionalAssociation": "Regionalverband 4",
+  "birthDate": "1998-04-04",
+  "weight": 63
+  },
+  {
+  "id": 5,
+  "firstName": "Tim",
+  "lastName": "Wagner",
+  "club": "Verein 5",
+  "regionalAssociation": "Regionalverband 5",
+  "birthDate": "1999-05-05",
+  "weight": 70
+  },
+  {
+  "id": 6,
+  "firstName": "Anna",
+  "lastName": "Becker",
+  "club": "Verein 6",
+  "regionalAssociation": "Regionalverband 6",
+  "birthDate": "2000-06-06",
+  "weight": 61
+  },
+  {
+  "id": 7,
+  "firstName": "Felix",
+  "lastName": "Keller",
+  "club": "Verein 7",
+  "regionalAssociation": "Regionalverband 7",
+  "birthDate": "2001-07-07",
+  "weight": 75
+  },
+  {
+  "id": 8,
+  "firstName": "Emma",
+  "lastName": "Hoffmann",
+  "club": "Verein 8",
+  "regionalAssociation": "Regionalverband 8",
+  "birthDate": "2002-08-08",
+  "weight": 68
+  },
+  {
+  "id": 9,
+  "firstName": "Leon",
+  "lastName": "Schmidt",
+  "club": "Verein 9",
+  "regionalAssociation": "Regionalverband 9",
+  "birthDate": "2003-09-09",
+  "weight": 73
+  },
+  {
+  "id": 10,
+  "firstName": "Lara",
+  "lastName": "Meyer",
+  "club": "Verein 10",
+  "regionalAssociation": "Regionalverband 10",
+  "birthDate": "2004-10-10",
+  "weight": 67
+  },
+  {
+  "id": 11,
+  "firstName": "Markus",
+  "lastName": "Schneider",
+  "club": "Verein 11",
+  "regionalAssociation": "Regionalverband 11",
+  "birthDate": "1990-11-11",
+  "weight": 80
+  },
+  {
+  "id": 12,
+  "firstName": "Hannah",
+  "lastName": "Wolf",
+  "club": "Verein 12",
+  "regionalAssociation": "Regionalverband 12",
+  "birthDate": "1991-12-12",
+  "weight": 64
+  },
+  {
+  "id": 13,
+  "firstName": "Alexander",
+  "lastName": "Bauer",
+  "club": "Verein 13",
+  "regionalAssociation": "Regionalverband 13",
+  "birthDate": "1992-01-13",
+  "weight": 71
+  },
+  {
+  "id": 14,
+  "firstName": "Julia",
+  "lastName": "Schmitt",
+  "club": "Verein 14",
+  "regionalAssociation": "Regionalverband 14",
+  "birthDate": "1993-02-14",
+  "weight": 66
+  },
+  {
+  "id": 15,
+  "firstName": "David",
+  "lastName": "Mayer",
+  "club": "Verein 15",
+  "regionalAssociation": "Regionalverband 15",
+  "birthDate": "1994-03-15",
+  "weight": 74
+  },
+  {
+  "id": 16,
+  "firstName": "Lisa",
+  "lastName": "Weber",
+  "club": "Verein 16",
+  "regionalAssociation": "Regionalverband 16",
+  "birthDate": "1995-04-16",
+  "weight": 69
+  },
+  {
+  "id": 17,
+  "firstName": "Michael",
+  "lastName": "Schulze",
+  "club": "Verein 17",
+  "regionalAssociation": "Regionalverband 17",
+  "birthDate": "1996-05-17",
+  "weight": 77
+  },
+  {
+  "id": 18,
+  "firstName": "Laura",
+  "lastName": "Wagner",
+  "club": "Verein 18",
+  "regionalAssociation": "Regionalverband 18",
+  "birthDate": "1997-06-18",
+  "weight": 62
+  },
+  {
+  "id": 19,
+  "firstName": "Tobias",
+  "lastName": "Koch",
+  "club": "Verein 19",
+  "regionalAssociation": "Regionalverband 19",
+  "birthDate": "1998-07-19",
+  "weight": 78
+  },
+  {
+  "id": 20,
+  "firstName": "Melanie",
+  "lastName": "Schäfer",
+  "club": "Verein 20",
+  "regionalAssociation": "Regionalverband 20",
+  "birthDate": "1999-08-20",
+  "weight": 61
+  },
+  {
+  "id": 21,
+  "firstName": "Kevin",
+  "lastName": "Bachmann",
+  "club": "Verein 21",
+  "regionalAssociation": "Regionalverband 21",
+  "birthDate": "2000-09-21",
+  "weight": 76
+  },
+  {
+  "id": 22,
+  "firstName": "Sophia",
+  "lastName": "Kohl",
+  "club": "Verein 22",
+  "regionalAssociation": "Regionalverband 22",
+  "birthDate": "2001-10-22",
+  "weight": 67
+  },
+  {
+  "id": 23,
+  "firstName": "Tom",
+  "lastName": "Lange",
+  "club": "Verein 23",
+  "regionalAssociation": "Regionalverband 23",
+  "birthDate": "2002-11-23",
+  "weight": 72
+  },
+  {
+  "id": 24,
+  "firstName": "Sarah",
+  "lastName": "Schuster",
+  "club": "Verein 24",
+  "regionalAssociation": "Regionalverband 24",
+  "birthDate": "2003-12-24",
+  "weight": 68
+  },
+  {
+  "id": 25,
+  "firstName": "Jonas",
+  "lastName": "Graf",
+  "club": "Verein 25",
+  "regionalAssociation": "Regionalverband 25",
+  "birthDate": "2004-01-25",
+  "weight": 73
+  },
+  {
+  "id": 26,
+  "firstName": "Lea",
+  "lastName": "König",
+  "club": "Verein 26",
+  "regionalAssociation": "Regionalverband 26",
+  "birthDate": "2005-02-26",
+  "weight": 66
+  },
+  {
+  "id": 27,
+  "firstName": "Ben",
+  "lastName": "Hansen",
+  "club": "Verein 27",
+  "regionalAssociation": "Regionalverband 27",
+  "birthDate": "2006-03-27",
+  "weight": 79
+  },
+  {
+  "id": 28,
+  "firstName": "Mia",
+  "lastName": "Scholz",
+  "club": "Verein 28",
+  "regionalAssociation": "Regionalverband 28",
+  "birthDate": "2007-04-28",
+  "weight": 64
+  },
+  {
+  "id": 29,
+  "firstName": "Niklas",
+  "lastName": "Krüger",
+  "club": "Verein 29",
+  "regionalAssociation": "Regionalverband 29",
+  "birthDate": "2008-05-29",
+  "weight": 75
+  },
+  {
+  "id": 30,
+  "firstName": "Emily",
+  "lastName": "Vogt",
+  "club": "Verein 30",
+  "regionalAssociation": "Regionalverband 30",
+  "birthDate": "2009-06-30",
+  "weight": 70
+  }
+  ]

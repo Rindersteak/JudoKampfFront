@@ -5,23 +5,27 @@ import { Fighter } from '../../types'; // Importieren des Fighter-Typs aus einer
 
 import './FighterManager.css'; // Importieren von Styling für FighterManager
 
-const FighterManager: React.FC = () => { // Deklaration der FighterManager-Komponente als Funktionskomponente
-    const [fighters, setFighters] = React.useState<Fighter[]>([]); // Verwaltung des Zustands der Kämpfer mit dem useState-Hook
+const FighterManager: React.FC = () => {
+    const [fighters, setFighters] = React.useState<Fighter[]>([]);
 
-    const addFighter = (fighter: Fighter) => { // Funktion zum Hinzufügen eines Kämpfers
-        setFighters([fighter, ...fighters]); // Hinzufügen des neuen Kämpfers zum Array der Kämpfer im Zustand
+    const addFighter = (fighter: Fighter) => {
+        setFighters([fighter, ...fighters]);
     };
 
     return (
-        <div className="innerContainer"> {/* Div-Container mit der Klasse "innerContainer" */}
-            <div className="formContainer"> {/* Div-Container für das Formular */}
-                <FighterForm onAddFighter={addFighter} /> {/* FighterForm-Komponente mit der onAddFighter-Funktion als Prop */}
+        <div className="innerContainer">
+            <div className="formContainer">
+                <FighterForm onAddFighter={addFighter} />
             </div>
-            <div className="listContainer"> {/* Div-Container für die Teilnehmerliste */}
-                <FighterList fighters={fighters} /> {/* FighterList-Komponente mit den Kämpfern im Zustand als Prop */}
+            <div className="listSection">
+                <h1 className="titleStyleList">Teilnehmerliste</h1>
+                <div className="listContainer">
+                    <FighterList fighters={fighters} />
+                </div>
             </div>
         </div>
     );
 };
+
 
 export default FighterManager; // Export der FighterManager-Komponente als Standardexport

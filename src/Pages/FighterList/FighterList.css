@@ -1,43 +1,40 @@
 .listContainer {
-    padding: 20px;
-    border-radius: 10px;
-    max-height: 500px;
-    overflow-y: scroll;
-    scrollbar-width: thin;
-    scrollbar-color: lightgray transparent;
-    max-width: 400px;
+    padding-left: 1.25em; /* 20px/16 */
+    padding-right: 1.25em; /* 20px/16 */
+    border-radius: 0.625em; /* 10px/16 */
 }
 
-.titleStyle {
-    background-color: #ffffff;
-    color: blue;
+
+.titleStyleList {
+    color: #001AFF;
+    padding-bottom: 0em;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.5em;
     text-align: center;
-    margin-bottom: 20px;
-    padding: 20px;
-    border-radius: 10px;
 }
 
 .entryList {
-    background-color: #f2f2f2;
-    border-radius: 10px;
-    padding: 20px;
+    padding: 1.25em; /* 20px/16 */
 }
 
+
 .entryStyle {
-    margin-bottom: 10px;
     display: flex;
-    align-items: center;
-    border-bottom: 1px solid gray;
+    align-items: stretch;
+    border-bottom: 0.063em solid #EEEEF2;
 }
+
 
 .headerStyle {
     font-weight: bold;
 }
 
-.nameStyle {
+.nameStyle, .clubStyle {
     flex-basis: 50%;
-}
-
-.clubStyle {
-    flex-basis: 50%;
+    width: 15em; /* 240px/16 */
+    height: 2.25em; /* 36px/16 */
+    background-color: #f9f9fc;
+    padding: 0.313em; /* 5px/16 */
 }

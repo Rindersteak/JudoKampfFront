@@ -1,0 +1,9 @@
+.fighter {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.name {
+    margin-right: 10px;
+}
