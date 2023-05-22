@@ -27,6 +27,8 @@ const FighterList: React.FC<Props> = ({ fighters }) => {
     loadBackendFighters();
   }, []);
 
+
+
   return (
     <div className="entryList">
       <div className="entryStyle headerStyle">

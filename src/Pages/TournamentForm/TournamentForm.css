@@ -1,4 +1,4 @@
-/* FighterForm.css */
+/* TournamentForm.css */
 
 /* Importiert die Nunito Schriftart von Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
@@ -38,6 +38,34 @@ body .titleStyle {
     font-family: 'Nunito', sans-serif;
     font-size: 1em;
     background: #EDEFF2;
+}
+
+.inputFieldWide {
+    width: 243px;
+    box-sizing: border-box;
+    border: none;
+    background: none;
+    height: 30px;
+    border-radius: 5px;
+    padding: 0 0.625em;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1em;
+    background: #EDEFF2;
+    align-self: flex-start;
+}
+
+.inputFieldSmall {
+    width: 117px;
+    box-sizing: border-box;
+    border: none;
+    background: none;
+    height: 30px;
+    border-radius: 5px;
+    padding: 0 0.625em;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1em;
+    background: #EDEFF2;
+    align-self: flex-end;
 }
 
 /* Styling für den "Hinzufügen" Button */
@@ -122,9 +150,11 @@ body .titleStyle {
 .formContainer {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    justify-content: center;
     align-items: center; /* zentriert die Elemente horizontal */
+    height: 100%; /* Füllt die gesamte verfügbare Höhe des übergeordneten Containers aus */
 }
+
 
 /* Styling für den Container der Dropdown-Felder */
 .selectContainer {
@@ -156,7 +186,22 @@ body .titleStyle {
     .halfWidthWrapper {
         flex-direction: row;
     }
+    
 }
+
+.halfWidthWrapperAddress {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center; /* zentriert die Elemente horizontal */
+    margin-top: -42px;
+}
+@media (min-width: 768px) {
+    .halfWidthWrapperAddress {
+        flex-direction: row;
+    }
+}
+
 
 
 /* Styling für die Eingabefelder in dem "halbe Breite" Container */
@@ -177,13 +222,33 @@ body .titleStyle {
 .inputContainer.halfWidth:last-of-type {
     margin-right: 0;
 }
-.separator {
-    flex-grow: 1;
-    height: 3px;
-    width: 10px;
-    background-color: black;
-    margin: 10px;
-    margin-bottom: 3.75em;
+
+.dashContainer {
     display: flex;
     align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-top: -0.5em;
+    left: -22.5px;
+    top: -20px;
   }
+  
+  .dash {
+    position: absolute;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27px;
+    letter-spacing: -0.02em;
+    color: #000000;
+  }
+  
+  .halfWidthWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  
