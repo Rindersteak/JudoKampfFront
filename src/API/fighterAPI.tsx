@@ -1,6 +1,3 @@
-// fighterApi.tsx
-
-// Importieren des Fighter-Typs
 import { Fighter } from '../types';
 
 export async function postFighter(fighter: Fighter) {
