@@ -3,6 +3,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Fighter } from '../../types';
 import './FighterForm.css';
+import { postFighter } from '../../API/fighterAPI';
 
 // Definieren der Properties für die Komponente
 type Props = {
@@ -76,29 +77,17 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
 
     // Versuch, den Fighter zum Backend hinzuzufügen
     try {
-      const response = await fetch('http://localhost:8081/fighters/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(fighter)
-      });
-
-      setLoading(false);
-
-      // Error handling
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
+      // Verwende die postFighter Funktion aus der Fighter API, um den Kämpfer hinzuzufügen
+      await postFighter(fighter);
+  
       // Hinzufügen des Fighters und Anzeigen des Erfolgspopups nur, wenn der POST erfolgreich war
       onAddFighter(fighter);
       onShowSuccessPopup(true);
-    } catch (error) {
-      console.error('An error occurred while submitting the fighter:', error);
+      setLoading(false);
+  } catch (error) {
       setErrorMessage("(DB-Error) Fehler beim Anlegen!");
       setLoading(false);
-    }
+  }
 
   };
 
