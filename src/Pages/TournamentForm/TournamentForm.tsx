@@ -9,10 +9,16 @@ const TournamentForm: React.FC = () => {
     const [tournamentVenue, setTournamentVenue] = useState("");
     const [tournamentDate, setTournamentDate] = useState('');
     const [nationalAssociation, setNationalAssociation] = useState("");
+    const [addressCity, setAddressCity] = useState("");
+    const [addressZipCode, setAddressZipCode] = useState("");
+    const [addressStreet, setAddressStreet] = useState("");
+    const [addressStreetNumber, setAddressStreetNumber] = useState("");
+
 
     const [periodFrom, setPeriodFrom] = useState<Date | null>(null);
     const [periodTo, setPeriodTo] = useState<Date | null>(null);
-    const [weight, setWeight] = useState(0);
+
+    
 
 
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,25 +48,23 @@ const TournamentForm: React.FC = () => {
                     <input className="inputField" type="text" id="tournamentVenue" value={tournamentVenue} onChange={e => setTournamentVenue(e.target.value)} required />
                 </div>
             </div>
-
             <div className="halfWidthWrapper">
                 <div className="inputContainer halfWidth">
                     <label className="inputLabel" htmlFor="address">Adresse</label>
-                    <input className="inputField" type="number" id="weight" value={weight} onChange={e => setWeight(parseFloat(e.target.value))} required /> {/* Eingabefeld für das Gewicht, das den weight-Status aktualisiert */}
+                    <input className="inputFieldWide" type="text" id="addressCity" value={addressCity} onChange={e => setAddressCity((e.target.value))} placeholder = "Stadt" required /> {/* Eingabefeld für das Gewicht, das den weight-Status aktualisiert */}
                 </div>
                 <div className="inputContainer halfWidth"> {/* Container für das Gewicht */}
-                    <input className="inputField" type="number" id="weight" value={weight} onChange={e => setWeight(parseFloat(e.target.value))} required /> {/* Eingabefeld für das Gewicht, das den weight-Status aktualisiert */}
+                    <input className="inputFieldSmall" type="text" id="addressZipCode" value={addressZipCode} onChange={e => setAddressZipCode((e.target.value))} placeholder = "PLZ" required /> {/* Eingabefeld für das Gewicht, das den weight-Status aktualisiert */}
                 </div>
             </div>
-            <div className="halfWidthWrapper">
+            <div className="halfWidthWrapperAddress">
                 <div className="inputContainer halfWidth">
-                    <input className="inputField" type="number" id="weight" value={weight} onChange={e => setWeight(parseFloat(e.target.value))} required /> {/* Eingabefeld für das Gewicht, das den weight-Status aktualisiert */}
+                    <input className="inputFieldWide" type="text" id="addressStreet" value={addressStreet} onChange={e => setAddressStreet((e.target.value))} placeholder = "Straße" required /> {/* Eingabefeld für das Gewicht, das den weight-Status aktualisiert */}
                 </div>
                 <div className="inputContainer halfWidth">
-                    <input className="inputField" type="number" id="weight" value={weight} onChange={e => setWeight(parseFloat(e.target.value))} required /> {/* Eingabefeld für das Gewicht, das den weight-Status aktualisiert */}
+                    <input className="inputFieldSmall" type="text" id="addressStreetNumber" value={addressStreetNumber} onChange={e => setAddressStreetNumber((e.target.value))} placeholder = "Nummer" required /> {/* Eingabefeld für das Gewicht, das den weight-Status aktualisiert */}
                 </div>
             </div>
-
             <div className="inputContainer">
                 <label className="inputLabel" htmlFor="nationalAssociation">Landesverband</label>
                 <div className="selectContainer">
@@ -82,6 +86,9 @@ const TournamentForm: React.FC = () => {
                         required
                     />
                 </div>
+                <div className="dashContainer">
+                  <div className="dash">-</div>
+                </div>
                 <div className="inputContainer halfWidth"> {/* Container für das Gewicht */}
                     <DatePicker
                         id="periodTo"
@@ -91,19 +98,12 @@ const TournamentForm: React.FC = () => {
                         required
                     /></div>
             </div>
-
             <button className="addButton" type="submit" onClick={handleSubmit}>
                 Hinzufügen
             </button>
 
         </form>
     );
-
-
-
-
-
-
 };
 
 export default TournamentForm;
