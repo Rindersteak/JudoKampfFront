@@ -1,0 +1,12 @@
+.locationStyle,
+.cityStyle,
+.numClubsStyle,
+.numParticipantsStyle{
+    flex: 1 1 auto; /* Flex Grow, Flex Shrink, Flex Basis */
+    height: 2.25em;
+    background-color: #f9f9fc;
+    padding: 0.6em;
+    text-indent: 1em; /* Verschiebt den Text nach rechts */
+    color: #484964;
+}
+

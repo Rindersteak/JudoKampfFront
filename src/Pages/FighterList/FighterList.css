@@ -5,6 +5,23 @@
 }
 
 
+
+.centeredContainerHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.headerBanner {
+    height: 12vh;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
 .titleStyleList {
     color: #001AFF;
     padding-bottom: 0em;
@@ -17,18 +34,9 @@
 
 .entryList {
     padding: 1.25em; /* 20px/16 */
+    height: 78%;
 }
 
-
-.entryStyle {
-    font-family: 'Nunito';
-    display: flex;
-    font-weight: 400;
-    align-items: stretch;
-    border-bottom: 0.063em solid #EEEEF2;
-    color: #242533;
-    
-}
 
 
 .headerStyle {
@@ -39,18 +47,51 @@
 
 .nameStyle {
     flex-basis: 50%;
-    width: 15em; 
-    height: 2.25em; 
+    width: 15em;
+    height: 2.25em;
     background-color: #f9f9fc;
-    padding: 0.6em; 
+    padding: 0.6em;
     text-indent: 1em; /* Verschiebt den Text nach rechts */
     }
-    
+
     .clubStyle {
     flex-basis: 50%;
-    width: 15em; 
-    height: 2.25em; 
+    width: 15em;
+    height: 2.25em;
     background-color: #f9f9fc;
-    padding: 0.6em; 
+    padding: 0.6em;
     text-indent: 1em; /* Verschiebt den Text nach rechts */
     }
+
+/* Die bestehenden Stile bleiben unverändert */
+
+/* Neue Stile für die detaillierte Ansicht */
+
+/* Die bestehenden Stile bleiben unverändert */
+
+/* Neue Stile für die detaillierte Ansicht */
+.cityStyle,
+.idStyle,
+.participantIdStyle,
+.weightClassStyle,
+.birthdateStyle,
+.nameStyle,
+.clubStyle {
+    color: #484964;
+    flex-grow: 1;
+    flex-basis: 0;
+    height: 2.25em;
+    background-color: #f9f9fc;
+    padding: 0.6em;
+    text-indent: 1em;
+}
+.entryStyle {
+    position: relative;
+    font-family: 'Nunito';
+    justify-content: space-between;
+    display: flex;
+    align-items: stretch;
+    border-bottom: 0.063em solid #EEEEF2;
+    color: #242533;
+}
+

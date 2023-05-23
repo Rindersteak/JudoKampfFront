@@ -1,8 +1,9 @@
 import { Fighter } from '../types';
+import { API_DOMAIN } from './apiConfig';
 
 export async function postFighter(fighter: Fighter) {
     try {
-        const response = await fetch('http://localhost:8081/fighters/', {
+        const response = await fetch(`${API_DOMAIN}/fighters/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -25,7 +26,7 @@ export async function postFighter(fighter: Fighter) {
 
 export async function getFighters() {
     try {
-        const response = await fetch('http://localhost:8081/fighters/');
+        const response = await fetch(`${API_DOMAIN}/fighters/`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -35,4 +36,8 @@ export async function getFighters() {
         console.error('Error loading backend fighters:', error);
         throw error; // Fehler weiterwerfen, um ihn in der FighterList-Komponente behandeln zu können
     }
+}
+
+export function getTotalParticipants(fighters: Fighter[]) {
+    return fighters.length;
 }
