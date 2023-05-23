@@ -7,7 +7,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboardList, faPlus, faTree, faTrophy } from '@fortawesome/free-solid-svg-icons';
 import { Tournament } from '../../types';
 
-const TournamentDetails = () => {
+interface TournamentDetailsProps {
+    onOpenFighterList: () => void;
+    onOpenFighterManager: () => void;
+}
+
+
+const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList, onOpenFighterManager }) => {
   const { tournamentId } = useParams<{ tournamentId: string | undefined }>();
   const [backendTournaments, setBackendTournaments] = useState<Tournament[]>([]);
   const [tournament, setTournament] = useState<Tournament | null>(null);
@@ -51,8 +57,8 @@ const TournamentDetails = () => {
       </div>
       <div className="cards-container">
         <CardOne tournamentId={tournamentId || ''} />
-        <CardTwo tournamentId={tournamentId || ''} />
-        <CardThree tournamentId={tournamentId || ''} />
+        <CardTwo tournamentId={tournamentId || ''} onOpenFighterList={onOpenFighterList} />
+        <CardThree tournamentId={tournamentId || ''} onOpenFighterManager={onOpenFighterManager} />
       </div>
       <div className="currentFightLabel">Aktueller Kampf:</div>
       <div className="currentFightPreview">PREVIEW IST IN ARBEIT</div>
@@ -77,11 +83,9 @@ const CardOne = ({ tournamentId }: { tournamentId: string }) => {
   );
 };
 
-const CardTwo = ({ tournamentId }: { tournamentId: string }) => {
-  const navigate = useNavigate();
-
+const CardTwo = ({ tournamentId, onOpenFighterList }: { tournamentId: string, onOpenFighterList: () => void }) => {
   const handleCardTwoClick = () => {
-    navigate(`/tournament-details/${tournamentId}`);
+    onOpenFighterList();
   };
 
   return (
@@ -94,11 +98,9 @@ const CardTwo = ({ tournamentId }: { tournamentId: string }) => {
   );
 };
 
-const CardThree = ({ tournamentId }: { tournamentId: string }) => {
-  const navigate = useNavigate();
-
+const CardThree = ({ tournamentId, onOpenFighterManager }: { tournamentId: string, onOpenFighterManager: () => void }) => {
   const handleCardThreeClick = () => {
-    navigate(`/tournament-details/${tournamentId}`);
+    onOpenFighterManager();
   };
 
   return (
@@ -110,5 +112,6 @@ const CardThree = ({ tournamentId }: { tournamentId: string }) => {
     </div>
   );
 };
+
 
 export default TournamentDetails;

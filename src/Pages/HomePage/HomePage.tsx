@@ -6,10 +6,11 @@ import './HomePage.css';
 
 interface HomePageProps {
     onOpenFighterManager: () => void;
-    onOpenTournamentForm: () => void; // Add this line
+    onOpenTournamentForm: () => void; 
+    onOpenTournamentList: () => void; 
 }
 
-const HomePage: React.FC<HomePageProps> = ({ onOpenFighterManager, onOpenTournamentForm }) => {
+const HomePage: React.FC<HomePageProps> = ({ onOpenTournamentList, onOpenTournamentForm }) => {
     return (
         <div className="content">
             <div className="top-banner">
@@ -20,7 +21,7 @@ const HomePage: React.FC<HomePageProps> = ({ onOpenFighterManager, onOpenTournam
                 <div onClick={onOpenTournamentForm} className="left-container">
                     <h1>Neues Turnier<br />anlegen</h1>
                 </div>
-                <div onClick={onOpenFighterManager} className="right-container">
+                <div onClick={onOpenTournamentList} className="right-container">
                     <h1>Bestehendes<br />Turnier öffnen</h1>
                 </div>
             </div>

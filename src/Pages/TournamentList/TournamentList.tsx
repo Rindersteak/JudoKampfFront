@@ -4,13 +4,20 @@ import { getTotalParticipants } from '../../API/fighterAPI';
 import { getTournaments, getTotalTournaments } from '../../API/tournamentAPI';
 import './TournamentList.css';
 
+
 import { useNavigate } from 'react-router-dom';
+
+interface TournamentListProps {
+    onClose: () => void;
+}
 
 interface TournamentListProps {}
 
-const TournamentList: React.FC<TournamentListProps> = () => {
+const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
   const [backendTournaments, setBackendTournaments] = useState<Tournament[]>([]);
   const navigate = useNavigate();
+
+  
 
   useEffect(() => {
     const loadBackendTournaments = async () => {
@@ -36,7 +43,9 @@ const TournamentList: React.FC<TournamentListProps> = () => {
 
   const navigateToTournamentDetails = (tournamentId: number) => {
     navigate(`/tournament-details/${tournamentId}`);
-  };
+    onClose();  // Schließt das Modal
+};
+
 
   return (
     <div className="entryList">

@@ -19,7 +19,6 @@
 .listContainer {
     flex: 1;
     max-height: 37.5em; /* 600px/16 */
-
     border-radius: 0.625em; /* 10px/16 */
 }
 

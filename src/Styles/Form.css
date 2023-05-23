@@ -1,0 +1,114 @@
+/* Importiert die Nunito Schriftart von Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
+
+/* Styling für den Formulartitel */
+body .titleStyle {
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.5em;
+    text-align: center;
+    padding-bottom: 2em;
+    color: #001AFF;
+}
+
+/* Styling für die Beschriftung der Eingabefelder */
+.inputLabel {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.25em;
+    font-weight: 700;
+    line-height: 1.35em;
+    letter-spacing: -0.02em;
+    color: #000000;
+    position: absolute;
+    top: -1.4em; /* Abstand nach oben anpassen */
+    left: 0;
+}
+
+/* Styling für Eingabefelder */
+.inputField {
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    background: none;
+    height: 3em;
+    border-radius: 5px;
+    padding: 0 0.625em;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1em;
+    background: #EDEFF2;
+}
+
+.inputFieldWide {
+    width: 243px;
+    box-sizing: border-box;
+    border: none;
+    background: none;
+    height: 30px;
+    border-radius: 5px;
+    padding: 0 0.625em;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1em;
+    background: #EDEFF2;
+    align-self: flex-start;
+}
+
+.inputFieldSmall {
+    width: 117px;
+    box-sizing: border-box;
+    border: none;
+    background: none;
+    height: 30px;
+    border-radius: 5px;
+    padding: 0 0.625em;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1em;
+    background: #EDEFF2;
+    align-self: flex-end;
+}
+
+/* Styling für den "Hinzufügen" Button */
+.addButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 243px;
+    height: 1.6875em;
+    background: #001AFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 2px;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-size: 1.5em;
+    font-weight: 900;
+    line-height: 2.0625em;
+    letter-spacing: -0.02em;
+    border: none;
+    cursor: pointer;
+    margin-top: -1.125em;
+}
+
+/* Styling für den "Hinzufügen" Button beim Mouseover */
+.addButton:hover {
+    background: #000A91;
+}
+
+/* Styling für den "Hinzufügen" Button beim Klicken */
+.addButton:active {
+    background: #00056D;
+}
+
+/* Styling für den Eingabefeld Container */
+.inputContainer {
+    display: flex;
+    gap: 1em;
+}
+
+/* Styling für den Eingabefeld-Container für schmale Eingabefelder */
+.inputContainerSmall {
+    display: flex;
+    gap: 1em;
+    justify-content: flex-end;
+}

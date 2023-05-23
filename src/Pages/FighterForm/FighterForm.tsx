@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Fighter } from '../../types';
-import './FighterForm.css';
+// import '../../Styles/Form.css'
 import { postFighter } from '../../API/fighterAPI';
+import './FighterForm.css'
 
 // Definieren der Properties für die Komponente
 type Props = {

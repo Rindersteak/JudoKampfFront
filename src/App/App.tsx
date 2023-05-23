@@ -11,6 +11,11 @@ import FighterManager from '../Pages/FighterManager/FighterManager';
 
 
 const App: React.FC = () => {
+
+    const handleCloseModal = () => {
+        setModalOpen(false);
+    };
+
     const [modalOpen, setModalOpen] = useState(false);
     const [modalContent, setModalContent] = useState<React.ReactNode | null>(null);
 
@@ -20,7 +25,7 @@ const App: React.FC = () => {
     };
 
     const handleOpenTournamentList = () => {
-        setModalContent(<TournamentList />);
+        setModalContent(<TournamentList onClose={handleCloseModal} />);
         setModalOpen(true);
     };
 
@@ -37,7 +42,7 @@ const App: React.FC = () => {
     return (
         <Router>
             <div className="container">
-                <AppRoutes onOpenTournamentForm={handleOpenTournamentForm} onOpenFighterManager={handleOpenFighterManager} onOpenFighterList={handleOpenFighterList}/>
+                <AppRoutes onOpenTournamentForm={handleOpenTournamentForm} onOpenFighterManager={handleOpenFighterManager} onOpenFighterList={handleOpenFighterList} onOpenTournamentList={handleOpenTournamentList}/>
                 {modalOpen &&
                     <Modal onClose={() => setModalOpen(false)}>
                         {modalContent}

@@ -15,13 +15,12 @@
 
 {
     color: #484964;
-    flex: 1; /* Vereinheitlicht das Wachstum aller Spalten */
+    flex: 1 1 0px;
     min-height: auto;
     background-color: #f9f9fc;
     padding: 0.6em;
     text-indent: 1em;
     overflow-wrap: break-word; /* Fügt die Eigenschaft overflow-wrap hinzu, um den Text bei Bedarf zu umbrechen */
-
 }
 
 

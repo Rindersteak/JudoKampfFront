@@ -3,7 +3,10 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import './TournamentForm.css';
+import './TournamentForm.css'
+// import '../../Styles/Form.css'
+
+
 const TournamentForm: React.FC = () => {
     const [tournamentName, setTournamentName] = useState('');
     const [tournamentVenue, setTournamentVenue] = useState("");
