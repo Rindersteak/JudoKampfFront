@@ -97,4 +97,4 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true }) => {
 
 };
 
-export default FighterList;  // Exportieren der Komponente für die Verwendung in anderen Teilen der Anwendung
+export default FighterList;
