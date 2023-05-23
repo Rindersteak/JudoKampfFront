@@ -1,30 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import FighterEntry from '../../Objects/Fighter/Fighter';
-import { Fighter } from '../../types';
-import './FighterList.css';
+import FighterEntry from '../../Objects/Fighter/Fighter'; 
+import { Fighter } from '../../types'; 
+import './FighterList.css'; 
+import { getFighters } from '../../API/fighterAPI';
 
-type Props = {
-  fighters: Fighter[];
-};
 
-const FighterList: React.FC<Props> = ({ fighters }) => {
+const FighterList: React.FC = () => {
   const [backendFighters, setBackendFighters] = useState<Fighter[]>([]);
 
   useEffect(() => {
     const loadBackendFighters = async () => {
       try {
-        const response = await fetch('http://localhost:8081/fighters/');
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        setBackendFighters(data);
+        const fighters = await getFighters();
+        setBackendFighters(fighters);
       } catch (error) {
         console.error('Error loading backend fighters:', error);
       }
     };
 
-    loadBackendFighters();
+    loadBackendFighters(); 
   }, []);
 
   return (
@@ -33,9 +27,6 @@ const FighterList: React.FC<Props> = ({ fighters }) => {
         <span className="nameStyle">Name</span>
         <span className="clubStyle">Verein</span>
       </div>
-      {fighters.map((fighter) => (
-        <FighterEntry key={fighter.id} fighter={fighter} />
-      ))}
       {backendFighters.map((fighter) => (
         <FighterEntry key={fighter.id} fighter={fighter} />
       ))}

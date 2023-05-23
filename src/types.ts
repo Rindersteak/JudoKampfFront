@@ -40,13 +40,12 @@ export type Fighter = {
   club: Club;
 };
 
-  
-
 export type Tournament = {
-    firstName: string;
-    lastName: string;
-    club: string;
-    regionalAssociation: string;
-    birthDate: string;
-    weight: number;
+  id: number;
+  name: string;
+  address: Address;
+  location: string;
+  startdate: Date; 
+  enddate: Date; 
+  fighters: Fighter[];
 };

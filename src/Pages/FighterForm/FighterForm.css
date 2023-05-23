@@ -192,3 +192,10 @@
     font-size: 1em;
     background: #EDEFF2;
 }
+
+.errorMessage {
+    color: red;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+  }

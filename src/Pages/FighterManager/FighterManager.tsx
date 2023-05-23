@@ -1,31 +1,42 @@
-import React from 'react'; // React importieren
-import FighterForm from '../FighterForm/FighterForm'; // Importieren der FighterForm-Komponente aus einer anderen Datei
-import FighterList from '../FighterList/FighterList'; // Importieren der FighterList-Komponente aus einer anderen Datei
-import { Fighter } from '../../types'; // Importieren des Fighter-Typs aus einer externen Datei
+import React, { useState } from 'react';
+import FighterForm from '../FighterForm/FighterForm'; 
+import FighterList from '../FighterList/FighterList'; 
+import './FighterManager.css'; 
 
-import './FighterManager.css'; // Importieren von Styling für FighterManager
 
 const FighterManager: React.FC = () => {
-    const [fighters, setFighters] = React.useState<Fighter[]>([]);
+    const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+    const [listKey, setListKey] = useState(Math.random());
 
-    const addFighter = (fighter: Fighter) => {
-        setFighters([fighter, ...fighters]);
+    const handleSuccessPopup = (status: boolean) => {
+        setShowSuccessPopup(status);
+        if (status) {
+            setTimeout(() => {
+                setShowSuccessPopup(false);
+            }, 3000);
+            setListKey(Math.random()); 
+        }
     };
 
     return (
         <div className="innerContainer">
             <div className="formContainer">
-                <FighterForm onAddFighter={addFighter} />
+            <FighterForm onAddFighter={() => {}} onShowSuccessPopup={handleSuccessPopup} />
+
             </div>
             <div className="listSection">
                 <h1 className="titleStyleList">Teilnehmerliste</h1>
                 <div className="listContainer">
-                    <FighterList fighters={fighters} />
+                    <FighterList key={listKey} />
                 </div>
             </div>
+            {showSuccessPopup && (
+                <div className="successPopup">
+                    Eintrag erfolgreich hinzugefügt!
+                </div>
+            )}
         </div>
     );
 };
 
-
-export default FighterManager; // Export der FighterManager-Komponente als Standardexport
+export default FighterManager;
