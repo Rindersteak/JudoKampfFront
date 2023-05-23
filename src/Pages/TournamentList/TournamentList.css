@@ -16,7 +16,7 @@
 {
     color: #484964;
     flex: 1; /* Vereinheitlicht das Wachstum aller Spalten */
-    min-height: 2.25em; /* Änderung von height zu min-height */
+    min-height: auto;
     background-color: #f9f9fc;
     padding: 0.6em;
     text-indent: 1em;

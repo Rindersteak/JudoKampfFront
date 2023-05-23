@@ -9,6 +9,7 @@ import TournamentForm from '../Pages/TournamentForm/TournamentForm';
 import FighterList from '../Pages/FighterList/FighterList'
 import FighterManager from '../Pages/FighterManager/FighterManager';
 
+
 const App: React.FC = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [modalContent, setModalContent] = useState<React.ReactNode | null>(null);

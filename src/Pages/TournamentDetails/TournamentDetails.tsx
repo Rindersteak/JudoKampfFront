@@ -1,25 +1,58 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { getTournaments, getTotalTournaments } from '../../API/tournamentAPI';
 import './TournamentDetails.css';
 import logo from '../../img/kadokan_logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboardList, faPlus, faTree, faTrophy } from '@fortawesome/free-solid-svg-icons';
+import { Tournament } from '../../types';
 
-const App = () => {
+const TournamentDetails = () => {
+  const { tournamentId } = useParams<{ tournamentId: string | undefined }>();
+  const [backendTournaments, setBackendTournaments] = useState<Tournament[]>([]);
+  const [tournament, setTournament] = useState<Tournament | null>(null);
+
+  useEffect(() => {
+    const fetchTournaments = async () => {
+      try {
+        const tournaments = await getTournaments();
+        setBackendTournaments(tournaments);
+        const tournament = getTournamentDetailsById(tournamentId, tournaments);
+        setTournament(tournament);
+      } catch (error) {
+        console.error('Error loading tournaments:', error);
+      }
+    };
+
+    fetchTournaments();
+  }, [tournamentId]);
+
+  const getTournamentDetailsById = (tournamentId: string | undefined, tournaments: Tournament[]): Tournament | null => {
+    if (!tournamentId) {
+      return null;
+    }
+    const tournament = tournaments.find((t) => t.id === parseInt(tournamentId));
+    return tournament || null;
+  };
+
+  if (!tournament) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="app">
       <div className="header">
         <svg className="logo" />
         <div className="top-banner">
           <img src={logo} alt="Logo" className="logo" />
-          <h1>Turnier "XXXX"</h1>
-          <h1>IDXXXX</h1>
+          <h1>Turnier "{tournament.name}"</h1>
+          <h1>ID{tournament.id}</h1>
         </div>
       </div>
       <div className="cards-container">
-        <CardOne />
-        <CardTwo />
-        <CardThree />
+        <CardOne tournamentId={tournamentId || ''} />
+        <CardTwo tournamentId={tournamentId || ''} />
+        <CardThree tournamentId={tournamentId || ''} />
       </div>
       <div className="currentFightLabel">Aktueller Kampf:</div>
       <div className="currentFightPreview">PREVIEW IST IN ARBEIT</div>
@@ -27,11 +60,11 @@ const App = () => {
   );
 };
 
-const CardOne = () => {
+const CardOne = ({ tournamentId }: { tournamentId: string }) => {
   const navigate = useNavigate();
 
   const handleCardOneClick = () => {
-    navigate('/'); // Hier die gewünschte Ziel-URL für card-one angeben
+    navigate(`/tournament-details/${tournamentId}`);
   };
 
   return (
@@ -44,11 +77,11 @@ const CardOne = () => {
   );
 };
 
-const CardTwo = () => {
+const CardTwo = ({ tournamentId }: { tournamentId: string }) => {
   const navigate = useNavigate();
 
   const handleCardTwoClick = () => {
-    navigate('/'); // Hier die gewünschte Ziel-URL für card-two angeben
+    navigate(`/tournament-details/${tournamentId}`);
   };
 
   return (
@@ -61,11 +94,11 @@ const CardTwo = () => {
   );
 };
 
-const CardThree = () => {
+const CardThree = ({ tournamentId }: { tournamentId: string }) => {
   const navigate = useNavigate();
 
   const handleCardThreeClick = () => {
-    navigate('/'); // Hier die gewünschte Ziel-URL für card-three angeben
+    navigate(`/tournament-details/${tournamentId}`);
   };
 
   return (
@@ -78,4 +111,4 @@ const CardThree = () => {
   );
 };
 
-export default App;
+export default TournamentDetails;

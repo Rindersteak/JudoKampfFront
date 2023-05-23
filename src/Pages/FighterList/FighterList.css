@@ -45,29 +45,7 @@
     color: #484964;
 }
 
-.nameStyle {
-    flex-basis: 50%;
-    width: 15em;
-    height: 2.25em;
-    background-color: #f9f9fc;
-    padding: 0.6em;
-    text-indent: 1em; /* Verschiebt den Text nach rechts */
-    }
 
-    .clubStyle {
-    flex-basis: 50%;
-    width: 15em;
-    height: 2.25em;
-    background-color: #f9f9fc;
-    padding: 0.6em;
-    text-indent: 1em; /* Verschiebt den Text nach rechts */
-    }
-
-/* Die bestehenden Stile bleiben unverändert */
-
-/* Neue Stile für die detaillierte Ansicht */
-
-/* Die bestehenden Stile bleiben unverändert */
 
 /* Neue Stile für die detaillierte Ansicht */
 .cityStyle,
@@ -78,9 +56,8 @@
 .nameStyle,
 .clubStyle {
     color: #484964;
-    flex-grow: 1;
-    flex-basis: 0;
-    height: 2.25em;
+    flex: 1;
+    min-height: auto;
     background-color: #f9f9fc;
     padding: 0.6em;
     text-indent: 1em;
@@ -94,4 +71,3 @@
     border-bottom: 0.063em solid #EEEEF2;
     color: #242533;
 }
-

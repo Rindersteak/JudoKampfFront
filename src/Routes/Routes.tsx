@@ -21,7 +21,7 @@ const AppRoutes: React.FC<AppRoutesProps> = ({ onOpenTournamentForm, onOpenFight
         <Route path="/tournament-form" element={<TournamentForm />} />
         <Route path="/fighter-manager" element={<FighterManager />} />
         <Route path="/fighter-list" element={<FighterList />} />
-        <Route path="/tournament-details" element={<TournamentDetails />} />
+        <Route path="/tournament-details/:tournamentId" element={<TournamentDetails />} />
         <Route path="/tournament-list" element={<TournamentList />} />
     </Routes>
 );
