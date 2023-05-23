@@ -1,12 +1,34 @@
+.nameStyle,
+.clubStyle,
 .locationStyle,
 .cityStyle,
+.idStyle,
+.participantIdStyle,
+.weightClassStyle,
+.birthdateStyle,
 .numClubsStyle,
-.numParticipantsStyle{
-    flex: 1 1 auto; /* Flex Grow, Flex Shrink, Flex Basis */
-    height: 2.25em;
+.numParticipantsStyle,
+
+/* Inhalt von Ort und Tournier-ID blau, da sie klickbar sein sollen (Linking) */
+.idStyleContent,
+.locationStyleContent
+
+{
+    color: #484964;
+    flex: 1; /* Vereinheitlicht das Wachstum aller Spalten */
+    min-height: 2.25em; /* Änderung von height zu min-height */
     background-color: #f9f9fc;
     padding: 0.6em;
-    text-indent: 1em; /* Verschiebt den Text nach rechts */
-    color: #484964;
+    text-indent: 1em;
+    overflow-wrap: break-word; /* Fügt die Eigenschaft overflow-wrap hinzu, um den Text bei Bedarf zu umbrechen */
+
 }
 
+
+.locationStyleContent {
+    color: #001AFF; /* Farbe für den Ort */
+}
+
+.idStyleContent {
+    color: #001AFF; /* Farbe für die Turnier-ID */
+}

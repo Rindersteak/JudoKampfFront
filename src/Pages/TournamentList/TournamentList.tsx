@@ -12,15 +12,20 @@ const TournamentList: React.FC<TournamentListProps> = () => {
     useEffect(() => {
         const loadBackendTournaments = async () => {
             try {
-                const tournaments = await getTournaments();
+                let tournaments = await getTournaments();
+                
+                // Turniere nach Namen sortieren
+                tournaments = tournaments.sort((a: Tournament, b: Tournament) => a.name.localeCompare(b.name));
+    
                 setBackendTournaments(tournaments);
             } catch (error) {
                 console.error('Error loading backend tournaments:', error);
             }
         };
-
+    
         loadBackendTournaments();
     }, []);
+    
 
     const handleLocationClick = (address: Address) => {
         const formattedAddress = `${address.street} ${address.houseNumber}, ${address.postalCode} ${address.city}, ${address.state}`;
@@ -44,11 +49,11 @@ const TournamentList: React.FC<TournamentListProps> = () => {
                 {backendTournaments.map((tournament) => (
                     <div className="entryStyle" key={tournament.id}>
                         <span className="nameStyle">{tournament.name}</span>
-                        <span className="locationStyle clickable" onClick={() => handleLocationClick(tournament.address)}>
+                        <span className="locationStyleContent clickable" onClick={() => handleLocationClick(tournament.address)}>
               {tournament.location}
             </span>
                         <span className="cityStyle">{tournament.address.city}</span>
-                        <span className="idStyle">{tournament.id}</span>
+                        <span className="idStyleContent">{tournament.id}</span>
                         <span className="numClubsStyle">{tournament.fighters.length}</span>
                         <span className="numParticipantsStyle">{getTotalParticipants(tournament.fighters)}</span>
                     </div>

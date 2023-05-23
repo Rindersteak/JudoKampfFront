@@ -33,12 +33,13 @@ export type Fighter = {
   sex: string;
   firstname: string;
   lastname: string;
-  birthdate: Date;
+  birthdate: string;
   ageclass: AgeClass;
   weight: number;
   weightclass: WeightClass;
   club: Club;
 };
+
 
 export type Tournament = {
   id: number;

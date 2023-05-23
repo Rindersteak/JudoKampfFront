@@ -40,13 +40,15 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
       return;
     }
 
+    const birthdateAsString = birthdate?.toISOString();
+
     // Erstellen des Fighter-Objekts basierend auf den Zustandsvariablen
     const fighter = {
       id: 0,
       sex: "m",
       firstname: firstname,
       lastname: lastname,
-      birthdate: birthdate,
+      birthdate: birthdateAsString,
       ageclass: {
         id: 0,
         name: "",
