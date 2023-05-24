@@ -39,7 +39,7 @@ const TournamentForm: React.FC = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="formContainer">
+        <form onSubmit={handleSubmit} className="formContaineTournament">
             <h1 className="titleStyle">Neues Turnier anlegen</h1>
             <div>
                 <div className="inputContainer">
