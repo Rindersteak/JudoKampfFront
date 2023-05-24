@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getTournaments, getTotalTournaments } from '../../API/tournamentAPI';
 import './TournamentDetails.css';
-import logo from '../../img/kadokan_logo.svg';
+import logo from '../../img/kodokan_logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboardList, faPlus, faTree, faTrophy } from '@fortawesome/free-solid-svg-icons';
 import { Tournament } from '../../types';

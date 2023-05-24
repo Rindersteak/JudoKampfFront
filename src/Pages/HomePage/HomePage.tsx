@@ -1,7 +1,7 @@
 // HomePage.tsx
 
 import React, { CSSProperties } from 'react';
-import logo from '../../img/kadokan_logo.svg';
+import logo from '../../img/kodokan_logo.svg';
 import './HomePage.css';
 
 interface HomePageProps {
