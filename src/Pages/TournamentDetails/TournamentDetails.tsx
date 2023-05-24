@@ -66,52 +66,60 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList
   );
 };
 
-const CardOne = ({ tournamentId }: { tournamentId: string }) => {
-  const navigate = useNavigate();
 
-  const handleCardOneClick = () => {
-    navigate(`/tournament-details/${tournamentId}`);
-  };
-
-  return (
-    <div className="card-one" onClick={handleCardOneClick}>
-      <div className="card-icon-white">
-        <FontAwesomeIcon icon={faTrophy} />
+  const CardOne = ({ tournamentId }: { tournamentId: string }) => {
+    const navigate = useNavigate();
+  
+    const handleCardOneClick = () => {
+      navigate(`/tournament-details/${tournamentId}`);
+    };
+  
+    return (
+      <div className="card-one" onClick={handleCardOneClick}>
+        <div className="card-content">
+          <div className="card-icon-white">
+            <FontAwesomeIcon icon={faTrophy} />
+          </div>
+          <div className="card-text-white">Turnierbaum</div>
+        </div>
       </div>
-      <div className="card-text-white">Turnierbaum</div>
-    </div>
-  );
-};
-
-const CardTwo = ({ tournamentId, onOpenFighterList }: { tournamentId: string, onOpenFighterList: () => void }) => {
-  const handleCardTwoClick = () => {
-    onOpenFighterList();
+    );
   };
-
-  return (
-    <div className="card-two" onClick={handleCardTwoClick}>
-      <div className="card-icon-blue">
-        <FontAwesomeIcon icon={faClipboardList} />
+  
+  const CardTwo = ({ tournamentId, onOpenFighterList }: { tournamentId: string, onOpenFighterList: () => void }) => {
+    const handleCardTwoClick = () => {
+      onOpenFighterList();
+    };
+  
+    return (
+      <div className="card-two" onClick={handleCardTwoClick}>
+        <div className="card-content">
+          <div className="card-icon-blue">
+            <FontAwesomeIcon icon={faClipboardList} />
+          </div>
+          <div className="card-text-blue">Teilnehmerliste</div>
+        </div>
       </div>
-      <div className="card-text-blue">Teilnehmerliste</div>
-    </div>
-  );
-};
-
-const CardThree = ({ tournamentId, onOpenFighterManager }: { tournamentId: string, onOpenFighterManager: () => void }) => {
-  const handleCardThreeClick = () => {
-    onOpenFighterManager();
+    );
   };
-
-  return (
-    <div className="card-three" onClick={handleCardThreeClick}>
-      <div className="card-icon-white">
-        <FontAwesomeIcon icon={faPlus} />
+  
+  const CardThree = ({ tournamentId, onOpenFighterManager }: { tournamentId: string, onOpenFighterManager: () => void }) => {
+    const handleCardThreeClick = () => {
+      onOpenFighterManager();
+    };
+  
+    return (
+      <div className="card-three" onClick={handleCardThreeClick}>
+        <div className="card-content">
+          <div className="card-icon-white">
+            <FontAwesomeIcon icon={faPlus} />
+          </div>
+          <div className="card-text-white">Teilnehmer</div>
+        </div>
       </div>
-      <div className="card-text-white">Teilnehmer</div>
-    </div>
-  );
-};
+    );
+  };
+  
 
 
 export default TournamentDetails;
