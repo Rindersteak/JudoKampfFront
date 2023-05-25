@@ -38,6 +38,23 @@ export async function getFighters() {
     }
 }
 
+// Participant muss zu Fighter umbenannt werden
 export function getTotalParticipants(fighters: Fighter[]) {
     return fighters.length;
 }
+
+export async function deleteFighter(fighterId: number) {
+    try {
+      const response = await fetch(`${API_DOMAIN}/fighters/delete/${fighterId}`, {
+        method: 'DELETE',
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+    } catch (error) {
+      console.error('An error occurred while deleting the fighter:', error);
+      throw error; 
+    }
+  }
+  

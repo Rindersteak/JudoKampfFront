@@ -40,13 +40,15 @@ export type Fighter = {
   club: Club;
 };
 
-
 export type Tournament = {
   id: number;
   name: string;
+  venue: string;
   address: Address;
+  periodFrom: string;
+  periodTo: string;
   location: string;
-  startdate: Date; 
-  enddate: Date; 
+  startdate: string;
+  enddate: string;
   fighters: Fighter[];
-};
+}

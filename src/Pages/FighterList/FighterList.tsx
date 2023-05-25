@@ -1,100 +1,133 @@
 import React, { useEffect, useState } from 'react';
 import { Fighter } from '../../types';
-import { getFighters } from '../../API/fighterAPI';
+import { getFighters, deleteFighter } from '../../API/fighterAPI';
+import { FiTrash2 } from 'react-icons/fi';
+import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai'; // Import der Icons
 import './FighterList.css';
 
-// Typendefinition für die Propertys
 interface FighterListProps {
-  detailedView?: boolean;  // Optionaler Boolean zur Steuerung der Detailansicht
+  detailedView?: boolean;
 }
 
 const FighterList: React.FC<FighterListProps> = ({ detailedView = true }) => {
-  // Lokaler State für die Kämpferdaten aus dem Backend
   const [backendFighters, setBackendFighters] = useState<Fighter[]>([]);
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc'); // Hinzufügen des Sortierstatus
 
-  // useEffect Hook zur Initialisierung und zum Abruf der Daten beim Laden der Komponente
   useEffect(() => {
-    // Asynchrone Funktion zum Laden der Kämpferdaten
     const loadBackendFighters = async () => {
       try {
-        const fighters = await getFighters();  // Abrufen der Kämpferdaten
-
-        // Create a copy of fighters array and convert birthdate strings into Date objects.
+        const fighters = await getFighters();
         const fightersCopy = fighters.map((fighter: Fighter) => ({
           ...fighter,
           birthdate: new Date(fighter.birthdate)
         }));
 
-
-        // Sortieren der Kämpferdaten
-        const sortedFighters = fightersCopy.sort((a: Fighter, b: Fighter) => a.lastname.localeCompare(b.lastname));
-        setBackendFighters(sortedFighters);  // Aktualisieren des lokalen States mit den sortierten Daten
+        const sortedFighters = fightersCopy.sort((a: Fighter, b: Fighter) =>
+          sortOrder === 'asc' ? a.lastname.localeCompare(b.lastname) : b.lastname.localeCompare(a.lastname)
+        );
+        setBackendFighters(sortedFighters);
       } catch (error) {
-        // Fehlermeldung, falls der Abruf der Daten fehlschlägt
         console.error('Error loading backend fighters:', error);
       }
     };
 
+    loadBackendFighters();
+  }, [sortOrder]); // Aktualisiere die Daten bei Sortierstatusänderung
 
+  const deleteFighterHandler = async (fighterId: number) => {
+    try {
+      await deleteFighter(fighterId);
+      setBackendFighters(backendFighters.filter(fighter => fighter.id !== fighterId));
+    } catch (error) {
+      console.error('Error deleting fighter:', error);
+    }
+  };
 
+  const handleSortClick = () => {
+    setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+  };
 
-    loadBackendFighters();  // Aufruf der Funktion beim Laden der Komponente
-  }, []);
-
-
-  // Rendern der Komponente
   return (
     <div className="entryList">
-      {/* Wenn detailedView true ist, wird der folgende Abschnitt gerendert */}
       {detailedView && (
         <div className="headerBanner">
-          <h1 className="titleStyleList">Teilnehmerliste</h1> {/* Nur angezeigt, wenn detailedView = true */}
+          <h1 className="titleStyleList">Teilnehmerliste</h1>
         </div>
       )}
-      {/* Der Container für die Inhalte, abhängig von detailedView */}
-      <div className={detailedView ? "contentContainer" : ""}>
-        {/* Die Kopfzeile der Tabelle, unabhängig von detailedView */}
-        <div className="entryStyle headerStyle">
-          <span className="nameStyle">Name</span>
-          <span className="clubStyle">Verein</span>
-          {/* Wenn detailedView true ist, werden die folgenden Spalten gerendert */}
-          {detailedView && (
-            <>
-              <span className="cityStyle">Stadt</span>
-              <span className="idStyle">Teilnehmer-ID</span>
-              <span className="weightClassStyle">Gewichtsklasse</span>
-              <span className="birthdateStyle">Geburtsdatum</span>
-            </>
-          )}
-        </div>
-        {/* Rendern der einzelnen Einträge aus backendFighters */}
-        {backendFighters.map((fighter) => {
-          // Convert birthdate from string to Date object
-          const birthdateAsDate = new Date(fighter.birthdate);
-
-          return (
-            <div className="entryStyle" key={fighter.id}>
-              <span className="nameStyle">{fighter.lastname} {fighter.firstname}</span>
-              <span className="clubStyle">{fighter.club?.name}</span>
-              {/* Wenn detailedView true ist, werden die folgenden Spalten gerendert */}
+      <table className="tableStyle">
+        <thead>
+          <tr>
+            <th className="headerCell">
+              Name
               {detailedView && (
-                <>
-                  <span className="cityStyle">{fighter.club?.address?.city}</span>
-                  <span className="idStyle">{fighter.id}</span>
-                  <span className="weightClassStyle">{fighter.weightclass?.name}</span>
-                  <span className="birthdateStyle">{birthdateAsDate.toDateString()}</span>
-                </>
+                <button className="arrowButton" onClick={handleSortClick}>
+                  {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                </button>
               )}
-            </div>
-          );
-        })}
+            </th>
+            <th className="headerCell">
+              Verein
+              {detailedView && (
+                <button className="arrowButton" onClick={handleSortClick}>
+                  {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                </button>
+              )}
+            </th>
+            {detailedView && (
+              <>
+                <th className="headerCell">
+                  Stadt
+                  <button className="arrowButton" onClick={handleSortClick}>
+                    {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                  </button>
+                </th>
+                <th className="headerCell">
+                  Teilnehmer-ID
+                  <button className="arrowButton" onClick={handleSortClick}>
+                    {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                  </button>
+                </th>
+                <th className="headerCell">
+                  Gewichtsklasse
+                  <button className="arrowButton" onClick={handleSortClick}>
+                    {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                  </button>
+                </th>
+                <th className="headerCell">
+                  Geburtsdatum
+                  <button className="arrowButton" onClick={handleSortClick}>
+                    {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                  </button>
+                </th>
+              </>
+            )}
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {backendFighters.map((fighter) => {
+            const birthdateAsDate = new Date(fighter.birthdate);
 
-
-      </div>
+            return (
+              <tr className="entryStyle" key={fighter.id}>
+                <td>{fighter.lastname} {fighter.firstname}</td>
+                <td>{fighter.club?.name}</td>
+                {detailedView && (
+                  <>
+                    <td>{fighter.club?.address?.city}</td>
+                    <td>{fighter.id}</td>
+                    <td>{fighter.weightclass?.name}</td>
+                    <td>{birthdateAsDate.toDateString()}</td>
+                  </>
+                )}
+                <td className="deleteIcon" onClick={() => deleteFighterHandler(fighter.id)}><FiTrash2 /></td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
-
-
 };
 
-export default FighterList;  // Exportieren der Komponente für die Verwendung in anderen Teilen der Anwendung
+export default FighterList;

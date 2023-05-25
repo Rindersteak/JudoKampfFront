@@ -1,31 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { Tournament, Address } from '../../types';
 import { getTotalParticipants } from '../../API/fighterAPI';
-import { getTournaments, getTotalTournaments } from '../../API/tournamentAPI';
+import { getTournaments } from '../../API/tournamentAPI';
+import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
 import './TournamentList.css';
-
-
 import { useNavigate } from 'react-router-dom';
 
 interface TournamentListProps {
-    onClose: () => void;
+  onClose: () => void;
 }
-
-interface TournamentListProps {}
 
 const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
   const [backendTournaments, setBackendTournaments] = useState<Tournament[]>([]);
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
   const navigate = useNavigate();
-
-  
 
   useEffect(() => {
     const loadBackendTournaments = async () => {
       try {
         let tournaments = await getTournaments();
 
-        // Turniere nach Namen sortieren
-        tournaments = tournaments.sort((a: Tournament, b: Tournament) => a.name.localeCompare(b.name));
+        tournaments = tournaments.sort((a: Tournament, b: Tournament) =>
+          sortOrder === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)
+        );
 
         setBackendTournaments(tournaments);
       } catch (error) {
@@ -34,7 +31,7 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
     };
 
     loadBackendTournaments();
-  }, []);
+  }, [sortOrder]);
 
   const handleLocationClick = (address: Address) => {
     const formattedAddress = `${address.street} ${address.houseNumber}, ${address.postalCode} ${address.city}, ${address.state}`;
@@ -43,39 +40,79 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
 
   const navigateToTournamentDetails = (tournamentId: number) => {
     navigate(`/tournament-details/${tournamentId}`);
-    onClose();  // Schließt das Modal
-};
+    onClose();
+  };
 
+  const handleSortClick = () => {
+    setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+  };
 
   return (
     <div className="entryList">
       <div className="headerBanner">
         <h1 className="titleStyleList">Turnierliste</h1>
       </div>
-      <div className="contentContainer">
-        <div className="entryStyle headerStyle">
-          <span className="nameStyle">Name</span>
-          <span className="locationStyle">Ort</span>
-          <span className="cityStyle">Stadt</span>
-          <span className="idStyle">Turnier-ID</span>
-          <span className="numClubsStyle">Anzahl teilnehmende Vereine</span>
-          <span className="numParticipantsStyle">Anzahl Teilnehmer</span>
-        </div>
-        {backendTournaments.map((tournament) => (
-          <div className="entryStyle" key={tournament.id}>
-            <span className="nameStyle">{tournament.name}</span>
-            <span className="locationStyleContent clickable" onClick={() => handleLocationClick(tournament.address)}>
-              {tournament.location}
-            </span>
-            <span className="cityStyle">{tournament.address.city}</span>
-            <span className="idStyleContent clickable" onClick={() => navigateToTournamentDetails(tournament.id)}>
-              {tournament.id}
-            </span>
-            <span className="numClubsStyle">{tournament.fighters.length}</span>
-            <span className="numParticipantsStyle">{getTotalParticipants(tournament.fighters)}</span>
-          </div>
-        ))}
-      </div>
+      <table className="tableStyle">
+        <thead>
+          <tr>
+            <th className="headerCell">
+              Name
+              <button className="arrowButton" onClick={handleSortClick}>
+                {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+              </button>
+            </th>
+            <th className="headerCell">
+              Ort
+              <button className="arrowButton" onClick={handleSortClick}>
+                {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+              </button>
+            </th>
+            <th className="headerCell">
+              Stadt
+              <button className="arrowButton" onClick={handleSortClick}>
+                {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+              </button>
+            </th>
+            <th className="headerCell">
+              Turnier-ID
+              <button className="arrowButton" onClick={handleSortClick}>
+                {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+              </button>
+            </th>
+            <th className="headerCell">
+              Anzahl teilnehmende Vereine
+              <button className="arrowButton" onClick={handleSortClick}>
+                {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+              </button>
+            </th>
+            <th className="headerCell">
+              Anzahl Teilnehmer
+              <button className="arrowButton" onClick={handleSortClick}>
+                {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+              </button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {backendTournaments.map((tournament) => (
+            <tr className="entryStyle" key={tournament.id}>
+              <td>{tournament.name}</td>
+              <td className="locationStyleContent clickable" onClick={() => handleLocationClick(tournament.address)}>
+                {tournament.location}
+              </td>
+              <td>{tournament.address.city}</td>
+              <td
+                className="idStyleContent clickable"
+                onClick={() => navigateToTournamentDetails(tournament.id)}
+              >
+                {tournament.id}
+              </td>
+              <td>{tournament.fighters.length}</td>
+              <td>{getTotalParticipants(tournament.fighters)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

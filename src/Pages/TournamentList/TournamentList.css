@@ -26,8 +26,14 @@
 
 .locationStyleContent {
     color: #001AFF; /* Farbe für den Ort */
+    text-align: left;
 }
 
 .idStyleContent {
     color: #001AFF; /* Farbe für die Turnier-ID */
+}
+
+.locationStyleContent,
+.idStyleContent {
+  text-align: left;
 }

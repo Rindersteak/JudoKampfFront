@@ -1,5 +1,3 @@
-// App.tsx
-
 import React, { useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import AppRoutes from '../Routes/Routes';
@@ -8,20 +6,29 @@ import TournamentList from '../Pages/TournamentList/TournamentList';
 import TournamentForm from '../Pages/TournamentForm/TournamentForm';
 import FighterList from '../Pages/FighterList/FighterList'
 import FighterManager from '../Pages/FighterManager/FighterManager';
-
+import { Tournament } from '../types';
 
 const App: React.FC = () => {
-
-    const handleCloseModal = () => {
-        setModalOpen(false);
-    };
-
     const [modalOpen, setModalOpen] = useState(false);
     const [modalContent, setModalContent] = useState<React.ReactNode | null>(null);
 
     const handleOpenTournamentForm = () => {
-        setModalContent(<TournamentForm />);
+        setModalContent(
+            <TournamentForm
+                onAddTournament={handleAddTournament}
+            />
+        );
         setModalOpen(true);
+    };
+
+    const handleAddTournament = (tournament: Tournament) => {
+        // Add logic for adding the tournament
+        console.log('Add Tournament:', tournament);
+    };
+
+    const handleShowSuccessPopup = (status: boolean) => {
+        // Add logic for showing success popup
+        console.log('Show Success Popup:', status);
     };
 
     const handleOpenTournamentList = () => {
@@ -39,15 +46,24 @@ const App: React.FC = () => {
         setModalOpen(true);
     };
 
+    const handleCloseModal = () => {
+        setModalOpen(false);
+    };
+
     return (
         <Router>
             <div className="container">
-                <AppRoutes onOpenTournamentForm={handleOpenTournamentForm} onOpenFighterManager={handleOpenFighterManager} onOpenFighterList={handleOpenFighterList} onOpenTournamentList={handleOpenTournamentList}/>
-                {modalOpen &&
-                    <Modal onClose={() => setModalOpen(false)}>
+                <AppRoutes
+                    onOpenTournamentForm={handleOpenTournamentForm}
+                    onOpenFighterManager={handleOpenFighterManager}
+                    onOpenFighterList={handleOpenFighterList}
+                    onOpenTournamentList={handleOpenTournamentList}
+                />
+                {modalOpen && (
+                    <Modal onClose={handleCloseModal}>
                         {modalContent}
                     </Modal>
-                }
+                )}
             </div>
         </Router>
     );

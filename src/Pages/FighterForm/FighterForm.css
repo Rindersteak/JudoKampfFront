@@ -132,9 +132,18 @@
 
 /* Styling für den Container der Dropdown-Felder */
 .selectContainer {
-    position: relative;
-    display: inline-block;
     width: 100%;
+    border-radius: 5px;
+    border: none;
+    padding: 0 0.625em;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1em;
+    background: #EDEFF2;
+    appearance: none;
+    position: relative;
+    height: 1.9375em;
+    -moz-appearance: none;
+    -webkit-appearance: none;
 }
 
 /* Styling für das Pfeil-Icon von Dropdown-Feldern */
@@ -143,9 +152,9 @@
     position: absolute;
     top: 50%;
     right: 0.625em;
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
-    border-top: 12px solid #001AFF;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #001AFF;
     transform: translateY(-50%);
 }
 
@@ -204,3 +213,10 @@
     font-weight: bold;
     text-align: center;
 }
+
+.selectContainer {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+  
