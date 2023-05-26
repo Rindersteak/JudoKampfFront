@@ -5,6 +5,7 @@ import { FiTrash2 } from 'react-icons/fi';
 import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai'; // Import der Icons
 import './FighterList.css';
 
+
 interface FighterListProps {
   detailedView?: boolean;
 }
