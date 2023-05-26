@@ -15,7 +15,7 @@ type Props = {
 
 const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
     const [tournamentName, handleNameChange] = useState('');
-    const [tournamentVenue, setTournamentVenue] = useState("");
+    const [tournamentLocation, setTournamentLocation] = useState("");
     const [nationalAssociation, setNationalAssociation] = useState("");
     const [addressCity, setAddressCity] = useState("");
     const [addressZipCode, setAddressZipCode] = useState("");
@@ -88,7 +88,7 @@ const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
                 lowerBoundary: 0,  // You need to set the correct value here
             },
             code: "",  // You need to set the correct value here
-            location: "", // You need to set the correct location here
+            location: tournamentLocation, // You need to set the correct location here
             startdate: periodFrom.toISOString(),
             enddate: periodTo.toISOString(),
             fighters: [],  // You need to set the correct fighters here
@@ -121,8 +121,8 @@ const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
                     <input className="inputField" type="text" id="tournamentName" value={tournamentName} onChange={(event) => handleNameChange(event.target.value)} required />
                 </div>
                 <div className="inputContainer">
-                    <label className="inputLabel" htmlFor="tournamentVenue">Veranstaltungsort</label>
-                    <input className="inputField" type="text" id="tournamentVenue" value={tournamentVenue} onChange={e => setTournamentVenue(e.target.value)} required />
+                    <label className="inputLabel" htmlFor="tournamentLocation">Veranstaltungsort</label>
+                    <input className="inputField" type="text" id="tournamenLocation" value={tournamentLocation} onChange={e => setTournamentLocation(e.target.value)} required />
                 </div>
             </div>
             <div className="halfWidthWrapper">
