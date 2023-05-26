@@ -51,3 +51,19 @@ export async function getTotalTournaments() {
         throw error; // Fehler weiterwerfen, um ihn in der TournamentList-Komponente behandeln zu können
     }
 }
+
+export async function deleteTournament(tournamentId: number) {
+    try {
+      const response = await fetch(`${API_DOMAIN}/tournament/delete/${tournamentId}`, {
+        method: 'DELETE',
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+    } catch (error) {
+      console.error('An error occurred while deleting the tournament:', error);
+      throw error; 
+    }
+  }
+  

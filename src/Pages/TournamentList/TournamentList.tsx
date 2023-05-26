@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Tournament, Address } from '../../types';
 import { getTotalParticipants } from '../../API/fighterAPI';
-import { getTournaments } from '../../API/tournamentAPI';
+import { getTournaments, deleteTournament } from '../../API/tournamentAPI';
 import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
+import { FiTrash2 } from 'react-icons/fi';
+import Modal from '../../Modal/Modal';
+import ConfirmDelete from '../ConfirmDelete/ConfirmDelete';
 import './TournamentList.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,6 +16,9 @@ interface TournamentListProps {
 const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
   const [backendTournaments, setBackendTournaments] = useState<Tournament[]>([]);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState(false);
+  const [tournamentIdToDelete, setTournamentToDelete] = useState<number | null>(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,6 +52,23 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
   const handleSortClick = () => {
     setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
   };
+
+  const handleDeleteTournament = (tournamentId: number) => {
+    setShowConfirmDeletePopup(true);
+    setTournamentToDelete(tournamentId);
+  };
+
+  const handleDeleteConfirmed = async () => {
+    if (tournamentIdToDelete !== null) {
+      await deleteTournament(tournamentIdToDelete);
+      setShowConfirmDeletePopup(false);
+      setBackendTournaments(backendTournaments.filter(tournament => tournament.id !== tournamentIdToDelete));
+    }
+  }
+
+  const handleDeleteCanceled = () => {
+    setShowConfirmDeletePopup(false);
+  }
 
   return (
     <div className="entryList">
@@ -91,6 +114,7 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
                 {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
               </button>
             </th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -109,10 +133,22 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
               </td>
               <td>{tournament.fighters.length}</td>
               <td>{getTotalParticipants(tournament.fighters)}</td>
+              <td className="deleteIcon" onClick={() => handleDeleteTournament(tournament.id)}><FiTrash2 /></td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      {showConfirmDeletePopup && tournamentIdToDelete !== null && (
+        <Modal size="small" onClose={handleDeleteCanceled}>
+          <ConfirmDelete
+            onClose={handleDeleteCanceled}
+            onConfirmDelete={handleDeleteConfirmed}
+            idToDelete={tournamentIdToDelete}
+          />
+
+        </Modal>
+      )}
     </div>
   );
 };

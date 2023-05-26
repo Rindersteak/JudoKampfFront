@@ -8,7 +8,7 @@ import './FighterManager.css';
 const FighterManager: React.FC = () => {
     const [showSuccessPopup, setShowSuccessPopup] = useState(false);
     const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState(false);
-    const [fighterIdToDelete, setFighterToDelete] = useState<number | null>(null); 
+    const [fighterIdToDelete, setFighterToDelete] = useState<number | null>(null);
     const [listKey, setListKey] = useState(Math.random());
 
     const handleSuccessPopup = (status: boolean) => {
@@ -29,10 +29,10 @@ const FighterManager: React.FC = () => {
         if (fighterIdToDelete !== null) {
             await deleteFighterHandler(fighterIdToDelete);
             setShowConfirmDeletePopup(false);
-            setListKey(Math.random()); 
+            setListKey(Math.random());
         }
     }
-    
+
     const handleDeleteCanceled = () => {
         setShowConfirmDeletePopup(false);
     }
@@ -45,7 +45,7 @@ const FighterManager: React.FC = () => {
             <div className="listSection">
                 <h1 className="titleStyleList">Teilnehmerliste</h1>
                 <div className="listContainer">
-                <FighterList key={listKey} detailedView={false} onDeleteFighter={handleConfirmDelete} />
+                    <FighterList key={listKey} detailedView={false} onDeleteFighter={handleConfirmDelete} />
                 </div>
             </div>
             {showSuccessPopup && (
@@ -58,7 +58,7 @@ const FighterManager: React.FC = () => {
                     <ConfirmDelete
                         onClose={handleDeleteCanceled}
                         onConfirmDelete={handleDeleteConfirmed}
-                        fighterId={fighterIdToDelete}
+                        idToDelete={fighterIdToDelete}
                     />
                 </Modal>
             )}

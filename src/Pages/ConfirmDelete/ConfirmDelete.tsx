@@ -1,30 +1,25 @@
-import { useState } from 'react';
+// ConfirmDelete.tsx
 import React from 'react';
 import './ConfirmDelete.css';
+import useDeleteHandler from '../../Tools/ErrorHandler';
 
 interface ConfirmDeleteProps {
   onClose: () => void;
   onConfirmDelete: () => Promise<void>;
-  fighterId: number;
+  idToDelete: number;
 }
 
 const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({
   onClose,
   onConfirmDelete,
-  fighterId,
+  idToDelete,
 }) => {
-  const [loading, setLoading] = useState(false);
-
-  const handleDelete = async () => {
-    setLoading(true);
-    await onConfirmDelete();
-    setLoading(false);
-  };
+  const { loading, errorMessage, handleDelete } = useDeleteHandler({ onDelete: onConfirmDelete });
 
   return (
     <div className="confirmDeletePopUp">
       <div className="deleteTitleStyle">
-        Möchten Sie den Teilnehmer wirklich löschen?
+        Möchten Sie den Eintrag wirklich löschen?
       </div>
       <div className="buttonContainer">
         <button className="addButton" type="submit" disabled={loading} onClick={onClose}>
@@ -34,6 +29,7 @@ const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({
           {loading ? "Laden..." : "Ja, löschen"}
         </button>
       </div>
+      {errorMessage && <div className="errorMessage">{errorMessage}</div>}
     </div>
   );
 };

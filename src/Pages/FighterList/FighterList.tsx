@@ -3,6 +3,8 @@ import { Fighter } from '../../types';
 import { getFighters, deleteFighter } from '../../API/fighterAPI';
 import { FiTrash2 } from 'react-icons/fi';
 import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
+import Modal from '../../Modal/Modal'; // Stellen Sie sicher, dass der Pfad zu Ihrer Modal-Komponente korrekt ist
+import ConfirmDelete from '../ConfirmDelete/ConfirmDelete'; // Stellen Sie sicher, dass der Pfad zu Ihrer ConfirmDelete-Komponente korrekt ist
 import './FighterList.css';
 
 // Importieren der benötigten Abhängigkeiten und CSS-Datei
@@ -23,13 +25,16 @@ export const deleteFighterHandler = async (fighterId: number) => {
   }
 };
 
-// Definition der Funktion deleteFighterHandler, die einen Kämpfer löscht und die Kämpferliste aktualisiert
+
 
 const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDeleteFighter }) => {
   const [backendFighters, setBackendFighters] = useState<Fighter[]>([]);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState(false);
+  const [fighterIdToDelete, setFighterToDelete] = useState<number | null>(null);
 
-  // Verwendung des useState-Hooks zum Speichern des Zustands der Kämpferliste und der Sortierreihenfolge
+
+
 
   useEffect(() => {
     const loadBackendFighters = async () => {
@@ -52,17 +57,28 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
     loadBackendFighters();
   }, [sortOrder]);
 
-  // Verwendung des useEffect-Hooks zum Laden der Kämpferliste und Aktualisieren des Zustands bei Änderungen der Sortierreihenfolge
 
   const handleSortClick = () => {
     setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
   };
 
-  // Funktion zum Umschalten der Sortierreihenfolge bei Klick auf einen Sortierungsbutton
 
   const handleDeleteFighter = (fighterId: number) => {
-    onDeleteFighter(fighterId);
+    setShowConfirmDeletePopup(true);
+    setFighterToDelete(fighterId);
   };
+
+  const handleDeleteConfirmed = async () => {
+    if (fighterIdToDelete !== null) {
+      await deleteFighterHandler(fighterIdToDelete);
+      setShowConfirmDeletePopup(false);
+      setBackendFighters(backendFighters.filter(fighter => fighter.id !== fighterIdToDelete));
+    }
+  }
+
+  const handleDeleteCanceled = () => {
+    setShowConfirmDeletePopup(false);
+  }
 
   // Funktion zum Löschen eines Kämpfers mit der gegebenen ID
 
@@ -73,9 +89,7 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
           <h1 className="titleStyleList">Teilnehmerliste</h1>
         </div>
       )}
-      {/* Rendert die Überschrift, wenn detailedView true ist */}
       <table className="tableStyle">
-        {/* Erstellt eine Tabelle mit einem bestimmten Stil */}
         <thead>
           <tr>
             <th className="headerCell">
@@ -86,7 +100,7 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
                 </button>
               )}
             </th>
-            {/* Rendert den Spaltenkopf für den Namen und optional den Sortierungsbutton */}
+
             <th className="headerCell">
               Verein
               {detailedView && (
@@ -95,7 +109,7 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
                 </button>
               )}
             </th>
-            {/* Rendert den Spaltenkopf für den Verein und optional den Sortierungsbutton */}
+
             {detailedView && (
               <>
                 <th className="headerCell">
@@ -104,32 +118,32 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
                     {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
                   </button>
                 </th>
-                {/* Rendert den Spaltenkopf für die Stadt und den Sortierungsbutton */}
+
                 <th className="headerCell">
                   Teilnehmer-ID
                   <button className="arrowButton" onClick={handleSortClick}>
                     {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
                   </button>
                 </th>
-                {/* Rendert den Spaltenkopf für die Teilnehmer-ID und den Sortierungsbutton */}
+
                 <th className="headerCell">
                   Gewichtsklasse
                   <button className="arrowButton" onClick={handleSortClick}>
                     {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
                   </button>
                 </th>
-                {/* Rendert den Spaltenkopf für die Gewichtsklasse und den Sortierungsbutton */}
+
                 <th className="headerCell">
                   Geburtsdatum
                   <button className="arrowButton" onClick={handleSortClick}>
                     {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
                   </button>
                 </th>
-                {/* Rendert den Spaltenkopf für das Geburtsdatum und den Sortierungsbutton */}
+
               </>
             )}
             <th></th>
-            {/* Rendert eine leere Spalte */}
+
           </tr>
         </thead>
         <tbody>
@@ -139,28 +153,39 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
             return (
               <tr className="entryStyle" key={fighter.id}>
                 <td>{fighter.lastname} {fighter.firstname}</td>
-                {/* Rendert den Namen des Kämpfers */}
+
                 <td>{fighter.club?.name}</td>
-                {/* Rendert den Verein des Kämpfers */}
+
                 {detailedView && (
                   <>
                     <td>{fighter.club?.address?.city}</td>
-                    {/* Rendert die Stadt des Kämpfers */}
+
                     <td>{fighter.id}</td>
-                    {/* Rendert die Teilnehmer-ID des Kämpfers */}
+
                     <td>{fighter.weightclass?.name}</td>
-                    {/* Rendert die Gewichtsklasse des Kämpfers */}
+
                     <td>{birthdateAsDate.toDateString()}</td>
-                    {/* Rendert das Geburtsdatum des Kämpfers */}
+
                   </>
                 )}
                 <td className="deleteIcon" onClick={() => handleDeleteFighter(fighter.id)}><FiTrash2 /></td>
-                {/* Rendert das Löschen-Symbol mit der Funktion zum Löschen des Kämpfers */}
+
               </tr>
             );
           })}
         </tbody>
       </table>
+
+      {showConfirmDeletePopup && fighterIdToDelete !== null && (
+        <Modal size="small" onClose={handleDeleteCanceled}>
+          <ConfirmDelete
+            onClose={handleDeleteCanceled}
+            onConfirmDelete={handleDeleteConfirmed}
+            idToDelete={fighterIdToDelete}
+          />
+
+        </Modal>
+      )}
     </div>
   );
 };
