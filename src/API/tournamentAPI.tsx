@@ -1,8 +1,9 @@
 import { Tournament } from '../types';
+import { API_DOMAIN } from './apiConfig';
 
 export async function postTournament(tournament: Tournament) {
     try {
-        const response = await fetch('http://localhost:8081/tournaments/', {
+        const response = await fetch(`${API_DOMAIN}/tournaments/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -25,7 +26,7 @@ export async function postTournament(tournament: Tournament) {
 
 export async function getTournaments() {
     try {
-        const response = await fetch('http://localhost:8081/tournaments/');
+        const response = await fetch(`${API_DOMAIN}/tournaments/`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -36,3 +37,33 @@ export async function getTournaments() {
         throw error; // Fehler weiterwerfen, um ihn in der TournamentList-Komponente behandeln zu können
     }
 }
+
+export async function getTotalTournaments() {
+    try {
+        const response = await fetch(`${API_DOMAIN}/tournaments/`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data.length;
+    } catch (error) {
+        console.error('Error loading backend tournaments:', error);
+        throw error; // Fehler weiterwerfen, um ihn in der TournamentList-Komponente behandeln zu können
+    }
+}
+
+export async function deleteTournament(tournamentId: number) {
+    try {
+      const response = await fetch(`${API_DOMAIN}/tournament/delete/${tournamentId}`, {
+        method: 'DELETE',
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+    } catch (error) {
+      console.error('An error occurred while deleting the tournament:', error);
+      throw error; 
+    }
+  }
+  
