@@ -77,10 +77,10 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
         address: {
           id: 0,
           street: "",
-          houseNumber: "",
+          housenumber: "",
           city: "",
           state: "",
-          postalCode: "",
+          postalcode: "",
         },
       },
     };

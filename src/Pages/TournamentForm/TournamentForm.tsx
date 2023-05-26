@@ -64,36 +64,53 @@ const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
             return;
         }
 
-        const tournament = {
+        const tournament: Tournament = {
             id: 0,
             name: tournamentName,
-            venue: tournamentVenue,
             address: {
-              id: 0, 
-              street: addressStreet,
-              houseNumber: addressStreetNumber, 
-              city: addressCity,
-              state: '', 
-              postalCode: '', 
+                id: 0,
+                street: addressStreet,
+                housenumber: addressStreetNumber,
+                city: addressCity,
+                state: "",
+                postalcode: addressZipCode,
             },
-            periodFrom: periodFrom.toISOString(),
-            periodTo: periodTo.toISOString(),
-            location: '',
-            startdate: '',
-            enddate: '',
-            fighters: [],
-          };
-          
+            ageclass: {
+                id: 0,
+                name: "",  // You need to set the correct value here
+                lowerAge: 0,  // You need to set the correct value here
+                upperAge: 0,  // You need to set the correct value here
+            },
+            weightclass: {
+                id: 0,
+                name: "",  // You need to set the correct value here
+                upperBoundary: 0,  // You need to set the correct value here
+                lowerBoundary: 0,  // You need to set the correct value here
+            },
+            code: "",  // You need to set the correct value here
+            location: "", // You need to set the correct location here
+            startdate: periodFrom.toISOString(),
+            enddate: periodTo.toISOString(),
+            fighters: [],  // You need to set the correct fighters here
+            fights: [],  // You need to set the correct fights here
+        };
+
+
+
 
         try {
+            // Senden Sie den Antrag an Ihr Backend
             await postTournament(tournament);
             onAddTournament(tournament);
             setLoading(false);
+            console.log('Turnier erfolgreich eingereicht');
         } catch (error) {
             setErrorMessage("(DB-Error) Fehler beim Anlegen!");
             setLoading(false);
         }
     };
+
+
 
     return (
         <form onSubmit={handleSubmit} className="formContaineTournament">

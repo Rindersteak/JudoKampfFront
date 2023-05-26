@@ -34,7 +34,7 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
   }, [sortOrder]);
 
   const handleLocationClick = (address: Address) => {
-    const formattedAddress = `${address.street} ${address.houseNumber}, ${address.postalCode} ${address.city}, ${address.state}`;
+    const formattedAddress = `${address.street} ${address.housenumber}, ${address.postalcode} ${address.city}, ${address.state}`;
     window.open(`https://maps.google.com/?q=${encodeURIComponent(formattedAddress)}`);
   };
 
