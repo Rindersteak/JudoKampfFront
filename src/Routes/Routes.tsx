@@ -1,5 +1,3 @@
-// Routes.tsx
-
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import HomePage from '../Pages/HomePage/HomePage';
@@ -10,13 +8,18 @@ import TournamentDetails from '../Pages/TournamentDetails/TournamentDetails';
 import TournamentList from '../Pages/TournamentList/TournamentList';
 
 interface AppRoutesProps {
-    onOpenTournamentForm: () => void;   
+    onOpenTournamentForm: () => void;
     onOpenFighterManager: () => void;
     onOpenFighterList: () => void;
     onOpenTournamentList: () => void;
 }
 
-const AppRoutes: React.FC<AppRoutesProps> = ({ onOpenTournamentForm, onOpenFighterManager, onOpenFighterList, onOpenTournamentList }) => (
+const AppRoutes: React.FC<AppRoutesProps> = ({
+    onOpenTournamentForm,
+    onOpenFighterManager,
+    onOpenFighterList,
+    onOpenTournamentList
+}) => (
     <Routes>
         <Route
             path="/"
@@ -26,20 +29,25 @@ const AppRoutes: React.FC<AppRoutesProps> = ({ onOpenTournamentForm, onOpenFight
                 onOpenTournamentList={onOpenTournamentList}
             />}
         />
-<Route path="/tournament-form" element={<TournamentForm onAddTournament={onOpenTournamentForm} />} />
-        <Route path="/fighter-manager" element={<FighterManager />} />
-        <Route path="/fighter-list" element={<FighterList />} />
-        <Route 
-            path="/tournament-details/:tournamentId" 
+        <Route path="/tournament-form" element={<TournamentForm onAddTournament={onOpenTournamentForm} />} />
+        <Route
+            path="/fighter-manager"
+            element={<FighterManager />}
+        />
+        <Route
+            path="/fighter-list"
+            element={<FighterList onDeleteFighter={() => {}} />} // Füge hier das onDeleteFighter-Prop hinzu
+        />
+        <Route
+            path="/tournament-details/:tournamentId"
             element={
-                <TournamentDetails 
-                    onOpenFighterList={onOpenFighterList} 
+                <TournamentDetails
+                    onOpenFighterList={onOpenFighterList}
                     onOpenFighterManager={onOpenFighterManager}
                 />
-            } 
+            }
         />
-<Route path="/tournament-list" element={<TournamentList onClose={onOpenTournamentList} />} />
-
+        <Route path="/tournament-list" element={<TournamentList onClose={onOpenTournamentList} />} />
     </Routes>
 );
 

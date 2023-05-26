@@ -42,8 +42,13 @@ const App: React.FC = () => {
     };
 
     const handleOpenFighterList = () => {
-        setModalContent(<FighterList />);
+        setModalContent(<FighterList onDeleteFighter={handleDeleteFighter} />);
         setModalOpen(true);
+    };
+
+    const handleDeleteFighter = (fighterId: number) => {
+        // Add logic for deleting the fighter
+        console.log('Delete Fighter:', fighterId);
     };
 
     const handleCloseModal = () => {

@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import FighterForm from '../FighterForm/FighterForm';
-import FighterList from '../FighterList/FighterList';
+import FighterList, { deleteFighterHandler } from '../FighterList/FighterList';
+import Modal from '../../Modal/Modal';
+import ConfirmDelete from '../ConfirmDelete/ConfirmDelete';
 import './FighterManager.css';
 
 const FighterManager: React.FC = () => {
     const [showSuccessPopup, setShowSuccessPopup] = useState(false);
     const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState(false);
+    const [fighterIdToDelete, setFighterToDelete] = useState<number | null>(null); 
     const [listKey, setListKey] = useState(Math.random());
 
     const handleSuccessPopup = (status: boolean) => {
         setShowSuccessPopup(status);
-        setShowConfirmDeletePopup(true);
         if (status) {
             setTimeout(() => {
                 setShowSuccessPopup(false);
@@ -19,24 +21,31 @@ const FighterManager: React.FC = () => {
         }
     };
 
-    const handleConfirmDeletePopup = () => {
+    const handleConfirmDelete = (fighterId: number) => {
         setShowConfirmDeletePopup(true);
-    };
+        setFighterToDelete(fighterId);
+    }
+    const handleDeleteConfirmed = async () => {
+        if (fighterIdToDelete !== null) {
+            await deleteFighterHandler(fighterIdToDelete);
+            setShowConfirmDeletePopup(false);
+            setListKey(Math.random()); 
+        }
+    }
     
-    const handleCloseConfirmDeletePopup = () => {
+    const handleDeleteCanceled = () => {
         setShowConfirmDeletePopup(false);
-    };
-    
+    }
 
     return (
         <div className="innerContainer">
             <div className="formContainer">
-                <FighterForm onAddFighter={() => {}} onShowSuccessPopup={handleSuccessPopup} />
+                <FighterForm onAddFighter={() => { }} onShowSuccessPopup={handleSuccessPopup} />
             </div>
             <div className="listSection">
                 <h1 className="titleStyleList">Teilnehmerliste</h1>
                 <div className="listContainer">
-                    <FighterList key={listKey} detailedView={false} />
+                <FighterList key={listKey} detailedView={false} onDeleteFighter={handleConfirmDelete} />
                 </div>
             </div>
             {showSuccessPopup && (
@@ -44,35 +53,18 @@ const FighterManager: React.FC = () => {
                     Eintrag erfolgreich hinzugefügt!
                 </div>
             )}
-
-            {showConfirmDeletePopup && (
-                <div className="popupOverlay">
-                    <div className="confirmDeletePopUp">
-                        <div className='close'>
-                        <span className="close">&times;</span>
-                        </div> 
-                        <div className='headTitle'>
-                            Möchten Sie den Teilnehmer wirklich löschen?
-                        </div>
-                
-                        <div className='buttonContainer'>
-                            <div className='abortDeleteButton'>
-                                <div className='abortDeleteButtonText'>
-                                    Nein, behalten
-                                </div>
-                            </div>
-
-                            <div className='ConfirmDeleteButton'>
-                                <div className='ConfirmButtonText'>
-                                    Ja, löschen
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            {showConfirmDeletePopup && fighterIdToDelete !== null && (
+                <Modal size="small" onClose={handleDeleteCanceled}>
+                    <ConfirmDelete
+                        onClose={handleDeleteCanceled}
+                        onConfirmDelete={handleDeleteConfirmed}
+                        fighterId={fighterIdToDelete}
+                    />
+                </Modal>
             )}
         </div>
     );
 };
+
 
 export default FighterManager;
