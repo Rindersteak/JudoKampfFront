@@ -5,16 +5,17 @@ import './TournamentDetails.css';
 import logo from '../../img/kodokan_logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboardList, faPlus, faTree, faTrophy } from '@fortawesome/free-solid-svg-icons';
+import { faArrowAltCircleLeft } from '@fortawesome/free-regular-svg-icons';
 import { Tournament } from '../../types';
 
 interface TournamentDetailsProps {
-    onOpenFighterList: () => void;
-    onOpenFighterManager: () => void;
+  onOpenFighterList: () => void;
+  onOpenFighterManager: () => void;
 }
-
 
 const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList, onOpenFighterManager }) => {
   const { tournamentId } = useParams<{ tournamentId: string | undefined }>();
+  const navigate = useNavigate();
   const [backendTournaments, setBackendTournaments] = useState<Tournament[]>([]);
   const [tournament, setTournament] = useState<Tournament | null>(null);
 
@@ -41,15 +42,25 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList
     return tournament || null;
   };
 
+  const handleGoBack = () => {
+    navigate(-1); // Navigiere eine Seite zurück
+  };
+
   if (!tournament) {
     return <div>Loading...</div>;
   }
 
+
+
+  
   return (
     <div className="app">
       <div className="header">
         <svg className="logo" />
         <div className="top-banner">
+          <div className="back-button" onClick={handleGoBack}>
+            <FontAwesomeIcon icon={faArrowAltCircleLeft} className="back-icon" />
+          </div>
           <img src={logo} alt="Logo" className="logo" />
           <h1>Turnier "{tournament.name}"</h1>
           <h1>ID{tournament.id}</h1>
