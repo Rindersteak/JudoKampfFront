@@ -7,6 +7,7 @@ import TournamentForm from '../Pages/TournamentForm/TournamentForm';
 import FighterList from '../Pages/FighterList/FighterList'
 import FighterManager from '../Pages/FighterManager/FighterManager';
 import { Tournament } from '../types';
+import ClubManager from '../Pages/Club/ClubManager/ClubManager';
 
 const App: React.FC = () => {
     const [modalOpen, setModalOpen] = useState(false);
@@ -55,6 +56,11 @@ const App: React.FC = () => {
         setModalOpen(false);
     };
 
+    const handleOpenClubManager = () => {
+        setModalContent(<ClubManager />);
+        setModalOpen(true);
+    };
+
     return (
         <Router>
             <div className="container">
@@ -63,6 +69,7 @@ const App: React.FC = () => {
                     onOpenFighterManager={handleOpenFighterManager}
                     onOpenFighterList={handleOpenFighterList}
                     onOpenTournamentList={handleOpenTournamentList}
+                    onOpenClubManager={handleOpenClubManager}
                 />
                 {modalOpen && (
                     <Modal onClose={handleCloseModal}>

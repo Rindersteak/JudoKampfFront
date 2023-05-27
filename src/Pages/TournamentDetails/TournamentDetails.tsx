@@ -11,9 +11,10 @@ import { Tournament } from '../../types';
 interface TournamentDetailsProps {
   onOpenFighterList: () => void;
   onOpenFighterManager: () => void;
+  onOpenClubManager:() => void;
 }
 
-const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList, onOpenFighterManager }) => {
+const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList, onOpenFighterManager, onOpenClubManager }) => {
   const { tournamentId } = useParams<{ tournamentId: string | undefined }>();
   const navigate = useNavigate();
   const [backendTournaments, setBackendTournaments] = useState<Tournament[]>([]);
@@ -70,6 +71,8 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList
         <CardOne tournamentId={tournamentId || ''} />
         <CardTwo tournamentId={tournamentId || ''} onOpenFighterList={onOpenFighterList} />
         <CardThree tournamentId={tournamentId || ''} onOpenFighterManager={onOpenFighterManager} />
+        <CardFour tournamentId={tournamentId || ''} onOpenFighterManager={onOpenFighterManager} />
+        <CardFive tournamentId={tournamentId || ''} onOpenClubManager={onOpenClubManager} />
       </div>
       <div className="currentFightLabel">Aktueller Kampf:</div>
       <div className="currentFightPreview">PREVIEW IST IN ARBEIT</div>
@@ -126,6 +129,42 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList
             <FontAwesomeIcon icon={faPlus} />
           </div>
           <div className="card-text-white">Teilnehmer</div>
+        </div>
+      </div>
+    );
+  };
+
+
+  const CardFour = ({ tournamentId, onOpenFighterManager }: { tournamentId: string, onOpenFighterManager: () => void }) => {
+    const handleCardThreeClick = () => {
+      onOpenFighterManager();
+    };
+  
+    return (
+      <div className="card-four" onClick={handleCardThreeClick}>
+        <div className="card-content">
+          <div className="card-icon-blue">
+          <FontAwesomeIcon icon={faClipboardList} />
+          </div>
+          <div className="card-text-blue">Vereinsliste</div>
+        </div>
+      </div>
+    );
+  };
+
+
+  const CardFive = ({ tournamentId, onOpenClubManager }: { tournamentId: string, onOpenClubManager: () => void }) => {
+    const handleCardThreeClick = () => {
+      onOpenClubManager();
+    };
+  
+    return (
+      <div className="card-five" onClick={handleCardThreeClick}>
+        <div className="card-content">
+          <div className="card-icon-white">
+          <FontAwesomeIcon icon={faPlus} />
+          </div>
+          <div className="card-text-white">Verein</div>
         </div>
       </div>
     );

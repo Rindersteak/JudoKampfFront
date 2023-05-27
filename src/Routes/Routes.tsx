@@ -12,12 +12,14 @@ interface AppRoutesProps {
     onOpenFighterManager: () => void;
     onOpenFighterList: () => void;
     onOpenTournamentList: () => void;
+    onOpenClubManager: () => void;
 }
 
 const AppRoutes: React.FC<AppRoutesProps> = ({
     onOpenTournamentForm,
     onOpenFighterManager,
     onOpenFighterList,
+    onOpenClubManager,
     onOpenTournamentList
 }) => (
     <Routes>
@@ -44,6 +46,7 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
                 <TournamentDetails
                     onOpenFighterList={onOpenFighterList}
                     onOpenFighterManager={onOpenFighterManager}
+                    onOpenClubManager={onOpenClubManager}
                 />
             }
         />

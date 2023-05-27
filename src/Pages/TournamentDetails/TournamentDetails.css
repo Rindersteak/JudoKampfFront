@@ -10,7 +10,9 @@
 
 .card-one,
 .card-two,
-.card-three {
+.card-three,
+.card-four,
+.card-five {
     /* Button Teilnehmer */
     /* Auto layout */
     display: flex;
@@ -39,6 +41,16 @@
 .card-three {
     left: 480px;
     background: #001AFF;
+}
+
+.card-four {
+  left: 720px;
+  background: #FFFFFF;
+}
+
+.card-five{
+  left: 960px;
+  background: #001AFF;
 }
 
 .card-text-white,
