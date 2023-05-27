@@ -136,14 +136,15 @@
     border-radius: 5px;
     border: none;
     padding: 0 0.625em;
-    font-family: 'Nunito', sans-serif;
-    font-size: 1em;
-    background: #EDEFF2;
-    appearance: none;
-    position: relative;
-    height: 1.9375em;
-    -moz-appearance: none;
-    -webkit-appearance: none;
+
+}
+
+.custom-select .css-1pahdxg-control {
+    height: 40px; /* Hier kannst du die gewünschte Höhe festlegen */
+  }
+
+.css-tj5bde-Svg{
+    color: #001AFF;
 }
 
 /* Styling für das Pfeil-Icon von Dropdown-Feldern */

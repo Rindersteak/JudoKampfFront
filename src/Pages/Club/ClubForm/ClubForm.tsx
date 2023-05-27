@@ -23,8 +23,8 @@ const ClubForm: React.FC<ClubFormProps> = ({ onAddClub, onShowSuccessPopup }) =>
   const [loading, setLoading] = useState(false);
 
   const landesverbandOptiopns = [
-    { value: 'm', label: 'Männlich' },
-    { value: 'f', label: 'Weiblich' }
+    { value: 'm', label: 'Landesverband 1' },
+    { value: 'f', label: 'Landesverband 2' }
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -82,19 +82,23 @@ const ClubForm: React.FC<ClubFormProps> = ({ onAddClub, onShowSuccessPopup }) =>
 
             <div className="inputContainer">
         <label className="inputLabel" htmlFor="landesverband">Landesverband</label>
-        <div className="selectContainer">
-          <Select
-            id="landesverband"
-            value={landesverband}
-            options={landesverbandOptiopns}
-            onChange={(newValue: { value: string; label: string; } | null) => setLandesverband(newValue)}
-            required
-          />
+        <Select
+  id="landesverband"
+  value={landesverband}
+  options={landesverbandOptiopns}
+  onChange={(newValue: { value: string; label: string; } | null) => setLandesverband(newValue)}
+  required
+  className="custom-select"
+  styles={{ control: (provided,state) => ({
+     ...provided, 
+     //height: "5px",
+     //minHeight: "10px",
+     backgroundColor: state.selectProps.value ? '#EDEFF2' : '#EDEFF2',
+     }) 
+     }}
+/>
+
         </div>
-
-
-
-      </div>
         </div>
         <div className="halfWidthWrapper">
             <div className="inputContainer halfWidth">
