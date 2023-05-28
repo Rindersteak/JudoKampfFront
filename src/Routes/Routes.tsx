@@ -7,6 +7,7 @@ import FighterManager from '../Pages/FighterManager/FighterManager';
 import TournamentDetails from '../Pages/TournamentDetails/TournamentDetails';
 import TournamentList from '../Pages/TournamentList/TournamentList';
 import ClubList from '../Pages/Club/ClubList/ClubList'
+import FighterDetails from '../Pages/FighterDetails/FighterDetails'
 
 interface AppRoutesProps {
     onOpenTournamentForm: () => void;
@@ -56,6 +57,7 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
         />
         <Route path="/tournament-list" element={<TournamentList onClose={onOpenTournamentList} />} />
         <Route path="/club-list" element={<ClubList onDeleteClub={() => {}}/>} />
+        <Route path="/fighter-details" element={<FighterDetails/>} />
     </Routes>
 );
 
