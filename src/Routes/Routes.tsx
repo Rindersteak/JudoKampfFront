@@ -6,6 +6,8 @@ import FighterList from '../Pages/FighterList/FighterList';
 import FighterManager from '../Pages/FighterManager/FighterManager';
 import TournamentDetails from '../Pages/TournamentDetails/TournamentDetails';
 import TournamentList from '../Pages/TournamentList/TournamentList';
+import TournamentTree from '../Pages/TournamentTree/TorunamentTree';
+
 
 interface AppRoutesProps {
     onOpenTournamentForm: () => void;
@@ -51,6 +53,7 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
             }
         />
         <Route path="/tournament-list" element={<TournamentList onClose={onOpenTournamentList} />} />
+        <Route path="/tournamentTree" element={<TournamentTree/>} />
     </Routes>
 );
 

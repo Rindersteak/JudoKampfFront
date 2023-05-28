@@ -1,0 +1,101 @@
+/*
+ * Flex Layout Specifics
+*/
+main {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .round {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 200px;
+    list-style: none;
+    padding: 0;
+  }
+  
+  .round .spacer {
+    flex-grow: 1;
+  }
+  
+  .round .spacer:first-child,
+  .round .spacer:last-child {
+    flex-grow: 0.5;
+  }
+  
+  .round .game-spacer {
+    flex-grow: 1;
+  }
+  
+  /*
+   * General Styles
+  */
+  body {
+    font-family: sans-serif;
+    font-size: small;
+    padding: 10px;
+    line-height: 1.4em;
+  }
+  
+  li.game {
+    padding-left: 20px;
+  }
+  
+  li.game.winner {
+    font-weight: bold;
+  }
+  
+  li.game span {
+    float: right;
+    margin-right: 5px;
+  }
+  
+  li.game-top {
+    border-bottom: none; /* Remove border at the bottom */
+  }
+  
+  li.game-spacer {
+    border-right: 1.5px solid #001AFF;
+    min-height: 17px;
+  }
+  
+  li.game-bottom {
+    border-top: none; /* Remove border at the top */
+  }
+  
+  /* New styles for player box */
+  .player-box {
+    background: #E1E8F2;
+    border-radius: 1px;
+    padding: 5px;
+    margin-bottom: 5px;
+    border-right: 1.5px solid #001AFF;
+  }
+  
+  li.game-top .player-box {
+    margin-bottom: -1px; /* Reduce margin between player boxes */
+  }
+  
+  li.game-bottom .player-box {
+    margin-top: -1px; /* Reduce margin between player boxes */
+  }
+  
+  /* New styles for connectors */
+  .connector {
+    position: relative;
+    width: 0;
+    height: 100%;
+  }
+  
+  .connector:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: 20px;
+    height: 2px;
+    background-color: #001AFF;
+    transform: translate(-50%, -50%);
+  }
+  
