@@ -134,7 +134,7 @@ const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
                     <input className="inputFieldSmall" type="text" id="addressZipCode" value={addressZipCode} onChange={e => setAddressZipCode((e.target.value))} placeholder="PLZ" required />
                 </div>
             </div>
-            <div className="halfWidthWrapper">
+            <div className="halfWidthWrapperAddress">
                 <div className="inputContainer halfWidth">
                     <input className="inputFieldWide" type="text" id="addressStreet" value={addressStreet} onChange={e => setAddressStreet((e.target.value))} placeholder="Straße" required />
                 </div>
