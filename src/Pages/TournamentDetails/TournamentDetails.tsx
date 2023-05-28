@@ -12,11 +12,12 @@ interface TournamentDetailsProps {
   onOpenFighterList: () => void;
   onOpenFighterManager: () => void;
   onOpenClubManager: () => void;
+  onOpenClubList: () => void;
 }
 
 
 // Hauptkomponente TournamentDetails
-const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList, onOpenFighterManager, onOpenClubManager }) => {
+const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList, onOpenFighterManager, onOpenClubManager, onOpenClubList }) => {
     
 
     // Hook, um URL-Parameter abzurufen
@@ -78,7 +79,7 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList
         <CardOne tournamentId={tournamentId || ''} />
         <CardTwo tournamentId={tournamentId || ''} onOpenFighterList={onOpenFighterList} />
         <CardThree tournamentId={tournamentId || ''} onOpenFighterManager={onOpenFighterManager} />
-        <CardFour tournamentId={tournamentId || ''} onOpenFighterManager={onOpenFighterManager} />
+        <CardFour tournamentId={tournamentId || ''} onOpenClubList={onOpenClubList} />
         <CardFive tournamentId={tournamentId || ''} onOpenClubManager={onOpenClubManager} />
         <CardSix tournamentId={tournamentId || ''} onOpenClubManager={onOpenClubManager} />
       </div>
@@ -145,9 +146,9 @@ const CardThree = ({ tournamentId, onOpenFighterManager }: { tournamentId: strin
 };
 
 
-const CardFour = ({ tournamentId, onOpenFighterManager }: { tournamentId: string, onOpenFighterManager: () => void }) => {
+const CardFour = ({ tournamentId, onOpenClubList }: { tournamentId: string, onOpenClubList: () => void }) => {
   const handleCardThreeClick = () => {
-    onOpenFighterManager();
+    onOpenClubList();
   };
 
   return (

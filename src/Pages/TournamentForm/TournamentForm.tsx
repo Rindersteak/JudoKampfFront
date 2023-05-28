@@ -2,26 +2,30 @@ import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './TournamentForm.css'
-import { Club, Address, Tournament } from '../../types';
-import { getClubs } from '../../API/clubAPI';
+import { Address, Tournament } from '../../types';
 import { postTournament } from '../../API/tournamentAPI';
+import stateassociationOptions from '../../Config/StateAssociations';
 
 type Props = {
     onAddTournament: (tournament: Tournament) => void;
 };
 
+type OptionType = {
+    value: string;
+    label: string;
+};
 
 
 
 const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
     const [tournamentName, handleNameChange] = useState('');
     const [tournamentLocation, setTournamentLocation] = useState("");
-    const [nationalAssociation, setNationalAssociation] = useState("");
+    const [stateassociation, setStateAssociation] = useState<string>("");
+
     const [addressCity, setAddressCity] = useState("");
     const [addressZipCode, setAddressZipCode] = useState("");
     const [addressStreet, setAddressStreet] = useState("");
     const [addressStreetNumber, setAddressStreetNumber] = useState("");
-    const [clubs, setClubs] = useState<Club[]>([]);
     const [periodFrom, setPeriodFrom] = useState<Date | null>(null);
     const [periodTo, setPeriodTo] = useState<Date | null>(null);
     const [errorMessage, setErrorMessage] = useState("");
@@ -40,18 +44,7 @@ const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
         }
     };
 
-    useEffect(() => {
-        fetchClubs();
-    }, []);
 
-    const fetchClubs = async () => {
-        try {
-            const clubsData = await getClubs();
-            setClubs(clubsData);
-        } catch (error) {
-            console.error('Error loading clubs:', error);
-        }
-    };
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
@@ -75,6 +68,7 @@ const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
                 state: "",
                 postalcode: addressZipCode,
             },
+            stateassociation: stateassociation,
             ageclass: {
                 id: 0,
                 name: "",  // You need to set the correct value here
@@ -95,19 +89,21 @@ const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
             fights: [],  // You need to set the correct fights here
         };
 
-
-
-
         try {
             // Senden Sie den Antrag an Ihr Backend
             await postTournament(tournament);
             onAddTournament(tournament);
             setLoading(false);
             console.log('Turnier erfolgreich eingereicht');
+            handleSuccessPopup(true);  // This line has been added
         } catch (error) {
             setErrorMessage("(DB-Error) Fehler beim Anlegen!");
             setLoading(false);
         }
+    };
+
+    const handleStateAssociationChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setStateAssociation(e.target.value);
     };
 
 
@@ -143,21 +139,23 @@ const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
                 </div>
             </div>
             <div className="inputContainer">
-                <label className="inputLabel" htmlFor="nationalAssociation">Verein</label>
-                <div className="selectContainer">
-                    <select
-                        className="selectField"
-                        id="nationalAssociation"
-                        value={nationalAssociation}
-                        onChange={e => setNationalAssociation(e.target.value)}
-                        required
-                    >
-                        <option value=""></option>
-                        {clubs.map(club => (
-                            <option key={club.id} value={club.name}>{club.name}</option>
-                        ))}
-                    </select>
-                </div>
+                <label className="inputLabel" htmlFor="stateassociation">Landesverband</label>
+                <select
+                    id="stateassociation"
+                    value={stateassociation || ''}
+                    onChange={handleStateAssociationChange}
+                    required
+                    className="dropdown-field"
+                >
+                    <option value="" disabled>
+                        Bitte auswählen
+                    </option>
+                    {stateassociationOptions.map((option: OptionType) => (
+                        <option key={option.value} value={option.value} className="dropdown-content">
+                            {option.label}
+                        </option>
+                    ))}
+                </select>
             </div>
             <div className="halfWidthWrapper">
                 <div className="inputContainer halfWidth">
@@ -184,10 +182,12 @@ const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
                 </div>
             </div>
             <button className="addButton" type="submit" disabled={loading}>
-        {loading ? "Laden..." : "Hinzufügen"}
-      </button>
+                {loading ? "Laden..." : "Hinzufügen"}
+            </button>
 
-      {errorMessage && <div className="errorMessage">{errorMessage}</div>}
+            {showSuccessPopup && <div className="successPopup">Eintrag erfolgreich hinzugefügt!</div>}
+
+            {errorMessage && <div className="errorMessage">{errorMessage}</div>}
 
         </form>
     );
