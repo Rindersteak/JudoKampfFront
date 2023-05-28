@@ -55,7 +55,7 @@ const ClubForm: React.FC<ClubFormProps> = ({ onAddClub, onShowSuccessPopup }) =>
         state: 'string',
         postalcode: addressZipCode,
       },
-      stateassociation: '',
+      stateassociation: stateassociation,
     };
 
     try {

@@ -11,7 +11,6 @@ import './ClubList.css';
 interface ClubListProps {
   detailedView?: boolean;
   onDeleteClub: (clubId: number) => void;
-  
 }
 
 export const deleteClubHandler = async (clubId: number) => {
@@ -26,6 +25,7 @@ export const deleteClubHandler = async (clubId: number) => {
 const ClubList: React.FC<ClubListProps> = ({ detailedView = true, onDeleteClub }) => {
   const [backendClubs, setBackendClubs] = useState<Club[]>([]);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const [sortColumn, setSortColumn] = useState<string>('name');
   const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState(false);
   const [clubIdToDelete, setClubToDelete] = useState<number | null>(null);
 
@@ -36,9 +36,15 @@ const ClubList: React.FC<ClubListProps> = ({ detailedView = true, onDeleteClub }
     const loadBackendClubs = async () => {
       try {
         const clubs = await getClubs();
-        const sortedClubs = clubs.sort((a: Club, b: Club) =>
-          sortOrder === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)
-        );
+        const sortedClubs = clubs.sort((a: Club, b: Club) => {
+          if (sortColumn === 'name') {
+            return sortOrder === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
+          } else if (sortColumn === 'stateassociation') {
+            return sortOrder === 'asc' ? a.stateassociation.localeCompare(b.stateassociation) : b.stateassociation.localeCompare(a.stateassociation);
+          }
+          return 0;
+        });
+
         setBackendClubs(sortedClubs);
       } catch (error) {
         console.error('Fehler beim Laden der Vereine aus der Datenbank:', error);
@@ -46,9 +52,10 @@ const ClubList: React.FC<ClubListProps> = ({ detailedView = true, onDeleteClub }
     };
 
     loadBackendClubs();
-  }, [sortOrder]);
+  }, [sortOrder, sortColumn]);
 
-  const handleSortClick = () => {
+  const handleSortClick = (column: string) => {
+    setSortColumn(column);
     setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
   };
 
@@ -91,30 +98,27 @@ const ClubList: React.FC<ClubListProps> = ({ detailedView = true, onDeleteClub }
           <tr>
             <th className="headerCell">
               Name
-              {detailedView && (
-                <button className="arrowButton" onClick={handleSortClick}>
-                  {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
-                </button>
-              )}
+              <button className="arrowButton" onClick={() => handleSortClick('name')}>
+                {sortOrder === 'asc' && sortColumn === 'name' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+              </button>
             </th>
             <th className="headerCell">
               Landesverband
-              {detailedView && (
-                <button className="arrowButton" onClick={handleSortClick}>
-                  {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
-                </button>
-              )}
+              <button className="arrowButton" onClick={() => handleSortClick('stateassociation')}>
+                {sortOrder === 'asc' && sortColumn === 'stateassociation' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+              </button>
             </th>
             <th></th>
           </tr>
         </thead>
+
         <tbody>
           {backendClubs.map((club) => {
             return (
               <tr
                 className="entryStyle"
                 key={club.id}
-                onClick={() => handleEditClub(club)} 
+                onClick={() => handleEditClub(club)}
               >
                 <td>{club.name}</td>
                 <td>{club.stateassociation}</td>
