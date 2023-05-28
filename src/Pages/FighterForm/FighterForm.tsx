@@ -11,6 +11,12 @@ type Props = {
   onShowSuccessPopup: (status: boolean) => void;
 };
 
+type OptionType = {
+  value: string;
+  label: string;
+};
+
+
 const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
@@ -22,15 +28,23 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
   const [gender, setGender] = useState<{ value: string; label: string; } | null>(null);
   const [club, setClub] = useState<{ value: string; label: string; } | null>(null);
 
-  const genderOptions = [
+  const genderOptions: OptionType[] = [
     { value: 'm', label: 'Männlich' },
     { value: 'f', label: 'Weiblich' }
   ];
 
-  const clubOptions = [
+  const clubOptions: OptionType[] = [
     { value: 'Verein 1', label: 'Verein 1' },
     { value: 'Verein 2', label: 'Verein 2' }
   ];
+
+  const handleGenderChange = (newValue: OptionType | null) => {
+    setGender(newValue);
+  };
+
+  const handleClubChange = (newValue: OptionType | null) => {
+    setClub(newValue);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -72,7 +86,7 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
       },
       club: {
         id: 0,
-        shortName: club?.value || '',
+        shortname: club?.value || '',
         name: club?.value || '',
         address: {
           id: 0,
@@ -82,6 +96,7 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
           state: "",
           postalcode: "",
         },
+        stateassociation: ''
       },
     };
 
@@ -111,31 +126,70 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
         </div>
       </div>
 
-      <div className="inputContainer">
-        <label className="inputLabel" htmlFor="gender">Geschlecht</label>
-        <div className="selectContainer">
-          <Select
-            id="gender"
-            value={gender}
-            options={genderOptions}
-            onChange={(newValue: { value: string; label: string; } | null) => setGender(newValue)}
-            required
-          />
-        </div>
-      </div>
 
       <div className="inputContainer">
-        <label className="inputLabel" htmlFor="club">Verein</label>
-        <div className="selectContainer">
-          <Select
-            id="club"
-            value={club}
-            options={clubOptions}
-            onChange={(newValue: { value: string; label: string; } | null) => setClub(newValue)}
-            required
-          />
-        </div>
+        <label className="inputLabel" htmlFor="gender">Geschlecht</label>
+        <select
+          id="gender"
+          value={gender ? gender.value : ''}
+          onChange={(e) => {
+            const selectedOption = genderOptions.find(
+              (option) => option.value === e.target.value
+            );
+            handleClubChange(selectedOption || null);
+          }}
+          required
+          className="dropdown-field"
+        >
+          <option value="" disabled>
+            Bitte auswählen
+          </option>
+          {genderOptions.map((option: OptionType) => (
+            <option
+              key={option.value}
+              value={option.value}
+              className="dropdown-content"
+            >
+              {option.label}
+            </option>
+          ))}
+        </select>
       </div>
+
+
+      <div className="inputContainer">
+        <label className="inputLabel" htmlFor="club">
+          Verein
+        </label>
+        <select
+          id="club"
+          value={club ? club.value : ''}
+          onChange={(e) => {
+            const selectedOption = clubOptions.find(
+              (option) => option.value === e.target.value
+            );
+            handleClubChange(selectedOption || null);
+          }}
+          required
+          className="dropdown-field"
+        >
+          <option value="" disabled>
+            Bitte auswählen
+          </option>
+          {clubOptions.map((option: OptionType) => (
+            <option
+              key={option.value}
+              value={option.value}
+              className="dropdown-content"
+            >
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+
+
 
       <div className="halfWidthWrapper">
         <div className="inputContainer halfWidth">

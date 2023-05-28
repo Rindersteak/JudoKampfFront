@@ -1,5 +1,5 @@
 import { Club } from '../types';
-import { API_DOMAIN } from './apiConfig';
+import { API_DOMAIN } from '../Config/apiConfig';
 
 export async function postClub(club: Club) {
     try {
@@ -54,3 +54,26 @@ export async function deleteClub(clubId: number) {
         throw error;
     }
 }
+
+export async function putClub(club: Club) {
+    try {
+      const response = await fetch(`${API_DOMAIN}/clubs/update/${club.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(club),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('An error occurred while updating the club:', error);
+      throw error;
+    }
+  }
+  

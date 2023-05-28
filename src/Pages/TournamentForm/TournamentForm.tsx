@@ -75,6 +75,7 @@ const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
                 state: "",
                 postalcode: addressZipCode,
             },
+            stateassociation:'',
             ageclass: {
                 id: 0,
                 name: "",  // You need to set the correct value here

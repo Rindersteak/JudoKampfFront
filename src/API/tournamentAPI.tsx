@@ -1,6 +1,6 @@
 import { Tournament } from '../types';
 import { Fighter } from '../types';
-import { API_DOMAIN } from './apiConfig';
+import { API_DOMAIN } from '../Config/apiConfig';
 
 export async function postTournament(tournament: Tournament) {
     try {
