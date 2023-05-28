@@ -142,31 +142,31 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
       <div className="inputContainer">
         <label className="inputLabel" htmlFor="gender">Geschlecht</label>
         <select
-          id="gender"
-          value={gender ? gender.value : ''}
-          onChange={(e) => {
-            const selectedOption = genderOptions.find(
-              (option) => option.value === e.target.value
-            );
-            handleClubChange(selectedOption || null);
-          }}
-          required
-          className="dropdown-field"
-        >
-          <option value="" disabled>
-            Bitte auswählen
-          </option>
-          {genderOptions.map((option: OptionType) => (
-            <option
-              key={option.value}
-              value={option.value}
-              className="dropdown-content"
-            >
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </div>
+    id="gender"
+    value={gender ? gender.value : ''}
+    onChange={(e) => {
+      const selectedOption = genderOptions.find(
+        (option) => option.value === e.target.value
+      );
+      handleGenderChange(selectedOption || null); // Hier war der Fehler
+    }}
+    required
+    className="dropdown-field"
+  >
+    <option value="" disabled>
+      Bitte auswählen
+    </option>
+    {genderOptions.map((option: OptionType) => (
+      <option
+        key={option.value}
+        value={option.value}
+        className="dropdown-content"
+      >
+        {option.label}
+      </option>
+    ))}
+  </select>
+</div>
 
 
       <div className="inputContainer">
@@ -223,7 +223,7 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
       <button className="addButton" type="submit" disabled={loading}>
         {loading ? "Laden..." : "Hinzufügen"}
       </button>
-
+          
       {errorMessage && <div className="errorMessage">{errorMessage}</div>}
     </form>
   );

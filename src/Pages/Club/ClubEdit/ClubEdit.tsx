@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Club } from '../../../types';
 import { putClub, deleteClub } from '../../../API/clubAPI';
 import Select from 'react-select';
+import Modal from '../../../Modal/Modal';
+import ConfirmDelete from '../../ConfirmDelete/ConfirmDelete';
 
 interface ClubEditProps {
   club: Club;
   onUpdateClub: (club: Club) => void;
   onDeleteClub: (clubId: number) => void;
 }
-
 const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub }) => {
   const [shortname, setShortName] = useState("");
   const [addressCity, setAddressCity] = useState("");
@@ -78,15 +79,27 @@ const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub })
     }
   };
 
-  const handleDelete = async () => {
+  const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState(false);
+
+  const handleDelete = () => {
+    setShowConfirmDeletePopup(true);
+  };
+
+  const handleDeleteConfirmed = async () => {
     try {
       await deleteClub(club.id);
       onDeleteClub(club.id);
     } catch (error) {
-      setErrorMessage('(DB-Error) Fehler beim Löschen!');
+      console.error('(DB-Error) Fehler beim Löschen!', error);
     }
+    setShowConfirmDeletePopup(false);
+  }
+
+  const handleDeleteCanceled = () => {
+    setShowConfirmDeletePopup(false);
   };
 
+  
   return (
     <form onSubmit={handleSubmit} className="formContainer">
       <h1 className="titleStyle">Verein bearbeiten</h1>
@@ -146,6 +159,16 @@ const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub })
       <button className="addDeleteButton" type="button" onClick={handleDelete}>
         Verein Löschen
       </button>
+
+      {showConfirmDeletePopup && (
+        <Modal size="small" onClose={handleDeleteCanceled}>
+          <ConfirmDelete
+            onClose={handleDeleteCanceled}
+            onConfirmDelete={handleDeleteConfirmed}
+            idToDelete={club.id}
+          />
+        </Modal>
+      )}
 
       {errorMessage && <div className="errorMessage">{errorMessage}</div>}
     </form>
