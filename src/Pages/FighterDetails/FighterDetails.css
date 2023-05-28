@@ -95,9 +95,12 @@
 
 .redCard{
     flex: 1;
-    padding-left: 1%;
-    padding-right: 1%;
-    padding-top: 1%;
-    padding-bottom: 1%;
-    background-color: red;
+    color: red;
+    font-size: 500%;
+}
+.yellowCardOne,
+.yellowCardTwo{
+    flex: 1;
+    color: yellow;
+    font-size: 500%;
 }

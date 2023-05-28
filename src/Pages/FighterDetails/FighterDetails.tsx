@@ -1,11 +1,11 @@
 
 import './FighterDetails.css';
-import React, { useState } from 'react';
-import { styled } from '@mui/material/styles';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClipboardList, faGear, faPencil, faPeopleArrows, faPlus, faTree, faTrophy} from '@fortawesome/free-solid-svg-icons';
+import { faSquare } from '@fortawesome/free-solid-svg-icons';
+import { ReactComponent as RectangleWideIcon } from './rectangle-wide.svg';
+
 
 const FighterDetails: React.FC = () => {
 
@@ -49,11 +49,16 @@ const FighterDetails: React.FC = () => {
                     0
                 </div>
 
-                <div className='redCard'></div>
+                <div className='redCard'>
+                <FontAwesomeIcon icon={faSquare}/>
+                </div>
 
-                <div className='yellowCardTwo'></div>
-
-                <div className='yellowCardOne'></div>
+                <div className='yellowCardTwo'>
+                <FontAwesomeIcon icon={faSquare}/>
+                </div>
+                <div className='yellowCardOne'>
+                  <FontAwesomeIcon icon={faSquare}/>
+                </div>
 
                 </div>
             </div>
