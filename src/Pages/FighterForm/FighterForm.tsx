@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Fighter } from '../../types';
 import { postFighter } from '../../API/fighterAPI';
+import { getClubs } from '../../API/clubAPI';
 import './FighterForm.css';
 import Select from 'react-select';
 
@@ -16,7 +17,6 @@ type OptionType = {
   label: string;
 };
 
-
 const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
@@ -25,18 +25,30 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
   const [weight, setWeight] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [gender, setGender] = useState<{ value: string; label: string; } | null>(null);
-  const [club, setClub] = useState<{ value: string; label: string; } | null>(null);
+  const [gender, setGender] = useState<OptionType | null>(null);
+  const [club, setClub] = useState<OptionType | null>(null);
+  const [clubOptions, setClubOptions] = useState<OptionType[]>([]);
 
   const genderOptions: OptionType[] = [
     { value: 'm', label: 'Männlich' },
     { value: 'f', label: 'Weiblich' }
   ];
 
-  const clubOptions: OptionType[] = [
-    { value: 'Verein 1', label: 'Verein 1' },
-    { value: 'Verein 2', label: 'Verein 2' }
-  ];
+  useEffect(() => {
+    async function fetchClubs() {
+      try {
+        const clubs = await getClubs();
+        const clubOptions = clubs.map((club: any) => ({
+          value: club.id.toString(),
+          label: club.name
+        }));
+        setClubOptions(clubOptions);
+      } catch (error) {
+        console.log("Error fetching clubs:", error);
+      }
+    }
+    fetchClubs();
+  }, []);
 
   const handleGenderChange = (newValue: OptionType | null) => {
     setGender(newValue);
