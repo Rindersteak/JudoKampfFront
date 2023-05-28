@@ -1,6 +1,6 @@
 import { Tournament } from '../types';
 import { Fighter } from '../types';
-import { API_DOMAIN } from './apiConfig';
+import { API_DOMAIN } from '../Config/apiConfig';
 
 export async function postTournament(tournament: Tournament) {
     try {
@@ -55,7 +55,7 @@ export async function getTotalTournaments() {
 
 export async function deleteTournament(tournamentId: number) {
     try {
-      const response = await fetch(`${API_DOMAIN}/tournament/delete/${tournamentId}`, {
+      const response = await fetch(`${API_DOMAIN}/tournaments/delete/${tournamentId}`, {
         method: 'DELETE',
       });
   
@@ -72,7 +72,7 @@ export async function deleteTournament(tournamentId: number) {
 
   export async function postTournamentFighter(tournamentId: number, fighter: Fighter) {
     try {
-        const response = await fetch(`${API_DOMAIN}/tournament/${tournamentId}/add-fighter`, {
+        const response = await fetch(`${API_DOMAIN}/tournaments/${tournamentId}/add-fighter`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

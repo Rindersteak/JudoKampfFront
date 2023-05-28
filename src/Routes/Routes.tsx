@@ -6,8 +6,12 @@ import FighterList from '../Pages/FighterList/FighterList';
 import FighterManager from '../Pages/FighterManager/FighterManager';
 import TournamentDetails from '../Pages/TournamentDetails/TournamentDetails';
 import TournamentList from '../Pages/TournamentList/TournamentList';
+<<<<<<< HEAD
 import TournamentTree from '../Pages/TournamentTree/TorunamentTree';
 
+=======
+import ClubList from '../Pages/Club/ClubList/ClubList'
+>>>>>>> cbb42f780183e28c45d4e70013dba7800786b87c
 
 interface AppRoutesProps {
     onOpenTournamentForm: () => void;
@@ -15,6 +19,7 @@ interface AppRoutesProps {
     onOpenFighterList: () => void;
     onOpenTournamentList: () => void;
     onOpenClubManager: () => void;
+    onOpenClubList: () => void;
 }
 
 const AppRoutes: React.FC<AppRoutesProps> = ({
@@ -22,7 +27,8 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
     onOpenFighterManager,
     onOpenFighterList,
     onOpenClubManager,
-    onOpenTournamentList
+    onOpenTournamentList,
+    onOpenClubList
 }) => (
     <Routes>
         <Route
@@ -49,11 +55,16 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
                     onOpenFighterList={onOpenFighterList}
                     onOpenFighterManager={onOpenFighterManager}
                     onOpenClubManager={onOpenClubManager}
+                    onOpenClubList={onOpenClubList}
                 />
             }
         />
         <Route path="/tournament-list" element={<TournamentList onClose={onOpenTournamentList} />} />
+<<<<<<< HEAD
         <Route path="/tournamentTree" element={<TournamentTree/>} />
+=======
+        <Route path="/club-list" element={<ClubList onDeleteClub={() => {}}/>} />
+>>>>>>> cbb42f780183e28c45d4e70013dba7800786b87c
     </Routes>
 );
 

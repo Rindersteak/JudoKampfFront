@@ -1,86 +1,90 @@
 import React, { useEffect, useState } from 'react';
-import { Fighter } from '../../../types';
-import { getFighters, deleteFighter } from '../../../API/fighterAPI';
+import { Club } from '../../../types';
+import { getClubs, deleteClub } from '../../../API/clubAPI';
 import { FiTrash2 } from 'react-icons/fi';
 import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
-import Modal from '../../../Modal/Modal'; // Stellen Sie sicher, dass der Pfad zu Ihrer Modal-Komponente korrekt ist
-import ConfirmDelete from '../../ConfirmDelete/ConfirmDelete'; // Stellen Sie sicher, dass der Pfad zu Ihrer ConfirmDelete-Komponente korrekt ist
+import Modal from '../../../Modal/Modal';
+import ConfirmDelete from '../../ConfirmDelete/ConfirmDelete';
+import ClubEdit from '../ClubEdit/ClubEdit';  // Importiere die ClubEdit-Komponente
 import './ClubList.css';
 
-// Importieren der benötigten Abhängigkeiten und CSS-Datei
-
-interface FighterListProps {
+interface ClubListProps {
   detailedView?: boolean;
-  onDeleteFighter: (fighterId: number) => void;
+  onDeleteClub: (clubId: number) => void;
 }
 
-// Definition der Schnittstelle für die Props der Komponente
-
-export const deleteClubHandler = async (fighterId: number) => {
+export const deleteClubHandler = async (clubId: number) => {
   try {
-    await deleteFighter(fighterId);
-    // Implementiere hier die Aktualisierung der Kämpferliste nach dem Löschen
+    await deleteClub(clubId);
+    // Implementiere hier die Aktualisierung der Vereinsliste nach dem Löschen
   } catch (error) {
-    console.error('Fehler beim Löschen des Kämpfers:', error);
+    console.error('Fehler beim Löschen des Vereins:', error);
   }
 };
 
-
-
-const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDeleteFighter }) => {
-  const [backendFighters, setBackendFighters] = useState<Fighter[]>([]);
+const ClubList: React.FC<ClubListProps> = ({ detailedView = true, onDeleteClub }) => {
+  const [backendClubs, setBackendClubs] = useState<Club[]>([]);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const [sortColumn, setSortColumn] = useState<string>('name');
   const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState(false);
-  const [fighterIdToDelete, setFighterToDelete] = useState<number | null>(null);
+  const [clubIdToDelete, setClubToDelete] = useState<number | null>(null);
 
-
-
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [selectedClub, setSelectedClub] = useState<Club | null>(null);
 
   useEffect(() => {
-    const loadBackendFighters = async () => {
+    const loadBackendClubs = async () => {
       try {
-        const fighters = await getFighters();
-        const fightersCopy = fighters.map((fighter: Fighter) => ({
-          ...fighter,
-          birthdate: new Date(fighter.birthdate)
-        }));
+        const clubs = await getClubs();
+        const sortedClubs = clubs.sort((a: Club, b: Club) => {
+          if (sortColumn === 'name') {
+            return sortOrder === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
+          } else if (sortColumn === 'stateassociation') {
+            return sortOrder === 'asc' ? a.stateassociation.localeCompare(b.stateassociation) : b.stateassociation.localeCompare(a.stateassociation);
+          }
+          return 0;
+        });
 
-        const sortedFighters = fightersCopy.sort((a: Fighter, b: Fighter) =>
-          sortOrder === 'asc' ? a.lastname.localeCompare(b.lastname) : b.lastname.localeCompare(a.lastname)
-        );
-        setBackendFighters(sortedFighters);
+        setBackendClubs(sortedClubs);
       } catch (error) {
-        console.error('Fehler beim Laden der Kämpfer aus der Datenbank:', error);
+        console.error('Fehler beim Laden der Vereine aus der Datenbank:', error);
       }
     };
 
-    loadBackendFighters();
-  }, [sortOrder]);
+    loadBackendClubs();
+  }, [sortOrder, sortColumn]);
 
-
-  const handleSortClick = () => {
+  const handleSortClick = (column: string) => {
+    setSortColumn(column);
     setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
   };
 
-
-  const handleDeleteFighter = (fighterId: number) => {
+  const handleDeleteClub = (event: React.MouseEvent, clubId: number) => {
+    event.stopPropagation(); // Verhindert, dass das Klickereignis weitergegeben wird
     setShowConfirmDeletePopup(true);
-    setFighterToDelete(fighterId);
+    setClubToDelete(clubId);
   };
 
   const handleDeleteConfirmed = async () => {
-    if (fighterIdToDelete !== null) {
-      await deleteClubHandler(fighterIdToDelete);
+    if (clubIdToDelete !== null) {
+      await deleteClubHandler(clubIdToDelete);
       setShowConfirmDeletePopup(false);
-      setBackendFighters(backendFighters.filter(fighter => fighter.id !== fighterIdToDelete));
+      setBackendClubs(backendClubs.filter(club => club.id !== clubIdToDelete));
     }
   }
 
   const handleDeleteCanceled = () => {
     setShowConfirmDeletePopup(false);
-  }
+  };
 
-  // Funktion zum Löschen eines Kämpfers mit der gegebenen ID
+  const handleEditClub = (club: Club) => {
+    setSelectedClub(club);
+    setShowEditModal(true);
+  };
+
+  const handleEditModalClose = () => {
+    setShowEditModal(false);
+  };
 
   return (
     <div className="entryList">
@@ -93,101 +97,55 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
         <thead>
           <tr>
             <th className="headerCell">
-              Verein
-              {detailedView && (
-                <button className="arrowButton" onClick={handleSortClick}>
-                  {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
-                </button>
-              )}
+              Name
+              <button className="arrowButton" onClick={() => handleSortClick('name')}>
+                {sortOrder === 'asc' && sortColumn === 'name' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+              </button>
             </th>
-
             <th className="headerCell">
               Landesverband
-              {detailedView && (
-                <button className="arrowButton" onClick={handleSortClick}>
-                  {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
-                </button>
-              )}
+              <button className="arrowButton" onClick={() => handleSortClick('stateassociation')}>
+                {sortOrder === 'asc' && sortColumn === 'stateassociation' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+              </button>
             </th>
-
-            {detailedView && (
-              <>
-                <th className="headerCell">
-                  Stadt
-                  <button className="arrowButton" onClick={handleSortClick}>
-                    {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
-                  </button>
-                </th>
-
-                <th className="headerCell">
-                  Teilnehmer-ID
-                  <button className="arrowButton" onClick={handleSortClick}>
-                    {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
-                  </button>
-                </th>
-
-                <th className="headerCell">
-                  Gewichtsklasse
-                  <button className="arrowButton" onClick={handleSortClick}>
-                    {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
-                  </button>
-                </th>
-
-                <th className="headerCell">
-                  Geburtsdatum
-                  <button className="arrowButton" onClick={handleSortClick}>
-                    {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
-                  </button>
-                </th>
-
-              </>
-            )}
             <th></th>
-
           </tr>
         </thead>
+
         <tbody>
-          {backendFighters.map((fighter) => {
-            const birthdateAsDate = new Date(fighter.birthdate);
-
+          {backendClubs.map((club) => {
             return (
-              <tr className="entryStyle" key={fighter.id}>
-                <td>{fighter.lastname} {fighter.firstname}</td>
-
-                <td>{fighter.club?.name}</td>
-
-                {detailedView && (
-                  <>
-                    <td>{fighter.club?.address?.city}</td>
-
-                    <td>{fighter.id}</td>
-
-                    <td>{fighter.weightclass?.name}</td>
-
-                    <td>{birthdateAsDate.toDateString()}</td>
-
-                  </>
-                )}
-                <td className="deleteIcon" onClick={() => handleDeleteFighter(fighter.id)}><FiTrash2 /></td>
-
+              <tr
+                className="entryStyle"
+                key={club.id}
+                onClick={() => handleEditClub(club)}
+              >
+                <td>{club.name}</td>
+                <td>{club.stateassociation}</td>
+                <td className="deleteIcon" onClick={(event) => handleDeleteClub(event, club.id)}><FiTrash2 /></td>
               </tr>
             );
           })}
         </tbody>
       </table>
 
-      {showConfirmDeletePopup && fighterIdToDelete !== null && (
+      {showConfirmDeletePopup && clubIdToDelete !== null && (
         <Modal size="small" onClose={handleDeleteCanceled}>
           <ConfirmDelete
             onClose={handleDeleteCanceled}
             onConfirmDelete={handleDeleteConfirmed}
-            idToDelete={fighterIdToDelete}
+            idToDelete={clubIdToDelete}
           />
+        </Modal>
+      )}
 
+      {showEditModal && selectedClub && (
+        <Modal size="large" onClose={handleEditModalClose}>
+          <ClubEdit club={selectedClub} onUpdateClub={() => { }} onDeleteClub={() => { }} />
         </Modal>
       )}
     </div>
   );
 };
 
-export default FighterList;
+export default ClubList;

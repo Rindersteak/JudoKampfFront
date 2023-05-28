@@ -25,9 +25,9 @@ export const deleteFighterHandler = async (fighterId: number) => {
 const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDeleteFighter }) => {
   const [backendFighters, setBackendFighters] = useState<Fighter[]>([]);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const [sortColumn, setSortColumn] = useState<string>('lastname');
   const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState(false);
   const [fighterIdToDelete, setFighterToDelete] = useState<number | null>(null);
-
 
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedFighter, setSelectedFighter] = useState<Fighter | null>(null);
@@ -38,12 +38,26 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
         const fighters = await getFighters();
         const fightersCopy = fighters.map((fighter: Fighter) => ({
           ...fighter,
-          birthdate: new Date(fighter.birthdate)
+          birthdate: fighter.birthdate 
         }));
 
-        const sortedFighters = fightersCopy.sort((a: Fighter, b: Fighter) =>
-          sortOrder === 'asc' ? a.lastname.localeCompare(b.lastname) : b.lastname.localeCompare(a.lastname)
-        );
+        const sortedFighters = fightersCopy.sort((a: Fighter, b: Fighter) => {
+          if (sortColumn === 'lastname') {
+            return sortOrder === 'asc' ? a.lastname.localeCompare(b.lastname) : b.lastname.localeCompare(a.lastname);
+          } else if (sortColumn === 'club') {
+            return sortOrder === 'asc' ? a.club?.name?.localeCompare(b.club?.name) : b.club?.name?.localeCompare(a.club?.name);
+          } else if (sortColumn === 'city') {
+            return sortOrder === 'asc' ? a.club?.address?.city?.localeCompare(b.club?.address?.city) : b.club?.address?.city?.localeCompare(a.club?.address?.city);
+          } else if (sortColumn === 'id') {
+            return sortOrder === 'asc' ? a.id - b.id : b.id - a.id;
+          } else if (sortColumn === 'weightclass') {
+            return sortOrder === 'asc' ? a.weightclass?.name?.localeCompare(b.weightclass?.name) : b.weightclass?.name?.localeCompare(a.weightclass?.name);
+          } else if (sortColumn === 'birthdate') {
+            return sortOrder === 'asc' ? a.birthdate.localeCompare(b.birthdate) : b.birthdate.localeCompare(a.birthdate);
+          }
+          return 0;
+        });
+
         setBackendFighters(sortedFighters);
       } catch (error) {
         console.error('Fehler beim Laden der Kämpfer aus der Datenbank:', error);
@@ -51,13 +65,15 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
     };
 
     loadBackendFighters();
-  }, [sortOrder]);
+  }, [sortOrder, sortColumn]);
 
-  const handleSortClick = () => {
+  const handleSortClick = (column: string) => {
+    setSortColumn(column);
     setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
   };
 
-  const handleDeleteFighter = (fighterId: number) => {
+  const handleDeleteFighter = (event: React.MouseEvent, fighterId: number) => {
+    event.stopPropagation(); // Verhindert, dass das Klickereignis weitergegeben wird
     setShowConfirmDeletePopup(true);
     setFighterToDelete(fighterId);
   };
@@ -96,16 +112,16 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
             <th className="headerCell">
               Name
               {detailedView && (
-                <button className="arrowButton" onClick={handleSortClick}>
-                  {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                <button className="arrowButton" onClick={() => handleSortClick('lastname')}>
+                  {sortOrder === 'asc' && sortColumn === 'lastname' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
                 </button>
               )}
             </th>
             <th className="headerCell">
               Verein
               {detailedView && (
-                <button className="arrowButton" onClick={handleSortClick}>
-                  {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                <button className="arrowButton" onClick={() => handleSortClick('club')}>
+                  {sortOrder === 'asc' && sortColumn === 'club' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
                 </button>
               )}
             </th>
@@ -113,26 +129,26 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
               <>
                 <th className="headerCell">
                   Stadt
-                  <button className="arrowButton" onClick={handleSortClick}>
-                    {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                  <button className="arrowButton" onClick={() => handleSortClick('city')}>
+                    {sortOrder === 'asc' && sortColumn === 'city' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
                   </button>
                 </th>
                 <th className="headerCell">
                   Teilnehmer-ID
-                  <button className="arrowButton" onClick={handleSortClick}>
-                    {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                  <button className="arrowButton" onClick={() => handleSortClick('id')}>
+                    {sortOrder === 'asc' && sortColumn === 'id' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
                   </button>
                 </th>
                 <th className="headerCell">
                   Gewichtsklasse
-                  <button className="arrowButton" onClick={handleSortClick}>
-                    {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                  <button className="arrowButton" onClick={() => handleSortClick('weightclass')}>
+                    {sortOrder === 'asc' && sortColumn === 'weightclass' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
                   </button>
                 </th>
                 <th className="headerCell">
                   Geburtsdatum
-                  <button className="arrowButton" onClick={handleSortClick}>
-                    {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                  <button className="arrowButton" onClick={() => handleSortClick('birthdate')}>
+                    {sortOrder === 'asc' && sortColumn === 'birthdate' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
                   </button>
                 </th>
               </>
@@ -148,7 +164,7 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
               <tr
                 className="entryStyle"
                 key={fighter.id}
-
+                onClick={() => handleEditFighter(fighter)} // Hinzufügen des onClick-Handlers für das Öffnen des Popups/Modals
               >
                 <td>{fighter.lastname} {fighter.firstname}</td>
                 <td>{fighter.club?.name}</td>
@@ -160,7 +176,7 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
                     <td>{birthdateAsDate.toDateString()}</td>
                   </>
                 )}
-                <td className="deleteIcon" onClick={() => handleDeleteFighter(fighter.id)}><FiTrash2 /></td>
+                <td className="deleteIcon" onClick={(event) => handleDeleteFighter(event, fighter.id)}><FiTrash2 /></td>
               </tr>
             );
           })}
@@ -179,7 +195,7 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
 
       {showEditModal && selectedFighter && (
         <Modal size="large" onClose={handleEditModalClose}>
-          <FighterEdit fighter={selectedFighter} onUpdateFighter={() => {}} onDeleteFighter={() => {}} />
+          <FighterEdit fighter={selectedFighter} onUpdateFighter={() => { }} onDeleteFighter={() => { }} />
         </Modal>
       )}
     </div>
