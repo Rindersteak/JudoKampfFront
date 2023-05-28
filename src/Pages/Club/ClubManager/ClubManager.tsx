@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import FighterForm from '../FighterForm/FighterForm';
-import FighterList, { deleteFighterHandler } from '../FighterList/FighterList';
-import Modal from '../../Modal/Modal';
-import ConfirmDelete from '../ConfirmDelete/ConfirmDelete';
-import './FighterManager.css';
+import ClubForm from '../ClubForm/ClubForm';
+import ClubList, { deleteClubHandler } from '../ClubList/ClubList';
+import Modal from '../../../Modal/Modal';
+import ConfirmDelete from '../../ConfirmDelete/ConfirmDelete';
+import './ClubManager.css';
 
-const FighterManager: React.FC = () => {
+const ClubManager: React.FC = () => {
     const [showSuccessPopup, setShowSuccessPopup] = useState(false);
     const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState(false);
-    const [fighterIdToDelete, setFighterToDelete] = useState<number | null>(null);
+    const [clubIDToDelete, setClubToDelete] = useState<number | null>(null);
     const [listKey, setListKey] = useState(Math.random());
 
     const handleSuccessPopup = (status: boolean) => {
@@ -21,13 +21,13 @@ const FighterManager: React.FC = () => {
         }
     };
 
-    const handleConfirmDelete = (fighterId: number) => {
+    const handleConfirmDelete = (clubID: number) => {
         setShowConfirmDeletePopup(true);
-        setFighterToDelete(fighterId);
+        setClubToDelete(clubID);
     }
     const handleDeleteConfirmed = async () => {
-        if (fighterIdToDelete !== null) {
-            await deleteFighterHandler(fighterIdToDelete);
+        if (clubIDToDelete !== null) {
+            await deleteClubHandler(clubIDToDelete);
             setShowConfirmDeletePopup(false);
             setListKey(Math.random());
         }
@@ -40,12 +40,12 @@ const FighterManager: React.FC = () => {
     return (
         <div className="innerContainer">
             <div className="formContainer">
-                <FighterForm onAddFighter={() => { }} onShowSuccessPopup={handleSuccessPopup} />
+                <ClubForm onAddClub={() => { }} onShowSuccessPopup={handleSuccessPopup} />
             </div>
             <div className="listSection">
-                <h1 className="titleStyleList">Teilnehmerliste</h1>
+                <h1 className="titleStyleList">Vereinsliste</h1>
                 <div className="listContainer">
-                    <FighterList key={listKey} detailedView={false} onDeleteFighter={handleConfirmDelete} />
+                    <ClubList key={listKey} detailedView={false} onDeleteClub={handleConfirmDelete} />
                 </div>
             </div>
             {showSuccessPopup && (
@@ -53,12 +53,12 @@ const FighterManager: React.FC = () => {
                     Eintrag erfolgreich hinzugefügt!
                 </div>
             )}
-            {showConfirmDeletePopup && fighterIdToDelete !== null && (
+            {showConfirmDeletePopup && clubIDToDelete !== null && (
                 <Modal size="small" onClose={handleDeleteCanceled}>
                     <ConfirmDelete
                         onClose={handleDeleteCanceled}
                         onConfirmDelete={handleDeleteConfirmed}
-                        idToDelete={fighterIdToDelete}
+                        idToDelete={clubIDToDelete}
                     />
                 </Modal>
             )}
@@ -67,4 +67,4 @@ const FighterManager: React.FC = () => {
 };
 
 
-export default FighterManager;
+export default ClubManager;

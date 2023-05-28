@@ -74,7 +74,7 @@ body .titleStyle {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 367px;
     height: 1.6875em;
     background: #001AFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -147,7 +147,7 @@ body .titleStyle {
 }
 
 /* Styling für den Formularcontainer */
-.formContainer {
+.formContaineTournament {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -251,4 +251,5 @@ body .titleStyle {
     align-items: center;
   }
   
+
   

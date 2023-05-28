@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Fighter } from '../../types';
+import { postFighter } from '../../API/fighterAPI';
+import { getClubs } from '../../API/clubAPI';
 import './FighterForm.css';
+import Select from 'react-select';
 
-// Definieren der Properties für die Komponente
 type Props = {
   onAddFighter: (fighter: Fighter) => void;
   onShowSuccessPopup: (status: boolean) => void;
 };
 
+type OptionType = {
+  value: string;
+  label: string;
+};
+
 const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
-  // Initialisierung der Zustandsvariablen für die Eingabefelder und das Laden und die Fehlermeldung
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [clubname, setClubName] = useState("");
@@ -19,14 +25,44 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
   const [weight, setWeight] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [gender, setGender] = useState<OptionType | null>(null);
+  const [club, setClub] = useState<OptionType | null>(null);
+  const [clubOptions, setClubOptions] = useState<OptionType[]>([]);
 
-  // Behandlung der Formular-Einreichung
+  const genderOptions: OptionType[] = [
+    { value: 'm', label: 'Männlich' },
+    { value: 'f', label: 'Weiblich' }
+  ];
+
+  useEffect(() => {
+    async function fetchClubs() {
+      try {
+        const clubs = await getClubs();
+        const clubOptions = clubs.map((club: any) => ({
+          value: club.id.toString(),
+          label: club.name
+        }));
+        setClubOptions(clubOptions);
+      } catch (error) {
+        console.log("Error fetching clubs:", error);
+      }
+    }
+    fetchClubs();
+  }, []);
+
+  const handleGenderChange = (newValue: OptionType | null) => {
+    setGender(newValue);
+  };
+
+  const handleClubChange = (newValue: OptionType | null) => {
+    setClub(newValue);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setErrorMessage("");
 
-    // Validierung der Eingaben
     if (!birthdate) {
       setErrorMessage("Bitte Geburtsdatum eingeben.");
       setLoading(false);
@@ -39,13 +75,14 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
       return;
     }
 
-    // Erstellen des Fighter-Objekts basierend auf den Zustandsvariablen
+    const birthdateAsString = birthdate?.toISOString();
+
     const fighter = {
       id: 0,
-      sex: "m",
+      sex: gender?.value || '',
       firstname: firstname,
       lastname: lastname,
-      birthdate: birthdate,
+      birthdate: birthdateAsString,
       ageclass: {
         id: 0,
         name: "",
@@ -61,101 +98,134 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
       },
       club: {
         id: 0,
-        shortName: clubname,
-        name: clubname,
+        shortname: club?.value || '',
+        name: club?.value || '',
         address: {
           id: 0,
           street: "",
-          houseNumber: "",
+          housenumber: "",
           city: "",
           state: "",
-          postalCode: "",
+          postalcode: "",
         },
+        stateassociation: ''
       },
     };
 
-    // Versuch, den Fighter zum Backend hinzuzufügen
     try {
-      const response = await fetch('http://localhost:8081/fighters/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(fighter)
-      });
-
-      setLoading(false);
-
-      // Error handling
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      // Hinzufügen des Fighters und Anzeigen des Erfolgspopups nur, wenn der POST erfolgreich war
+      await postFighter(fighter);
       onAddFighter(fighter);
       onShowSuccessPopup(true);
+      setLoading(false);
     } catch (error) {
-      console.error('An error occurred while submitting the fighter:', error);
       setErrorMessage("(DB-Error) Fehler beim Anlegen!");
       setLoading(false);
     }
-
   };
 
-
-// Rendern des Formulars
   return (
-      <form onSubmit={handleSubmit} className="formContainer">
-        <h1 className="titleStyle">Neuen Teilnehmer hinzufügen</h1>
+    <form onSubmit={handleSubmit} className="formContainer">
+      <h1 className="titleStyle">Neuen Teilnehmer hinzufügen</h1>
 
-        <div>
-          {/* Eingabefeld für den Vornamen */}
-          <div className="inputContainer">
-            <label className="inputLabel" htmlFor="firstName">Vorname</label>
-            <input className="inputField" type="text" id="firstName" value={firstname} onChange={e => setFirstName(e.target.value)} required />
-          </div>
-          {/* Eingabefeld für den Nachnamen */}
-          <div className="inputContainer">
-            <label className="inputLabel" htmlFor="lastName">Nachname</label>
-            <input className="inputField" type="text" id="lastName" value={lastname} onChange={e => setLastName(e.target.value)} required />
-          </div>
-        </div>
-        {/* Auswahl des Vereins */}
+      <div>
         <div className="inputContainer">
-          <label className="inputLabel" htmlFor="club">Verein</label>
-          <div className="selectContainer">
-            <select className="selectField" id="club" value={clubname} onChange={e => setClubName(e.target.value)} required>
-              <option value=""></option>
-              <option value="Verein 1">Verein 1</option>
-              <option value="Verein 2">Verein 2</option>
-            </select>
-          </div>
+          <label className="inputLabel" htmlFor="firstName">Vorname</label>
+          <input className="inputField" type="text" id="firstName" value={firstname} onChange={e => setFirstName(e.target.value)} required />
         </div>
-        {/* Geburtsdatum und Gewicht */}
-        <div className="halfWidthWrapper">
-          {/* Eingabefeld für das Geburtsdatum */}
-          <div className="inputContainer halfWidth">
-            <label className="inputLabel" htmlFor="birthDate">Geburtsdatum</label>
-            <DatePicker
-                id="birthDate"
-                selected={birthdate}
-                onChange={(date: Date | null) => setBirthDate(date)}
-                dateFormat="dd.MM.yyyy"
-                required
-            />
-          </div>
-          {/* Eingabefeld für das Gewicht */}
-          <div className="inputContainer halfWidth">
-            <label className="inputLabel" htmlFor="weight">Gewicht</label>
-            <input className="inputField" type="number" id="weight" value={weight} onChange={e => setWeight(parseFloat(e.target.value))} required />
-          </div>
+        <div className="inputContainer">
+          <label className="inputLabel" htmlFor="lastName">Nachname</label>
+          <input className="inputField" type="text" id="lastName" value={lastname} onChange={e => setLastName(e.target.value)} required />
         </div>
-        {/* Hinzufügen-Button und Fehlermeldung */}
-        <button className="addButton" type="submit" disabled={loading}>
-          {loading ? "Laden..." : "Hinzufügen"}
-        </button>
-        {errorMessage && <div className="errorMessage">{errorMessage}</div>}
-      </form>
+      </div>
+
+
+      <div className="inputContainer">
+        <label className="inputLabel" htmlFor="gender">Geschlecht</label>
+        <select
+    id="gender"
+    value={gender ? gender.value : ''}
+    onChange={(e) => {
+      const selectedOption = genderOptions.find(
+        (option) => option.value === e.target.value
+      );
+      handleGenderChange(selectedOption || null); // Hier war der Fehler
+    }}
+    required
+    className="dropdown-field"
+  >
+    <option value="" disabled>
+      Bitte auswählen
+    </option>
+    {genderOptions.map((option: OptionType) => (
+      <option
+        key={option.value}
+        value={option.value}
+        className="dropdown-content"
+      >
+        {option.label}
+      </option>
+    ))}
+  </select>
+</div>
+
+
+      <div className="inputContainer">
+        <label className="inputLabel" htmlFor="club">
+          Verein
+        </label>
+        <select
+          id="club"
+          value={club ? club.value : ''}
+          onChange={(e) => {
+            const selectedOption = clubOptions.find(
+              (option) => option.value === e.target.value
+            );
+            handleClubChange(selectedOption || null);
+          }}
+          required
+          className="dropdown-field"
+        >
+          <option value="" disabled>
+            Bitte auswählen
+          </option>
+          {clubOptions.map((option: OptionType) => (
+            <option
+              key={option.value}
+              value={option.value}
+              className="dropdown-content"
+            >
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+
+
+
+      <div className="halfWidthWrapper">
+        <div className="inputContainer halfWidth">
+          <label className="inputLabel" htmlFor="birthDate">Geburtsdatum</label>
+          <DatePicker
+            id="birthDate"
+            selected={birthdate}
+            onChange={(date: Date | null) => setBirthDate(date)}
+            dateFormat="dd.MM.yyyy"
+            required
+          />
+        </div>
+        <div className="inputContainer halfWidth">
+          <label className="inputLabel" htmlFor="weight">Gewicht</label>
+          <input className="inputField" type="number" id="weight" value={weight} onChange={e => setWeight(parseFloat(e.target.value))} required />
+        </div>
+      </div>
+
+      <button className="addButton" type="submit" disabled={loading}>
+        {loading ? "Laden..." : "Hinzufügen"}
+      </button>
+          
+      {errorMessage && <div className="errorMessage">{errorMessage}</div>}
+    </form>
   );
 };
 

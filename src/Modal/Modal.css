@@ -11,18 +11,17 @@
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-
 .modal-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    background-color: #fefefe;
+    align-items: stretch;
+    background-color: white;
     margin: auto;
-    padding: 4vh;
+    padding: 4%;
     border: 1px solid #888;
-    width: 90vw;
-    height: 90vh;
+    width: 90%;
+    height: 90%;
     position: relative;
     overflow-y: auto;
 }
@@ -37,3 +36,13 @@
     transform: translate(50%, -50%);
 }
 
+
+.modal.large .modal-content {
+    width: 90%;
+    height: 90%;
+}
+
+.modal.small .modal-content {
+    width: 40%;
+    height: 40%;
+}
