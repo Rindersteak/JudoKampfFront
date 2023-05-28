@@ -95,22 +95,23 @@ const ClubForm: React.FC<ClubFormProps> = ({ onAddClub, onShowSuccessPopup }) =>
           <label className="inputLabel" htmlFor="stateassociation">
             Landesverband
           </label>
+          <div className='inputContainerSelect'>
           <select
             id="stateassociation"
             value={stateassociation || ''}
             onChange={handleStateAssociationChange}
             required
-            className="dropdown-field"
+            className="selectField"
           >
-            <option value="" disabled>
-              Bitte auswählen
+            <option value="">
             </option>
             {stateassociationOptions.map((option: OptionType) => (
-              <option key={option.value} value={option.value} className="dropdown-content">
+              <option key={option.value} value={option.value}>
                 {option.label}
               </option>
             ))}
           </select>
+          </div>
         </div>
 
       </div>
@@ -123,7 +124,7 @@ const ClubForm: React.FC<ClubFormProps> = ({ onAddClub, onShowSuccessPopup }) =>
           <input className="inputFieldSmall" type="text" id="addressZipCode" value={addressZipCode} onChange={e => setAddressZipCode((e.target.value))} placeholder="PLZ" required />
         </div>
       </div>
-      <div className="halfWidthWrapper">
+      <div className="halfWidthWrapperAddress">
         <div className="inputContainer halfWidth">
           <input className="inputFieldWide" type="text" id="addressStreet" value={addressStreet} onChange={e => setAddressStreet((e.target.value))} placeholder="Straße" required />
         </div>

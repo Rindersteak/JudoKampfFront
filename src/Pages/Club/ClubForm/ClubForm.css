@@ -23,8 +23,7 @@
     letter-spacing: -0.02em;
     color: #000000;
     position: absolute;
-    top: -1.4em;
-    /* Abstand nach oben anpassen */
+    top: -1.4em; /* Abstand nach oben anpassen */
     left: 0;
 }
 
@@ -142,6 +141,113 @@
 }
 
 
+.halfWidthWrapperAddress {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center; /* zentriert die Elemente horizontal */
+    margin-top: -42px;
+}
+@media (min-width: 768px) {
+    .halfWidthWrapperAddress {
+        flex-direction: row;
+    }
+}
+
+.inputFieldWide {
+    width: 243px;
+    box-sizing: border-box;
+    border: none;
+    background: none;
+    height: 30px;
+    border-radius: 5px;
+    padding: 0 0.625em;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1em;
+    background: #EDEFF2;
+    align-self: flex-start;
+}
+
+.inputFieldSmall {
+    width: 117px;
+    box-sizing: border-box;
+    border: none;
+    background: none;
+    height: 30px;
+    border-radius: 5px;
+    padding: 0 0.625em;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1em;
+    background: #EDEFF2;
+    align-self: flex-end;
+}
+
+.selectField {
+    /* possibly need to adjust to make dynamic? */
+    width: 104.5%;
+    border-radius: 5px;
+    border: none;
+    padding: 0 0.625em;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1em;
+    background: #EDEFF2;
+    appearance: none;
+    position: relative;
+    height: 1.9375em;
+    /* possibly need to adjust to make dynamic? */
+    left: -8px;
+
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+
+/* Styling für das Pfeil-Icon von Dropdown-Feldern */
+.selectField:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0.625em;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #001AFF;
+    transform: translateY(-50%);
+}
+
+
+.inputContainerSelect {
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    padding: 0 0.625em;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1em;
+    background: #EDEFF2;
+    appearance: none;
+    position: relative;
+    height: 1.9375em;
+    box-sizing: border-box;
+  }
+  
+
+/* Styling für das Pfeil-Icon von Dropdown-Feldern */
+.inputContainerSelect:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0.625em;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #001AFF;
+    transform: translateY(-50%);
+  }
+  
+  @media (min-width: 768px) {
+    .selectField,
+    .inputContainerSelect {
+      width: 22.9375em; /* Adjust the width as needed */
+    }
+  }
 .react-datepicker__input-container input {
     width: 100%;
     margin-bottom: 2.9375em;

@@ -175,6 +175,42 @@ body .titleStyle {
     transform: translateY(-50%);
 }
 
+
+.inputContainerSelect {
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    padding: 0 0.625em;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1em;
+    background: #EDEFF2;
+    appearance: none;
+    position: relative;
+    height: 1.9375em;
+    box-sizing: border-box;
+  }
+  
+
+/* Styling für das Pfeil-Icon von Dropdown-Feldern */
+.inputContainerSelect:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0.625em;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #001AFF;
+    transform: translateY(-50%);
+  }
+  
+  @media (min-width: 768px) {
+    .selectField,
+    .inputContainerSelect {
+      width: 22.9375em; /* Adjust the width as needed */
+    }
+  }
+
+
 /* Styling für den Container der zwei Eingabefelder nebeneinander anordnet */
 .halfWidthWrapper {
     display: flex;

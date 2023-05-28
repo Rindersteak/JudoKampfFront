@@ -145,7 +145,7 @@ const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
             </div>
             <div className="inputContainer">
                 <label className="inputLabel" htmlFor="nationalAssociation">Verein</label>
-                <div className="selectContainer">
+                <div className="inputContainerSelect">
                     <select
                         className="selectField"
                         id="nationalAssociation"

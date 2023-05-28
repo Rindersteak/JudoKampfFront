@@ -129,6 +129,7 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
 
       <div className="inputContainer">
         <label className="inputLabel" htmlFor="gender">Geschlecht</label>
+        <div className='inputContainerSelect'>
         <select
           id="gender"
           value={gender ? gender.value : ''}
@@ -136,24 +137,23 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
             const selectedOption = genderOptions.find(
               (option) => option.value === e.target.value
             );
-            handleClubChange(selectedOption || null);
+            handleGenderChange(selectedOption || null);
           }}
           required
-          className="dropdown-field"
+          className="selectField"
         >
-          <option value="" disabled>
-            Bitte auswählen
+          <option value="">            
           </option>
           {genderOptions.map((option: OptionType) => (
             <option
               key={option.value}
               value={option.value}
-              className="dropdown-content"
             >
               {option.label}
             </option>
           ))}
         </select>
+        </div>
       </div>
 
 
@@ -161,6 +161,7 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
         <label className="inputLabel" htmlFor="club">
           Verein
         </label>
+        <div className='inputContainerSelect'>
         <select
           id="club"
           value={club ? club.value : ''}
@@ -171,21 +172,20 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
             handleClubChange(selectedOption || null);
           }}
           required
-          className="dropdown-field"
+          className="selectField"
         >
-          <option value="" disabled>
-            Bitte auswählen
+          <option value="">
           </option>
           {clubOptions.map((option: OptionType) => (
             <option
               key={option.value}
               value={option.value}
-              className="dropdown-content"
             >
               {option.label}
             </option>
           ))}
         </select>
+        </div>
       </div>
 
 
