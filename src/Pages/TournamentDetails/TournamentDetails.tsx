@@ -61,6 +61,7 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList
         title={`Turnier "${tournament ? tournament.name : ''}"`}
         subtitle={`ID${tournament ? tournament.id : ''}`}
       />
+      {/* Für den Edit-Button kann hier einfach der Button aus der Banner.tsx aufgerufen werden */}
 
       {/* Container für die Karten */}
 
@@ -70,6 +71,7 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList
         <CardThree tournamentId={tournamentId || ''} onOpenFighterManager={onOpenFighterManager} />
         <CardFour tournamentId={tournamentId || ''} onOpenFighterManager={onOpenFighterManager} />
         <CardFive tournamentId={tournamentId || ''} onOpenClubManager={onOpenClubManager} />
+        <CardSix tournamentId={tournamentId || ''} onOpenClubManager={onOpenClubManager} />
       </div>
       {/* Aktueller Kampf: Label anzeigen */}
       <div className="currentFightLabel">Aktueller Kampf:</div>
@@ -168,6 +170,24 @@ const CardFive = ({ tournamentId, onOpenClubManager }: { tournamentId: string, o
     </div>
   );
 };
+
+const CardSix = ({ tournamentId, onOpenClubManager }: { tournamentId: string, onOpenClubManager: () => void }) => {
+  const handleCardThreeClick = () => {
+    onOpenClubManager();
+  };
+
+  return (
+    <div className="card-six" onClick={handleCardThreeClick}>
+      <div className="card-content">
+        <div className="card-icon-blue">
+          <FontAwesomeIcon icon={faPlus} />
+        </div>
+        <div className="card-text-blue">Verein</div>
+      </div>
+    </div>
+  );
+};
+
 
 
 

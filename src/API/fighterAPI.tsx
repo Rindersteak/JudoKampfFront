@@ -58,3 +58,25 @@ export async function deleteFighter(fighterId: number) {
     }
   }
   
+  export async function putFighter(fighter: Fighter) {
+    try {
+      const response = await fetch(`${API_DOMAIN}/fighters/update/${fighter.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(fighter),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('An error occurred while updating the fighter:', error);
+      throw error;
+    }
+  }
+  

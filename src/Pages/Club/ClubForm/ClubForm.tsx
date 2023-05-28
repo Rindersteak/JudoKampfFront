@@ -27,6 +27,8 @@ const ClubForm: React.FC<ClubFormProps> = ({ onAddClub, onShowSuccessPopup }) =>
     { value: 'f', label: 'Landesverband 2' }
   ];
 
+  
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -44,7 +46,7 @@ const ClubForm: React.FC<ClubFormProps> = ({ onAddClub, onShowSuccessPopup }) =>
       setLoading(false);
       return;
     }
- 
+
     const club = {
       id: 0,
       shortname: shortname,
@@ -58,73 +60,69 @@ const ClubForm: React.FC<ClubFormProps> = ({ onAddClub, onShowSuccessPopup }) =>
         postalcode: addressZipCode
       }
     }
-/*
-    try {
-      await postFighter(fighter);
-      onAddClub(fighter);
-      onShowSuccessPopup(true);
-      setLoading(false);
-    } catch (error) {
-      setErrorMessage("(DB-Error) Fehler beim Anlegen!");
-      setLoading(false);
-    }
-    */
+    /*
+        try {
+          await postFighter(fighter);
+          onAddClub(fighter);
+          onShowSuccessPopup(true);
+          setLoading(false);
+        } catch (error) {
+          setErrorMessage("(DB-Error) Fehler beim Anlegen!");
+          setLoading(false);
+        }
+        */
   };
+
+  
 
   return (
     <form onSubmit={handleSubmit} className="formContaineTournament">
-        <h1 className="titleStyle">Neuen Verein anlegen</h1>
-        <div>
-            <div className="inputContainer">
-                <label className="inputLabel" htmlFor="tournamentName">Vereinsname</label>
-                <input className="inputField" type="text" id="tournamentName" value={clubName} onChange={(event) => setClubName(event.target.value)} required />
-            </div>
+      <h1 className="titleStyle">Neuen Verein anlegen</h1>
+      <div>
+        <div className="inputContainer">
+          <label className="inputLabel" htmlFor="tournamentName">Vereinsname</label>
+          <input className="inputField" type="text" id="tournamentName" value={clubName} onChange={(event) => setClubName(event.target.value)} required />
+        </div>
 
-            <div className="inputContainer">
-        <label className="inputLabel" htmlFor="landesverband">Landesverband</label>
-        <Select
-  id="landesverband"
-  value={landesverband}
-  options={landesverbandOptiopns}
-  onChange={(newValue: { value: string; label: string; } | null) => setLandesverband(newValue)}
-  required
-  className="custom-select"
-  styles={{ control: (provided,state) => ({
-     ...provided, 
-     //height: "5px",
-     //minHeight: "10px",
-     backgroundColor: state.selectProps.value ? '#EDEFF2' : '#EDEFF2',
-     }) 
-     }}
-/>
+        <div className="inputContainer">
+          <label className="inputLabel" htmlFor="landesverband">Landesverband</label>
+          <Select
+            id="landesverband"
+            value={landesverband}
+            options={landesverbandOptiopns}
+            onChange={(newValue: { value: string; label: string; } | null) => setLandesverband(newValue)}
+            required
+            className="create-select"
+            styles={{}}
+          />
 
         </div>
+      </div>
+      <div className="halfWidthWrapper">
+        <div className="inputContainer halfWidth">
+          <label className="inputLabel" htmlFor="address">Adresse</label>
+          <input className="inputFieldWide" type="text" id="addressCity" value={addressCity} onChange={e => setAddressCity((e.target.value))} placeholder="Stadt" required />
         </div>
-        <div className="halfWidthWrapper">
-            <div className="inputContainer halfWidth">
-                <label className="inputLabel" htmlFor="address">Adresse</label>
-                <input className="inputFieldWide" type="text" id="addressCity" value={addressCity} onChange={e => setAddressCity((e.target.value))} placeholder="Stadt" required />
-            </div>
-            <div className="inputContainer halfWidth">
-                <input className="inputFieldSmall" type="text" id="addressZipCode" value={addressZipCode} onChange={e => setAddressZipCode((e.target.value))} placeholder="PLZ" required />
-            </div>
+        <div className="inputContainer halfWidth">
+          <input className="inputFieldSmall" type="text" id="addressZipCode" value={addressZipCode} onChange={e => setAddressZipCode((e.target.value))} placeholder="PLZ" required />
         </div>
-        <div className="halfWidthWrapper">
-            <div className="inputContainer halfWidth">
-                <input className="inputFieldWide" type="text" id="addressStreet" value={addressStreet} onChange={e => setAddressStreet((e.target.value))} placeholder="Straße" required />
-            </div>
-            <div className="inputContainer halfWidth">
-                <input className="inputFieldSmall" type="text" id="addressStreetNumber" value={addressStreetNumber} onChange={e => setAddressStreetNumber((e.target.value))} placeholder="Nummer" required />
-            </div>
+      </div>
+      <div className="halfWidthWrapper">
+        <div className="inputContainer halfWidth">
+          <input className="inputFieldWide" type="text" id="addressStreet" value={addressStreet} onChange={e => setAddressStreet((e.target.value))} placeholder="Straße" required />
         </div>
-        <button className="addButton" type="submit" disabled={loading}>
-    {loading ? "Laden..." : "Hinzufügen"}
-  </button>
+        <div className="inputContainer halfWidth">
+          <input className="inputFieldSmall" type="text" id="addressStreetNumber" value={addressStreetNumber} onChange={e => setAddressStreetNumber((e.target.value))} placeholder="Nummer" required />
+        </div>
+      </div>
+      <button className="addButton" type="submit" disabled={loading}>
+        {loading ? "Laden..." : "Hinzufügen"}
+      </button>
 
-  {errorMessage && <div className="errorMessage">{errorMessage}</div>}
+      {errorMessage && <div className="errorMessage">{errorMessage}</div>}
 
     </form>
-);
+  );
 };
 
 export default ClubForm;

@@ -93,33 +93,6 @@
     }
 }
 
-/* Styling für Dropdown-Felder */
-.selectField {
-    width: 100%;
-    border-radius: 5px;
-    border: none;
-    padding: 0 0.625em;
-    font-family: 'Nunito', sans-serif;
-    font-size: 1em;
-    background: #EDEFF2;
-    appearance: none;
-    position: relative;
-    height: 1.9375em;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-}
-
-/* Styling für das Pfeil-Icon von Dropdown-Feldern */
-.selectField:after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 0.625em;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid #001AFF;
-    transform: translateY(-50%);
-}
 
 /* Styling für den Formularcontainer */
 .formContainer {
@@ -130,34 +103,8 @@
     /* zentriert die Elemente horizontal */
 }
 
-/* Styling für den Container der Dropdown-Felder */
-.selectContainer {
-    width: 100%;
-    border-radius: 5px;
-    border: none;
-    padding: 0 0.625em;
 
-}
 
-.custom-select .css-1pahdxg-control {
-    height: 40px; /* Hier kannst du die gewünschte Höhe festlegen */
-  }
-
-.css-tj5bde-Svg{
-    color: #001AFF;
-}
-
-/* Styling für das Pfeil-Icon von Dropdown-Feldern */
-.selectContainer:after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 0.625em;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid #001AFF;
-    transform: translateY(-50%);
-}
 
 /* Styling für den Container der zwei Eingabefelder nebeneinander anordnet */
 .halfWidthWrapper {
@@ -214,5 +161,36 @@
     position: relative;
     display: inline-block;
     width: 100%;
-  }
-  
+}
+
+/* ClubFormDropdown.css */
+
+
+
+
+.create-select {
+    width: 100%;
+    color: #000;
+    height: 31px;
+    min-height: 31px;
+}
+
+.create-select .value-container {
+    min-height: 31px;
+    height: 31px;
+}
+
+.create-select .indicators-container {
+    min-height: 31px;
+    height: 31px;
+}
+
+.create-select .input {
+    min-height: 31px;
+    height: 31px;
+}
+
+.create-select .control {
+    min-height: 31px;
+    height: 31px;
+}
