@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Fighter } from '../../types';
@@ -12,15 +12,16 @@ interface FighterEditProps {
 }
 
 const FighterEdit: React.FC<FighterEditProps> = ({ fighter, onUpdateFighter, onDeleteFighter }) => {
-  const [firstname, setFirstName] = useState(fighter.firstname);
-  const [lastname, setLastName] = useState(fighter.lastname);
-  const [clubname, setClubName] = useState(fighter.club?.name || '');
-  const [birthdate, setBirthDate] = useState<Date | null>(fighter.birthdate ? new Date(fighter.birthdate) : null);
-  const [weight, setWeight] = useState(fighter.weight);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [firstname, setFirstName] = useState("");
+  const [lastname, setLastName] = useState("");
+  const [clubname, setClubName] = useState("");
+  const [birthdate, setBirthDate] = useState<Date | null>(null);
+  const [weight, setWeight] = useState(0);
+  const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [gender, setGender] = useState<{ value: string; label: string } | null>(null);
-  const [club, setClub] = useState<{ value: string; label: string } | null>(null);
+  const [gender, setGender] = useState<{ value: string; label: string; } | null>(null);
+  const [club, setClub] = useState<{ value: string; label: string; } | null>(null);
+
 
   const genderOptions = [
     { value: 'm', label: 'Männlich' },
@@ -48,6 +49,7 @@ const FighterEdit: React.FC<FighterEditProps> = ({ fighter, onUpdateFighter, onD
       setLoading(false);
       return;
     }
+    
 
     const birthdateAsString = birthdate.toISOString();
 
@@ -64,6 +66,8 @@ const FighterEdit: React.FC<FighterEditProps> = ({ fighter, onUpdateFighter, onD
       sex: gender?.value || '',
     };
 
+    
+
     try {
       await putFighter(updatedFighter);
       onUpdateFighter(updatedFighter);
@@ -73,6 +77,19 @@ const FighterEdit: React.FC<FighterEditProps> = ({ fighter, onUpdateFighter, onD
       setLoading(false);
     }
   };
+
+
+  // initialisiert den Zustand der Komponente mit den Daten des übergebenen Fighter
+  useEffect(() => {
+    setFirstName(fighter.firstname);
+    setLastName(fighter.lastname);
+    setClubName(fighter.club.name);
+    setBirthDate(new Date(fighter.birthdate));
+    setWeight(fighter.weight);
+    setGender(genderOptions.find(option => option.value === fighter.sex) || null);
+    setClub(clubOptions.find(option => option.value === fighter.club.name) || null);
+  }, [fighter]);
+
 
   const handleDelete = async () => {
     try {

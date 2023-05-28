@@ -57,10 +57,12 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
     setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
   };
 
-  const handleDeleteFighter = (fighterId: number) => {
+  const handleDeleteFighter = (event: React.MouseEvent, fighterId: number) => {
+    event.stopPropagation(); // Verhindert, dass das Klickereignis weitergegeben wird
     setShowConfirmDeletePopup(true);
     setFighterToDelete(fighterId);
   };
+
 
   const handleDeleteConfirmed = async () => {
     if (fighterIdToDelete !== null) {
@@ -148,7 +150,7 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
               <tr
                 className="entryStyle"
                 key={fighter.id}
-
+                onClick={() => handleEditFighter(fighter)} // Hinzufügen des onClick-Handlers für das Öffnen des Popups/Modals
               >
                 <td>{fighter.lastname} {fighter.firstname}</td>
                 <td>{fighter.club?.name}</td>
@@ -160,7 +162,7 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
                     <td>{birthdateAsDate.toDateString()}</td>
                   </>
                 )}
-                <td className="deleteIcon" onClick={() => handleDeleteFighter(fighter.id)}><FiTrash2 /></td>
+                <td className="deleteIcon" onClick={(event) => handleDeleteFighter(event, fighter.id)}><FiTrash2 /></td>
               </tr>
             );
           })}
@@ -179,7 +181,7 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
 
       {showEditModal && selectedFighter && (
         <Modal size="large" onClose={handleEditModalClose}>
-          <FighterEdit fighter={selectedFighter} onUpdateFighter={() => {}} onDeleteFighter={() => {}} />
+          <FighterEdit fighter={selectedFighter} onUpdateFighter={() => { }} onDeleteFighter={() => { }} />
         </Modal>
       )}
     </div>
