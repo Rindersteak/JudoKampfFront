@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { getTournaments, getTotalTournaments } from '../../API/tournamentAPI';
 import './TournamentDetails.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClipboardList, faPeopleArrows, faPlus, faTree, faTrophy } from '@fortawesome/free-solid-svg-icons';
+import { faClipboardList, faPencil, faPeopleArrows, faPlus, faTree, faTrophy } from '@fortawesome/free-solid-svg-icons';
 import { Tournament } from '../../types';
 import Banner from '../../Tools/Banner';
 
@@ -64,6 +64,15 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList
       {/* Für den Edit-Button kann hier einfach der Button aus der Banner.tsx aufgerufen werden */}
 
       {/* Container für die Karten */}
+
+
+      
+      <button className='editTorunamentButton'>
+        <div>
+          <FontAwesomeIcon icon={faPencil} />
+        </div>
+        Turnier bearbeiten
+      </button>
 
       <div className="cards-container">
         <CardOne tournamentId={tournamentId || ''} />
