@@ -157,38 +157,40 @@
 
 
 
+.selectContainer {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+/* ClubFormDropdown.css */
 
 
 
-.dropdown-field {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 44.83%;
-    bottom: 20.69%;
-    width: 367px;
-    height: 31.72px;
-    background: #EDEFF2;
-    border-radius: 5px;
-  }
-  
-  .dropdown-field:hover {
-    cursor: pointer;
-  }
-  
-  .dropdown-content {
-    position: absolute;
-    left: 2.72%;
-    right: 51.23%;
-    top: 20.69%;
-    bottom: 17.24%;
-    width: 169px;
-    height: 18.62px;
-    font-family: 'Nunito';
-    font-weight: 200;
-    font-size: 14px;
-    line-height: 19px;
-    letter-spacing: -0.02em;
-    color: #000000;
-  }
-  
+
+.create-select {
+    width: 100%;
+    color: #000;
+    height: 31px;
+    min-height: 31px;
+}
+
+.create-select .value-container {
+    min-height: 31px;
+    height: 31px;
+}
+
+.create-select .indicators-container {
+    min-height: 31px;
+    height: 31px;
+}
+
+.create-select .input {
+    min-height: 31px;
+    height: 31px;
+}
+
+.create-select .control {
+    min-height: 31px;
+    height: 31px;
+}

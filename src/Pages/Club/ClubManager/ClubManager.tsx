@@ -45,7 +45,7 @@ const ClubManager: React.FC = () => {
             <div className="listSection">
                 <h1 className="titleStyleList">Vereinsliste</h1>
                 <div className="listContainer">
-                    <ClubList key={listKey} detailedView={false} onDeleteClub={handleConfirmDelete} />
+                    <ClubList key={listKey} detailedView={false} onDeleteFighter={handleConfirmDelete} />
                 </div>
             </div>
             {showSuccessPopup && (

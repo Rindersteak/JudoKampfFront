@@ -1,49 +1,53 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import React, { useState } from 'react';
+import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Club } from '../../../types';
-import { postClub } from '../../../API/clubAPI';
+import { Fighter } from '../../../types';
+import { postFighter } from '../../../API/fighterAPI';
 import './ClubForm.css';
-import stateassociationOptions from '../../../Config/StateAssociations';
+import Select from 'react-select';
 
 type ClubFormProps = {
-  onAddClub: (club: Club) => void;
+  onAddClub: (fighter: Fighter) => void;
   onShowSuccessPopup: (status: boolean) => void;
 };
 
-type OptionType = {
-  value: string;
-  label: string;
-};
-
 const ClubForm: React.FC<ClubFormProps> = ({ onAddClub, onShowSuccessPopup }) => {
-  const [shortname, setShortName] = useState('');
-  const [addressCity, setAddressCity] = useState('');
-  const [addressZipCode, setAddressZipCode] = useState('');
-  const [clubName, setClubName] = useState('');
-  const [addressStreet, setAddressStreet] = useState('');
-  const [addressStreetNumber, setAddressStreetNumber] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [stateassociation, setStateAssociation] = useState<string | null>(null);
+  const [shortname, setShortName] = useState("");
+  const [addressCity, setAddressCity] = useState("");
+  const [addressZipCode, setAddressZipCode] = useState("");
+  const [clubName, setClubName] = useState("");
+  const [addressStreet, setAddressStreet] = useState("");
+  const [addressStreetNumber, setAddressStreetNumber] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [landesverband, setLandesverband] = useState<{ value: string; label: string; } | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: FormEvent) => {
+  const landesverbandOptiopns = [
+    { value: 'm', label: 'Landesverband 1' },
+    { value: 'f', label: 'Landesverband 2' }
+  ];
+
+  
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setErrorMessage('');
+    setErrorMessage("");
+
 
     if (!clubName) {
-      setErrorMessage('Bitte Vereinsnamen eingeben.');
+      setErrorMessage("Bitte Vereinsnamen eingeben.");
       setLoading(false);
       return;
     }
 
-    if (!stateassociation) {
-      setErrorMessage('Bitte Landesverband auswählen');
+    if (!landesverband) {
+      setErrorMessage("Bitte Landesverband auswählen");
       setLoading(false);
       return;
     }
 
-    const club: Club = {
+    const club = {
       id: 0,
       shortname: shortname,
       name: clubName,
@@ -52,67 +56,47 @@ const ClubForm: React.FC<ClubFormProps> = ({ onAddClub, onShowSuccessPopup }) =>
         street: addressStreet,
         housenumber: addressStreetNumber,
         city: addressCity,
-        state: 'string',
-        postalcode: addressZipCode,
-      },
-      stateassociation: stateassociation,
-    };
-
-    try {
-      await postClub(club);
-      onAddClub(club);
-      onShowSuccessPopup(true);
-      setLoading(false);
-    } catch (error) {
-      setErrorMessage('(DB-Error) Fehler beim Anlegen!');
-      setLoading(false);
+        state: "string",
+        postalcode: addressZipCode
+      }
     }
+    /*
+        try {
+          await postFighter(fighter);
+          onAddClub(fighter);
+          onShowSuccessPopup(true);
+          setLoading(false);
+        } catch (error) {
+          setErrorMessage("(DB-Error) Fehler beim Anlegen!");
+          setLoading(false);
+        }
+        */
   };
 
-  const handleStateAssociationChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setStateAssociation(e.target.value);
-  };
+  
 
   return (
     <form onSubmit={handleSubmit} className="formContaineTournament">
       <h1 className="titleStyle">Neuen Verein anlegen</h1>
       <div>
         <div className="inputContainer">
-          <label className="inputLabel" htmlFor="tournamentName">
-            Vereinsname
-          </label>
-          <input
-            className="inputField"
-            type="text"
-            id="tournamentName"
-            value={clubName}
-            onChange={(event) => setClubName(event.target.value)}
-            required
-          />
+          <label className="inputLabel" htmlFor="tournamentName">Vereinsname</label>
+          <input className="inputField" type="text" id="tournamentName" value={clubName} onChange={(event) => setClubName(event.target.value)} required />
         </div>
 
         <div className="inputContainer">
-          <label className="inputLabel" htmlFor="stateassociation">
-            Landesverband
-          </label>
-          <select
-            id="stateassociation"
-            value={stateassociation || ''}
-            onChange={handleStateAssociationChange}
+          <label className="inputLabel" htmlFor="landesverband">Landesverband</label>
+          <Select
+            id="landesverband"
+            value={landesverband}
+            options={landesverbandOptiopns}
+            onChange={(newValue: { value: string; label: string; } | null) => setLandesverband(newValue)}
             required
-            className="dropdown-field"
-          >
-            <option value="" disabled>
-              Bitte auswählen
-            </option>
-            {stateassociationOptions.map((option: OptionType) => (
-              <option key={option.value} value={option.value} className="dropdown-content">
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
+            className="create-select"
+            styles={{}}
+          />
 
+        </div>
       </div>
       <div className="halfWidthWrapper">
         <div className="inputContainer halfWidth">

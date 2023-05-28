@@ -1,20 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Fighter } from '../../types';
 import { postFighter } from '../../API/fighterAPI';
-import { getClubs } from '../../API/clubAPI';
 import './FighterForm.css';
 import Select from 'react-select';
 
 type Props = {
   onAddFighter: (fighter: Fighter) => void;
   onShowSuccessPopup: (status: boolean) => void;
-};
-
-type OptionType = {
-  value: string;
-  label: string;
 };
 
 const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
@@ -25,38 +19,18 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
   const [weight, setWeight] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [gender, setGender] = useState<OptionType | null>(null);
-  const [club, setClub] = useState<OptionType | null>(null);
-  const [clubOptions, setClubOptions] = useState<OptionType[]>([]);
+  const [gender, setGender] = useState<{ value: string; label: string; } | null>(null);
+  const [club, setClub] = useState<{ value: string; label: string; } | null>(null);
 
-  const genderOptions: OptionType[] = [
+  const genderOptions = [
     { value: 'm', label: 'Männlich' },
     { value: 'f', label: 'Weiblich' }
   ];
 
-  useEffect(() => {
-    async function fetchClubs() {
-      try {
-        const clubs = await getClubs();
-        const clubOptions = clubs.map((club: any) => ({
-          value: club.id.toString(),
-          label: club.name
-        }));
-        setClubOptions(clubOptions);
-      } catch (error) {
-        console.log("Error fetching clubs:", error);
-      }
-    }
-    fetchClubs();
-  }, []);
-
-  const handleGenderChange = (newValue: OptionType | null) => {
-    setGender(newValue);
-  };
-
-  const handleClubChange = (newValue: OptionType | null) => {
-    setClub(newValue);
-  };
+  const clubOptions = [
+    { value: 'Verein 1', label: 'Verein 1' },
+    { value: 'Verein 2', label: 'Verein 2' }
+  ];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -98,7 +72,7 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
       },
       club: {
         id: 0,
-        shortname: club?.value || '',
+        shortName: club?.value || '',
         name: club?.value || '',
         address: {
           id: 0,
@@ -108,7 +82,6 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
           state: "",
           postalcode: "",
         },
-        stateassociation: ''
       },
     };
 
@@ -138,70 +111,31 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
         </div>
       </div>
 
-
       <div className="inputContainer">
         <label className="inputLabel" htmlFor="gender">Geschlecht</label>
-        <select
-    id="gender"
-    value={gender ? gender.value : ''}
-    onChange={(e) => {
-      const selectedOption = genderOptions.find(
-        (option) => option.value === e.target.value
-      );
-      handleGenderChange(selectedOption || null); // Hier war der Fehler
-    }}
-    required
-    className="dropdown-field"
-  >
-    <option value="" disabled>
-      Bitte auswählen
-    </option>
-    {genderOptions.map((option: OptionType) => (
-      <option
-        key={option.value}
-        value={option.value}
-        className="dropdown-content"
-      >
-        {option.label}
-      </option>
-    ))}
-  </select>
-</div>
-
-
-      <div className="inputContainer">
-        <label className="inputLabel" htmlFor="club">
-          Verein
-        </label>
-        <select
-          id="club"
-          value={club ? club.value : ''}
-          onChange={(e) => {
-            const selectedOption = clubOptions.find(
-              (option) => option.value === e.target.value
-            );
-            handleClubChange(selectedOption || null);
-          }}
-          required
-          className="dropdown-field"
-        >
-          <option value="" disabled>
-            Bitte auswählen
-          </option>
-          {clubOptions.map((option: OptionType) => (
-            <option
-              key={option.value}
-              value={option.value}
-              className="dropdown-content"
-            >
-              {option.label}
-            </option>
-          ))}
-        </select>
+        <div className="selectContainer">
+          <Select
+            id="gender"
+            value={gender}
+            options={genderOptions}
+            onChange={(newValue: { value: string; label: string; } | null) => setGender(newValue)}
+            required
+          />
+        </div>
       </div>
 
-
-
+      <div className="inputContainer">
+        <label className="inputLabel" htmlFor="club">Verein</label>
+        <div className="selectContainer">
+          <Select
+            id="club"
+            value={club}
+            options={clubOptions}
+            onChange={(newValue: { value: string; label: string; } | null) => setClub(newValue)}
+            required
+          />
+        </div>
+      </div>
 
       <div className="halfWidthWrapper">
         <div className="inputContainer halfWidth">
@@ -223,7 +157,7 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
       <button className="addButton" type="submit" disabled={loading}>
         {loading ? "Laden..." : "Hinzufügen"}
       </button>
-          
+
       {errorMessage && <div className="errorMessage">{errorMessage}</div>}
     </form>
   );

@@ -23,10 +23,9 @@ export type Address = {
 
 export type Club = {
   id: number;
-  shortname: string;
+  shortName: string;
   name: string;
   address: Address;
-  stateassociation: string;
 };
 
 export type Fighter = {
@@ -58,7 +57,6 @@ export type Tournament = {
   id: number,
   name: string,
   address: Address,
-  stateassociation: string;
   ageclass: AgeClass,
   weightclass: WeightClass,
   code: string,  // add this line

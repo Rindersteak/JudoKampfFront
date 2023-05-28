@@ -8,7 +8,6 @@ import FighterList from '../Pages/FighterList/FighterList'
 import FighterManager from '../Pages/FighterManager/FighterManager';
 import { Tournament } from '../types';
 import ClubManager from '../Pages/Club/ClubManager/ClubManager';
-import ClubList from '../Pages/Club/ClubList/ClubList';
 
 const App: React.FC = () => {
     const [modalOpen, setModalOpen] = useState(false);
@@ -28,6 +27,11 @@ const App: React.FC = () => {
         console.log('Add Tournament:', tournament);
     };
 
+    const handleShowSuccessPopup = (status: boolean) => {
+        // Add logic for showing success popup
+        console.log('Show Success Popup:', status);
+    };
+
     const handleOpenTournamentList = () => {
         setModalContent(<TournamentList onClose={handleCloseModal} />);
         setModalOpen(true);
@@ -41,16 +45,6 @@ const App: React.FC = () => {
     const handleOpenFighterList = () => {
         setModalContent(<FighterList onDeleteFighter={handleDeleteFighter} />);
         setModalOpen(true);
-    };
-
-    const handleOpenClubList = () => {
-        setModalContent(<ClubList onDeleteClub={handleDeleteClub} />);
-        setModalOpen(true);
-    };
-
-    const handleDeleteClub = (clubID: number) => {
-        // Add logic for deleting the fighter
-        console.log('Delete Club:', clubID);
     };
 
     const handleDeleteFighter = (fighterId: number) => {
@@ -75,7 +69,6 @@ const App: React.FC = () => {
                     onOpenFighterManager={handleOpenFighterManager}
                     onOpenFighterList={handleOpenFighterList}
                     onOpenTournamentList={handleOpenTournamentList}
-                    onOpenClubList={handleOpenClubList}
                     onOpenClubManager={handleOpenClubManager}
                 />
                 {modalOpen && (
