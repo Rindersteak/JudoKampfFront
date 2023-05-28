@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import { Club } from '../../../types';
 import { putClub, deleteClub } from '../../../API/clubAPI';
-import Select from 'react-select';
 import Modal from '../../../Modal/Modal';
 import ConfirmDelete from '../../ConfirmDelete/ConfirmDelete';
 
@@ -10,6 +9,7 @@ interface ClubEditProps {
   onUpdateClub: (club: Club) => void;
   onDeleteClub: (clubId: number) => void;
 }
+
 const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub }) => {
   const [shortname, setShortName] = useState("");
   const [addressCity, setAddressCity] = useState("");
@@ -18,7 +18,7 @@ const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub })
   const [addressStreet, setAddressStreet] = useState("");
   const [addressStreetNumber, setAddressStreetNumber] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [stateassociation, setStateAssociation] = useState<{ value: string; label: string; } | null>(null);
+  const [stateassociation, setStateAssociation] = useState('');
   const [loading, setLoading] = useState(false);
 
   const stateassociationOptions = [
@@ -33,10 +33,12 @@ const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub })
     setClubName(club.name);
     setAddressStreet(club.address.street);
     setAddressStreetNumber(club.address.housenumber);
-    setStateAssociation(stateassociationOptions.find(option => option.value === String(club.stateassociation)) || null);
-
-
+    setStateAssociation(String(club.stateassociation));
   }, [club]);
+
+  const handleStateAssociationChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setStateAssociation(e.target.value);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -56,18 +58,18 @@ const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub })
     }
 
     const updatedClub = {
-        ...club,
-        shortName: shortname,
-        name: clubName,
-        address: {
-          ...club.address,
-          street: addressStreet,
-          housenumber: addressStreetNumber,
-          city: addressCity,
-          postalcode: addressZipCode
-        },
-        stateassociation: '',
-      };
+      ...club,
+      shortName: shortname,
+      name: clubName,
+      address: {
+        ...club.address,
+        street: addressStreet,
+        housenumber: addressStreetNumber,
+        city: addressCity,
+        postalcode: addressZipCode
+      },
+      stateassociation: stateassociation,
+    };
 
     try {
       await putClub(updatedClub);
@@ -99,7 +101,6 @@ const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub })
     setShowConfirmDeletePopup(false);
   };
 
-  
   return (
     <form onSubmit={handleSubmit} className="formContainer">
       <h1 className="titleStyle">Verein bearbeiten</h1>
@@ -119,16 +120,25 @@ const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub })
       </div>
 
       <div className="inputContainer">
-        <label className="inputLabel" htmlFor="landesverband">
+        <label className="inputLabel" htmlFor="stateassociation">
           Landesverband
         </label>
-        <Select
-          id="landesverband"
-          value={stateassociation}
-          options={stateassociationOptions}
-          onChange={(newValue: { value: string; label: string; } | null) => setStateAssociation(newValue)}
+        <select
+          id="stateassociation"
+          value={stateassociation || ''}
+          onChange={handleStateAssociationChange}
           required
-        />
+          className="dropdown-field"
+        >
+          <option value="" disabled>
+            Bitte auswählen
+          </option>
+          {stateassociationOptions.map((option) => (
+            <option key={option.value} value={option.value} className="dropdown-content">
+              {option.label}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="halfWidthWrapper">
@@ -141,6 +151,7 @@ const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub })
           <input className="inputFieldSmall" type="text" id="addressZipCode" value={addressZipCode} onChange={(e) => setAddressZipCode(e.target.value)} required />
         </div>
       </div>
+
       <div className="halfWidthWrapper">
         <div className="inputContainer halfWidth">
           <label className="inputLabel" htmlFor="addressStreet">Straße</label>
