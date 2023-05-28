@@ -3,18 +3,15 @@ import { Fighter } from '../../types';
 import { getFighters, deleteFighter } from '../../API/fighterAPI';
 import { FiTrash2 } from 'react-icons/fi';
 import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
-import Modal from '../../Modal/Modal'; // Stellen Sie sicher, dass der Pfad zu Ihrer Modal-Komponente korrekt ist
-import ConfirmDelete from '../ConfirmDelete/ConfirmDelete'; // Stellen Sie sicher, dass der Pfad zu Ihrer ConfirmDelete-Komponente korrekt ist
+import Modal from '../../Modal/Modal';
+import ConfirmDelete from '../ConfirmDelete/ConfirmDelete';
+import FighterEdit from '../FighterEdit/FighterEdit'; // Importiere die FighterEdit-Komponente
 import './FighterList.css';
-
-// Importieren der benötigten Abhängigkeiten und CSS-Datei
 
 interface FighterListProps {
   detailedView?: boolean;
   onDeleteFighter: (fighterId: number) => void;
 }
-
-// Definition der Schnittstelle für die Props der Komponente
 
 export const deleteFighterHandler = async (fighterId: number) => {
   try {
@@ -25,8 +22,6 @@ export const deleteFighterHandler = async (fighterId: number) => {
   }
 };
 
-
-
 const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDeleteFighter }) => {
   const [backendFighters, setBackendFighters] = useState<Fighter[]>([]);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
@@ -34,7 +29,8 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
   const [fighterIdToDelete, setFighterToDelete] = useState<number | null>(null);
 
 
-
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [selectedFighter, setSelectedFighter] = useState<Fighter | null>(null);
 
   useEffect(() => {
     const loadBackendFighters = async () => {
@@ -57,11 +53,9 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
     loadBackendFighters();
   }, [sortOrder]);
 
-
   const handleSortClick = () => {
     setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
   };
-
 
   const handleDeleteFighter = (fighterId: number) => {
     setShowConfirmDeletePopup(true);
@@ -78,9 +72,16 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
 
   const handleDeleteCanceled = () => {
     setShowConfirmDeletePopup(false);
-  }
+  };
 
-  // Funktion zum Löschen eines Kämpfers mit der gegebenen ID
+  const handleEditFighter = (fighter: Fighter) => {
+    setSelectedFighter(fighter);
+    setShowEditModal(true);
+  };
+
+  const handleEditModalClose = () => {
+    setShowEditModal(false);
+  };
 
   return (
     <div className="entryList">
@@ -100,7 +101,6 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
                 </button>
               )}
             </th>
-
             <th className="headerCell">
               Verein
               {detailedView && (
@@ -109,7 +109,6 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
                 </button>
               )}
             </th>
-
             {detailedView && (
               <>
                 <th className="headerCell">
@@ -118,32 +117,27 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
                     {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
                   </button>
                 </th>
-
                 <th className="headerCell">
                   Teilnehmer-ID
                   <button className="arrowButton" onClick={handleSortClick}>
                     {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
                   </button>
                 </th>
-
                 <th className="headerCell">
                   Gewichtsklasse
                   <button className="arrowButton" onClick={handleSortClick}>
                     {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
                   </button>
                 </th>
-
                 <th className="headerCell">
                   Geburtsdatum
                   <button className="arrowButton" onClick={handleSortClick}>
                     {sortOrder === 'asc' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
                   </button>
                 </th>
-
               </>
             )}
             <th></th>
-
           </tr>
         </thead>
         <tbody>
@@ -151,25 +145,22 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
             const birthdateAsDate = new Date(fighter.birthdate);
 
             return (
-              <tr className="entryStyle" key={fighter.id}>
+              <tr
+                className="entryStyle"
+                key={fighter.id}
+
+              >
                 <td>{fighter.lastname} {fighter.firstname}</td>
-
                 <td>{fighter.club?.name}</td>
-
                 {detailedView && (
                   <>
                     <td>{fighter.club?.address?.city}</td>
-
                     <td>{fighter.id}</td>
-
                     <td>{fighter.weightclass?.name}</td>
-
                     <td>{birthdateAsDate.toDateString()}</td>
-
                   </>
                 )}
                 <td className="deleteIcon" onClick={() => handleDeleteFighter(fighter.id)}><FiTrash2 /></td>
-
               </tr>
             );
           })}
@@ -183,7 +174,12 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
             onConfirmDelete={handleDeleteConfirmed}
             idToDelete={fighterIdToDelete}
           />
+        </Modal>
+      )}
 
+      {showEditModal && selectedFighter && (
+        <Modal size="large" onClose={handleEditModalClose}>
+          <FighterEdit fighter={selectedFighter} onUpdateFighter={() => {}} onDeleteFighter={() => {}} />
         </Modal>
       )}
     </div>
