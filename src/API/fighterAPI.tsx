@@ -17,6 +17,10 @@ export async function postFighter(fighter: Fighter) {
 
         // Erfolg: Rückgabe der Antwort als JSON
         const data = await response.json();
+
+        // Tournament ID Kram aus Swagger handlen
+        
+
         return data;
     } catch (error) {
         console.error('An error occurred while submitting the fighter:', error);
