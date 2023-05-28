@@ -76,6 +76,8 @@
 
 .points{
     display: flex;
+    align-items: center;
+    margin-top: 5%;
 }
 
 .pointLeft{
@@ -88,4 +90,14 @@
     flex: 1;
     width: 50%;
     font-size: 400%;
+    margin-left: 20%;
+}
+
+.redCard{
+    flex: 1;
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    background-color: red;
 }

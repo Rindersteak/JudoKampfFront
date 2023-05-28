@@ -48,6 +48,13 @@ const FighterDetails: React.FC = () => {
                 <div className='pointRight'>
                     0
                 </div>
+
+                <div className='redCard'></div>
+
+                <div className='yellowCardTwo'></div>
+
+                <div className='yellowCardOne'></div>
+
                 </div>
             </div>
             <div className='mainRight'>
