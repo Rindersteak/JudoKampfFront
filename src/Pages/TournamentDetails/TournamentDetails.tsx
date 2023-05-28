@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { getTournaments, getTotalTournaments } from '../../API/tournamentAPI';
 import './TournamentDetails.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClipboardList, faPencil, faPeopleArrows, faPlus, faTree, faTrophy } from '@fortawesome/free-solid-svg-icons';
+import { faClipboardList, faGear, faPencil, faPeopleArrows, faPlus, faTree, faTrophy } from '@fortawesome/free-solid-svg-icons';
 import { Tournament } from '../../types';
 import Banner from '../../Tools/Banner';
 
@@ -189,9 +189,9 @@ const CardSix = ({ tournamentId, onOpenClubManager }: { tournamentId: string, on
     <div className="card-six" onClick={handleCardThreeClick}>
       <div className="card-content">
         <div className="card-icon-blue">
-          <FontAwesomeIcon icon={faPeopleArrows} />
+          <FontAwesomeIcon icon={faGear} />
         </div>
-        <div className="card-text-blue">Kampfmodus ändern</div>
+        <div className="card-text-blue">Kampfmodus</div>
       </div>
     </div>
   );
