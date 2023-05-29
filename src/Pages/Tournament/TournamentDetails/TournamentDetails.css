@@ -118,15 +118,25 @@
 
 .currentFightPreview {
   /* Aktueller Kampf: */
+  display: flex;
   position: absolute;
-  border: 1px solid;
+  text-align: center;
+  height: 20vh; /* Höhe in vh */
+  left: 1vw; /* Abstand zur linken Seite in vw */
+  top: calc(40vh + 25vh + 10vh + 5vh - 8vh); /* Abstand von den Cards Were der Cards usw. nötig! */
+}
+
+.previewTransparent{
+  display: flex;
   text-align: center;
   width: 35vw; /* Breite in vw */
   height: 20vh; /* Höhe in vh */
   left: 1vw; /* Abstand zur linken Seite in vw */
   top: calc(40vh + 25vh + 10vh + 5vh - 8vh); /* Abstand von den Cards Were der Cards usw. nötig! */
-  border-color: black;
-  color: red;
+}
+
+.previewTransparent:hover{
+  cursor: pointer;
 }
 
 .card-content {

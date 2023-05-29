@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboardList, faGear, faPencil, faPeopleArrows, faPlus, faTree, faTrophy } from '@fortawesome/free-solid-svg-icons';
 import { Tournament } from '../../../types';
 import Banner from '../../../Tools/Banner/Banner';
+import FighterDetails from '../../Fight/FightDetails/FightDetails'
 
 // Definition der Eigenschaften für die TournamentDetails-Komponente
 interface TournamentDetailsProps {
@@ -85,7 +86,11 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList
       </div>
       {/* Aktueller Kampf: Label anzeigen */}
       <div className="currentFightLabel">Aktueller Kampf:</div>
-      <div className="currentFightPreview">PREVIEW IST IN ARBEIT</div>
+      <div className="previewTransparent">
+        <div className="currentFightPreview">
+          <FighterDetails />
+        </div>
+      </div>
     </div>
   );
 
