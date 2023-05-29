@@ -1,13 +1,13 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import HomePage from '../Pages/HomePage/HomePage';
-import TournamentForm from '../Pages/TournamentForm/TournamentForm';
-import FighterList from '../Pages/FighterList/FighterList';
-import FighterManager from '../Pages/FighterManager/FighterManager';
-import TournamentDetails from '../Pages/TournamentDetails/TournamentDetails';
-import TournamentList from '../Pages/TournamentList/TournamentList';
+import TournamentForm from '../Pages//Tournament/TournamentForm/TournamentForm';
+import FighterList from '../Pages/Fighter/FighterList/FighterList';
+import FighterManager from '../Pages/Fighter/FighterManager/FighterManager';
+import TournamentDetails from '../Pages/Tournament/TournamentDetails/TournamentDetails';
+import TournamentList from '../Pages/Tournament/TournamentList/TournamentList';
 import ClubList from '../Pages/Club/ClubList/ClubList'
-import FighterDetails from '../Pages/FighterDetails/FighterDetails'
+import FighterDetails from '../Pages/Fight/FightDetails/FightDetails'
 
 interface AppRoutesProps {
     onOpenTournamentForm: () => void;
@@ -33,6 +33,7 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
                 onOpenTournamentForm={onOpenTournamentForm}
                 onOpenFighterManager={onOpenFighterManager}
                 onOpenTournamentList={onOpenTournamentList}
+                onLogoClick={() => {}} 
             />}
         />
         <Route path="/tournament-form" element={<TournamentForm onAddTournament={onOpenTournamentForm} />} />

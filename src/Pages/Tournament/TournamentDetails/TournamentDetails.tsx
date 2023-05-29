@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getTournaments, getTotalTournaments } from '../../API/tournamentAPI';
+import { getTournaments, getTotalTournaments } from '../../../API/tournamentAPI';
 import './TournamentDetails.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboardList, faGear, faPencil, faPeopleArrows, faPlus, faTree, faTrophy } from '@fortawesome/free-solid-svg-icons';
-import { Tournament } from '../../types';
-import Banner from '../../Tools/Banner';
+import { Tournament } from '../../../types';
+import Banner from '../../../Tools/Banner/Banner';
 
 // Definition der Eigenschaften für die TournamentDetails-Komponente
 interface TournamentDetailsProps {

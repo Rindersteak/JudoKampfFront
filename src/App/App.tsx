@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import AppRoutes from '../Routes/Routes';
-import Modal from '../Modal/Modal';
-import TournamentList from '../Pages/TournamentList/TournamentList';
-import TournamentForm from '../Pages/TournamentForm/TournamentForm';
-import FighterList from '../Pages/FighterList/FighterList'
-import FighterManager from '../Pages/FighterManager/FighterManager';
+import Modal from '../Tools/Modal/Modal';
+import TournamentList from '../Pages/Tournament/TournamentList/TournamentList';
+import TournamentForm from '../Pages/Tournament/TournamentForm/TournamentForm';
+import FighterList from '../Pages/Fighter/FighterList/FighterList'
+import FighterManager from '../Pages/Fighter/FighterManager/FighterManager';
 import { Tournament } from '../types';
 import ClubManager from '../Pages/Club/ClubManager/ClubManager';
 import ClubList from '../Pages/Club/ClubList/ClubList';

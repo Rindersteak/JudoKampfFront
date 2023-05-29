@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import ClubForm from '../ClubForm/ClubForm';
 import ClubList, { deleteClubHandler } from '../ClubList/ClubList';
-import Modal from '../../../Modal/Modal';
-import ConfirmDelete from '../../ConfirmDelete/ConfirmDelete';
+import Modal from '../../../Tools/Modal/Modal';
+import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
 import './ClubManager.css';
 
 const ClubManager: React.FC = () => {

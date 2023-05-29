@@ -1,5 +1,5 @@
 
-import './FighterDetails.css';
+import './FightDetails.css';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboardList, faGear, faPencil, faPeopleArrows, faPlus, faTree, faTrophy} from '@fortawesome/free-solid-svg-icons';

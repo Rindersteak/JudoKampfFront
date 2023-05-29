@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './TournamentForm.css'
-import { Address, Tournament } from '../../types';
-import { postTournament } from '../../API/tournamentAPI';
-import stateassociationOptions from '../../Config/StateAssociations';
+import { Address, Tournament } from '../../../types';
+import { postTournament } from '../../../API/tournamentAPI';
+import stateassociationOptions from '../../../Config/StateAssociations';
 
 type Props = {
     onAddTournament: (tournament: Tournament) => void;

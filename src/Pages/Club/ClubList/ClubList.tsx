@@ -3,8 +3,8 @@ import { Club } from '../../../types';
 import { getClubs, deleteClub } from '../../../API/clubAPI';
 import { FiTrash2 } from 'react-icons/fi';
 import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
-import Modal from '../../../Modal/Modal';
-import ConfirmDelete from '../../ConfirmDelete/ConfirmDelete';
+import Modal from '../../../Tools/Modal/Modal';
+import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
 import ClubEdit from '../ClubEdit/ClubEdit';  // Importiere die ClubEdit-Komponente
 import './ClubList.css';
 

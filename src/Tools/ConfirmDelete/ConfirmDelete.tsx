@@ -1,7 +1,7 @@
 // ConfirmDelete.tsx
 import React from 'react';
 import './ConfirmDelete.css';
-import useDeleteHandler from '../../Tools/ErrorHandler';
+import useDeleteHandler from '../MessageHandling/ErrorHandler';
 
 interface ConfirmDeleteProps {
   onClose: () => void;

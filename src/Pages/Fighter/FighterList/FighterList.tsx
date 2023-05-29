@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Fighter } from '../../types';
-import { getFighters, deleteFighter } from '../../API/fighterAPI';
+import { Fighter } from '../../../types';
+import { getFighters, deleteFighter } from '../../../API/fighterAPI';
 import { FiTrash2 } from 'react-icons/fi';
 import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
-import Modal from '../../Modal/Modal';
-import ConfirmDelete from '../ConfirmDelete/ConfirmDelete';
+import Modal from '../../../Tools/Modal/Modal';
+import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
 import FighterEdit from '../FighterEdit/FighterEdit'; // Importiere die FighterEdit-Komponente
 import './FighterList.css';
 

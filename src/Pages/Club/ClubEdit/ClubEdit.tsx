@@ -1,8 +1,8 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import { Club } from '../../../types';
 import { putClub, deleteClub } from '../../../API/clubAPI';
-import Modal from '../../../Modal/Modal';
-import ConfirmDelete from '../../ConfirmDelete/ConfirmDelete';
+import Modal from '../../../Tools/Modal/Modal';
+import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
 
 interface ClubEditProps {
   club: Club;

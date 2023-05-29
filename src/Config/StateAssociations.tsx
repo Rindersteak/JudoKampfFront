@@ -1,5 +1,4 @@
-// Lanbdesverbände
-
+// Landesverbände
 
 const stateassociationOptions = ['Landesverband 1', 'Landesverband 2'];
 

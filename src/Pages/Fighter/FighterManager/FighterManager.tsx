@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import FighterForm from '../FighterForm/FighterForm';
 import FighterList, { deleteFighterHandler } from '../FighterList/FighterList';
-import Modal from '../../Modal/Modal';
-import ConfirmDelete from '../ConfirmDelete/ConfirmDelete';
+import Modal from '../../../Tools/Modal/Modal';
+import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
 import './FighterManager.css';
 
 const FighterManager: React.FC = () => {

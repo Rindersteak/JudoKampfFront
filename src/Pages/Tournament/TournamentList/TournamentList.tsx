@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Tournament, Address } from '../../types';
-import { getTotalParticipants } from '../../API/fighterAPI';
-import { getTournaments, deleteTournament } from '../../API/tournamentAPI';
+import { Tournament, Address } from '../../../types';
+import { getTotalParticipants } from '../../../API/fighterAPI';
+import { getTournaments, deleteTournament } from '../../../API/tournamentAPI';
 import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
 import { FiTrash2 } from 'react-icons/fi';
-import Modal from '../../Modal/Modal';
-import ConfirmDelete from '../ConfirmDelete/ConfirmDelete';
+import Modal from '../../../Tools/Modal/Modal';
+import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
 import './TournamentList.css';
 import { useNavigate } from 'react-router-dom';
 

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Fighter } from '../../types';
-import { postFighter } from '../../API/fighterAPI';
-import { getClubs } from '../../API/clubAPI';
+import { Fighter } from '../../../types';
+import { postFighter } from '../../../API/fighterAPI';
+import { getClubs } from '../../../API/clubAPI';
 import './FighterForm.css';
 import Select from 'react-select';
 
