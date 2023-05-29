@@ -1,0 +1,23 @@
+.tournament-tree {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .round {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  
+  .fight {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #000;
+    margin-bottom: 10px;
+  }
+  
+  .vs {
+    margin: 0 10px;
+  }
+  

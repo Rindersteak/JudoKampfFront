@@ -54,6 +54,7 @@ export type Fight = {
   white_fouls: number;
 };
 
+
 export type Tournament = {
   id: number,
   name: string,
