@@ -23,7 +23,6 @@
     overflow-wrap: break-word; /* Fügt die Eigenschaft overflow-wrap hinzu, um den Text bei Bedarf zu umbrechen */
 }
 
-
 .locationStyleContent {
     color: #001AFF; /* Farbe für den Ort */
     text-align: left;
