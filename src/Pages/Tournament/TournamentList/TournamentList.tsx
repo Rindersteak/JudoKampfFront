@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Tournament, Address } from '../../../types';
+import { Tournament } from '../../../types';
 import { getTotalParticipants } from '../../../API/fighterAPI';
 import { getTournaments, deleteTournament } from '../../../API/tournamentAPI';
 import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
@@ -55,10 +55,6 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
     loadBackendTournaments();
   }, [sortOrder, sortColumn]);
 
-  const handleLocationClick = (address: Address) => {
-    const formattedAddress = `${address.street} ${address.housenumber}, ${address.postalcode} ${address.city}, ${address.state}`;
-    window.open(`https://maps.google.com/?q=${encodeURIComponent(formattedAddress)}`);
-  };
 
   const navigateToTournamentDetails = (tournamentId: number) => {
     navigate(`/tournament-details/${tournamentId}`);
@@ -93,6 +89,7 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
     return `${startDate} - ${endDate}`;
   };
 
+
   return (
     <div className="entryList">
       <div className="headerBanner">
@@ -105,12 +102,6 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
               Name
               <button className="arrowButton" onClick={() => handleSortClick('name')}>
                 {sortOrder === 'asc' && sortColumn === 'name' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
-              </button>
-            </th>
-            <th className="headerCell">
-              Ort
-              <button className="arrowButton" onClick={() => handleSortClick('location')}>
-                {sortOrder === 'asc' && sortColumn === 'location' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
               </button>
             </th>
             <th className="headerCell">
@@ -142,28 +133,23 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
         </thead>
         <tbody>
           {backendTournaments.map((tournament) => (
-            <tr className="entryStyle" key={tournament.id}>
+            <tr
+              className="entryStyle clickable"
+              key={tournament.id}
+              onClick={() => navigateToTournamentDetails(tournament.id)}
+            >
               <td>{tournament.name}</td>
-              <td className="locationStyleContent clickable" onClick={() => handleLocationClick(tournament.address)}>
-                {tournament.location}
-              </td>
               <td>{tournament.address.city}</td>
-              <td
-                className="idStyleContent clickable"
-                onClick={() => navigateToTournamentDetails(tournament.id)}
-              >
-                {tournament.id}
-              </td>
+              <td>{tournament.id}</td>
               <td>{getTotalParticipants(tournament.fighters)}</td>
               <td>{formatTournamentPeriod(tournament.startdate, tournament.enddate)}</td>
-              <td className="deleteIcon" onClick={() => handleDeleteTournament(tournament.id)}>
+              <td className="deleteIcon" onClick={(e) => { e.stopPropagation(); handleDeleteTournament(tournament.id); }}>
                 <FiTrash2 />
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-
       {showConfirmDeletePopup && tournamentIdToDelete !== null && (
         <Modal size="small" onClose={handleDeleteCanceled}>
           <ConfirmDelete onClose={handleDeleteCanceled} onConfirmDelete={handleDeleteConfirmed} idToDelete={tournamentIdToDelete} />

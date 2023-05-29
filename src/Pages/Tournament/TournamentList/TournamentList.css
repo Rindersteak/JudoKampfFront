@@ -37,3 +37,13 @@
 .idStyleContent {
   text-align: left;
 }
+
+.clickable:hover {
+    background-color: rgba(0, 0, 0, 0.10);
+    cursor: pointer;
+  }
+  
+  .entryStyle:hover {
+    background-color: rgba(0, 0, 0, 0.10);
+    cursor: pointer;
+  }
