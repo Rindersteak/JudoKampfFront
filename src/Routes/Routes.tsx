@@ -9,6 +9,8 @@ import TournamentList from '../Pages/Tournament/TournamentList/TournamentList';
 import ClubList from '../Pages/Club/ClubList/ClubList'
 import FightDetails from '../Pages/Fight/FightDetails/FightDetails'
 import TournamentTable from '../Pages/Tournament/TournamentTree/TournamentTable';
+import TournamentEdit from '../Pages/Tournament/TournamentEdit/TournamentEdit';
+
 
 interface AppRoutesProps {
     onOpenTournamentForm: () => void;
@@ -17,6 +19,7 @@ interface AppRoutesProps {
     onOpenTournamentList: () => void;
     onOpenClubManager: () => void;
     onOpenClubList: () => void;
+    onOpenTournamentEdit: () => void;
 }
 
 const exampleGroups = [
@@ -99,7 +102,8 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
     onOpenFighterList,
     onOpenClubManager,
     onOpenTournamentList,
-    onOpenClubList
+    onOpenClubList,
+    onOpenTournamentEdit
 }) => (
     <Routes>
         <Route
@@ -128,6 +132,7 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
                     onOpenFighterManager={onOpenFighterManager}
                     onOpenClubManager={onOpenClubManager}
                     onOpenClubList={onOpenClubList}
+                    onOpenTournamentEdit={onOpenTournamentEdit}
                 />
             }
         />
