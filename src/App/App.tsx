@@ -12,10 +12,11 @@ import ClubList from '../Pages/Club/ClubList/ClubList';
 import TournamentEdit from '../Pages/Tournament/TournamentEdit/TournamentEdit';
 
 interface TournamentEditProps {
-  tournament: Tournament; // Add the missing 'tournament' prop
-  onUpdateTournament: (tournamentId: Tournament) => void;
-  onDeleteTournament: (tournamentId: number) => void;
-}
+    tournament?: Tournament;
+    onUpdateTournament: (tournament: Tournament) => void;
+    onDeleteTournament: (tournamentId: number) => void;
+  }
+  
 
 const App: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -87,13 +88,13 @@ const App: React.FC = () => {
   const handleOpenTournamentEdit = () => {
     setModalContent(
       <TournamentEdit
-        tournament={TournamentEdit}
         onUpdateTournament={handleUpdateTournament}
         onDeleteTournament={handleDeleteTournament}
       />
     );
     setModalOpen(true);
   };
+  
 
   return (
     <Router>

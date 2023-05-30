@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Tournament } from '../../../types';
-import { deleteTournament, postTournament } from '../../../API/tournamentAPI';
+import { deleteTournament, postTournament, getTournaments } from '../../../API/tournamentAPI';
 import stateassociationOptions from '../../../Config/StateAssociations';
 import './TournamentEdit.css';
 
@@ -15,7 +15,7 @@ type OptionType = {
 
 
 interface TournamentEditProps {
-  tournament: Tournament;
+  tournament?: Tournament;
   onUpdateTournament: (tournament: Tournament) => void;
   onDeleteTournament: (tournamentId: number) => void;
 }
@@ -38,17 +38,23 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({ tournament, onUpdateTou
     console.log('Turnier erfolgreich aktualisiert');
   };
 
+
+
   useEffect(() => {
+    if (tournament) {
       setTournamentName(tournament.name);
       setTournamentLocation(tournament.address.city);
-      setStateAssociation(tournament.stateassociation);
+      setStateAssociation(String(tournament.stateassociation));
       setAddressCity(tournament.address.city);
       setAddressZipCode(tournament.address.postalcode);
       setAddressStreet(tournament.address.street);
       setAddressStreetNumber(tournament.address.housenumber);
       setPeriodFrom(new Date(tournament.startdate));
       setPeriodTo(new Date(tournament.enddate));
+    }
   }, [tournament]);
+
+
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -79,23 +85,25 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({ tournament, onUpdateTou
 
     try {
       await postTournament(updatedTournament);
+      onUpdateTournament(updatedTournament);
       setLoading(false);
-      handleSuccessPopup();
     } catch (error) {
       console.error('Fehler beim Aktualisieren des Turniers:', error);
       setErrorMessage('(DB-Error) Fehler beim Aktualisieren!');
       setLoading(false);
     }
   };
-
   const handleDelete = async () => {
-    try {
-      await deleteTournament(tournament.id);
-      onDeleteTournament(tournament.id);
-    } catch (error) {
-      setErrorMessage('(DB-Error) Fehler beim Löschen!');
+    if (tournament) {
+      try {
+        await deleteTournament(tournament.id);
+        onDeleteTournament(tournament.id);
+      } catch (error) {
+        setErrorMessage('(DB-Error) Fehler beim Löschen!');
+      }
     }
   };
+
 
   const handleStateAssociationChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setStateAssociation(e.target.value);
@@ -231,13 +239,13 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({ tournament, onUpdateTou
           />
         </div>
       </div>
-      
+
       <button className="addButton" type="submit" disabled={loading}>
         {loading ? 'Laden...' : 'Aktualisieren'}
       </button>
 
       <button className="addDeleteButton" type="button" onClick={handleDelete}>
-        Teilnehmer Löschen
+        Turnier Löschen
       </button>
 
       {errorMessage && <div className="errorMessage">{errorMessage}</div>}
