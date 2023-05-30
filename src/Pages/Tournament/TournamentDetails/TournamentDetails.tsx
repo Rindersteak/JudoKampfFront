@@ -68,13 +68,14 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList
       {/* Container für die Karten */}
 
 
-      
+      {/* Turnier Bearbeiten Button auskommentiert
       <button className='editTorunamentButton'>
         <div>
           <FontAwesomeIcon icon={faPencil} />
         </div>
         Turnier bearbeiten
       </button>
+  */}
 
       <div className="cards-container">
         <CardOne tournamentId={tournamentId || ''} />
@@ -197,7 +198,7 @@ const CardSix = ({ tournamentId, onOpenClubManager }: { tournamentId: string, on
         <div className="card-icon-blue">
           <FontAwesomeIcon icon={faGear} />
         </div>
-        <div className="card-text-blue">Kampfmodus</div>
+        <div className="card-text-blue">Turnier/Modus</div>
       </div>
     </div>
   );
