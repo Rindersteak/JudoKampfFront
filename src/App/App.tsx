@@ -21,6 +21,7 @@ interface TournamentEditProps {
 const App: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState<React.ReactNode | null>(null);
+  const [tournamentId, setTournamentId] = useState<number | null>(null); // Declare tournamentId and its setter
 
   const handleOpenTournamentForm = () => {
     setModalContent(

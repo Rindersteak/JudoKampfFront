@@ -15,13 +15,14 @@ type OptionType = {
 
 
 interface TournamentEditProps {
-  tournament?: Tournament;
   onUpdateTournament: (tournament: Tournament) => void;
   onDeleteTournament: (tournamentId: number) => void;
 }
 
-const TournamentEdit: React.FC<TournamentEditProps> = ({ tournament, onUpdateTournament, onDeleteTournament }) => {
+
+const TournamentEdit: React.FC<TournamentEditProps> = ({ onUpdateTournament, onDeleteTournament }) => {
   const { tournamentId } = useParams<{ tournamentId: string }>();
+
   const [tournamentName, setTournamentName] = useState('');
   const [tournamentLocation, setTournamentLocation] = useState('');
   const [stateassociation, setStateAssociation] = useState<string>('');
@@ -33,6 +34,7 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({ tournament, onUpdateTou
   const [periodTo, setPeriodTo] = useState<Date | null>(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [tournament, setTournament] = useState<Tournament | null>(null);
 
   const handleSuccessPopup = () => {
     console.log('Turnier erfolgreich aktualisiert');
@@ -41,18 +43,31 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({ tournament, onUpdateTou
 
 
   useEffect(() => {
-    if (tournament) {
-      setTournamentName(tournament.name);
-      setTournamentLocation(tournament.address.city);
-      setStateAssociation(String(tournament.stateassociation));
-      setAddressCity(tournament.address.city);
-      setAddressZipCode(tournament.address.postalcode);
-      setAddressStreet(tournament.address.street);
-      setAddressStreetNumber(tournament.address.housenumber);
-      setPeriodFrom(new Date(tournament.startdate));
-      setPeriodTo(new Date(tournament.enddate));
-    }
-  }, [tournament]);
+    const fetchTournament = async () => {
+      try {
+        const tournaments = await getTournaments(); // Fetch all tournaments from the backend
+        const selectedTournament = tournaments.find((t: Tournament) => t.id === 112 ); // Input ID
+        if (selectedTournament) {
+          setTournamentName(selectedTournament.name);
+          setTournamentLocation(selectedTournament.location);
+          setStateAssociation(selectedTournament.stateassociation);
+          setAddressCity(selectedTournament.address.city);
+          setAddressZipCode(selectedTournament.address.postalcode);
+          setAddressStreet(selectedTournament.address.street);
+          setAddressStreetNumber(selectedTournament.address.housenumber);
+          setPeriodFrom(new Date(selectedTournament.startdate));
+          setPeriodTo(new Date(selectedTournament.enddate));
+
+
+        }
+      } catch (error) {
+        console.error('Error loading tournament:', error);
+      }
+    };
+  
+    fetchTournament();
+  }, []);
+  
 
 
 
@@ -241,7 +256,7 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({ tournament, onUpdateTou
       </div>
 
       <button className="addButton" type="submit" disabled={loading}>
-        {loading ? 'Laden...' : 'Aktualisieren'}
+        {loading ? 'Laden...' : 'Änderung speichern'}
       </button>
 
       <button className="addDeleteButton" type="button" onClick={handleDelete}>
