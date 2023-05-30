@@ -23,9 +23,10 @@ export type Address = {
 
 export type Club = {
   id: number;
-  shortName: string;
+  shortname: string;
   name: string;
   address: Address;
+  stateassociation: string;
 };
 
 export type Fighter = {
@@ -53,10 +54,12 @@ export type Fight = {
   white_fouls: number;
 };
 
+
 export type Tournament = {
   id: number,
   name: string,
   address: Address,
+  stateassociation: string;
   ageclass: AgeClass,
   weightclass: WeightClass,
   code: string,  // add this line

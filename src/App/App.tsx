@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import AppRoutes from '../Routes/Routes';
-import Modal from '../Modal/Modal';
-import TournamentList from '../Pages/TournamentList/TournamentList';
-import TournamentForm from '../Pages/TournamentForm/TournamentForm';
-import FighterList from '../Pages/FighterList/FighterList'
-import FighterManager from '../Pages/FighterManager/FighterManager';
+import Modal from '../Tools/Modal/Modal';
+import TournamentList from '../Pages/Tournament/TournamentList/TournamentList';
+import TournamentForm from '../Pages/Tournament/TournamentForm/TournamentForm';
+import FighterList from '../Pages/Fighter/FighterList/FighterList'
+import FighterManager from '../Pages/Fighter/FighterManager/FighterManager';
 import { Tournament } from '../types';
+import ClubManager from '../Pages/Club/ClubManager/ClubManager';
+import ClubList from '../Pages/Club/ClubList/ClubList';
 
 const App: React.FC = () => {
     const [modalOpen, setModalOpen] = useState(false);
@@ -26,11 +28,6 @@ const App: React.FC = () => {
         console.log('Add Tournament:', tournament);
     };
 
-    const handleShowSuccessPopup = (status: boolean) => {
-        // Add logic for showing success popup
-        console.log('Show Success Popup:', status);
-    };
-
     const handleOpenTournamentList = () => {
         setModalContent(<TournamentList onClose={handleCloseModal} />);
         setModalOpen(true);
@@ -46,6 +43,16 @@ const App: React.FC = () => {
         setModalOpen(true);
     };
 
+    const handleOpenClubList = () => {
+        setModalContent(<ClubList onDeleteClub={handleDeleteClub} />);
+        setModalOpen(true);
+    };
+
+    const handleDeleteClub = (clubID: number) => {
+        // Add logic for deleting the fighter
+        console.log('Delete Club:', clubID);
+    };
+
     const handleDeleteFighter = (fighterId: number) => {
         // Add logic for deleting the fighter
         console.log('Delete Fighter:', fighterId);
@@ -53,6 +60,11 @@ const App: React.FC = () => {
 
     const handleCloseModal = () => {
         setModalOpen(false);
+    };
+
+    const handleOpenClubManager = () => {
+        setModalContent(<ClubManager />);
+        setModalOpen(true);
     };
 
     return (
@@ -63,6 +75,8 @@ const App: React.FC = () => {
                     onOpenFighterManager={handleOpenFighterManager}
                     onOpenFighterList={handleOpenFighterList}
                     onOpenTournamentList={handleOpenTournamentList}
+                    onOpenClubList={handleOpenClubList}
+                    onOpenClubManager={handleOpenClubManager}
                 />
                 {modalOpen && (
                     <Modal onClose={handleCloseModal}>

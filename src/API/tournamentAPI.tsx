@@ -1,5 +1,6 @@
 import { Tournament } from '../types';
-import { API_DOMAIN } from './apiConfig';
+import { Fighter } from '../types';
+import { API_DOMAIN } from '../Config/apiConfig';
 
 export async function postTournament(tournament: Tournament) {
     try {
@@ -54,7 +55,7 @@ export async function getTotalTournaments() {
 
 export async function deleteTournament(tournamentId: number) {
     try {
-      const response = await fetch(`${API_DOMAIN}/tournament/delete/${tournamentId}`, {
+      const response = await fetch(`${API_DOMAIN}/tournaments/delete/${tournamentId}`, {
         method: 'DELETE',
       });
   
@@ -67,3 +68,28 @@ export async function deleteTournament(tournamentId: number) {
     }
   }
   
+ // Fighter in Tournament (nach ID) anlegen
+
+  export async function postTournamentFighter(tournamentId: number, fighter: Fighter) {
+    try {
+        const response = await fetch(`${API_DOMAIN}/tournaments/${tournamentId}/add-fighter`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(fighter)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        // Erfolg: Rückgabe der Antwort als JSON
+        const data = await response.json();
+
+        return data;
+    } catch (error) {
+        console.error('An error occurred while submitting the fighter:', error);
+        throw error; // Fehler weiterwerfen, um ihn in der FighterForm-Komponente behandeln zu können
+    }
+}

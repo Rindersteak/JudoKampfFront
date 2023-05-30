@@ -1,0 +1,300 @@
+/* FighterForm.css */
+
+/* Importiert die Nunito Schriftart von Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
+
+/* Styling für den Formulartitel */
+.titleStyle {
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.5em;
+    text-align: center;
+    padding-bottom: 2em;
+    color: #001AFF;
+}
+
+/* Styling für die Beschriftung der Eingabefelder */
+.inputLabel {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.25em;
+    font-weight: 700;
+    line-height: 1.35em;
+    letter-spacing: -0.02em;
+    color: #000000;
+    position: absolute;
+    top: -1.4em; /* Abstand nach oben anpassen */
+    left: 0;
+}
+
+/* Styling für Eingabefelder */
+.inputField {
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    background: none;
+    height: 3em;
+    border-radius: 5px;
+    padding: 0 0.625em;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1em;
+    background: #EDEFF2;
+}
+
+/* Styling für den "Hinzufügen" Button */
+.addButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 367px;
+    height: 1.6875em;
+    background: #001AFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 2px;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-size: 1.5em;
+    font-weight: 900;
+    line-height: 2.0625em;
+    letter-spacing: -0.02em;
+    border: none;
+    cursor: pointer;
+    margin-top: -1.125em;
+}
+
+/* Styling für den "Hinzufügen" Button beim Mouseover */
+.addButton:hover {
+    background: #000A91;
+}
+
+/* Styling für den "Hinzufügen" Button beim Klicken */
+.addButton:active {
+    background: #00056D;
+}
+
+/* Styling für den Eingabefeld Container */
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3.76em;
+    width: 100%;
+    position: relative;
+    height: 1.9375em;
+    border-radius: 5px;
+}
+
+@media (min-width: 768px) {
+    .inputContainer {
+        width: 22.9375em;
+        /* 367px */
+    }
+}
+
+
+/* Styling für den Formularcontainer */
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    /* zentriert die Elemente horizontal */
+}
+
+
+
+
+/* Styling für den Container der zwei Eingabefelder nebeneinander anordnet */
+.halfWidthWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    /* zentriert die Elemente horizontal */
+}
+
+@media (min-width: 768px) {
+    .halfWidthWrapper {
+        flex-direction: row;
+    }
+}
+
+/* Styling für die Eingabefelder in dem "halbe Breite" Container */
+.inputContainer.halfWidth {
+    width: 100%;
+    margin-bottom: 2.9375em;
+    height: 1.9375em;
+}
+
+@media (min-width: 768px) {
+    .inputContainer.halfWidth {
+        width: 10em;
+        /* 160px */
+        margin-right: 2.9375em;
+    }
+}
+
+/* Entfernt den rechten Abstand vom letzten Eingabefeld in dem "halbe Breite" Container */
+.inputContainer.halfWidth:last-of-type {
+    margin-right: 0;
+}
+
+
+.halfWidthWrapperAddress {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center; /* zentriert die Elemente horizontal */
+    margin-top: -42px;
+}
+@media (min-width: 768px) {
+    .halfWidthWrapperAddress {
+        flex-direction: row;
+    }
+}
+
+.inputFieldWide {
+    width: 243px;
+    box-sizing: border-box;
+    border: none;
+    background: none;
+    height: 30px;
+    border-radius: 5px;
+    padding: 0 0.625em;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1em;
+    background: #EDEFF2;
+    align-self: flex-start;
+}
+
+.inputFieldSmall {
+    width: 117px;
+    box-sizing: border-box;
+    border: none;
+    background: none;
+    height: 30px;
+    border-radius: 5px;
+    padding: 0 0.625em;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1em;
+    background: #EDEFF2;
+    align-self: flex-end;
+}
+
+.selectField {
+    /* possibly need to adjust to make dynamic? */
+    width: 104.5%;
+    border-radius: 5px;
+    border: none;
+    padding: 0 0.625em;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1em;
+    background: #EDEFF2;
+    appearance: none;
+    position: relative;
+    height: 1.9375em;
+    /* possibly need to adjust to make dynamic? */
+    left: -8px;
+
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+
+/* Styling für das Pfeil-Icon von Dropdown-Feldern */
+.selectField:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0.625em;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #001AFF;
+    transform: translateY(-50%);
+}
+
+
+.inputContainerSelect {
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    padding: 0 0.625em;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1em;
+    background: #EDEFF2;
+    appearance: none;
+    position: relative;
+    height: 1.9375em;
+    box-sizing: border-box;
+  }
+  
+
+/* Styling für das Pfeil-Icon von Dropdown-Feldern */
+.inputContainerSelect:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0.625em;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #001AFF;
+    transform: translateY(-50%);
+  }
+  
+  @media (min-width: 768px) {
+    .selectField,
+    .inputContainerSelect {
+      width: 22.9375em; /* Adjust the width as needed */
+    }
+  }
+.react-datepicker__input-container input {
+    width: 100%;
+    margin-bottom: 2.9375em;
+    height: 1.9375em;
+    border: none;
+    background: none;
+    border-radius: 5px;
+    padding: 0 0.625em;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1em;
+    background: #EDEFF2;
+}
+
+
+
+
+
+
+.dropdown-field {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 44.83%;
+    bottom: 20.69%;
+    width: 367px;
+    height: 31.72px;
+    background: #EDEFF2;
+    border-radius: 5px;
+  }
+  
+  .dropdown-field:hover {
+    cursor: pointer;
+  }
+  
+  .dropdown-content {
+    position: absolute;
+    left: 2.72%;
+    right: 51.23%;
+    top: 20.69%;
+    bottom: 17.24%;
+    width: 169px;
+    height: 18.62px;
+    font-family: 'Nunito';
+    font-weight: 200;
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: -0.02em;
+    color: #000000;
+  }
+  

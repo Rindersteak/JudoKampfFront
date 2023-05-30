@@ -1,5 +1,5 @@
 import { Fighter } from '../types';
-import { API_DOMAIN } from './apiConfig';
+import { API_DOMAIN } from '../Config/apiConfig';
 
 export async function postFighter(fighter: Fighter) {
     try {
@@ -17,6 +17,10 @@ export async function postFighter(fighter: Fighter) {
 
         // Erfolg: Rückgabe der Antwort als JSON
         const data = await response.json();
+
+        // Tournament ID Kram aus Swagger handlen
+        
+
         return data;
     } catch (error) {
         console.error('An error occurred while submitting the fighter:', error);
@@ -55,6 +59,28 @@ export async function deleteFighter(fighterId: number) {
     } catch (error) {
       console.error('An error occurred while deleting the fighter:', error);
       throw error; 
+    }
+  }
+  
+  export async function putFighter(fighter: Fighter) {
+    try {
+      const response = await fetch(`${API_DOMAIN}/fighters/update/${fighter.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(fighter),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('An error occurred while updating the fighter:', error);
+      throw error;
     }
   }
   
