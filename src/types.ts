@@ -59,10 +59,10 @@ export type Tournament = {
   id: number,
   name: string,
   address: Address,
-  stateassociation: string;
   ageclass: AgeClass,
   weightclass: WeightClass,
-  code: string,  // add this line
+  code: string,  
+  stateassociation: string;
   location: string,
   startdate: string,
   enddate: string,
