@@ -10,6 +10,7 @@ export async function postFighter(fighter: Fighter) {
             },
             body: JSON.stringify(fighter)
         });
+        console.log(JSON.stringify(fighter))
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);

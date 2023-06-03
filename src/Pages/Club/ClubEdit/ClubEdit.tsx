@@ -28,13 +28,14 @@ const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub })
 
   useEffect(() => {
     setShortName(club.shortname);
-    setAddressCity(club.address.city);
-    setAddressZipCode(club.address.postalcode);
+    setAddressCity(club.address?.city || '');
+    setAddressZipCode(club.address?.postalcode || '');
     setClubName(club.name);
-    setAddressStreet(club.address.street);
-    setAddressStreetNumber(club.address.housenumber);
+    setAddressStreet(club.address?.street || '');
+    setAddressStreetNumber(club.address?.housenumber || '');
     setStateAssociation(String(club.stateassociation));
   }, [club]);
+
 
   const handleStateAssociationChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setStateAssociation(e.target.value);
@@ -57,19 +58,24 @@ const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub })
       return;
     }
 
-    const updatedClub = {
+
+    const updatedClub: Club = {
       ...club,
-      shortName: shortname,
+      shortname: shortname,
       name: clubName,
       address: {
         ...club.address,
         street: addressStreet,
         housenumber: addressStreetNumber,
         city: addressCity,
-        postalcode: addressZipCode
+        postalcode: addressZipCode,
+        id: club.address?.id || 0,
+        state: club.address?.state, // Feld ohne den optionalen Operator ? übernehmen
       },
       stateassociation: stateassociation,
+      id: club.id || 0,
     };
+
 
     try {
       await putClub(updatedClub);
@@ -89,13 +95,13 @@ const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub })
 
   const handleDeleteConfirmed = async () => {
     try {
-      await deleteClub(club.id);
-      onDeleteClub(club.id);
+      await deleteClub(club.id || 0); // Verwenden Sie eine Standardwert, wenn club.id undefined ist
+      onDeleteClub(club.id || 0); // Verwenden Sie eine Standardwert, wenn club.id undefined ist
     } catch (error) {
       console.error('(DB-Error) Fehler beim Löschen!', error);
     }
     setShowConfirmDeletePopup(false);
-  }
+  };
 
   const handleDeleteCanceled = () => {
     setShowConfirmDeletePopup(false);
@@ -176,10 +182,11 @@ const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub })
           <ConfirmDelete
             onClose={handleDeleteCanceled}
             onConfirmDelete={handleDeleteConfirmed}
-            idToDelete={club.id}
+            idToDelete={club.id || 0} 
           />
         </Modal>
       )}
+
 
       {errorMessage && <div className="errorMessage">{errorMessage}</div>}
     </form>

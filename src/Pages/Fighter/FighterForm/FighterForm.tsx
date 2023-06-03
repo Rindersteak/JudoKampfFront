@@ -83,34 +83,14 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
       firstname: firstname,
       lastname: lastname,
       birthdate: birthdateAsString,
-      ageclass: {
-        id: 0,
-        name: "",
-        lowerAge: 0,
-        upperAge: 0,
-      },
       weight: weight,
-      weightclass: {
-        id: 0,
-        name: "",
-        upperBoundary: 0,
-        lowerBoundary: 0,
-      },
       club: {
-        id: 0,
+        id: club?.value ? parseInt(club.value) : 0,
         shortname: club?.value || '',
-        name: club?.value || '',
-        address: {
-          id: 0,
-          street: "",
-          housenumber: "",
-          city: "",
-          state: "",
-          postalcode: "",
-        },
-        stateassociation: ''
+        name: club?.label || '',
       },
     };
+    
 
     try {
       await postFighter(fighter);

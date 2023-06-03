@@ -130,7 +130,7 @@ const CardTwo = ({ tournamentId, onOpenFighterList }: { tournamentId: string, on
 
 const CardThree = ({ tournamentId, onOpenFighterManager }: { tournamentId: string, onOpenFighterManager: () => void }) => {
   const handleCardThreeClick = () => {
-    onOpenFighterManager(tournamentId);
+    onOpenFighterManager();
   };
 
   return (
