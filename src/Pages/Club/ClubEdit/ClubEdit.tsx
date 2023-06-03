@@ -129,14 +129,15 @@ const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub })
         <label className="inputLabel" htmlFor="stateassociation">
           Landesverband
         </label>
+        <div className='inputContainerSelect'>
         <select
           id="stateassociation"
           value={stateassociation || ''}
           onChange={handleStateAssociationChange}
           required
-          className="dropdown-field"
+          className="selectField"
         >
-          <option value="" disabled>
+          <option value="">
             Bitte auswählen
           </option>
           {stateassociationOptions.map((option) => (
@@ -145,6 +146,7 @@ const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub })
             </option>
           ))}
         </select>
+      </div>
       </div>
 
       <div className="halfWidthWrapper">
