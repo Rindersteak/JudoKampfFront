@@ -11,6 +11,11 @@ interface FighterEditProps {
   onDeleteFighter: (fighterId: number) => void;
 }
 
+type OptionType = {
+  value: string;
+  label: string;
+};
+
 const FighterEdit: React.FC<FighterEditProps> = ({ fighter, onUpdateFighter, onDeleteFighter }) => {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
@@ -100,6 +105,14 @@ const FighterEdit: React.FC<FighterEditProps> = ({ fighter, onUpdateFighter, onD
     }
   };
 
+  const handleClubChange = (newValue: OptionType | null) => {
+    setClub(newValue);
+  };
+
+  const handleGenderChange = (newValue: OptionType | null) => {
+    setGender(newValue);
+  };
+
   return (
     <form onSubmit={handleSubmit} className="formContainer">
       <h1 className="titleStyle">Teilnehmer bearbeiten</h1>
@@ -134,32 +147,63 @@ const FighterEdit: React.FC<FighterEditProps> = ({ fighter, onUpdateFighter, onD
       </div>
 
       <div className="inputContainer">
-        <label className="inputLabel" htmlFor="gender">
-          Geschlecht
-        </label>
-        <div className="selectContainer">
-          <Select
-            id="gender"
-            value={gender}
-            options={genderOptions}
-            onChange={(newValue: { value: string; label: string } | null) => setGender(newValue)}
-            required
-          />
+        <label className="inputLabel" htmlFor="gender">Geschlecht</label>
+        <div className='inputContainerSelect'>
+        <select
+          id="gender"
+          value={gender ? gender.value : ''}
+          onChange={(e) => {
+            const selectedOption = genderOptions.find(
+              (option) => option.value === e.target.value
+            );
+            handleGenderChange(selectedOption || null);
+          }}
+          required
+          className="selectField"
+        >
+          <option value="">            
+          </option>
+          {genderOptions.map((option: OptionType) => (
+            <option
+              key={option.value}
+              value={option.value}
+            >
+              {option.label}
+            </option>
+          ))}
+        </select>
         </div>
       </div>
+
 
       <div className="inputContainer">
         <label className="inputLabel" htmlFor="club">
           Verein
         </label>
-        <div className="selectContainer">
-          <Select
-            id="club"
-            value={club}
-            options={clubOptions}
-            onChange={(newValue: { value: string; label: string } | null) => setClub(newValue)}
-            required
-          />
+        <div className='inputContainerSelect'>
+        <select
+          id="club"
+          value={club ? club.value : ''}
+          onChange={(e) => {
+            const selectedOption = clubOptions.find(
+              (option) => option.value === e.target.value
+            );
+            handleClubChange(selectedOption || null);
+          }}
+          required
+          className="selectField"
+        >
+          <option value="">
+          </option>
+          {clubOptions.map((option: OptionType) => (
+            <option
+              key={option.value}
+              value={option.value}
+            >
+              {option.label}
+            </option>
+          ))}
+        </select>
         </div>
       </div>
 
