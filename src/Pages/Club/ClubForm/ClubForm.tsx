@@ -101,8 +101,7 @@ const ClubForm: React.FC<ClubFormProps> = ({ onAddClub, onShowSuccessPopup }) =>
             value={stateassociation || ''}
             onChange={handleStateAssociationChange}
             required
-            className="selectField"
-          >
+            className="selectField">
             <option value="">
             </option>
             {stateassociationOptions.map((option: OptionType) => (

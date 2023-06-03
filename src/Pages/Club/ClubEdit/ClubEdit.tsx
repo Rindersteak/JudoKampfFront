@@ -3,6 +3,7 @@ import { Club } from '../../../types';
 import { putClub, deleteClub } from '../../../API/clubAPI';
 import Modal from '../../../Tools/Modal/Modal';
 import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
+import stateassociationOptions from '../../../Config/StateAssociations';
 
 interface ClubEditProps {
   club: Club;
@@ -21,10 +22,10 @@ const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub })
   const [stateassociation, setStateAssociation] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const stateassociationOptions = [
-    { value: 'lv1', label: 'Landesverband 1' },
-    { value: 'lv2', label: 'Landesverband 2' },
-  ];
+  type OptionType = {
+    value: string;
+    label: string;
+  };
 
   useEffect(() => {
     setShortName(club.shortname);
@@ -140,11 +141,11 @@ const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub })
           <option value="">
             Bitte auswählen
           </option>
-          {stateassociationOptions.map((option) => (
-            <option key={option.value} value={option.value} className="dropdown-content">
-              {option.label}
-            </option>
-          ))}
+          {stateassociationOptions.map((option: OptionType) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
         </select>
       </div>
       </div>
