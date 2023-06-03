@@ -40,7 +40,7 @@ export async function getClubs() {
 
 export async function deleteClub(clubId: number) {
   try {
-    const response = await fetch(`${API_DOMAIN}/clubs/delete/${clubId}`, {
+    const response = await fetch(`${API_DOMAIN}/clubs/${clubId}/delete`, {
       method: 'DELETE',
     });
 
@@ -55,7 +55,7 @@ export async function deleteClub(clubId: number) {
 
 export async function putClub(club: Club) {
   try {
-    const response = await fetch(`${API_DOMAIN}/clubs/update/${club.id}`, {
+    const response = await fetch(`${API_DOMAIN}/clubs/${club.id}/update`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

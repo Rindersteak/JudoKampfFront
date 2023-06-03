@@ -40,7 +40,7 @@ export async function getTournaments() {
 
 export async function deleteTournament(tournamentId: number) {
   try {
-    const response = await fetch(`${API_DOMAIN}/tournaments/delete/${tournamentId}`, {
+    const response = await fetch(`${API_DOMAIN}/tournaments/${tournamentId}/delete`, {
       method: 'DELETE',
     });
 
@@ -55,7 +55,7 @@ export async function deleteTournament(tournamentId: number) {
 
 export async function putTournament(tournament: Tournament) {
   try {
-    const response = await fetch(`${API_DOMAIN}/tournaments/update/${tournament.id}`, {
+    const response = await fetch(`${API_DOMAIN}/tournaments/${tournament.id}/update`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -88,26 +88,25 @@ export function getTotalTournaments(tournaments: Tournament[]): number {
   
  // Fighter in Tournament (nach ID) anlegen
 
-  export async function postTournamentFighter(tournamentId: number, fighter: Fighter) {
-    try {
-        const response = await fetch(`${API_DOMAIN}/tournaments/${tournamentId}/add-fighter`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(fighter)
-        });
+ export async function postTournamentFighter(tournamentId: number, fighter: Fighter) {
+  try {
+    const response = await fetch(`${API_DOMAIN}/tournaments/${tournamentId}/add-fighter`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(fighter)
+    });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        // Erfolg: Rückgabe der Antwort als JSON
-        const data = await response.json();
-
-        return data;
-    } catch (error) {
-        console.error('An error occurred while submitting the fighter:', error);
-        throw error; // Fehler weiterwerfen, um ihn in der FighterForm-Komponente behandeln zu können
+    if (response.status !== 200) {
+      throw new Error('Failed to add fighter');
     }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 }
+
