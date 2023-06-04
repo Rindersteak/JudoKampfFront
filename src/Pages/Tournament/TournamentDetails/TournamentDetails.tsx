@@ -80,12 +80,14 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList
         <CardSix tournamentId={tournamentId || ''} onOpenTournamentEdit={onOpenTournamentEdit} />
       </div>
       {/* Aktueller Kampf: Label anzeigen */}
+      {/*
       <div className="currentFightLabel">Aktueller Kampf:</div>
       <div className="previewTransparent">
         <div className="currentFightPreview">
           <FighterDetails />
         </div>
       </div>
+        */}
     </div>
   );
 
