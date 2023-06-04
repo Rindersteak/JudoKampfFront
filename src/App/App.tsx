@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, useParams} from 'react-router-dom';
 import AppRoutes from '../Routes/Routes';
 import Modal from '../Tools/Modal/Modal';
 import TournamentList from '../Pages/Tournament/TournamentList/TournamentList';
@@ -14,14 +14,14 @@ import TournamentEdit from '../Pages/Tournament/TournamentEdit/TournamentEdit';
 interface TournamentEditProps {
     tournament?: Tournament;
     onUpdateTournament: (tournament: Tournament) => void;
-    onDeleteTournament: (tournamentId: number) => void;
+    onDeleteTournament: (tournamentId: string) => void;
   }
   
 
 const App: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState<React.ReactNode | null>(null);
-  const [tournamentId, setTournamentId] = useState<number | null>(null); // Declare tournamentId and its setter
+  const [tournamentId, setTournamentId] = useState<string | undefined>();
 
   const handleOpenTournamentForm = () => {
     setModalContent(
@@ -96,9 +96,11 @@ const App: React.FC = () => {
     setModalOpen(true);
   };
   
+  
 
   return (
     <Router>
+      
       <div className="container">
         <AppRoutes
           onOpenTournamentForm={handleOpenTournamentForm}

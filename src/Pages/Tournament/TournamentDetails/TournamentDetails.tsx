@@ -25,7 +25,7 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList
 
     // Hook, um URL-Parameter abzurufen
   const { tournamentId } = useParams<{ tournamentId: string | undefined }>();
-
+  console.log(tournamentId)
     // Setzen der anfänglichen Zustände mit Hooks
   const [backendTournaments, setBackendTournaments] = useState<Tournament[]>([]);
   const [tournament, setTournament] = useState<Tournament | null>(null);
@@ -45,6 +45,8 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList
 
     fetchTournaments();
   }, [tournamentId]);
+
+  
 
     // Funktion zum Abrufen der Turnierdetails anhand der ID
   const getTournamentDetailsById = (tournamentId: string | undefined, tournaments: Tournament[]): Tournament | null => {
@@ -183,13 +185,13 @@ const CardFive = ({ tournamentId, onOpenClubManager }: { tournamentId: string, o
   );
 };
 
-const CardSix = ({ tournamentId, onOpenTournamentEdit }: { tournamentId: string, onOpenTournamentEdit: () => void }) => {
-  const handleCardThreeClick = () => {
-    onOpenTournamentEdit();
+const CardSix = ({ tournamentId, onOpenTournamentEdit }: { tournamentId: string, onOpenTournamentEdit: (tournamentId: string) => void }) => {
+  const handleCardSixClick = () => {
+    onOpenTournamentEdit(tournamentId);
   };
 
   return (
-    <div className="card-six" onClick={handleCardThreeClick}>
+    <div className="card-six" onClick={handleCardSixClick}>
       <div className="card-content">
         <div className="card-icon-blue">
           <FontAwesomeIcon icon={faGear} />

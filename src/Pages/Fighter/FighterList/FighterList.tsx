@@ -7,6 +7,8 @@ import Modal from '../../../Tools/Modal/Modal';
 import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
 import FighterEdit from '../FighterEdit/FighterEdit'; // Importiere die FighterEdit-Komponente
 import './FighterList.css';
+import { useParams } from 'react-router-dom';
+
 
 interface FighterListProps {
   detailedView?: boolean;
@@ -31,6 +33,9 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
 
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedFighter, setSelectedFighter] = useState<Fighter | null>(null);
+
+  const { tournamentId } = useParams<{ tournamentId: string | undefined }>();
+  console.log(tournamentId)
 
   useEffect(() => {
     const loadBackendFighters = async () => {

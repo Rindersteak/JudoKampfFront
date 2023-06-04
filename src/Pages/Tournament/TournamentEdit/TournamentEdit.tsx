@@ -20,9 +20,10 @@ interface TournamentEditProps {
 }
 
 
-const TournamentEdit: React.FC<TournamentEditProps> = ({ onUpdateTournament, onDeleteTournament }) => {
-  const { tournamentId } = useParams<{ tournamentId: string }>();
 
+const TournamentEdit: React.FC<TournamentEditProps> = ({ onUpdateTournament, onDeleteTournament }) => {
+  const { tournamentId } = useParams<{ tournamentId: string | undefined }>();
+  console.log(tournamentId)
   const [tournamentName, setTournamentName] = useState('');
   const [tournamentLocation, setTournamentLocation] = useState('');
   const [stateassociation, setStateAssociation] = useState<string>('');
@@ -36,40 +37,57 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({ onUpdateTournament, onD
   const [loading, setLoading] = useState(false);
   const [tournament, setTournament] = useState<Tournament | null>(null);
 
+
+  const [backendTournaments, setBackendTournaments] = useState<Tournament[]>([]);
+
+
   const handleSuccessPopup = () => {
     console.log('Turnier erfolgreich aktualisiert');
   };
+    
+    // Funktion zum Abrufen der Turnierdetails anhand der ID
+    useEffect(() => {
+      const fetchTournament = async () => {
+        try {
+          const tournaments = await getTournaments();
+          const tournamentId = "76"
+          console.log(tournaments)
+          const tournament = getTournamentDetailsById(tournamentId, tournaments);
+          setTournament(tournament);
+          const selectedTournament = tournaments.find((t: Tournament) => t.id === tournament?.id);
+          console.log(selectedTournament)
+          if (selectedTournament) {
+            setTournamentName(selectedTournament.name);
+            setTournamentLocation(selectedTournament.location);
+            setStateAssociation(selectedTournament.stateassociation);
+            setAddressCity(selectedTournament.address.city);
+            setAddressZipCode(selectedTournament.address.postalcode);
+            setAddressStreet(selectedTournament.address.street);
+            setAddressStreetNumber(selectedTournament.address.housenumber);
+            setPeriodFrom(new Date(selectedTournament.startdate));
+            setPeriodTo(new Date(selectedTournament.enddate));
+          }
 
-
-
-  useEffect(() => {
-    const fetchTournament = async () => {
-      try {
-        const tournaments = await getTournaments(); // Fetch all tournaments from the backend
-        const selectedTournament = tournaments.find((t: Tournament) => t.id === 112 ); // Input ID
-        if (selectedTournament) {
-          setTournamentName(selectedTournament.name);
-          setTournamentLocation(selectedTournament.location);
-          setStateAssociation(selectedTournament.stateassociation);
-          setAddressCity(selectedTournament.address.city);
-          setAddressZipCode(selectedTournament.address.postalcode);
-          setAddressStreet(selectedTournament.address.street);
-          setAddressStreetNumber(selectedTournament.address.housenumber);
-          setPeriodFrom(new Date(selectedTournament.startdate));
-          setPeriodTo(new Date(selectedTournament.enddate));
-
-
+        } catch (error) {
+          console.error('Error loading tournament:', error);
         }
-      } catch (error) {
-        console.error('Error loading tournament:', error);
-      }
-    };
-  
-    fetchTournament();
-  }, []);
-  
+      };
+    
+      fetchTournament();
+    }, [tournamentId]);
+    
+    
 
 
+   const getTournamentDetailsById = (tournamentId: string | undefined, tournaments: Tournament[]): Tournament | null => {
+    if (!tournamentId) {
+      console.log("keine ID")
+      return null;
+    }
+    const tournament = tournaments.find((t) => t.id === parseInt(tournamentId));
+    //console.log(tournament)
+    return tournament || null;
+  };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
