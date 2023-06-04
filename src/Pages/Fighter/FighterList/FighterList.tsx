@@ -34,9 +34,6 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedFighter, setSelectedFighter] = useState<Fighter | null>(null);
 
-  const { tournamentId } = useParams<{ tournamentId: string | undefined }>();
-  console.log(tournamentId)
-
   useEffect(() => {
     const loadBackendFighters = async () => {
       try {

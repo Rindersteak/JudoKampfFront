@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Tournament } from '../../../types';
 import { deleteTournament, postTournament, getTournaments } from '../../../API/tournamentAPI';
 import stateassociationOptions from '../../../Config/StateAssociations';
 import './TournamentEdit.css';
+
 
 
 type OptionType = {
@@ -21,9 +22,13 @@ interface TournamentEditProps {
 
 
 
-const TournamentEdit: React.FC<TournamentEditProps> = ({ onUpdateTournament, onDeleteTournament }) => {
-  const { tournamentId } = useParams<{ tournamentId: string | undefined }>();
-  console.log(tournamentId)
+
+const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDeleteTournament }) => {
+  const location = useLocation(); // get current URL
+  //console.log(location)
+  const tournamentId = location.pathname.split('/').pop();
+
+  //console.log(tournamentId)
   const [tournamentName, setTournamentName] = useState('');
   const [tournamentLocation, setTournamentLocation] = useState('');
   const [stateassociation, setStateAssociation] = useState<string>('');
@@ -50,9 +55,9 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({ onUpdateTournament, onD
       const fetchTournament = async () => {
         try {
           const tournaments = await getTournaments();
-          const tournamentId = "76"
+          //const tournamentId = "76"
           console.log(tournaments)
-          const tournament = getTournamentDetailsById(tournamentId, tournaments);
+          const tournament = getTournamentDetailsById(tournamentId ?? undefined, tournaments);
           setTournament(tournament);
           const selectedTournament = tournaments.find((t: Tournament) => t.id === tournament?.id);
           console.log(selectedTournament)

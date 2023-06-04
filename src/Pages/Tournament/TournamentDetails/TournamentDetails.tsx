@@ -14,7 +14,7 @@ interface TournamentDetailsProps {
   onOpenFighterManager: () => void;
   onOpenClubManager: () => void;
   onOpenClubList: () => void;
-  onOpenTournamentEdit: () => void;
+  onOpenTournamentEdit: (tournamentId: string) => void;
   
 }
 
@@ -71,7 +71,7 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList
 
       {/* Container für die Karten */}
 
-
+      
 
       <div className="cards-container">
         <CardOne tournamentId={tournamentId || ''} />
