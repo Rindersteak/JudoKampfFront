@@ -4,7 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Fighter } from '../../../types';
 import { postFighter } from '../../../API/fighterAPI';
 import { getClubs } from '../../../API/clubAPI';
-import './FighterForm.css';
+import './FighterForm.scss';
 import Select from 'react-select';
 
 type Props = {

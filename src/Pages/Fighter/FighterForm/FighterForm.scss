@@ -9,8 +9,7 @@
     font-style: normal;
     font-weight: 700;
     font-size: 1.5em;
-    text-align: center;
-    padding-bottom: 2em;
+    justify-content: center;
     color: #001AFF;
 }
 
@@ -86,13 +85,6 @@
     border-radius: 5px;
 }
 
-@media (min-width: 768px) {
-    .inputContainer {
-        width: 22.9375em;
-        /* 367px */
-    }
-}
-
 .selectField {
     /* possibly need to adjust to make dynamic? */
     width: 104.5%;
@@ -107,7 +99,6 @@
     height: 1.9375em;
     /* possibly need to adjust to make dynamic? */
     left: -8px;
-
     -moz-appearance: none;
     -webkit-appearance: none;
 }
@@ -127,10 +118,8 @@
 
 /* Styling für den Formularcontainer */
 .formContainer {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
+    display: grid;
+    justify-content: center;
     /* zentriert die Elemente horizontal */
 }
 
@@ -190,13 +179,6 @@
     transform: translateY(-50%);
   }
   
-  @media (min-width: 768px) {
-    .selectField,
-    .inputContainerSelect {
-      width: 22.9375em; /* Adjust the width as needed */
-    }
-  }
-
 /* Styling für den Container der zwei Eingabefelder nebeneinander anordnet */
 .halfWidthWrapper {
     display: flex;
@@ -206,25 +188,11 @@
     /* zentriert die Elemente horizontal */
 }
 
-@media (min-width: 768px) {
-    .halfWidthWrapper {
-        flex-direction: row;
-    }
-}
-
 /* Styling für die Eingabefelder in dem "halbe Breite" Container */
 .inputContainer.halfWidth {
     width: 100%;
     margin-bottom: 2.9375em;
     height: 1.9375em;
-}
-
-@media (min-width: 768px) {
-    .inputContainer.halfWidth {
-        width: 10em;
-        /* 160px */
-        margin-right: 2.9375em;
-    }
 }
 
 /* Entfernt den rechten Abstand vom letzten Eingabefeld in dem "halbe Breite" Container */

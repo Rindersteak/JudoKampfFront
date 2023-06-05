@@ -1,3 +1,18 @@
+$screen-mid: 768px;
+$screen-normal: 992px;
+
+@mixin small{
+  @media (max-width: #{$screen-mid}) {
+    @content;
+  }
+}
+
+@mixin normal{
+  @media (min-width: #{$screen-normal}) {
+    @content;
+  }
+}
+
 .innerContainer {
     display: flex;
     justify-content: space-between;
@@ -5,15 +20,14 @@
 }
 
 .listSection {
-    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-}
 
-.formContainer {
-    flex: 1;
+    @include small{
+        
+    }
 }
 
 .listContainer {

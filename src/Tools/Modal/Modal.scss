@@ -1,3 +1,18 @@
+$screen-mid: 768px;
+$screen-normal: 1000px;
+
+@mixin small{
+  @media (max-width: #{$screen-mid}) {
+    @content;
+  }
+}
+
+@mixin normal{
+  @media (min-width: #{$screen-normal}) {
+    @content;
+  }
+}
+
 .modal {
     display: flex;
     justify-content: center;

@@ -3,7 +3,7 @@ import FighterForm from '../FighterForm/FighterForm';
 import FighterList, { deleteFighterHandler } from '../FighterList/FighterList';
 import Modal from '../../../Tools/Modal/Modal';
 import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
-import './FighterManager.css';
+import './FighterManager.scss';
 
 const FighterManager: React.FC = () => {
     const [showSuccessPopup, setShowSuccessPopup] = useState(false);

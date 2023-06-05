@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import './Modal.css';
+import './Modal.scss';
 
 interface ModalProps {
     onClose: () => void;

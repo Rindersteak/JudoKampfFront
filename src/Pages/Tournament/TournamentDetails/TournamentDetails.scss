@@ -1,3 +1,19 @@
+$margin: 2rem;
+$screen-mid: 768px;
+$screen-normal: 992px;
+
+@mixin small{
+  @media (max-width: #{$screen-mid}) {
+    @content;
+  }
+}
+
+@mixin normal{
+  @media (min-width: #{$screen-normal}) {
+    @content;
+  }
+}
+
 .cards-container {
   background-color: rgba(39, 39, 39, 0.5);
   position: absolute;
@@ -7,6 +23,11 @@
   display: flex;
   flex-direction: row;
   overflow-y: auto;
+
+  @include small{
+    //display: grid;
+    display: grid;
+  }
 }
 
 
@@ -27,6 +48,11 @@
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 2px;
   cursor: pointer;
+
+  @include small{
+    width: 100%;
+  }
+
 }
 
 .card-one {
@@ -71,6 +97,10 @@
   flex: none;
   order: 0;
   flex-grow: 0;
+
+  @include small{
+    font-size: 3.0vw; 
+  }
 }
 
 .card-text-white {
@@ -89,6 +119,10 @@
   align-items: center;
   border-radius: 50%;
   font-size: 2vw; /* Icon-Größe in vw */
+
+  @include small{
+    font-size: 3.0vw; 
+  }
 }
 
 .card-icon-white {

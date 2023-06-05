@@ -3,6 +3,23 @@
 /* Importiert die Nunito Schriftart von Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
 
+$screen-mid: 535px;
+$screen-normal: 1000px;
+
+@mixin small{
+  @media (max-width: #{$screen-mid}) {
+    @content;
+  }
+}
+
+@mixin normal{
+  @media (min-width: #{$screen-normal}) {
+    @content;
+  }
+}
+
+
+
 /* Styling für den Formulartitel */
 body .titleStyle {
     font-family: 'Nunito';

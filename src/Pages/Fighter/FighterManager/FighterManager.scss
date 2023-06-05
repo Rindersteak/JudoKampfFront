@@ -1,3 +1,18 @@
+$screen-mid: 1000px;
+$screen-normal: 1001px;
+
+@mixin small{
+  @media (max-width: #{$screen-mid}) {
+    @content;
+  }
+}
+
+@mixin normal{
+  @media (min-width: #{$screen-normal}) {
+    @content;
+  }
+}
+
 .innerContainer {
     display: flex;
     justify-content: space-between;
@@ -10,6 +25,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+
+    @include small{
+        padding-top: 5%;
+    }
 }
 
 .formContainer {

@@ -3,7 +3,7 @@ import ClubForm from '../ClubForm/ClubForm';
 import ClubList, { deleteClubHandler } from '../ClubList/ClubList';
 import Modal from '../../../Tools/Modal/Modal';
 import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
-import './ClubManager.css';
+import './ClubManager.scss';
 
 const ClubManager: React.FC = () => {
     const [showSuccessPopup, setShowSuccessPopup] = useState(false);

@@ -2,7 +2,7 @@
 
 import React, { CSSProperties } from 'react';
 import logo from '../../img/kodokan_logo.svg';
-import './HomePage.css';
+import './HomePage.scss';
 import { useNavigate } from 'react-router-dom';
 
 interface HomePageProps {
