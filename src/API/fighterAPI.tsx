@@ -10,6 +10,7 @@ export async function postFighter(fighter: Fighter) {
             },
             body: JSON.stringify(fighter)
         });
+        console.log(JSON.stringify(fighter))
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -49,7 +50,7 @@ export function getTotalParticipants(fighters: Fighter[]) {
 
 export async function deleteFighter(fighterId: number) {
     try {
-      const response = await fetch(`${API_DOMAIN}/fighters/delete/${fighterId}`, {
+      const response = await fetch(`${API_DOMAIN}/fighters/${fighterId}/delete`, {
         method: 'DELETE',
       });
   
@@ -64,7 +65,7 @@ export async function deleteFighter(fighterId: number) {
   
   export async function putFighter(fighter: Fighter) {
     try {
-      const response = await fetch(`${API_DOMAIN}/fighters/update/${fighter.id}`, {
+      const response = await fetch(`${API_DOMAIN}/fighters/${fighter.id}/update`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

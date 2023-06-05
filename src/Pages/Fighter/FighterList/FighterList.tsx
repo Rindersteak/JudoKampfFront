@@ -7,6 +7,8 @@ import Modal from '../../../Tools/Modal/Modal';
 import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
 import FighterEdit from '../FighterEdit/FighterEdit'; // Importiere die FighterEdit-Komponente
 import './FighterList.css';
+import { useParams } from 'react-router-dom';
+
 
 interface FighterListProps {
   detailedView?: boolean;
@@ -45,18 +47,19 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
           if (sortColumn === 'lastname') {
             return sortOrder === 'asc' ? a.lastname.localeCompare(b.lastname) : b.lastname.localeCompare(a.lastname);
           } else if (sortColumn === 'club') {
-            return sortOrder === 'asc' ? a.club?.name?.localeCompare(b.club?.name) : b.club?.name?.localeCompare(a.club?.name);
+            return sortOrder === 'asc' ? a.club?.name?.localeCompare(b.club?.name || '') : b.club?.name?.localeCompare(a.club?.name || '');
           } else if (sortColumn === 'city') {
-            return sortOrder === 'asc' ? a.club?.address?.city?.localeCompare(b.club?.address?.city) : b.club?.address?.city?.localeCompare(a.club?.address?.city);
+            return sortOrder === 'asc' ? a.club?.address?.city?.localeCompare(b.club?.address?.city || '') : b.club?.address?.city?.localeCompare(a.club?.address?.city || '');
           } else if (sortColumn === 'id') {
             return sortOrder === 'asc' ? a.id - b.id : b.id - a.id;
           } else if (sortColumn === 'weightclass') {
-            return sortOrder === 'asc' ? a.weightclass?.name?.localeCompare(b.weightclass?.name) : b.weightclass?.name?.localeCompare(a.weightclass?.name);
+            return sortOrder === 'asc' ? (a.weightclass?.name || '').localeCompare(b.weightclass?.name || '') : (b.weightclass?.name || '').localeCompare(a.weightclass?.name || '');
           } else if (sortColumn === 'birthdate') {
             return sortOrder === 'asc' ? a.birthdate.localeCompare(b.birthdate) : b.birthdate.localeCompare(a.birthdate);
           }
           return 0;
         });
+        
 
         setBackendFighters(sortedFighters);
       } catch (error) {

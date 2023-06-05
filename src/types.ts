@@ -13,20 +13,20 @@ export type WeightClass = {
 };
 
 export type Address = {
-  id: number;
+  id?: number;
   street: string;
   housenumber: string;
   city: string;
-  state: string;
+  state?: string;
   postalcode: string;
 };
 
 export type Club = {
-  id: number;
+  id?: number;
   shortname: string;
   name: string;
-  address: Address;
-  stateassociation: string;
+  address?: Address;
+  stateassociation?: string;
 };
 
 export type Fighter = {
@@ -35,11 +35,12 @@ export type Fighter = {
   firstname: string;
   lastname: string;
   birthdate: string;
-  ageclass: AgeClass;
+  ageclass?: AgeClass;
   weight: number;
-  weightclass: WeightClass;
+  weightclass?: WeightClass;
   club: Club;
 };
+
 
 export type Fight = {
   id: number;
@@ -59,10 +60,10 @@ export type Tournament = {
   id: number,
   name: string,
   address: Address,
-  stateassociation: string;
   ageclass: AgeClass,
   weightclass: WeightClass,
-  code: string,  // add this line
+  code: string,  
+  stateassociation: string;
   location: string,
   startdate: string,
   enddate: string,

@@ -40,10 +40,14 @@ const ClubList: React.FC<ClubListProps> = ({ detailedView = true, onDeleteClub }
           if (sortColumn === 'name') {
             return sortOrder === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
           } else if (sortColumn === 'stateassociation') {
-            return sortOrder === 'asc' ? a.stateassociation.localeCompare(b.stateassociation) : b.stateassociation.localeCompare(a.stateassociation);
+            const stateAssociationA = a.stateassociation ?? '';
+            const stateAssociationB = b.stateassociation ?? '';
+            return sortOrder === 'asc' ? stateAssociationA.localeCompare(stateAssociationB) : stateAssociationB.localeCompare(stateAssociationA);
           }
           return 0;
         });
+
+
 
         setBackendClubs(sortedClubs);
       } catch (error) {
@@ -60,7 +64,7 @@ const ClubList: React.FC<ClubListProps> = ({ detailedView = true, onDeleteClub }
   };
 
   const handleDeleteClub = (event: React.MouseEvent, clubId: number) => {
-    event.stopPropagation(); // Verhindert, dass das Klickereignis weitergegeben wird
+    event.stopPropagation();
     setShowConfirmDeletePopup(true);
     setClubToDelete(clubId);
   };
@@ -122,7 +126,7 @@ const ClubList: React.FC<ClubListProps> = ({ detailedView = true, onDeleteClub }
               >
                 <td>{club.name}</td>
                 <td>{club.stateassociation}</td>
-                <td className="deleteIcon" onClick={(event) => handleDeleteClub(event, club.id)}><FiTrash2 /></td>
+                <td className="deleteIcon" onClick={(event) => handleDeleteClub(event, club.id ?? 0)}><FiTrash2 /></td>
               </tr>
             );
           })}

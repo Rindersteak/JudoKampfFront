@@ -14,16 +14,18 @@ interface TournamentDetailsProps {
   onOpenFighterManager: () => void;
   onOpenClubManager: () => void;
   onOpenClubList: () => void;
+  onOpenTournamentEdit: (tournamentId: string) => void;
+  
 }
 
 
 // Hauptkomponente TournamentDetails
-const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList, onOpenFighterManager, onOpenClubManager, onOpenClubList }) => {
+const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList, onOpenFighterManager, onOpenClubManager, onOpenClubList, onOpenTournamentEdit }) => {
     
 
     // Hook, um URL-Parameter abzurufen
   const { tournamentId } = useParams<{ tournamentId: string | undefined }>();
-
+  console.log(tournamentId)
     // Setzen der anfänglichen Zustände mit Hooks
   const [backendTournaments, setBackendTournaments] = useState<Tournament[]>([]);
   const [tournament, setTournament] = useState<Tournament | null>(null);
@@ -43,6 +45,8 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList
 
     fetchTournaments();
   }, [tournamentId]);
+
+  
 
     // Funktion zum Abrufen der Turnierdetails anhand der ID
   const getTournamentDetailsById = (tournamentId: string | undefined, tournaments: Tournament[]): Tournament | null => {
@@ -67,15 +71,7 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList
 
       {/* Container für die Karten */}
 
-
-      {/* Turnier Bearbeiten Button auskommentiert
-      <button className='editTorunamentButton'>
-        <div>
-          <FontAwesomeIcon icon={faPencil} />
-        </div>
-        Turnier bearbeiten
-      </button>
-  */}
+      
 
       <div className="cards-container">
         <CardOne tournamentId={tournamentId || ''} />
@@ -83,15 +79,17 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList
         <CardThree tournamentId={tournamentId || ''} onOpenFighterManager={onOpenFighterManager} />
         <CardFour tournamentId={tournamentId || ''} onOpenClubList={onOpenClubList} />
         <CardFive tournamentId={tournamentId || ''} onOpenClubManager={onOpenClubManager} />
-        <CardSix tournamentId={tournamentId || ''} onOpenClubManager={onOpenClubManager} />
+        <CardSix tournamentId={tournamentId || ''} onOpenTournamentEdit={onOpenTournamentEdit} />
       </div>
       {/* Aktueller Kampf: Label anzeigen */}
+      {/*
       <div className="currentFightLabel">Aktueller Kampf:</div>
       <div className="previewTransparent">
         <div className="currentFightPreview">
           <FighterDetails />
         </div>
       </div>
+        */}
     </div>
   );
 
@@ -187,13 +185,13 @@ const CardFive = ({ tournamentId, onOpenClubManager }: { tournamentId: string, o
   );
 };
 
-const CardSix = ({ tournamentId, onOpenClubManager }: { tournamentId: string, onOpenClubManager: () => void }) => {
-  const handleCardThreeClick = () => {
-    onOpenClubManager();
+const CardSix = ({ tournamentId, onOpenTournamentEdit }: { tournamentId: string, onOpenTournamentEdit: (tournamentId: string) => void }) => {
+  const handleCardSixClick = () => {
+    onOpenTournamentEdit(tournamentId);
   };
 
   return (
-    <div className="card-six" onClick={handleCardThreeClick}>
+    <div className="card-six" onClick={handleCardSixClick}>
       <div className="card-content">
         <div className="card-icon-blue">
           <FontAwesomeIcon icon={faGear} />
