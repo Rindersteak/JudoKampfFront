@@ -1,3 +1,18 @@
+$screen-mid: 535px;
+$screen-normal: 1000px;
+
+@mixin small{
+  @media (max-width: #{$screen-mid}) {
+    @content;
+  }
+}
+
+@mixin normal{
+  @media (min-width: #{$screen-normal}) {
+    @content;
+  }
+}
+
 .top-banner {
   position: absolute;
   width: 100%;
@@ -8,6 +23,8 @@
   align-items: center;
   flex-direction: row;
   color: white;
+
+
 }
 
 .logo-container,

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowAltCircleLeft } from '@fortawesome/free-regular-svg-icons';
 import logo from '../../img/kodokan_logo.svg';
-import './Banner.css';
+import './Banner.scss';
 
 interface BannerProps {
   title: string;
