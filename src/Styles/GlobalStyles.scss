@@ -1,0 +1,169 @@
+$screen-mid: 888px;
+$screen-normal: 1000px;
+
+@mixin small{
+  @media (max-width: #{$screen-mid}) {
+    @content;
+  }
+}
+
+@mixin normal{
+  @media (min-width: #{$screen-normal}) {
+    @content;
+  }
+}
+
+.formContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* zentriert die Elemente horizontal */
+    padding: 5%;
+}
+
+.listSection{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3.76em;
+    position: relative;
+    height: 1.9375em;
+    width: 100%;
+}
+
+.buttonSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputContainerAdressesTop{
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 10px;
+    margin-bottom: 1em;
+    position: relative;
+    width: 100%;
+
+    @include small{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0.5em;
+    }
+}
+
+.inputContainerAdressesBottom{
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 10px;
+  margin-bottom: 3em;
+  position: relative;
+  width: 100%;
+
+  @include small{
+      display: flex;
+      flex-direction: column;
+      
+  }
+}
+
+.inputContainerTimeIntervall{
+    display: grid;
+    margin-bottom: 1em;
+    position: relative;
+    height: 1.9375em;
+    width: 100%;
+    grid-template-columns: auto auto auto;
+    align-items: center;
+
+    @include small{
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 10%;
+    }
+}
+
+.innerContainer {
+    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: auto auto;
+
+    @include small{
+        display: grid;
+        grid-template-columns: auto;
+    }
+
+}
+
+/* Styling für Eingabefelder */
+.inputField {
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  background: none;
+  height: 1.9375em;
+  border-radius: 5px;
+  padding: 0 0.625em;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1em;
+  background: #EDEFF2;
+}
+
+.blueButton{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50vh;
+    height: 1.6875em;
+    background: #001AFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 2px;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-size: 1.5em;
+    font-weight: 900;
+    line-height: 2.0625em;
+    letter-spacing: -0.02em;
+    border: none;
+    cursor: pointer;
+    margin-top: -1.125em;
+}
+
+.blueButton:hover {
+  background: #000A91;
+}
+
+.redButton{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50vh;
+  height: 1.6875em;
+  background: #B40000;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+  color: white;
+  font-family: 'Nunito', sans-serif;
+  font-style: normal;
+  font-size: 1.5em;
+  font-weight: 900;
+  line-height: 2.0625em;
+  letter-spacing: -0.02em;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px; /* Hier wird der Abstand nach oben festgelegt */
+}
+
+.redButton:hover {
+  background: #720000;
+}

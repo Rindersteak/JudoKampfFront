@@ -27,20 +27,6 @@
     left: 0;
 }
 
-/* Styling für Eingabefelder */
-.inputField {
-    width: 100%;
-    box-sizing: border-box;
-    border: none;
-    background: none;
-    height: 3em;
-    border-radius: 5px;
-    padding: 0 0.625em;
-    font-family: 'Nunito', sans-serif;
-    font-size: 1em;
-    background: #EDEFF2;
-}
-
 /* Styling für den "Hinzufügen" Button */
 .addButton {
     display: flex;
@@ -74,17 +60,6 @@
     background: #00056D;
 }
 
-/* Styling für den Eingabefeld Container */
-.inputContainer {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 3.76em;
-    width: 100%;
-    position: relative;
-    height: 1.9375em;
-    border-radius: 5px;
-}
-
 .selectField {
     /* possibly need to adjust to make dynamic? */
     width: 104.5%;
@@ -116,12 +91,6 @@
     transform: translateY(-50%);
 }
 
-/* Styling für den Formularcontainer */
-.formContainer {
-    display: grid;
-    justify-content: center;
-    /* zentriert die Elemente horizontal */
-}
 
 /* Styling für den Container der Dropdown-Felder */
 .selectContainer {

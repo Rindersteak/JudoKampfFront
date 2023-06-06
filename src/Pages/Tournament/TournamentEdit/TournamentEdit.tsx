@@ -149,9 +149,10 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
 
 
   return (
-    <form onSubmit={handleSubmit} className="formContaineTournament">
+    <form onSubmit={handleSubmit}>
+      <div className="formContainer">
       <h1 className="titleStyle">Turnier bearbeiten</h1>
-      <div>
+
         <div className="inputContainer">
           <label className="inputLabel" htmlFor="tournamentName">
             Turniername
@@ -178,14 +179,15 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
             required
           />
         </div>
-      </div>
-      <div className="halfWidthWrapper">
-        <div className="inputContainer halfWidth">
+
+
+        <div className='inputContainerAdressesTop'>
+        <div>
           <label className="inputLabel" htmlFor="address">
             Adresse
           </label>
           <input
-            className="inputFieldWide"
+            className="inputField"
             type="text"
             id="addressCity"
             value={addressCity}
@@ -194,9 +196,9 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
             required
           />
         </div>
-        <div className="inputContainer halfWidth">
+        <div>
           <input
-            className="inputFieldSmall"
+            className="inputField"
             type="text"
             id="addressZipCode"
             value={addressZipCode}
@@ -205,11 +207,14 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
             required
           />
         </div>
-      </div>
-      <div className="halfWidthWrapperAddress">
-        <div className="inputContainer halfWidth">
+        </div>
+
+
+
+        <div className='inputContainerAdressesBottom'>
+        <div>
           <input
-            className="inputFieldWide"
+            className="inputField"
             type="text"
             id="addressStreet"
             value={addressStreet}
@@ -218,9 +223,9 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
             required
           />
         </div>
-        <div className="inputContainer halfWidth">
+        <div>
           <input
-            className="inputFieldSmall"
+            className="inputField"
             type="text"
             id="addressStreetNumber"
             value={addressStreetNumber}
@@ -229,7 +234,8 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
             required
           />
         </div>
-      </div>
+        </div>
+
       <div className="inputContainer">
         <label className="inputLabel" htmlFor="nationalAssociation">
           Verein
@@ -251,40 +257,42 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
           </select>
         </div>
       </div>
-      <div className="halfWidthWrapper">
-        <div className="inputContainer halfWidth">
-          <label className="inputLabel" htmlFor="period">
-            Zeitraum
-          </label>
-          <DatePicker
-            id="periodFrom"
-            selected={periodFrom}
-            onChange={(date: Date | null) => setPeriodFrom(date)}
-            dateFormat="dd.MM.yyyy"
-            required
-          />
-        </div>
-        <div className="dashContainer">
-          <div className="dash">-</div>
-        </div>
-        <div className="inputContainer halfWidth">
-          <DatePicker
-            id="periodTo"
-            selected={periodTo}
-            onChange={(date: Date | null) => setPeriodTo(date)}
-            dateFormat="dd.MM.yyyy"
-            required
-          />
-        </div>
+
+      <div className="inputContainerTimeIntervall">
+                <div className="inputContainer halfWidth">
+                    <label className="inputLabel" htmlFor="period">Zeitraum</label>
+                    <DatePicker
+                        id="periodFrom"
+                        selected={periodFrom}
+                        onChange={(date: Date | null) => setPeriodFrom(date)}
+                        dateFormat="dd.MM.yyyy"
+                        required
+                    />
+                </div>
+                <div className="dashContainer">
+                    <div className="dash">-</div>
+                </div>
+                <div className="inputContainer halfWidth">
+                    <DatePicker
+                        id="periodTo"
+                        selected={periodTo}
+                        onChange={(date: Date | null) => setPeriodTo(date)}
+                        dateFormat="dd.MM.yyyy"
+                        required
+                    />
+                </div>
+            </div>
       </div>
 
-      <button className="addButton" type="submit" disabled={loading}>
-        {loading ? 'Laden...' : 'Änderung speichern'}
-      </button>
+      <div className='buttonSection'>
+        <button className="blueButton" type="submit" disabled={loading}>
+          {loading ? 'Laden...' : 'Änderung speichern'}
+        </button>
 
-      <button className="addDeleteButton" type="button" onClick={handleDelete}>
-        Turnier Löschen
-      </button>
+        <button className="redButton" type="button" onClick={handleDelete}>
+          Turnier löschen
+        </button>
+      </div>
 
       {errorMessage && <div className="errorMessage">{errorMessage}</div>}
     </form>

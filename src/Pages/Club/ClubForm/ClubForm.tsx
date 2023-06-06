@@ -4,6 +4,7 @@ import { Club } from '../../../types';
 import { postClub } from '../../../API/clubAPI';
 import './ClubForm.scss';
 import stateassociationOptions from '../../../Config/StateAssociations';
+import '../../../Styles/GlobalStyles.scss'
 
 type ClubFormProps = {
   onAddClub: (club: Club) => void;
@@ -74,9 +75,10 @@ const ClubForm: React.FC<ClubFormProps> = ({ onAddClub, onShowSuccessPopup }) =>
   };
 
   return (
-    <form onSubmit={handleSubmit} className="formContaineTournament">
+    <form onSubmit={handleSubmit}>
+      <div className="formContainer">
       <h1 className="titleStyle">Neuen Verein anlegen</h1>
-      <div>
+     
         <div className="inputContainer">
           <label className="inputLabel" htmlFor="tournamentName">
             Vereinsname
@@ -113,27 +115,33 @@ const ClubForm: React.FC<ClubFormProps> = ({ onAddClub, onShowSuccessPopup }) =>
           </div>
         </div>
 
-      </div>
-      <div className="halfWidthWrapper">
-        <div className="inputContainer halfWidth">
+        <div className="inputContainerAdressesTop">
+        <div>
           <label className="inputLabel" htmlFor="address">Adresse</label>
-          <input className="inputFieldWide" type="text" id="addressCity" value={addressCity} onChange={e => setAddressCity((e.target.value))} placeholder="Stadt" required />
+          <input className="inputField" type="text" id="addressCity" value={addressCity} onChange={e => setAddressCity((e.target.value))} placeholder="Stadt" required />
         </div>
-        <div className="inputContainer halfWidth">
-          <input className="inputFieldSmall" type="text" id="addressZipCode" value={addressZipCode} onChange={e => setAddressZipCode((e.target.value))} placeholder="PLZ" required />
+        
+        <div>
+          <input className="inputField" type="text" id="addressZipCode" value={addressZipCode} onChange={e => setAddressZipCode((e.target.value))} placeholder="PLZ" required />
         </div>
+        </div>
+
+        <div className='inputContainerAdressesBottom'>
+          <div>
+            <input className="inputField" type="text" id="addressStreet" value={addressStreet} onChange={e => setAddressStreet((e.target.value))} placeholder="Straße" required />
+          </div>
+
+          <div>
+            <input className="inputField" type="text" id="addressStreetNumber" value={addressStreetNumber} onChange={e => setAddressStreetNumber((e.target.value))} placeholder="Nummer" required />
+          </div>
+        </div>
+
       </div>
-      <div className="halfWidthWrapperAddress">
-        <div className="inputContainer halfWidth">
-          <input className="inputFieldWide" type="text" id="addressStreet" value={addressStreet} onChange={e => setAddressStreet((e.target.value))} placeholder="Straße" required />
-        </div>
-        <div className="inputContainer halfWidth">
-          <input className="inputFieldSmall" type="text" id="addressStreetNumber" value={addressStreetNumber} onChange={e => setAddressStreetNumber((e.target.value))} placeholder="Nummer" required />
-        </div>
-      </div>
+      <div className='buttonSection'>
       <button className="addButton" type="submit" disabled={loading}>
         {loading ? "Laden..." : "Hinzufügen"}
       </button>
+      </div>
 
       {errorMessage && <div className="errorMessage">{errorMessage}</div>}
 

@@ -5,6 +5,7 @@ import './TournamentForm.scss'
 import { Address, Tournament } from '../../../types';
 import { postTournament } from '../../../API/tournamentAPI';
 import stateassociationOptions from '../../../Config/StateAssociations';
+import '../../../Styles/GlobalStyles.scss'
 
 type Props = {
     onAddTournament: (tournament: Tournament) => void;
@@ -109,35 +110,44 @@ const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
 
 
     return (
-        <form onSubmit={handleSubmit} className="formContaineTournament">
+        <form onSubmit={handleSubmit}>
             <h1 className="titleStyle">Neues Turnier anlegen</h1>
-            <div>
+
+            <div className="formContainer">
+
                 <div className="inputContainer">
                     <label className="inputLabel" htmlFor="tournamentName">Turniername</label>
                     <input className="inputField" type="text" id="tournamentName" value={tournamentName} onChange={(event) => handleNameChange(event.target.value)} required />
                 </div>
+
                 <div className="inputContainer">
                     <label className="inputLabel" htmlFor="tournamentLocation">Veranstaltungsort</label>
                     <input className="inputField" type="text" id="tournamenLocation" value={tournamentLocation} onChange={e => setTournamentLocation(e.target.value)} required />
                 </div>
-            </div>
-            <div className="halfWidthWrapper">
-                <div className="inputContainer halfWidth">
+
+            <div className="inputContainerAdressesTop">
+                <div>
                     <label className="inputLabel" htmlFor="address">Adresse</label>
-                    <input className="inputFieldWide" type="text" id="addressCity" value={addressCity} onChange={e => setAddressCity((e.target.value))} placeholder="Stadt" required />
+                    <input className="inputField" type="text" id="addressCity" value={addressCity} onChange={e => setAddressCity((e.target.value))} placeholder="Stadt" required />
                 </div>
-                <div className="inputContainer halfWidth">
-                    <input className="inputFieldSmall" type="text" id="addressZipCode" value={addressZipCode} onChange={e => setAddressZipCode((e.target.value))} placeholder="PLZ" required />
+
+                <div>
+                    <input className="inputField" type="text" id="addressZipCode" value={addressZipCode} onChange={e => setAddressZipCode((e.target.value))} placeholder="PLZ" required />
                 </div>
+
             </div>
-            <div className="halfWidthWrapperAddress">
-                <div className="inputContainer halfWidth">
-                    <input className="inputFieldWide" type="text" id="addressStreet" value={addressStreet} onChange={e => setAddressStreet((e.target.value))} placeholder="Straße" required />
+
+            <div className="inputContainerAdressesBottom">
+                <div>
+                    <input className="inputField" type="text" id="addressStreet" value={addressStreet} onChange={e => setAddressStreet((e.target.value))} placeholder="Straße" required />
                 </div>
-                <div className="inputContainer halfWidth">
-                    <input className="inputFieldSmall" type="text" id="addressStreetNumber" value={addressStreetNumber} onChange={e => setAddressStreetNumber((e.target.value))} placeholder="Nummer" required />
+
+                <div>
+                    <input className="inputField" type="text" id="addressStreetNumber" value={addressStreetNumber} onChange={e => setAddressStreetNumber((e.target.value))} placeholder="Nummer" required />
                 </div>
+
             </div>
+
             <div className="inputContainer">
                 <label className="inputLabel" htmlFor="nationalAssociation">Verein</label>
                 <div className="inputContainerSelect">
@@ -156,7 +166,8 @@ const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
                     </select>
                 </div>
             </div>
-            <div className="halfWidthWrapper">
+
+            <div className="inputContainerTimeIntervall">
                 <div className="inputContainer halfWidth">
                     <label className="inputLabel" htmlFor="period">Zeitraum</label>
                     <DatePicker
@@ -180,9 +191,14 @@ const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
                     />
                 </div>
             </div>
-            <button className="addButton" type="submit" disabled={loading}>
+            </div>
+
+            <div className='buttonSection'>
+            <button className="blueButton" type="submit" disabled={loading}>
                 {loading ? "Laden..." : "Hinzufügen"}
             </button>
+            </div>
+
 
             {showSuccessPopup && <div className="successPopup">Eintrag erfolgreich hinzugefügt!</div>}
 

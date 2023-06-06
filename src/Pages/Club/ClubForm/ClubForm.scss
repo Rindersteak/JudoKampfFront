@@ -27,20 +27,6 @@
     left: 0;
 }
 
-/* Styling für Eingabefelder */
-.inputField {
-    width: 100%;
-    box-sizing: border-box;
-    border: none;
-    background: none;
-    height: 3em;
-    border-radius: 5px;
-    padding: 0 0.625em;
-    font-family: 'Nunito', sans-serif;
-    font-size: 1em;
-    background: #EDEFF2;
-}
-
 /* Styling für den "Hinzufügen" Button */
 .addButton {
     display: flex;
@@ -74,37 +60,6 @@
     background: #00056D;
 }
 
-/* Styling für den Eingabefeld Container */
-.inputContainer {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 3.76em;
-    width: 100%;
-    position: relative;
-    height: 1.9375em;
-    border-radius: 5px;
-}
-
-@media (min-width: 768px) {
-    .inputContainer {
-        width: 22.9375em;
-        /* 367px */
-    }
-}
-
-
-/* Styling für den Formularcontainer */
-.formContainer {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-    /* zentriert die Elemente horizontal */
-}
-
-
-
-
 /* Styling für den Container der zwei Eingabefelder nebeneinander anordnet */
 .halfWidthWrapper {
     display: flex;
@@ -114,12 +69,6 @@
     /* zentriert die Elemente horizontal */
 }
 
-@media (min-width: 768px) {
-    .halfWidthWrapper {
-        flex-direction: row;
-    }
-}
-
 /* Styling für die Eingabefelder in dem "halbe Breite" Container */
 .inputContainer.halfWidth {
     width: 100%;
@@ -127,13 +76,6 @@
     height: 1.9375em;
 }
 
-@media (min-width: 768px) {
-    .inputContainer.halfWidth {
-        width: 10em;
-        /* 160px */
-        margin-right: 2.9375em;
-    }
-}
 
 /* Entfernt den rechten Abstand vom letzten Eingabefeld in dem "halbe Breite" Container */
 .inputContainer.halfWidth:last-of-type {
@@ -242,12 +184,6 @@
     transform: translateY(-50%);
   }
   
-  @media (min-width: 768px) {
-    .selectField,
-    .inputContainerSelect {
-      width: 22.9375em; /* Adjust the width as needed */
-    }
-  }
 .react-datepicker__input-container input {
     width: 100%;
     margin-bottom: 2.9375em;
@@ -260,11 +196,6 @@
     font-size: 1em;
     background: #EDEFF2;
 }
-
-
-
-
-
 
 .dropdown-field {
     position: absolute;

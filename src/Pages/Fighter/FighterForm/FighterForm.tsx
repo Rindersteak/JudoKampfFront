@@ -5,6 +5,7 @@ import { Fighter } from '../../../types';
 import { postFighter } from '../../../API/fighterAPI';
 import { getClubs } from '../../../API/clubAPI';
 import './FighterForm.scss';
+import '../../../Styles/GlobalStyles.scss';
 import Select from 'react-select';
 
 type Props = {
@@ -104,10 +105,9 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="formContainer">
+    <form onSubmit={handleSubmit}>
+      <div className="formContainer">
       <h1 className="titleStyle">Neuen Teilnehmer hinzufügen</h1>
-
-      <div>
         <div className="inputContainer">
           <label className="inputLabel" htmlFor="firstName">Vorname</label>
           <input className="inputField" type="text" id="firstName" value={firstname} onChange={e => setFirstName(e.target.value)} required />
@@ -116,7 +116,6 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
           <label className="inputLabel" htmlFor="lastName">Nachname</label>
           <input className="inputField" type="text" id="lastName" value={lastname} onChange={e => setLastName(e.target.value)} required />
         </div>
-      </div>
 
 
       <div className="inputContainer">
@@ -180,11 +179,7 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
         </div>
       </div>
 
-
-
-
-      <div className="halfWidthWrapper">
-        <div className="inputContainer halfWidth">
+        <div className="inputContainer">
           <label className="inputLabel" htmlFor="birthDate">Geburtsdatum</label>
           <DatePicker
             id="birthDate"
@@ -194,15 +189,18 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
             required
           />
         </div>
-        <div className="inputContainer halfWidth">
+        <div className="inputContainer">
           <label className="inputLabel" htmlFor="weight">Gewicht</label>
           <input className="inputField" type="number" id="weight" value={weight} onChange={e => setWeight(parseFloat(e.target.value))} required />
         </div>
       </div>
+      
 
+      <div className='buttonSection'>
       <button className="addButton" type="submit" disabled={loading}>
         {loading ? "Laden..." : "Hinzufügen"}
       </button>
+      </div>
           
       {errorMessage && <div className="errorMessage">{errorMessage}</div>}
     </form>

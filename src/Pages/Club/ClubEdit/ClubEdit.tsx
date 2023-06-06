@@ -4,6 +4,8 @@ import { putClub, deleteClub } from '../../../API/clubAPI';
 import Modal from '../../../Tools/Modal/Modal';
 import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
 import stateassociationOptions from '../../../Config/StateAssociations';
+import '../../../Styles/GlobalStyles.scss'
+import './ClubEdit.scss'
 
 interface ClubEditProps {
   club: Club;
@@ -109,7 +111,8 @@ const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub })
   };
 
   return (
-    <form onSubmit={handleSubmit} className="formContainer">
+    <form onSubmit={handleSubmit}>
+      <div className="formContainer">
       <h1 className="titleStyle">Verein bearbeiten</h1>
 
       <div className="inputContainer">
@@ -150,28 +153,29 @@ const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub })
       </div>
       </div>
 
-      <div className="halfWidthWrapper">
-        <div className="inputContainer halfWidth">
-          <label className="inputLabel" htmlFor="addressCity">Stadt</label>
-          <input className="inputFieldWide" type="text" id="addressCity" value={addressCity} onChange={(e) => setAddressCity(e.target.value)} required />
+      <div className="inputContainerAdressesTop">
+        <div>
+          <label className="inputLabel" htmlFor="address">Adresse</label>
+          <input className="inputField" type="text" id="addressCity" value={addressCity} onChange={e => setAddressCity((e.target.value))} placeholder="Stadt" required />
         </div>
-        <div className="inputContainer halfWidth">
-          <label className="inputLabel" htmlFor="addressZipCode">PLZ</label>
-          <input className="inputFieldSmall" type="text" id="addressZipCode" value={addressZipCode} onChange={(e) => setAddressZipCode(e.target.value)} required />
+        
+        <div>
+          <input className="inputField" type="text" id="addressZipCode" value={addressZipCode} onChange={e => setAddressZipCode((e.target.value))} placeholder="PLZ" required />
+        </div>
+        </div>
+
+        <div className='inputContainerAdressesBottom'>
+          <div>
+            <input className="inputField" type="text" id="addressStreet" value={addressStreet} onChange={e => setAddressStreet((e.target.value))} placeholder="Straße" required />
+          </div>
+
+          <div>
+            <input className="inputField" type="text" id="addressStreetNumber" value={addressStreetNumber} onChange={e => setAddressStreetNumber((e.target.value))} placeholder="Nummer" required />
+          </div>
         </div>
       </div>
 
-      <div className="halfWidthWrapper">
-        <div className="inputContainer halfWidth">
-          <label className="inputLabel" htmlFor="addressStreet">Straße</label>
-          <input className="inputFieldWide" type="text" id="addressStreet" value={addressStreet} onChange={(e) => setAddressStreet(e.target.value)} required />
-        </div>
-        <div className="inputContainer halfWidth">
-          <label className="inputLabel" htmlFor="addressStreetNumber">Nummer</label>
-          <input className="inputFieldSmall" type="text" id="addressStreetNumber" value={addressStreetNumber} onChange={(e) => setAddressStreetNumber(e.target.value)} required />
-        </div>
-      </div>
-
+      <div className='buttonSection'>
       <button className="addButton" type="submit" disabled={loading}>
         {loading ? 'Laden...' : 'Aktualisieren'}
       </button>
@@ -179,6 +183,7 @@ const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub })
       <button className="addDeleteButton" type="button" onClick={handleDelete}>
         Verein Löschen
       </button>
+      </div> 
 
       {showConfirmDeletePopup && (
         <Modal size="small" onClose={handleDeleteCanceled}>

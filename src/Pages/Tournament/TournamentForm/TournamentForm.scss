@@ -43,20 +43,6 @@ body .titleStyle {
     left: 0;
 }
 
-/* Styling für Eingabefelder */
-.inputField {
-    width: 100%;
-    box-sizing: border-box;
-    border: none;
-    background: none;
-    height: 3em;
-    border-radius: 5px;
-    padding: 0 0.625em;
-    font-family: 'Nunito', sans-serif;
-    font-size: 1em;
-    background: #EDEFF2;
-}
-
 .inputFieldWide {
     width: 243px;
     box-sizing: border-box;
@@ -116,17 +102,6 @@ body .titleStyle {
 /* Styling für den "Hinzufügen" Button beim Klicken */
 .addButton:active {
     background: #00056D;
-}
-
-/* Styling für den Eingabefeld Container */
-.inputContainer {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 3.76em;
-    width: 100%;
-    position: relative;
-    height: 1.9375em;
-    border-radius: 5px;
 }
 
 /* Styling für Dropdown-Felder */

@@ -4,6 +4,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Fighter } from '../../../types';
 import { putFighter, deleteFighter } from '../../../API/fighterAPI';
 import Select from 'react-select';
+import '../../../Styles/GlobalStyles.scss'
+import './FighterEdit.scss'
 
 interface FighterEditProps {
   fighter: Fighter;
@@ -114,10 +116,11 @@ const FighterEdit: React.FC<FighterEditProps> = ({ fighter, onUpdateFighter, onD
   };
 
   return (
-    <form onSubmit={handleSubmit} className="formContainer">
+    <form onSubmit={handleSubmit}>
+      <div className='formContainer'>
       <h1 className="titleStyle">Teilnehmer bearbeiten</h1>
 
-      <div>
+     
         <div className="inputContainer">
           <label className="inputLabel" htmlFor="firstName">
             Vorname
@@ -130,7 +133,7 @@ const FighterEdit: React.FC<FighterEditProps> = ({ fighter, onUpdateFighter, onD
             onChange={(e) => setFirstName(e.target.value)}
             required
           />
-        </div>
+          </div>        
         <div className="inputContainer">
           <label className="inputLabel" htmlFor="lastName">
             Nachname
@@ -144,7 +147,7 @@ const FighterEdit: React.FC<FighterEditProps> = ({ fighter, onUpdateFighter, onD
             required
           />
         </div>
-      </div>
+      
 
       <div className="inputContainer">
         <label className="inputLabel" htmlFor="gender">Geschlecht</label>
@@ -207,8 +210,7 @@ const FighterEdit: React.FC<FighterEditProps> = ({ fighter, onUpdateFighter, onD
         </div>
       </div>
 
-      <div className="halfWidthWrapper">
-        <div className="inputContainer halfWidth">
+      <div className="inputContainer">
           <label className="inputLabel" htmlFor="birthDate">
             Geburtsdatum
           </label>
@@ -219,8 +221,7 @@ const FighterEdit: React.FC<FighterEditProps> = ({ fighter, onUpdateFighter, onD
             dateFormat="dd.MM.yyyy"
             required
           />
-        </div>
-        <div className="inputContainer halfWidth">
+        <div className="inputContainer">
           <label className="inputLabel" htmlFor="weight">
             Gewicht
           </label>
@@ -234,14 +235,17 @@ const FighterEdit: React.FC<FighterEditProps> = ({ fighter, onUpdateFighter, onD
           />
         </div>
       </div>
+      </div>
 
-      <button className="addButton" type="submit" disabled={loading}>
-        {loading ? 'Laden...' : 'Aktualisieren'}
-      </button>
+      <div className='buttonSection'>
+        <button className="editFighter" type="submit" disabled={loading}>
+          {loading ? 'Laden...' : 'Aktualisieren'}
+        </button>
 
-      <button className="addDeleteButton" type="button" onClick={handleDelete}>
-        Teilnehmer Löschen
-      </button>
+        <button className="deleteFighter" type="button" onClick={handleDelete}>
+          Teilnehmer Löschen
+        </button>
+      </div>
 
       {errorMessage && <div className="errorMessage">{errorMessage}</div>}
     </form>

@@ -13,28 +13,6 @@ $screen-normal: 1001px;
   }
 }
 
-.innerContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
-.listSection {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-
-    @include small{
-        padding-top: 5%;
-    }
-}
-
-.formContainer {
-    flex: 1;
-}
-
 .listContainer {
     flex: 1;
     max-height: 37.5em; /* 600px/16 */

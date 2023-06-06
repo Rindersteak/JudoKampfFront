@@ -26,20 +26,6 @@ body .titleStyle {
     left: 0;
 }
 
-/* Styling für Eingabefelder */
-.inputField {
-    width: 100%;
-    box-sizing: border-box;
-    border: none;
-    background: none;
-    height: 3em;
-    border-radius: 5px;
-    padding: 0 0.625em;
-    font-family: 'Nunito', sans-serif;
-    font-size: 1em;
-    background: #EDEFF2;
-}
-
 .inputFieldWide {
     width: 243px;
     box-sizing: border-box;
@@ -99,23 +85,6 @@ body .titleStyle {
 /* Styling für den "Hinzufügen" Button beim Klicken */
 .addButton:active {
     background: #00056D;
-}
-
-/* Styling für den Eingabefeld Container */
-.inputContainer {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 3.76em;
-    width: 100%;
-    position: relative;
-    height: 1.9375em;
-    border-radius: 5px;
-}
-
-@media (min-width: 768px) {
-    .inputContainer {
-        width: 22.9375em; /* 367px */
-    }
 }
 
 /* Styling für Dropdown-Felder */
@@ -202,22 +171,6 @@ body .titleStyle {
     border-top: 6px solid #001AFF;
     transform: translateY(-50%);
   }
-  
-  @media (min-width: 768px) {
-    .selectField,
-    .inputContainerSelect {
-      width: 22.9375em; /* Adjust the width as needed */
-    }
-  }
-
-
-/* Styling für den Container der zwei Eingabefelder nebeneinander anordnet */
-.halfWidthWrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center; /* zentriert die Elemente horizontal */
-}
 
 .halfWidthWrapperAddress {
     display: flex;
@@ -225,11 +178,6 @@ body .titleStyle {
     justify-content: space-between;
     align-items: center; /* zentriert die Elemente horizontal */
     margin-top: -42px;
-}
-@media (min-width: 768px) {
-    .halfWidthWrapperAddress {
-        flex-direction: row;
-    }
 }
 
 
@@ -239,13 +187,6 @@ body .titleStyle {
     width: 100%;
     margin-bottom: 2.9375em;
     height: 1.9375em;
-}
-
-@media (min-width: 768px) {
-    .inputContainer.halfWidth {
-        width: 10em; /* 160px */
-        margin-right: 2.9375em;
-    }
 }
 
 /* Entfernt den rechten Abstand vom letzten Eingabefeld in dem "halbe Breite" Container */

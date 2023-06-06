@@ -39,14 +39,14 @@ const ClubManager: React.FC = () => {
 
     return (
         <div className="innerContainer">
-            <div className="formContainer">
+            
                 <ClubForm onAddClub={() => { }} onShowSuccessPopup={handleSuccessPopup} />
-            </div>
+            
             <div className="listSection">
                 <h1 className="titleStyleList">Vereinsliste</h1>
-                <div className="listContainer">
+                
                     <ClubList key={listKey} detailedView={false} onDeleteClub={handleConfirmDelete} />
-                </div>
+                
             </div>
             {showSuccessPopup && (
                 <div className="successPopup">
