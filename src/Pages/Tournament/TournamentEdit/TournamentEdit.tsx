@@ -5,7 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Tournament } from '../../../types';
 import { deleteTournament, postTournament, getTournaments } from '../../../API/tournamentAPI';
 import stateassociationOptions from '../../../Config/StateAssociations';
-import './TournamentEdit.css';
+import './TournamentEdit.scss';
 
 
 

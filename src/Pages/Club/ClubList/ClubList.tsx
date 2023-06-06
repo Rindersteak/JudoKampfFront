@@ -6,7 +6,7 @@ import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
 import Modal from '../../../Tools/Modal/Modal';
 import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
 import ClubEdit from '../ClubEdit/ClubEdit';  // Importiere die ClubEdit-Komponente
-import './ClubList.css';
+import './ClubList.scss';
 
 interface ClubListProps {
   detailedView?: boolean;

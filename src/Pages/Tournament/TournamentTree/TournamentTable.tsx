@@ -1,5 +1,5 @@
 import React from 'react';
-import './TournamentTable.css';
+import './TournamentTable.scss';
 
 // Definieren Sie den Typ 'Fighter' mit den erforderlichen Feldern und einer Index-Signatur für beliebige Felder
 type Fighter = {

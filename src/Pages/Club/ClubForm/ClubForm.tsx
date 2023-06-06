@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Club } from '../../../types';
 import { postClub } from '../../../API/clubAPI';
-import './ClubForm.css';
+import './ClubForm.scss';
 import stateassociationOptions from '../../../Config/StateAssociations';
 
 type ClubFormProps = {

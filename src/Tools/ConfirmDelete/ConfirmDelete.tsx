@@ -1,6 +1,6 @@
 // ConfirmDelete.tsx
 import React from 'react';
-import './ConfirmDelete.css';
+import './ConfirmDelete.scss';
 import useDeleteHandler from '../MessageHandling/ErrorHandler';
 
 interface ConfirmDeleteProps {

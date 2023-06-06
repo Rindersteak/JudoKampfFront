@@ -6,7 +6,7 @@ import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
 import { FiTrash2 } from 'react-icons/fi';
 import Modal from '../../../Tools/Modal/Modal';
 import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
-import './TournamentList.css';
+import './TournamentList.scss';
 import { useNavigate } from 'react-router-dom';
 
 interface TournamentListProps {

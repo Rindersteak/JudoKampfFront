@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './ErrorHandler.css';
+import './ErrorHandler.scss';
 
 interface DeleteHandlerProps {
     onDelete: () => Promise<void>;

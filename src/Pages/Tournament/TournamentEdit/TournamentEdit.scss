@@ -218,12 +218,6 @@ body .titleStyle {
     justify-content: space-between;
     align-items: center; /* zentriert die Elemente horizontal */
 }
-@media (min-width: 768px) {
-    .halfWidthWrapper {
-        flex-direction: row;
-    }
-    
-}
 
 .halfWidthWrapperAddress {
     display: flex;

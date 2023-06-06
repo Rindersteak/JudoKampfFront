@@ -6,8 +6,7 @@ import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
 import Modal from '../../../Tools/Modal/Modal';
 import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
 import FighterEdit from '../FighterEdit/FighterEdit'; // Importiere die FighterEdit-Komponente
-import './FighterList.css';
-import { useParams } from 'react-router-dom';
+import './FighterList.scss';
 
 
 interface FighterListProps {

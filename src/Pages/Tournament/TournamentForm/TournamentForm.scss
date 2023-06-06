@@ -129,12 +129,6 @@ body .titleStyle {
     border-radius: 5px;
 }
 
-@media (min-width: 768px) {
-    .inputContainer {
-        width: 22.9375em; /* 367px */
-    }
-}
-
 /* Styling für Dropdown-Felder */
 .selectField {
     width: 100%;
@@ -220,12 +214,7 @@ body .titleStyle {
     transform: translateY(-50%);
   }
   
-  @media (min-width: 768px) {
-    .selectField,
-    .inputContainerSelect {
-      width: 22.9375em; /* Adjust the width as needed */
-    }
-  }
+ 
 
 
 /* Styling für den Container der zwei Eingabefelder nebeneinander anordnet */
@@ -235,12 +224,7 @@ body .titleStyle {
     justify-content: space-between;
     align-items: center; /* zentriert die Elemente horizontal */
 }
-@media (min-width: 768px) {
-    .halfWidthWrapper {
-        flex-direction: row;
-    }
-    
-}
+
 
 .halfWidthWrapperAddress {
     display: flex;
@@ -249,12 +233,6 @@ body .titleStyle {
     align-items: center; /* zentriert die Elemente horizontal */
     margin-top: -42px;
 }
-@media (min-width: 768px) {
-    .halfWidthWrapperAddress {
-        flex-direction: row;
-    }
-}
-
 
 
 /* Styling für die Eingabefelder in dem "halbe Breite" Container */
@@ -264,12 +242,7 @@ body .titleStyle {
     height: 1.9375em;
 }
 
-@media (min-width: 768px) {
-    .inputContainer.halfWidth {
-        width: 10em; /* 160px */
-        margin-right: 2.9375em;
-    }
-}
+
 
 /* Entfernt den rechten Abstand vom letzten Eingabefeld in dem "halbe Breite" Container */
 .inputContainer.halfWidth:last-of-type {
