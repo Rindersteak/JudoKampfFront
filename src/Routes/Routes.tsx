@@ -33,44 +33,44 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
   onOpenClubList,
   onOpenTournamentEdit
 }) => (
-  <Routes>
-    <Route
-      path="/"
-      element={<HomePage
-        onOpenTournamentForm={onOpenTournamentForm}
-        onOpenFighterManager={onOpenFighterManager}
-        onOpenTournamentList={onOpenTournamentList}
-        onLogoClick={() => { }}
-      />}
-    />
-    <Route path="/tournament-form" element={<TournamentForm onAddTournament={onOpenTournamentForm} />} />
-    <Route
-      path="/fighter-manager"
-      element={<FighterManager />}
-    />
-    <Route
-      path="/fighter-list"
-      element={<FighterList onDeleteFighter={() => { }} />} // Füge hier das onDeleteFighter-Prop hinzu
-    />
-    <Route
-      path="/tournament-details/:tournamentId"
-      element={
-        <TournamentDetails
-          onOpenFighterList={onOpenFighterList}
-          onOpenFighterManager={onOpenFighterManager}
-          onOpenFightGroupList={(tournamentId: string) => onOpenFightGroupList(tournamentId)}
-          onOpenClubManager={onOpenClubManager}
-          onOpenClubList={onOpenClubList}
-          onOpenTournamentEdit={onOpenTournamentEdit}
+    <Routes>
+        <Route
+            path="/"
+            element={<HomePage
+                onOpenTournamentForm={onOpenTournamentForm}
+                onOpenFighterManager={onOpenFighterManager}
+                onOpenTournamentList={onOpenTournamentList}
+                onLogoClick={() => {}} 
+            />}
         />
-      }
-    />
-    <Route path="/tournament-list" element={<TournamentList onClose={onOpenTournamentList} />} />
-    <Route path="/club-list" element={<ClubList onDeleteClub={() => { }} />} />
-    <Route path="/fight-details" element={<FightDetails />} />
-    <Route
-  path="/tournament-tree-for-two/:fightgroupId"
-  element={<TreeForTwo fightgroupId={1} />}
+        <Route path="/tournament-form" element={<TournamentForm onAddTournament={onOpenTournamentForm} />} />
+        <Route
+            path="/fighter-manager"
+            element={<FighterManager />}
+        />
+        <Route
+            path="/fighter-list"
+            element={<FighterList onDeleteFighter={() => {}} />} // Füge hier das onDeleteFighter-Prop hinzu
+        />
+        <Route
+            path="/tournament-details/:tournamentId"
+            element={
+                <TournamentDetails
+                    onOpenFighterList={onOpenFighterList}
+                    onOpenFighterManager={onOpenFighterManager}
+                    onOpenClubManager={onOpenClubManager}
+                    onOpenClubList={onOpenClubList}
+                    onOpenTournamentEdit={onOpenTournamentEdit}
+                />
+            }
+        />
+        <Route path="/tournament-list" element={<TournamentList onClose={onOpenTournamentList} />} />
+        <Route path="/club-list" element={<ClubList onDeleteClub={() => {}}/>} />
+        <Route path="/fight-details" element={<FightDetails/>} />
+        <Route path="/fight-group-list" element={<FightGroupList />} />
+        <Route
+  path="/tournament-tree-for-two"
+  element={<TreeForTwo fightgroupId={1} bannerTitle="Example Title" />}
 />
 
 
