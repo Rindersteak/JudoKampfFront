@@ -55,6 +55,17 @@ export type Fight = {
   white_fouls: number;
 };
 
+export type Fightgroup = {
+  id: number;
+  name: string;
+  tournament: Tournament;
+  ageclass: AgeClass;
+  weightclass: WeightClass;
+  sex: string;
+  fighters: Fighter[];
+  fights: Fight[];
+};
+
 
 export type Tournament = {
   id: number,

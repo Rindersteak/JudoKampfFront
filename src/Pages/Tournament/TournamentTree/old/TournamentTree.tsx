@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tournament, Fight, Fighter } from '../../../types';  
+import { Tournament, Fight, Fighter } from '../../../../types';  
 
 
 interface TournamentTreeProps {
