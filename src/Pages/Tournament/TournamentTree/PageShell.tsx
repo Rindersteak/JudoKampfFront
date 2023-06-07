@@ -1,24 +1,23 @@
 import React from 'react';
-import Banner from "../../../Tools/Banner/Banner";
+import Banner from '../../../Tools/Banner/Banner';
 
 export interface FighterRow {
-    fighter: string; // Name des Kämpfers
-    victories: number; // Anzahl der Siege
-    points: number; // Punktzahl
-    club: string; // Verein
+  fighter: string; // Name des Kämpfers
+  victories: number; // Anzahl der Siege
+  points: number; // Punktzahl
+  club: string; // Verein
 }
 
 export interface TournamentShellProps {
-    bannerTitle: string;
-    fighters: FighterRow[]; // Die Daten für die Tabelle
-    children?: React.ReactNode; // Fügt die children Prop hinzu
+  bannerTitle: string;
+  fighters: FighterRow[]; // Die Daten für die Tabelle
 }
 
-const TournamentShell: React.FC<TournamentShellProps> = ({ bannerTitle, fighters, children }) => {
+const TournamentShell: React.FC<TournamentShellProps> = ({ bannerTitle, fighters }) => {
   return (
     <div className="tournament-shell">
       <Banner title={bannerTitle} />
-      
+
       <table className="tournament-table">
         <thead>
           <tr>
@@ -39,7 +38,6 @@ const TournamentShell: React.FC<TournamentShellProps> = ({ bannerTitle, fighters
           ))}
         </tbody>
       </table>
-      {children}
     </div>
   );
 };

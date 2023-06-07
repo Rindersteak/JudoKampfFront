@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getFightList, getFightersList, getWinner } from '../../../../API/fightAPI';
 import TournamentBonsai from '../TournamentObjects/TournamentBonsai';
-import PageShell, { FighterRow} from '../PageShell';
+import TournamentShell, { FighterRow } from '../PageShell';
 import { Fight, Fighter } from '../../../../types';
 
 interface TreeForTwoProps {
@@ -42,26 +42,7 @@ const TreeForTwo: React.FC<TreeForTwoProps> = ({ fightgroupId, bannerTitle }) =>
   }, [fightgroupId]);
 
   return (
-    <PageShell bannerTitle={bannerTitle} fighters={fightersList}>
-      {fights.map((fight, index) => (
-        <TournamentBonsai
-          key={index}
-          pair={{
-            firstNameBlue: fight.fighterBlue.firstname,
-            lastNameBlue: fight.fighterBlue.lastname,
-            clubBlue: fight.fighterBlue.club.name,
-            firstNameWhite: fight.fighterWhite.firstname,
-            lastNameWhite: fight.fighterWhite.lastname,
-            clubWhite: fight.fighterWhite.club.name,
-          }}
-          winner={{
-            firstName: winners[index].firstname,
-            lastName: winners[index].lastname,
-            club: winners[index].club.name,
-          }}
-        />
-      ))}
-    </PageShell>
+    <TournamentShell bannerTitle={bannerTitle} fighters={fightersList} />
   );
 };
 
