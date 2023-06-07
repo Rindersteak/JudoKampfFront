@@ -50,7 +50,7 @@ $screen-normal: 1000px;
 
 .inputContainerAdressesTop{
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 70% 30%;
     gap: 10px;
     margin-bottom: 1em;
     position: relative;
@@ -65,7 +65,7 @@ $screen-normal: 1000px;
 
 .inputContainerAdressesBottom{
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 70% 30%;
   gap: 10px;
   margin-bottom: 3em;
   position: relative;
