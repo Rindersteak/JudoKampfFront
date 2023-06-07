@@ -10,6 +10,7 @@ import ClubList from '../Pages/Club/ClubList/ClubList'
 import FightDetails from '../Pages/Fight/FightDetails/FightDetails'
 import TournamentTable from '../Pages/Tournament/TournamentTree/TournamentTable';
 import TournamentEdit from '../Pages/Tournament/TournamentEdit/TournamentEdit';
+import Spielwiese from './Spielwiese';
 
 
 interface AppRoutesProps {
@@ -140,6 +141,7 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
         <Route path="/club-list" element={<ClubList onDeleteClub={() => {}}/>} />
         <Route path="/fight-details" element={<FightDetails/>} />
         <Route path="/tournament-table" element={<TournamentTable groups={exampleGroups} />} />
+        <Route path="/spielwiese" element={<Spielwiese />} />
     </Routes>
 );
 
