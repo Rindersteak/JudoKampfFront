@@ -68,9 +68,7 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
         <Route path="/club-list" element={<ClubList onDeleteClub={() => {}}/>} />
         <Route path="/fight-details" element={<FightDetails/>} />
         <Route path="/fight-group-list" element={<FightGroupList />} />
-        <Route
-  path="/tournament-tree-for-two"
-  element={<TreeForTwo fightgroupId={1} bannerTitle="Example Title" />}
+        <Route path="/tournament-tree-for-two" element={<TreeForTwo fightgroupId={1} bannerTitle="Example Title" />}
 />
     </Routes>
 );
