@@ -19,7 +19,6 @@ $screen-normal: 1000px;
     flex-direction: column;
     justify-content: center;
     align-items: center; /* zentriert die Elemente horizontal */
-    padding: 5%;
 }
 
 .listSection{
@@ -43,6 +42,10 @@ $screen-normal: 1000px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    @include small{
+
+      margin-bottom: 5%;
+  }
 }
 
 .inputContainerAdressesTop{

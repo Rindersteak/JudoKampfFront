@@ -197,7 +197,7 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
       
 
       <div className='buttonSection'>
-      <button className="addButton" type="submit" disabled={loading}>
+      <button className="blueButton" type="submit" disabled={loading}>
         {loading ? "Laden..." : "Hinzufügen"}
       </button>
       </div>
