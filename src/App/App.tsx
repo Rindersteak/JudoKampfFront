@@ -18,11 +18,9 @@ interface TournamentEditProps {
   onDeleteTournament: (tournamentId: string) => void;
 }
 
-interface AppProps {
-  onOpenFightGroupList: (tournamentId: string) => void; // Update the type for onOpenFightGroupList
-}
 
-const App: React.FC<AppProps> = ({ onOpenFightGroupList }) => {
+
+const App: React.FC = ({ }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState<React.ReactNode | null>(null);
   const [tournamentId, setTournamentId] = useState<string | undefined>();
