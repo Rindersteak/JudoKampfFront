@@ -53,6 +53,9 @@ export type Fight = {
   fight_duration: number;
   blue_fouls: number;
   white_fouls: number;
+  winner: Fighter;
+  stage: string;
+  fightGroup: Fightgroup;
 };
 
 export type Fightgroup = {

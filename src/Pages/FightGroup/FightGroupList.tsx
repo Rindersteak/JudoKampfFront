@@ -1,31 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import { Fightgroup } from '../../types';
-import { getFightgroups } from '../../API/fightGroupAPI';
+import { getFightgroupsByTournamentId } from '../../API/fightGroupAPI';
 import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 
-interface FightGroupListProps {}
+interface FightGroupListProps {
+  tournamentId?: string;
+  onClose: () => void;
+}
 
-const FightGroupList: React.FC<FightGroupListProps> = () => {
+const FightGroupList: React.FC<FightGroupListProps> = ({ tournamentId }) => {
   const [fightGroups, setFightGroups] = useState<Fightgroup[]>([]);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
   const [sortColumn, setSortColumn] = useState<string>('gender');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loadFightGroups = async () => {
       try {
-        const groups = await getFightgroups();
-        setFightGroups(groups);
+        if (tournamentId) {
+          const groups = await getFightgroupsByTournamentId(parseInt(tournamentId));
+          setFightGroups(groups);
+        }
       } catch (error) {
         console.error('Error loading fight groups:', error);
       }
     };
-
+  
     loadFightGroups();
-  }, []);
+  }, [tournamentId]);
 
   const handleSortClick = (column: string) => {
     setSortColumn(column);
     setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+  };
+
+  const handleRowClick = (group: Fightgroup) => {
+    navigate(`/tournament-tree-for-two/${group.id}`, { state: { bannerTitle: group.name } });
   };
 
   const sortedFightGroups = fightGroups.sort((a: Fightgroup, b: Fightgroup) => {
@@ -42,8 +53,8 @@ const FightGroupList: React.FC<FightGroupListProps> = () => {
   });
 
   return (
-    <div className="fightGroupList">
-      <h1 className="titleStyle">Kampfgruppen</h1>
+    <div className="fightGroupList"> {/* CSS-Klasse für FightGroupList hinzugefügt */}
+      <h1 className="titleStyleList">Kampfgruppen</h1>
       <table className="tableStyle">
         <thead>
           <tr>
@@ -81,7 +92,7 @@ const FightGroupList: React.FC<FightGroupListProps> = () => {
         </thead>
         <tbody>
           {sortedFightGroups.map((group) => (
-            <tr key={group.id}>
+            <tr key={group.id} onClick={() => handleRowClick(group)}>
               <td>{group.sex}</td>
               <td>{group.ageclass.name}</td>
               <td>{group.weightclass.name}</td>

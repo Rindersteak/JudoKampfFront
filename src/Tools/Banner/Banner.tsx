@@ -6,7 +6,7 @@ import logo from '../../img/kodokan_logo.svg';
 import './Banner.scss';
 
 interface BannerProps {
-  title: string;
+  title?: string;
   subtitle?: string;
   optionalButtonLabel?: string;
   onOptionalButtonClick?: () => void;

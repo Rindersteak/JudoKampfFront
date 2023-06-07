@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, useParams} from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import AppRoutes from '../Routes/Routes';
 import Modal from '../Tools/Modal/Modal';
 import TournamentList from '../Pages/Tournament/TournamentList/TournamentList';
@@ -10,15 +10,19 @@ import { Tournament } from '../types';
 import ClubManager from '../Pages/Club/ClubManager/ClubManager';
 import ClubList from '../Pages/Club/ClubList/ClubList';
 import TournamentEdit from '../Pages/Tournament/TournamentEdit/TournamentEdit';
+import FightGroupList from '../Pages/FightGroup/FightGroupList';
 
 interface TournamentEditProps {
-    tournament?: Tournament;
-    onUpdateTournament: (tournament: Tournament) => void;
-    onDeleteTournament: (tournamentId: string) => void;
-  }
-  
+  tournament?: Tournament;
+  onUpdateTournament: (tournament: Tournament) => void;
+  onDeleteTournament: (tournamentId: string) => void;
+}
 
-const App: React.FC = () => {
+interface AppProps {
+  onOpenFightGroupList: (tournamentId: string) => void; // Update the type for onOpenFightGroupList
+}
+
+const App: React.FC<AppProps> = ({ onOpenFightGroupList }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState<React.ReactNode | null>(null);
   const [tournamentId, setTournamentId] = useState<string | undefined>();
@@ -52,6 +56,12 @@ const App: React.FC = () => {
     setModalOpen(true);
   };
 
+  const handleOpenFightGroupList = (tournamentId: string) => {
+    setTournamentId(tournamentId);
+    setModalContent(<FightGroupList tournamentId={tournamentId} onClose={handleCloseModal} />);
+    setModalOpen(true);
+  };
+  
   const handleOpenClubList = () => {
     setModalContent(<ClubList onDeleteClub={handleDeleteClub} />);
     setModalOpen(true);
@@ -95,28 +105,26 @@ const App: React.FC = () => {
     );
     setModalOpen(true);
   };
-  
-  
 
   return (
     <Router>
-      
       <div className="container">
         <AppRoutes
           onOpenTournamentForm={handleOpenTournamentForm}
           onOpenFighterManager={handleOpenFighterManager}
           onOpenFighterList={handleOpenFighterList}
+          onOpenFightGroupList={handleOpenFightGroupList}
           onOpenTournamentList={handleOpenTournamentList}
           onOpenClubList={handleOpenClubList}
           onOpenClubManager={handleOpenClubManager}
           onOpenTournamentEdit={handleOpenTournamentEdit}
         />
-        {modalOpen && (
-          <Modal onClose={handleCloseModal}>
-            {modalContent}
-          </Modal>
-        )}
       </div>
+      {modalOpen && (
+        <Modal onClose={handleCloseModal}>
+          {modalContent}
+        </Modal>
+      )}
     </Router>
   );
 };

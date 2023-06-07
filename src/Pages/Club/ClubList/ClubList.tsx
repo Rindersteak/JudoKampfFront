@@ -32,6 +32,8 @@ const ClubList: React.FC<ClubListProps> = ({ detailedView = true, onDeleteClub }
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedClub, setSelectedClub] = useState<Club | null>(null);
 
+  
+
   useEffect(() => {
     const loadBackendClubs = async () => {
       try {
