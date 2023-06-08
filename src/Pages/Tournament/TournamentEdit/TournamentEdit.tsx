@@ -41,15 +41,24 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [tournament, setTournament] = useState<Tournament | null>(null);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
+  const [listKey, setListKey] = useState(Math.random());
 
   const [backendTournaments, setBackendTournaments] = useState<Tournament[]>([]);
 
 
-  const handleSuccessPopup = () => {
+  const handleSuccessPopup =  (status: boolean)  => {
     console.log('Turnier erfolgreich aktualisiert');
+    setShowSuccessPopup(status);
+    if (status) {
+        setTimeout(() => {
+            setShowSuccessPopup(false);
+        }, 3000);
+        setListKey(Math.random());
+    }
   };
-    
+
     // Funktion zum Abrufen der Turnierdetails anhand der ID
     useEffect(() => {
       const fetchTournament = async () => {
@@ -124,6 +133,7 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
     try {
       await postTournament(updatedTournament);
       onUpdateTournament(updatedTournament);
+      handleSuccessPopup(true);
       setLoading(false);
     } catch (error) {
       console.error('Fehler beim Aktualisieren des Turniers:', error);
@@ -131,6 +141,7 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
       setLoading(false);
     }
   };
+
   const handleDelete = async () => {
     if (tournament) {
       try {
@@ -293,7 +304,11 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
           Turnier löschen
         </button>
       </div>
-
+      {showSuccessPopup && (
+                <div className="successPopup">
+                    Turnier wurde erfolgreich aktualisiert!
+                </div>
+            )}
       {errorMessage && <div className="errorMessage">{errorMessage}</div>}
     </form>
   );
