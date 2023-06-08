@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation} from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Tournament } from '../../../types';
 import { deleteTournament, postTournament, getTournaments } from '../../../API/tournamentAPI';
 import stateassociationOptions from '../../../Config/StateAssociations';
 import './TournamentEdit.scss';
-
+import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
+import Modal from '../../../Tools/Modal/Modal';
 
 
 type OptionType = {
@@ -14,21 +15,15 @@ type OptionType = {
   label: string;
 };
 
-
 interface TournamentEditProps {
   onUpdateTournament: (tournament: Tournament) => void;
   onDeleteTournament: (tournamentId: number) => void;
 }
 
-
-
-
 const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDeleteTournament }) => {
   const location = useLocation(); // get current URL
-  //console.log(location)
   const tournamentId = location.pathname.split('/').pop();
 
-  //console.log(tournamentId)
   const [tournamentName, setTournamentName] = useState('');
   const [tournamentLocation, setTournamentLocation] = useState('');
   const [stateassociation, setStateAssociation] = useState<string>('');
@@ -42,10 +37,8 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
   const [loading, setLoading] = useState(false);
   const [tournament, setTournament] = useState<Tournament | null>(null);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
-
   const [listKey, setListKey] = useState(Math.random());
-
-  const [backendTournaments, setBackendTournaments] = useState<Tournament[]>([]);
+  const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState(false);
 
 
   const handleSuccessPopup =  (status: boolean)  => {
@@ -64,8 +57,6 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
       const fetchTournament = async () => {
         try {
           const tournaments = await getTournaments();
-          //const tournamentId = "76"
-          console.log(tournaments)
           const tournament = getTournamentDetailsById(tournamentId ?? undefined, tournaments);
           setTournament(tournament);
           const selectedTournament = tournaments.find((t: Tournament) => t.id === tournament?.id);
@@ -142,17 +133,29 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
     }
   };
 
+  
+
+
   const handleDelete = async () => {
+       setShowConfirmDeletePopup(true);
+  };
+
+  const handleDeleteConfirmed = async () => {
     if (tournament) {
       try {
         await deleteTournament(tournament.id);
         onDeleteTournament(tournament.id);
+        setShowConfirmDeletePopup(false);
+        window.location.href = '/';        //after successful deleting tournament, route user back to HomePage
       } catch (error) {
         setErrorMessage('(DB-Error) Fehler beim Löschen!');
       }
     }
   };
 
+  const handleDeleteCanceled = () => {
+    setShowConfirmDeletePopup(false);
+  };
 
   const handleStateAssociationChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setStateAssociation(e.target.value);
@@ -299,16 +302,24 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
         <button className="blueButton" type="submit" disabled={loading}>
           {loading ? 'Laden...' : 'Änderung speichern'}
         </button>
-
-        <button className="redButton" type="button" onClick={handleDelete}>
-          Turnier löschen
-        </button>
-      </div>
-      {showSuccessPopup && (
+        {showSuccessPopup && (
                 <div className="successPopup">
                     Turnier wurde erfolgreich aktualisiert!
                 </div>
             )}
+        <button className="redButton" type="button" onClick={handleDelete}>
+          Turnier löschen
+        </button>
+      </div>
+      {showConfirmDeletePopup && (
+        <Modal size="small" onClose={handleDeleteCanceled}>
+          <ConfirmDelete
+            onClose={handleDeleteCanceled}
+            onConfirmDelete={handleDeleteConfirmed}
+            idToDelete={Number(tournamentId)}
+          />
+        </Modal>
+      )}
       {errorMessage && <div className="errorMessage">{errorMessage}</div>}
     </form>
   );
