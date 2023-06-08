@@ -148,25 +148,6 @@ const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
 
             </div>
 
-            <div className="inputContainer">
-                <label className="inputLabel" htmlFor="nationalAssociation">Verein</label>
-                <div className="inputContainerSelect">
-                    <select
-                        className="selectField"
-                        id="stateassociation"
-                        value={stateassociation || ''}
-                        onChange={handleStateAssociationChange}
-                        required
-                    >
-                        <option value=""></option>
-                        {stateassociationOptions.map((option: OptionType) => (
-                        <option key={option.value} value={option.value} className="dropdown-content">
-                        {option.label}</option>
-                        ))}
-                    </select>
-                </div>
-            </div>
-
             <div className="inputContainerTimeIntervall">
                 <div className="inputContainer halfWidth">
                     <label className="inputLabel" htmlFor="period">Zeitraum</label>
