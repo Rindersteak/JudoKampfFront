@@ -110,10 +110,10 @@ const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
 
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h1 className="titleStyle">Neues Turnier anlegen</h1>
-
+            <div className='newTournamentMain'>
+            <form onSubmit={handleSubmit}>
             <div className="formContainer">
+            <h1 className="titleStyle">Neues Turnier anlegen</h1>
 
                 <div className="inputContainer">
                     <label className="inputLabel" htmlFor="tournamentName">Turniername</label>
@@ -174,7 +174,7 @@ const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
             </div>
             </div>
 
-            <div className='buttonSection'>
+            <div className='buttonSectionTournamentForm'>
             <button className="blueButton" type="submit" disabled={loading}>
                 {loading ? "Laden..." : "Hinzufügen"}
             </button>
@@ -186,6 +186,7 @@ const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
             {errorMessage && <div className="errorMessage">{errorMessage}</div>}
 
         </form>
+            </div>
     );
 };
 

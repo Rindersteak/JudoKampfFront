@@ -1,3 +1,19 @@
+$screen-mid: 888px;
+$screen-normal: 1000px;
+
+@mixin small{
+  @media (max-width: #{$screen-mid}) {
+    @content;
+  }
+}
+
+@mixin normal{
+  @media (min-width: #{$screen-normal}) {
+    @content;
+  }
+}
+
+
 .editFighter{
     display: flex;
     flex-direction: row;
@@ -37,6 +53,19 @@
     cursor: pointer;
     margin-top: 10px; /* Hier wird der Abstand nach oben festgelegt */
 
+}
+
+.buttonSectionFighterEdit{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-top: 5vh;
+
+    @include small {
+        margin-top: 6vh;
+    }
 }
 
 /* Styling für den "Hinzufügen" Button beim Mouseover */

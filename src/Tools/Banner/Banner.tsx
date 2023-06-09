@@ -31,25 +31,23 @@ const Banner: React.FC<BannerProps> = ({ title, subtitle, optionalButtonLabel, o
   };
 
   return (
-    <div className="top-banner">
-      <div className="logo-container" onClick={handleLogoClick}>
-        <img src={logo} alt="Logo" className="logo" />
-      </div>
-      <div className="back-button-container">
-        <div className="back-button" onClick={handleGoBack}>
-          <FontAwesomeIcon icon={faArrowAltCircleLeft} className="back-icon" />
-        </div>
-      </div>
-      <div className={`title-container ${titleClass}`}>
-        <h1>{title}</h1>
-        {subtitle && <h2>{subtitle}</h2>}
-      </div>
-      {optionalButtonLabel && (
-        <div className="optional-button-container">
-          <button className="optional-button" onClick={onOptionalButtonClick}>{optionalButtonLabel}</button>
-        </div>
-      )}
+
+    <div className='topBanner'>
+
+    <div className='logoContainer' onClick={handleLogoClick}>
+      <img src={logo} alt="Logo" className="kodokanLogo" />
     </div>
+
+    <div className='backButtonContainer' >
+      <FontAwesomeIcon icon={faArrowAltCircleLeft} className="newBackIcon" onClick={handleGoBack}/>
+    </div>
+
+
+    <div className='titleContainer'>
+    <h1>{title}</h1>
+    {subtitle && <h2>{subtitle}</h2>}
+    </div>
+  </div>
   );
 };
 

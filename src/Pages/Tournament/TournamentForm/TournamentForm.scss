@@ -43,6 +43,25 @@ body .titleStyle {
     left: 0;
 }
 
+.newTournamentMain{
+    display: flex;
+    justify-content: center;
+
+}
+
+.buttonSectionTournamentForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-top: 5vh;
+
+    @include small{
+        margin-top: 12vh;
+    }
+}
+
 .inputFieldWide {
     width: 243px;
     box-sizing: border-box;

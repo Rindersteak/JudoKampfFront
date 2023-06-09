@@ -2,6 +2,22 @@
 
 /* Importiert die Nunito Schriftart von Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
+@import url('./../../../Styles/GlobalStyles.scss');
+
+$screen-mid: 888px;
+$screen-normal: 1000px;
+
+@mixin small{
+  @media (max-width: #{$screen-mid}) {
+    @content;
+  }
+}
+
+@mixin normal{
+  @media (min-width: #{$screen-normal}) {
+    @content;
+  }
+}
 
 /* Styling für den Formulartitel */
 body .titleStyle {
@@ -75,6 +91,36 @@ body .titleStyle {
     border: none;
     cursor: pointer;
     margin-top: -1.125em;
+}
+
+.tournamentEditForm{
+    display: flex;
+    flex-direction: column;
+    
+    @include small{
+        margin-top: 10vh;
+    }
+}
+
+
+
+.buttonSectionTournamentEdit{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-top: 5vh;
+
+    @include small{
+        margin-top: 12vh;
+    }
+}
+
+.tournamentEditMain{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Styling für den "Hinzufügen" Button beim Mouseover */

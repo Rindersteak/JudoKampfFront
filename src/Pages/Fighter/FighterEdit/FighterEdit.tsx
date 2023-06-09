@@ -237,7 +237,7 @@ const FighterEdit: React.FC<FighterEditProps> = ({ fighter, onUpdateFighter, onD
       </div>
       </div>
 
-      <div className='buttonSection'>
+      <div className='buttonSectionFighterEdit'>
         <button className="editFighter" type="submit" disabled={loading}>
           {loading ? 'Laden...' : 'Aktualisieren'}
         </button>
