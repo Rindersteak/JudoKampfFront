@@ -116,7 +116,8 @@ const FighterEdit: React.FC<FighterEditProps> = ({ fighter, onUpdateFighter, onD
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className='fighterEditMain'>
+      <form onSubmit={handleSubmit}>
       <div className='formContainer'>
       <h1 className="titleStyle">Teilnehmer bearbeiten</h1>
 
@@ -249,6 +250,8 @@ const FighterEdit: React.FC<FighterEditProps> = ({ fighter, onUpdateFighter, onD
 
       {errorMessage && <div className="errorMessage">{errorMessage}</div>}
     </form>
+    </div>
+  
   );
 };
 

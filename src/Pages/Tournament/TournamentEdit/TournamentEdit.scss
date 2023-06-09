@@ -93,13 +93,12 @@ body .titleStyle {
     margin-top: -1.125em;
 }
 
-.tournamentEditForm{
+.tournamentEditMain{
     display: flex;
     flex-direction: column;
-    
-    @include small{
-        margin-top: 10vh;
-    }
+    justify-content: center;
+    align-items: center;
+    position: relative;    
 }
 
 
@@ -110,17 +109,11 @@ body .titleStyle {
     justify-content: center;
     align-items: center;
     position: relative;
-    margin-top: 5vh;
+    margin-top: 3em;
 
     @include small{
-        margin-top: 12vh;
+        margin-top: 5em;
     }
-}
-
-.tournamentEditMain{
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 /* Styling für den "Hinzufügen" Button beim Mouseover */

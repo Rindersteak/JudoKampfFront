@@ -24,12 +24,13 @@ $screen-normal: 1000px;
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.4);
+    transition: 0s;
 }
 
 .modal-content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: stretch;
     background-color: white;
     margin: auto;

@@ -52,7 +52,14 @@ $screen-normal: 1000px;
     border: none;
     cursor: pointer;
     margin-top: 10px; /* Hier wird der Abstand nach oben festgelegt */
+}
 
+.fighterEditMain{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 .buttonSectionFighterEdit{
