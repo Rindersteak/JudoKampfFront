@@ -132,94 +132,9 @@ $screen-normal: 993px;
   color: blue;
 }
 
-.currentFightLabel {
-  /* Aktueller Kampf: */
-  position: absolute;
-  width: 30vw; /* Breite in vw */
-  height: 5vh; /* Höhe in vh */
-  left: 1vw; /* Abstand zur linken Seite in vw */
-  top: calc(40vh + 25vh + 5vh - 8vh); /* Abstand von den Cards Were der Cards usw. nötig! */
-  font-family: 'Nunito';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 1.5vw; /* Schriftgröße in vw */
-  line-height: 3vh; /* Zeilenhöhe in vh */
-  display: flex;
-  align-items: center;
-  color: #FFFFFF;
-}
-
-.currentFightPreview {
-  /* Aktueller Kampf: */
-  display: flex;
-  position: absolute;
-  text-align: center;
-  height: 20vh; /* Höhe in vh */
-  left: 1vw; /* Abstand zur linken Seite in vw */
-  top: calc(40vh + 25vh + 10vh + 5vh - 8vh); /* Abstand von den Cards Were der Cards usw. nötig! */
-}
-
-.previewTransparent{
-  display: flex;
-  text-align: center;
-  width: 35vw; /* Breite in vw */
-  height: 20vh; /* Höhe in vh */
-  left: 1vw; /* Abstand zur linken Seite in vw */
-  top: calc(40vh + 25vh + 10vh + 5vh - 8vh); /* Abstand von den Cards Were der Cards usw. nötig! */
-}
-
-.previewTransparent:hover{
-  cursor: pointer;
-}
-
 .card-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.editTorunamentButton{
-  /* Button / Primary */
-
-
-  /* Auto layout */
-  border: #001AFF;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 5px 10px;
-  gap: 10px;
-
-  position: absolute;
-  left: 75%;
-  top: 80px;
-
-  background: #001AFF;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 2px;
-
-  width: 20%;
-  height: 3.5%;
-
-/* Button Text Style
-
-Buttons
-*/
-font-family: 'Nunito';
-font-style: normal;
-font-weight: 900;
-font-size: 24px;
-line-height: 28px;
-
-color: #FFFFFF;
-
-
-/* Inside auto layout */
-
-flex: none;
-order: 0;
-flex-grow: 0;
 }
