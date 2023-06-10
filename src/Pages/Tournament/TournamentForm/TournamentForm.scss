@@ -3,8 +3,8 @@
 /* Importiert die Nunito Schriftart von Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
 
-$screen-mid: 535px;
-$screen-normal: 1000px;
+$screen-mid: 992px;
+$screen-normal: 993px;
 
 @mixin small{
   @media (max-width: #{$screen-mid}) {
@@ -17,8 +17,6 @@ $screen-normal: 1000px;
     @content;
   }
 }
-
-
 
 /* Styling für den Formulartitel */
 body .titleStyle {
@@ -55,11 +53,11 @@ body .titleStyle {
     justify-content: center;
     align-items: center;
     position: relative;
-    margin-top: 5vh;
-
+    margin-top: 2em;
+    width: 100%;
 
     @include small{
-        margin-top: 12vh;
+        margin-top: 6em;
     }
 }
 

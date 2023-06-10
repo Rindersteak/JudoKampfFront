@@ -6,7 +6,6 @@ import { postFighter } from '../../../API/fighterAPI';
 import { getClubs } from '../../../API/clubAPI';
 import './FighterForm.scss';
 import '../../../Styles/GlobalStyles.scss';
-import Select from 'react-select';
 
 type Props = {
   onAddFighter: (fighter: Fighter) => void;
@@ -105,8 +104,7 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="formContainer">
+    <form className='formContainer' onSubmit={handleSubmit}>
       <h1 className="titleStyle">Neuen Teilnehmer hinzufügen</h1>
         <div className="inputContainer">
           <label className="inputLabel" htmlFor="firstName">Vorname</label>
@@ -193,8 +191,6 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
           <label className="inputLabel" htmlFor="weight">Gewicht</label>
           <input className="inputField" type="number" id="weight" value={weight} onChange={e => setWeight(parseFloat(e.target.value))} required />
         </div>
-      </div>
-      
 
       <div className='buttonSection'>
       <button className="blueButton" type="submit" disabled={loading}>

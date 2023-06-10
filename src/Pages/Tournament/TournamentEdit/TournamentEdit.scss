@@ -110,6 +110,7 @@ body .titleStyle {
     align-items: center;
     position: relative;
     margin-top: 3em;
+    width: 100%;
 
     @include small{
         margin-top: 5em;

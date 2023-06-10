@@ -40,9 +40,7 @@ const FighterManager: React.FC = () => {
 
     return (
         <div className="innerContainer">
-            <div className="formContainer">
-                <FighterForm onAddFighter={() => { }} onShowSuccessPopup={handleSuccessPopup} />
-            </div>
+            <FighterForm onAddFighter={() => { }} onShowSuccessPopup={handleSuccessPopup} />
             <div className="listSection">
                 <h1 className="titleStyleList">Teilnehmerliste</h1>
                 <div className="listContainer">

@@ -164,8 +164,7 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
 
   return (
     <div className='tournamentEditMain'>
-      <form onSubmit={handleSubmit}>
-      <div className="formContainer">
+      <form className='formContainer' onSubmit={handleSubmit}>
       <h1 className="titleStyle">Turnier bearbeiten</h1>
 
         <div className="inputContainer">
@@ -297,7 +296,6 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
                     />
                 </div>
             </div>
-      </div>
 
       <div className='buttonSectionTournamentEdit'>
         <button className="blueButton" type="submit" disabled={loading}>

@@ -117,8 +117,7 @@ const FighterEdit: React.FC<FighterEditProps> = ({ fighter, onUpdateFighter, onD
 
   return (
     <div className='fighterEditMain'>
-      <form onSubmit={handleSubmit}>
-      <div className='formContainer'>
+      <form className='formContainer' onSubmit={handleSubmit}>
       <h1 className="titleStyle">Teilnehmer bearbeiten</h1>
 
      
@@ -236,14 +235,13 @@ const FighterEdit: React.FC<FighterEditProps> = ({ fighter, onUpdateFighter, onD
           />
         </div>
       </div>
-      </div>
 
       <div className='buttonSectionFighterEdit'>
-        <button className="editFighter" type="submit" disabled={loading}>
+        <button className="blueButton" type="submit" disabled={loading}>
           {loading ? 'Laden...' : 'Aktualisieren'}
         </button>
 
-        <button className="deleteFighter" type="button" onClick={handleDelete}>
+        <button className="redButton" type="button" onClick={handleDelete}>
           Teilnehmer Löschen
         </button>
       </div>

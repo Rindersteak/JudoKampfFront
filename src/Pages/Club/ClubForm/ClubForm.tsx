@@ -75,8 +75,7 @@ const ClubForm: React.FC<ClubFormProps> = ({ onAddClub, onShowSuccessPopup }) =>
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="formContainer">
+    <form className='formContainer' onSubmit={handleSubmit}>
       <h1 className="titleStyle">Neuen Verein anlegen</h1>
      
         <div className="inputContainer">
@@ -136,9 +135,8 @@ const ClubForm: React.FC<ClubFormProps> = ({ onAddClub, onShowSuccessPopup }) =>
           </div>
         </div>
 
-      </div>
       <div className='buttonSection'>
-      <button className="addButton" type="submit" disabled={loading}>
+      <button className="blueButton" type="submit" disabled={loading}>
         {loading ? "Laden..." : "Hinzufügen"}
       </button>
       </div>

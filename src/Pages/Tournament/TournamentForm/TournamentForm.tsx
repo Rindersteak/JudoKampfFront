@@ -111,8 +111,8 @@ const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
 
     return (
             <div className='newTournamentMain'>
-            <form onSubmit={handleSubmit}>
-            <div className="formContainer">
+            <form className='formContainer' onSubmit={handleSubmit}>
+            
             <h1 className="titleStyle">Neues Turnier anlegen</h1>
 
                 <div className="inputContainer">
@@ -172,7 +172,7 @@ const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
                     />
                 </div>
             </div>
-            </div>
+          
 
             <div className='buttonSectionTournamentForm'>
             <button className="blueButton" type="submit" disabled={loading}>

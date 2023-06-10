@@ -112,8 +112,7 @@ const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub })
 
   return (
     <div className='clubEditMain'>
-      <form onSubmit={handleSubmit}>
-      <div className="formContainer">
+      <form className='formContainer' onSubmit={handleSubmit}>
       <h1 className="titleStyle">Verein bearbeiten</h1>
 
       <div className="inputContainer">
@@ -174,7 +173,6 @@ const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub })
             <input className="inputField" type="text" id="addressStreetNumber" value={addressStreetNumber} onChange={e => setAddressStreetNumber((e.target.value))} placeholder="Nummer" required />
           </div>
         </div>
-      </div>
 
       <div className='buttonSection'>
       <button className="blueButton" type="submit" disabled={loading}>
@@ -182,7 +180,7 @@ const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub })
       </button>
 
       <button className="redButton" type="button" onClick={handleDelete}>
-        Verein Löschen
+        Verein löschen
       </button>
       </div> 
 

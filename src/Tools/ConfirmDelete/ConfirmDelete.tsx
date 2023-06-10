@@ -22,10 +22,10 @@ const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({
         Möchten Sie den Eintrag wirklich löschen?
       </div>
       <div className="buttonContainer">
-        <button className="addButton" type="submit" disabled={loading} onClick={onClose}>
+        <button className="blueButton" type="submit" disabled={loading} onClick={onClose}>
           {loading ? "Laden..." : "Nein, behalten"}
         </button>
-        <button className="addDeleteButton" type="submit" disabled={loading} onClick={handleDelete}>
+        <button className="redButton" type="submit" disabled={loading} onClick={handleDelete}>
           {loading ? "Laden..." : "Ja, löschen"}
         </button>
       </div>
