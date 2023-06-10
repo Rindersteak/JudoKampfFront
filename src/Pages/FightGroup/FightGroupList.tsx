@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Fightgroup } from '../../types';
 import { getFightgroupsByTournamentId } from '../../API/fightGroupAPI';
-import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowDown, faArrowUp} from '@fortawesome/free-solid-svg-icons';
 
 interface FightGroupListProps {
   tournamentId?: string;
@@ -61,31 +62,31 @@ const FightGroupList: React.FC<FightGroupListProps> = ({ tournamentId }) => {
             <th className="headerCell">
               Geschlecht
               <button className="arrowButton" onClick={() => handleSortClick('gender')}>
-                {sortOrder === 'asc' && sortColumn === 'gender' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                {sortOrder === 'asc' && sortColumn === 'gender' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
               </button>
             </th>
             <th className="headerCell">
               Jugend/Erwachsene
               <button className="arrowButton" onClick={() => handleSortClick('ageclass')}>
-                {sortOrder === 'asc' && sortColumn === 'ageclass' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                {sortOrder === 'asc' && sortColumn === 'ageclass' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
               </button>
             </th>
             <th className="headerCell">
               Gewichtsklasse
               <button className="arrowButton" onClick={() => handleSortClick('weightclass')}>
-                {sortOrder === 'asc' && sortColumn === 'weightclass' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                {sortOrder === 'asc' && sortColumn === 'weightclass' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
               </button>
             </th>
             <th className="headerCell">
               Altersklasse
               <button className="arrowButton" onClick={() => handleSortClick('ageclass')}>
-                {sortOrder === 'asc' && sortColumn === 'ageclass' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                {sortOrder === 'asc' && sortColumn === 'ageclass' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
               </button>
             </th>
             <th className="headerCell">
               Teilnehmeranzahl
               <button className="arrowButton" onClick={() => handleSortClick('participants')}>
-                {sortOrder === 'asc' && sortColumn === 'participants' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                {sortOrder === 'asc' && sortColumn === 'participants' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
               </button>
             </th>
           </tr>
