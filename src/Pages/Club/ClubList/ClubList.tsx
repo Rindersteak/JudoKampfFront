@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Club } from '../../../types';
 import { getClubs, deleteClub } from '../../../API/clubAPI';
 import { FiTrash2 } from 'react-icons/fi';
-import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
 import Modal from '../../../Tools/Modal/Modal';
 import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
 import ClubEdit from '../ClubEdit/ClubEdit';  // Importiere die ClubEdit-Komponente
 import './ClubList.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowDown, faArrowUp} from '@fortawesome/free-solid-svg-icons';
 
 interface ClubListProps {
   detailedView?: boolean;
@@ -106,13 +107,13 @@ const ClubList: React.FC<ClubListProps> = ({ detailedView = true, onDeleteClub }
             <th className="headerCell">
               Name
               <button className="arrowButton" onClick={() => handleSortClick('name')}>
-                {sortOrder === 'asc' && sortColumn === 'name' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                {sortOrder === 'asc' && sortColumn === 'name' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
               </button>
             </th>
             <th className="headerCell">
               Landesverband
               <button className="arrowButton" onClick={() => handleSortClick('stateassociation')}>
-                {sortOrder === 'asc' && sortColumn === 'stateassociation' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                {sortOrder === 'asc' && sortColumn === 'stateassociation' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
               </button>
             </th>
             <th></th>

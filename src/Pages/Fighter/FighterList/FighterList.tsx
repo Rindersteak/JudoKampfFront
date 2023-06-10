@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Fighter } from '../../../types';
 import { getFighters, deleteFighter } from '../../../API/fighterAPI';
 import { FiTrash2 } from 'react-icons/fi';
-import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
 import Modal from '../../../Tools/Modal/Modal';
 import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
 import FighterEdit from '../FighterEdit/FighterEdit'; // Importiere die FighterEdit-Komponente
 import './FighterList.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowDown, faArrowUp} from '@fortawesome/free-solid-svg-icons';
 
 
 interface FighterListProps {
@@ -116,7 +117,7 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
               Name
               {detailedView && (
                 <button className="arrowButton" onClick={() => handleSortClick('lastname')}>
-                  {sortOrder === 'asc' && sortColumn === 'lastname' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                  {sortOrder === 'asc' && sortColumn === 'lastname' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
                 </button>
               )}
             </th>
@@ -124,7 +125,7 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
               Verein
               {detailedView && (
                 <button className="arrowButton" onClick={() => handleSortClick('club')}>
-                  {sortOrder === 'asc' && sortColumn === 'club' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                  {sortOrder === 'asc' && sortColumn === 'club' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
                 </button>
               )}
             </th>
@@ -133,25 +134,25 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
                 <th className="headerCell">
                   Stadt
                   <button className="arrowButton" onClick={() => handleSortClick('city')}>
-                    {sortOrder === 'asc' && sortColumn === 'city' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                    {sortOrder === 'asc' && sortColumn === 'city' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
                   </button>
                 </th>
                 <th className="headerCell">
                   Teilnehmer-ID
                   <button className="arrowButton" onClick={() => handleSortClick('id')}>
-                    {sortOrder === 'asc' && sortColumn === 'id' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                    {sortOrder === 'asc' && sortColumn === 'id' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
                   </button>
                 </th>
                 <th className="headerCell">
                   Gewichtsklasse
                   <button className="arrowButton" onClick={() => handleSortClick('weightclass')}>
-                    {sortOrder === 'asc' && sortColumn === 'weightclass' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                    {sortOrder === 'asc' && sortColumn === 'weightclass' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
                   </button>
                 </th>
                 <th className="headerCell">
                   Geburtsdatum
                   <button className="arrowButton" onClick={() => handleSortClick('birthdate')}>
-                    {sortOrder === 'asc' && sortColumn === 'birthdate' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                    {sortOrder === 'asc' && sortColumn === 'birthdate' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
                   </button>
                 </th>
               </>

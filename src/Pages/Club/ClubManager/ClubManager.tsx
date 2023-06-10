@@ -39,15 +39,14 @@ const ClubManager: React.FC = () => {
     }
 
     return (
-        <div className="innerContainer">
+        <div className='innerContainerScrollbar'>
+                    <div className="innerContainer">
             
             <ClubForm onAddClub={() => { }} onShowSuccessPopup={handleSuccessPopup} />
             
             <div className="listSection">
                 <h1 className="titleStyleList">Vereinsliste</h1>
-                <div className="listContainer">
                 <ClubList key={listKey} detailedView={false} onDeleteClub={handleConfirmDelete} />
-                </div>
             </div>
             {showSuccessPopup && (
                 <div className="successPopup">
@@ -63,6 +62,7 @@ const ClubManager: React.FC = () => {
                     />
                 </Modal>
             )}
+        </div>
         </div>
     );
 };

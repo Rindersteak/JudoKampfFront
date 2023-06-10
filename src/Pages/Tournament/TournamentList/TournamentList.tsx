@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Tournament } from '../../../types';
 import { getTotalParticipants } from '../../../API/fighterAPI';
 import { getTournaments, deleteTournament } from '../../../API/tournamentAPI';
-import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
 import { FiTrash2 } from 'react-icons/fi';
 import Modal from '../../../Tools/Modal/Modal';
 import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
 import './TournamentList.scss';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowDown, faArrowUp} from '@fortawesome/free-solid-svg-icons';
 
 interface TournamentListProps {
   onClose: () => void;
@@ -102,31 +103,31 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
             <th className="headerCell">
               Name
               <button className="arrowButton" onClick={() => handleSortClick('name')}>
-                {sortOrder === 'asc' && sortColumn === 'name' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                {sortOrder === 'asc' && sortColumn === 'name' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
               </button>
             </th>
             <th className="headerCell">
               Stadt
               <button className="arrowButton" onClick={() => handleSortClick('city')}>
-                {sortOrder === 'asc' && sortColumn === 'city' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                {sortOrder === 'asc' && sortColumn === 'city' ?<FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
               </button>
             </th>
             <th className="headerCell">
               Turnier-ID
               <button className="arrowButton" onClick={() => handleSortClick('id')}>
-                {sortOrder === 'asc' && sortColumn === 'id' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                {sortOrder === 'asc' && sortColumn === 'id' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
               </button>
             </th>
             <th className="headerCell">
               Anzahl Teilnehmer
               <button className="arrowButton" onClick={() => handleSortClick('participants')}>
-                {sortOrder === 'asc' && sortColumn === 'participants' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                {sortOrder === 'asc' && sortColumn === 'participants' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
               </button>
             </th>
             <th className="headerCell">
               Zeitraum
               <button className="arrowButton" onClick={() => handleSortClick('period')}>
-                {sortOrder === 'asc' && sortColumn === 'period' ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                {sortOrder === 'asc' && sortColumn === 'period' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
               </button>
             </th>
             <th className="headerCell"></th>

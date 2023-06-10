@@ -39,7 +39,8 @@ const FighterManager: React.FC = () => {
     }
 
     return (
-        <div className="innerContainer">
+        <div className='innerContainerScrollbar'>
+            <div className="innerContainer">
             <FighterForm onAddFighter={() => { }} onShowSuccessPopup={handleSuccessPopup} />
             <div className="listSection">
                 <h1 className="titleStyleList">Teilnehmerliste</h1>
@@ -61,6 +62,7 @@ const FighterManager: React.FC = () => {
                     />
                 </Modal>
             )}
+        </div>
         </div>
     );
 };

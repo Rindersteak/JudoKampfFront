@@ -49,6 +49,18 @@ $screen-normal: 993px;
   }
 }
 
+.innerContainerScrollbar{
+  
+    flex: 1;
+    max-height: 45.5em; /* 600px/16 */
+    border-radius: 0.625em; /* 10px/16 */
+    overflow: auto;
+  
+    @include small{
+      width: 100%;
+    }
+}
+
 .tableStyle {
   width: 100%;
   border-collapse: collapse;

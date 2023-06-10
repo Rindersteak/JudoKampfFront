@@ -15,7 +15,7 @@ interface BannerProps {
 
 
 const Banner: React.FC<BannerProps> = ({ title, subtitle, optionalButtonLabel, onOptionalButtonClick, onLogoClick }) => {
-  let titleClass = subtitle ? "title-with-subtitle" : "title-only";
+  //let titleClass = subtitle ? "title-with-subtitle" : "title-only";
   const navigate = useNavigate();
 
   const handleGoBack = () => {
