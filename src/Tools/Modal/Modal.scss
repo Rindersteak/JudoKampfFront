@@ -1,5 +1,5 @@
-$screen-mid: 768px;
-$screen-normal: 1000px;
+$screen-mid: 992px;
+$screen-normal: 993px;
 
 @mixin small{
   @media (max-width: #{$screen-mid}) {
@@ -55,10 +55,14 @@ $screen-normal: 1000px;
 
 .modal.large .modal-content {
   margin: 5vh;
-    //height: 90%;
+  height: auto;
 }
 
 .modal.small .modal-content {
     width: 40%;
+
+    @include small{
+      width: 65%;
+    }
     //height: 40%;
 }
