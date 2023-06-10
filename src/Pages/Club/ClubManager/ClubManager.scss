@@ -1,5 +1,5 @@
-$screen-mid: 768px;
-$screen-normal: 992px;
+$screen-mid: 992px;
+$screen-normal: 993px;
 
 @mixin small{
   @media (max-width: #{$screen-mid}) {
@@ -17,6 +17,10 @@ $screen-normal: 992px;
     flex: 1;
     max-height: 37.5em; /* 600px/16 */
     border-radius: 0.625em; /* 10px/16 */
+
+    @include small{
+      width: 100%;
+    }
 }
 
 .entryList {
@@ -26,6 +30,9 @@ $screen-normal: 992px;
     max-height: 37.5em; /* 600px/16 */
     overflow-y: auto;
     border-radius: 0.625em; /* 10px/16 */
+    @include small{
+      width: 100%;
+    }
 }
 
 .successPopup {
