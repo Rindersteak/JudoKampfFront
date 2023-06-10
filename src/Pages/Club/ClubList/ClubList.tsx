@@ -99,6 +99,7 @@ const ClubList: React.FC<ClubListProps> = ({ detailedView = true, onDeleteClub }
           <h1 className="titleStyleList">Vereinsliste</h1>
         </div>
       )}
+      <div className='listContainer'>
       <table className="tableStyle">
         <thead>
           <tr>
@@ -134,6 +135,7 @@ const ClubList: React.FC<ClubListProps> = ({ detailedView = true, onDeleteClub }
           })}
         </tbody>
       </table>
+      </div>
 
       {showConfirmDeletePopup && clubIdToDelete !== null && (
         <Modal size="small" onClose={handleDeleteCanceled}>

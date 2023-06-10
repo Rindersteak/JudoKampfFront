@@ -43,9 +43,9 @@ const FighterManager: React.FC = () => {
             <FighterForm onAddFighter={() => { }} onShowSuccessPopup={handleSuccessPopup} />
             <div className="listSection">
                 <h1 className="titleStyleList">Teilnehmerliste</h1>
-                <div className="listContainer">
+                
                     <FighterList key={listKey} detailedView={false} onDeleteFighter={handleConfirmDelete} />
-                </div>
+                
             </div>
             {showSuccessPopup && (
                 <div className="successPopup">

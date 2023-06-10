@@ -13,20 +13,14 @@ $screen-normal: 1001px;
   }
 }
 
+/*
+
 .listContainer {
     flex: 1;
-    max-height: 37.5em; /* 600px/16 */
-    border-radius: 0.625em; /* 10px/16 */
+    max-height: 37.5em;
+    border-radius: 0.625em; 
 }
-
-.entryList {
-    min-width: 30em;
-    padding-top: 1.25em; /* 20px/16 */
-    padding-right: 0em;
-    max-height: 37.5em; /* 600px/16 */
-    overflow-y: auto;
-    border-radius: 0.625em; /* 10px/16 */
-}
+*/
 
 .successPopup {
     position: fixed;

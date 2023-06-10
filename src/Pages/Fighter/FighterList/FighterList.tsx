@@ -108,6 +108,7 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
           <h1 className="titleStyleList">Teilnehmerliste</h1>
         </div>
       )}
+      <div className='listContainer'>
       <table className="tableStyle">
         <thead>
           <tr>
@@ -184,6 +185,8 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
           })}
         </tbody>
       </table>
+      </div>
+
 
       {showConfirmDeletePopup && fighterIdToDelete !== null && (
         <Modal size="small" onClose={handleDeleteCanceled}>

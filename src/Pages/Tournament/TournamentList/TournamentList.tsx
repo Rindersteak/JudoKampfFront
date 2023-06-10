@@ -95,6 +95,7 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
       <div className="headerBanner">
         <h1 className="titleStyleList">Turnierliste</h1>
       </div>
+      <div className='listContainer'>
       <table className="tableStyle">
         <thead>
           <tr>
@@ -150,6 +151,8 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
           ))}
         </tbody>
       </table>
+      </div>
+      
       {showConfirmDeletePopup && tournamentIdToDelete !== null && (
         <Modal size="small" onClose={handleDeleteCanceled}>
           <ConfirmDelete onClose={handleDeleteCanceled} onConfirmDelete={handleDeleteConfirmed} idToDelete={tournamentIdToDelete} />

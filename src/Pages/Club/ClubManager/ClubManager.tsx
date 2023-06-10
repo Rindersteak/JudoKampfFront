@@ -4,6 +4,7 @@ import ClubList, { deleteClubHandler } from '../ClubList/ClubList';
 import Modal from '../../../Tools/Modal/Modal';
 import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
 import './ClubManager.scss';
+import './../../../Styles/GlobalStyles.scss'
 
 const ClubManager: React.FC = () => {
     const [showSuccessPopup, setShowSuccessPopup] = useState(false);
@@ -40,13 +41,13 @@ const ClubManager: React.FC = () => {
     return (
         <div className="innerContainer">
             
-                <ClubForm onAddClub={() => { }} onShowSuccessPopup={handleSuccessPopup} />
+            <ClubForm onAddClub={() => { }} onShowSuccessPopup={handleSuccessPopup} />
             
             <div className="listSection">
                 <h1 className="titleStyleList">Vereinsliste</h1>
-                
-                    <ClubList key={listKey} detailedView={false} onDeleteClub={handleConfirmDelete} />
-                
+                <div className="listContainer">
+                <ClubList key={listKey} detailedView={false} onDeleteClub={handleConfirmDelete} />
+                </div>
             </div>
             {showSuccessPopup && (
                 <div className="successPopup">

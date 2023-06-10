@@ -37,7 +37,7 @@ $screen-normal: 993px;
     padding: 4%;
     border: 1px solid #888;
     width: 100%;
-    height: 95vh;
+    //height: 95vh;
     position: relative;
     overflow-y: auto;
 }
@@ -55,7 +55,6 @@ $screen-normal: 993px;
 
 .modal.large .modal-content {
   margin: 5vh;
-  height: auto;
 }
 
 .modal.small .modal-content {
