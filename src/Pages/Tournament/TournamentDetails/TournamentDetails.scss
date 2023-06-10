@@ -1,6 +1,5 @@
-$margin: 2rem;
-$screen-mid: 768px;
-$screen-normal: 992px;
+$screen-mid: 992px;
+$screen-normal: 993px;
 
 @mixin small{
   @media (max-width: #{$screen-mid}) {
@@ -15,16 +14,18 @@ $screen-normal: 992px;
 }
 
 .cards-container {
-  background-color: rgba(39, 39, 39, 0.5);
-  position: absolute;
-  width: 100%;
-  height: -webkit-fill-available;
-  display: flex;
-  flex-direction: row;
 
-  @include small{
-    //display: grid;
-    display: grid;
+  @include normal(){
+    background-color: rgba(39, 39, 39, 0.5);
+    position: absolute;
+    width: 100%;
+    height: -webkit-fill-available;
+    display: flex;
+    flex-direction: row;
+
+    @include small{
+      display: grid;
+    }
   }
 }
 
@@ -41,8 +42,8 @@ $screen-normal: 992px;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 25vw;
-  height: 40vh;
+  width: 25em;
+  height: 25em;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 2px;
   cursor: pointer;

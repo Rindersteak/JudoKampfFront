@@ -1,5 +1,5 @@
-$screen-mid: 888px;
-$screen-normal: 1000px;
+$screen-mid: 992px;
+$screen-normal: 993px;
 
 @mixin small{
   @media (max-width: #{$screen-mid}) {
@@ -96,6 +96,7 @@ $screen-normal: 1000px;
 }
 
 .innerContainer {
+  @include normal{
     justify-content: space-evenly;
     display: flex;
     flex-direction: row;
@@ -107,6 +108,7 @@ $screen-normal: 1000px;
         display: grid;
         grid-template-columns: auto;
     }
+  }
 
 }
 

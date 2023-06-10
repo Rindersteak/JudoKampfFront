@@ -111,7 +111,8 @@ const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub })
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className='clubEditMain'>
+      <form onSubmit={handleSubmit}>
       <div className="formContainer">
       <h1 className="titleStyle">Verein bearbeiten</h1>
 
@@ -176,11 +177,11 @@ const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub })
       </div>
 
       <div className='buttonSection'>
-      <button className="addButton" type="submit" disabled={loading}>
+      <button className="blueButton" type="submit" disabled={loading}>
         {loading ? 'Laden...' : 'Aktualisieren'}
       </button>
 
-      <button className="addDeleteButton" type="button" onClick={handleDelete}>
+      <button className="redButton" type="button" onClick={handleDelete}>
         Verein Löschen
       </button>
       </div> 
@@ -198,6 +199,8 @@ const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub })
 
       {errorMessage && <div className="errorMessage">{errorMessage}</div>}
     </form>
+    </div>
+  
   );
 };
 
