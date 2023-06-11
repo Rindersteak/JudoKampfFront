@@ -1,5 +1,5 @@
-$screen-mid: 992px;
-$screen-normal: 993px;
+$screen-mid: 1030px;
+$screen-normal: 1031px;
 
 @mixin small{
   @media (max-width: #{$screen-mid}) {
@@ -31,8 +31,7 @@ $screen-normal: 993px;
     flex-direction: column;
     justify-content: center;
     align-items: center; /* zentriert die Elemente horizontal */
-    width: 40%;
-    margin-left: 1rem;
+    width: 35%;
 
     @include small{
       width: 100%;
@@ -45,6 +44,7 @@ $screen-normal: 993px;
     padding-right: 0em;
     //max-height: 37.5em; /* 600px/16 */
     border-radius: 0.625em; /* 10px/16 */
+    overflow: auto;
     @include small{
       width: 100%;
     }
@@ -86,7 +86,7 @@ $screen-normal: 993px;
 .innerContainerScrollbar{
   
     flex: 1;
-    max-height: 45.5em; /* 600px/16 */
+    //max-height: 45.5em; /* 600px/16 */ --> Gut wenn nur die Listen geescrollt werden sollen
     border-radius: 0.625em; /* 10px/16 */
     overflow: auto;
   

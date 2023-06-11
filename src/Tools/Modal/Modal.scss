@@ -1,5 +1,5 @@
-$screen-mid: 992px;
-$screen-normal: 993px;
+$screen-mid: 1030px;
+$screen-normal: 1031px;
 
 @mixin small{
   @media (max-width: #{$screen-mid}) {
@@ -33,13 +33,14 @@ $screen-normal: 993px;
     justify-content: flex-start;
     align-items: stretch;
     background-color: white;
-    margin: auto;
     padding: 3rem;
     border: 1px solid #888;
-   width: 95%;
-    //height: 95vh;
+    width: 80%;
+    height: 90%;
     position: relative;
-    overflow-y: auto;
+    //overflow-y: auto;
+
+
 }
 
 .modal.large .modal-content {
