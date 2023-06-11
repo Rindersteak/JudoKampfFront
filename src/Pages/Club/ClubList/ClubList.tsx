@@ -4,10 +4,10 @@ import { getClubs, deleteClub } from '../../../API/clubAPI';
 import { FiTrash2 } from 'react-icons/fi';
 import Modal from '../../../Tools/Modal/Modal';
 import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
-import ClubEdit from '../ClubEdit/ClubEdit';  // Importiere die ClubEdit-Komponente
+import ClubEdit from '../ClubEdit/ClubEdit';
 import './ClubList.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowDown, faArrowUp} from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown, faArrowUp, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 interface ClubListProps {
   detailedView?: boolean;
@@ -32,8 +32,7 @@ const ClubList: React.FC<ClubListProps> = ({ detailedView = true, onDeleteClub }
 
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedClub, setSelectedClub] = useState<Club | null>(null);
-
-  
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const loadBackendClubs = async () => {
@@ -49,8 +48,6 @@ const ClubList: React.FC<ClubListProps> = ({ detailedView = true, onDeleteClub }
           }
           return 0;
         });
-
-
 
         setBackendClubs(sortedClubs);
       } catch (error) {
@@ -78,7 +75,7 @@ const ClubList: React.FC<ClubListProps> = ({ detailedView = true, onDeleteClub }
       setShowConfirmDeletePopup(false);
       setBackendClubs(backendClubs.filter(club => club.id !== clubIdToDelete));
     }
-  }
+  };
 
   const handleDeleteCanceled = () => {
     setShowConfirmDeletePopup(false);
@@ -93,6 +90,12 @@ const ClubList: React.FC<ClubListProps> = ({ detailedView = true, onDeleteClub }
     setShowEditModal(false);
   };
 
+  const handleSearchTermChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredClubs = backendClubs.filter(club => club.name.toLowerCase().includes(searchTerm.toLowerCase()));
+
   return (
     <div className="entryList">
       {detailedView && (
@@ -100,42 +103,46 @@ const ClubList: React.FC<ClubListProps> = ({ detailedView = true, onDeleteClub }
           <h1 className="titleStyleList">Vereinsliste</h1>
         </div>
       )}
-      <div className='listContainer'>
-      <table className="tableStyle">
-        <thead>
-          <tr>
-            <th className="headerCell">
-              Name
-              <button className="arrowButton" onClick={() => handleSortClick('name')}>
-                {sortOrder === 'asc' && sortColumn === 'name' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
-              </button>
-            </th>
-            <th className="headerCell">
-              Landesverband
-              <button className="arrowButton" onClick={() => handleSortClick('stateassociation')}>
-                {sortOrder === 'asc' && sortColumn === 'stateassociation' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
-              </button>
-            </th>
-            <th></th>
-          </tr>
-        </thead>
+      <div className='searchContainerForLists'>
+        <input className='searchField' type='search' placeholder='Verein suchen' value={searchTerm} onChange={handleSearchTermChange} />
+      </div>
 
-        <tbody>
-          {backendClubs.map((club) => {
-            return (
-              <tr
-                className="entryStyle"
-                key={club.id}
-                onClick={() => handleEditClub(club)}
-              >
-                <td>{club.name}</td>
-                <td>{club.stateassociation}</td>
-                <td className="deleteIcon" onClick={(event) => handleDeleteClub(event, club.id ?? 0)}><FiTrash2 /></td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <div className='listContainer'>
+        <table className="tableStyle">
+          <thead>
+            <tr>
+              <th className="headerCell">
+                Name
+                <button className="arrowButton" onClick={() => handleSortClick('name')}>
+                  {sortOrder === 'asc' && sortColumn === 'name' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
+                </button>
+              </th>
+              <th className="headerCell">
+                Landesverband
+                <button className="arrowButton" onClick={() => handleSortClick('stateassociation')}>
+                  {sortOrder === 'asc' && sortColumn === 'stateassociation' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
+                </button>
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {filteredClubs.map((club) => {
+              return (
+                <tr
+                  className="entryStyle"
+                  key={club.id}
+                  onClick={() => handleEditClub(club)}
+                >
+                  <td>{club.name}</td>
+                  <td>{club.stateassociation}</td>
+                  <td className="deleteIcon" onClick={(event) => handleDeleteClub(event, club.id ?? 0)}><FiTrash2 /></td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
 
       {showConfirmDeletePopup && clubIdToDelete !== null && (
