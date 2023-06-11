@@ -102,9 +102,13 @@
   
   .tableStyle th,
   .tableStyle td {
-    padding: 0.6em;
     text-align: left;
     border-bottom: 1px solid #EEEEF2;
+    //padding: 0.6rem; evtl. wieder aktivieren, wenn untere gelöcsht
+    padding-left: 2rem;//evtl. löschen
+    padding-right: 2rem;//evtl. löschen
+    padding-top: 0.6rem;//evtl. löschen
+    padding-bottom: 0.6rem;//evtl. löschen
   }
   
   .tableStyle th {
