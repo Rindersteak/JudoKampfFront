@@ -45,7 +45,7 @@ const Banner: React.FC<BannerProps> = ({ title, subtitle, optionalButtonLabel, o
 
     <div className='titleContainer'>
     <h1>{title}</h1>
-    {subtitle && <h2>{subtitle}</h2>}
+    <h1>{subtitle}</h1>
     </div>
   </div>
   );
