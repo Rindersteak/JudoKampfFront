@@ -55,7 +55,9 @@ const FightGroupList: React.FC<FightGroupListProps> = ({ tournamentId }) => {
 
   return (
     <div className="fightGroupList"> {/* CSS-Klasse für FightGroupList hinzugefügt */}
-      <h1 className="titleStyleList">Kampfgruppen</h1>
+    <div className='headerBanner'>
+    <h1 className="titleStyleList">Kampfgruppen</h1>
+    </div>
       <table className="tableStyle">
         <thead>
           <tr>

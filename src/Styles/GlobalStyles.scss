@@ -61,6 +61,14 @@ $screen-normal: 993px;
     }
 }
 
+.headerBanner {
+  height: 6em;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .tableStyle {
   width: 100%;
   border-collapse: collapse;
