@@ -34,24 +34,13 @@ $screen-normal: 993px;
     align-items: stretch;
     background-color: white;
     margin: auto;
-    padding: 4%;
+    padding: 3rem;
     border: 1px solid #888;
-   // width: 100%;
+   width: 95%;
     //height: 95vh;
     position: relative;
     overflow-y: auto;
 }
-
-.close {
-    color: #56595E;
-    font-size: 3rem;
-    font-weight: bold;
-    position: absolute;
-    top: 1.5rem;
-    right: 2rem;
-    transform: translate(50%, -50%);
-}
-
 
 .modal.large .modal-content {
   margin: 5vh;

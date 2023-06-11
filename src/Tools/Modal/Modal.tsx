@@ -1,5 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import './Modal.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClose } from '@fortawesome/free-solid-svg-icons';
 
 interface ModalProps {
     onClose: () => void;
@@ -11,7 +13,9 @@ const Modal: FC<ModalProps> = ({ onClose, children, size = 'large' }) => {
     return (
         <div className={`modal ${size}`}>
             <div className="modal-content">
-                <span className="close" onClick={onClose}>&times;</span>
+                <div className='closeModalButtonContainer'>
+                <FontAwesomeIcon icon={faClose} onClick={onClose} className='closeModalButton'/>
+                </div>
                 {children}
             </div>
         </div>
