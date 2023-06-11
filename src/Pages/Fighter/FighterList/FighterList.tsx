@@ -7,7 +7,7 @@ import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
 import FighterEdit from '../FighterEdit/FighterEdit';
 import './FighterList.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowDown, faArrowUp, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 
 interface FighterListProps {
   detailedView?: boolean;

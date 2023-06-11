@@ -7,7 +7,7 @@ import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
 import ClubEdit from '../ClubEdit/ClubEdit';
 import './ClubList.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowDown, faArrowUp, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown, faArrowUp} from '@fortawesome/free-solid-svg-icons';
 
 interface ClubListProps {
   detailedView?: boolean;
