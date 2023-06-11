@@ -98,12 +98,21 @@ $screen-normal: 993px;
   color: #484964;
 }
 
+.tableMinWidth{
+  min-width: 60rem;
+}
+
 
 .listSection{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-left: 10rem;
+
+  @include small{
+    margin-left: 0rem;
+  }
 }
 
 .inputContainer {

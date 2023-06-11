@@ -4,6 +4,7 @@ import { getFightgroupsByTournamentId } from '../../API/fightGroupAPI';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowDown, faArrowUp} from '@fortawesome/free-solid-svg-icons';
+import './FightGroupList.scss'
 
 interface FightGroupListProps {
   tournamentId?: string;
@@ -58,7 +59,8 @@ const FightGroupList: React.FC<FightGroupListProps> = ({ tournamentId }) => {
     <div className='headerBanner'>
     <h1 className="titleStyleList">Kampfgruppen</h1>
     </div>
-      <table className="tableStyle">
+    <div className='listContainer'>
+    <table className="tableStyle tableMinWidth">
         <thead>
           <tr>
             <th className="headerCell">
@@ -105,6 +107,7 @@ const FightGroupList: React.FC<FightGroupListProps> = ({ tournamentId }) => {
           ))}
         </tbody>
       </table>
+    </div>
     </div>
   );
 };
