@@ -43,6 +43,18 @@ $screen-normal: 993px;
     }
 }
 
+.formContainerOneSide{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* zentriert die Elemente horizontal */
+  width: 70%;
+
+  @include small{
+    width: 100%;
+  }
+}
+
 .entryList {
     min-width: 30em;
     //padding-top: 1.25em; /* 20px/16 */

@@ -177,10 +177,10 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
   const handleStateAssociationChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setStateAssociation(e.target.value);
   };
-// adjust formContainer for width of inputs
+
   return (
     <div className='tournamentEditMain'>
-      <form className='formContainer' onSubmit={handleSubmit}> 
+      <form className='formContainerOneSide' onSubmit={handleSubmit}> 
       <h1 className="titleStyle">Turnier bearbeiten</h1>
 
         <div className="inputContainer">
