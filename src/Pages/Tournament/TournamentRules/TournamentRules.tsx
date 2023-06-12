@@ -26,35 +26,34 @@ const rulesContent = () => {
       <input className='inputField'></input>
     </div>
 
-    <div className='eponWasariContainer'>
+    <div className='inputContainer'>
       <div className='pointsEponWasariContainer'>
-        <div className='pointsEpponContainer'>
           <label className='inputLabel'>Punkte Eppon:</label>
           <input className='inputField'></input>
-        </div>
         <div></div>
-        <div className='pointsWasariContainer'>
+        <div className='inputContainer'>
         <label className='inputLabel'>Punkte Wasari:</label>
         <input className='inputField'></input>
         </div>
       </div>
-
-      <div className='holdTimeEponWasari'>
-        <div className='holdTimeEpponContainer'>
+      </div>
+      
+      <div className='inputContainerSecondRow'>
+        <div className='holdTimeEponWasari'>
           <label className='inputLabel'>Haltezeit Eppon:</label>
           <input className='inputField'></input>
-        </div>
+       
 
         <div></div>
 
-        <div className='pointsWasariContainer'>
+        <div className='inputContainerSecondRow'>
         <label className='inputLabel'>Haltezeit Wasari:</label>
         <input className='inputField'></input>
         </div>
-
+        </div>
       </div>
     </div>
-  </div>
+  
   );
 }
 
