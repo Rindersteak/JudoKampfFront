@@ -1,11 +1,16 @@
 .tournamentManagerContainer {
-    display: grid;
-    grid-template-columns: 1fr 1fr; // Adjust the column widths as needed
-    grid-gap: 20px; // Adjust the gap between the columns as needed
-  }
-  .tournamentButtonsContainer {
-    display: grid;
-    place-items: center;
-    height: 100%;
-  }
-  
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Adjust the column widths as needed */
+  grid-gap: 20px; /* Adjust the gap between the columns as needed */
+  height: 100vh; /* Set the height of the container to the full viewport height */
+  align-items: baseline;
+}
+
+.tournamentButtonsContainer {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%
+}
+.tournamentRulesContainer{
+  display: flex;
+}
