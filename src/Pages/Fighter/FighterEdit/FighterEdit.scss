@@ -1,5 +1,5 @@
-$screen-mid: 888px;
-$screen-normal: 1000px;
+$screen-mid: 992px;
+$screen-normal: 993px;
 
 @mixin small{
   @media (max-width: #{$screen-mid}) {
@@ -28,22 +28,6 @@ $screen-normal: 1000px;
     align-items: center;
     position: relative;
     width: 100%;
-
-    @include small {
-        margin-top: 5em;
-    }
-}
-
-/* Styling für den "Hinzufügen" Button beim Mouseover */
-.editFighter:hover {
-    background: #000A91;
-    cursor: pointer;
-}
-
-
-.deleteFighter:hover {
-    background: #720000;
-    cursor: pointer;
 }
 
 .marginTopWeightFighterEdit{
