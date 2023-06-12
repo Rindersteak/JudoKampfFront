@@ -124,10 +124,9 @@ const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
                     <label className="inputLabel" htmlFor="tournamentLocation">Veranstaltungsort</label>
                     <input className="inputField" type="text" id="tournamenLocation" value={tournamentLocation} onChange={e => setTournamentLocation(e.target.value)} required />
                 </div>
-
+                <label className="inputLabel" htmlFor="address">Adresse</label>
             <div className="inputContainerAdressesTop">
                 <div>
-                    <label className="inputLabel" htmlFor="address">Adresse</label>
                     <input className="inputField" type="text" id="addressCity" value={addressCity} onChange={e => setAddressCity((e.target.value))} placeholder="Stadt" required />
                 </div>
 
@@ -147,10 +146,9 @@ const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
                 </div>
 
             </div>
-
+            <label className="inputLabel" htmlFor="period">Zeitraum</label>
             <div className="inputContainerTimeIntervall marginToButtonTournamentForm">
                 <div className="inputContainer halfWidth">
-                    <label className="inputLabel" htmlFor="period">Zeitraum</label>
                     <DatePicker
                         id="periodFrom"
                         selected={periodFrom}

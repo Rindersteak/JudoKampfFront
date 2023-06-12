@@ -113,10 +113,9 @@ const ClubForm: React.FC<ClubFormProps> = ({ onAddClub, onShowSuccessPopup }) =>
           </select>
           </div>
         </div>
-
+        <label className="inputLabel" htmlFor="address">Adresse</label>
         <div className="inputContainerAdressesTop">
         <div>
-          <label className="inputLabel" htmlFor="address">Adresse</label>
           <input className="inputField" type="text" id="addressCity" value={addressCity} onChange={e => setAddressCity((e.target.value))} placeholder="Stadt" required />
         </div>
         

@@ -28,19 +28,6 @@ body .titleStyle {
     padding-bottom: 2em;
 }
 
-/* Styling für die Beschriftung der Eingabefelder */
-.inputLabel {
-    font-family: 'Nunito', sans-serif;
-    font-size: 1.25em;
-    font-weight: 700;
-    line-height: 1.35em;
-    letter-spacing: -0.02em;
-    color: #000000;
-    position: absolute;
-    top: -1.4em; /* Abstand nach oben anpassen */
-    left: 0;
-}
-
 .newTournamentMain{
     display: flex;
     justify-content: center;

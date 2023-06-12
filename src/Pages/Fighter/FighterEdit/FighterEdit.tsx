@@ -221,7 +221,7 @@ const FighterEdit: React.FC<FighterEditProps> = ({ fighter, onUpdateFighter, onD
             dateFormat="dd.MM.yyyy"
             required
           />
-        <div className="inputContainer">
+        <div className="inputContainer marginTopWeightFighterEdit">
           <label className="inputLabel" htmlFor="weight">
             Gewicht
           </label>

@@ -27,7 +27,6 @@ $screen-normal: 1000px;
     justify-content: center;
     align-items: center;
     position: relative;
-    margin-top: 4em;
     width: 100%;
 
     @include small {
@@ -45,4 +44,10 @@ $screen-normal: 1000px;
 .deleteFighter:hover {
     background: #720000;
     cursor: pointer;
+}
+
+.marginTopWeightFighterEdit{
+  
+    margin-top: 2rem;
+
 }

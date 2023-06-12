@@ -18,6 +18,16 @@ $screen-normal: 993px;
 }
 
 
+.inputLabel {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.25em;
+  font-weight: 700;
+  line-height: 1.35em;
+  letter-spacing: -0.02em;
+  color: #000000;
+  width: 100%;
+}
+
 .closeModalButtonContainer{
   display: flex;
   width: 100%;
@@ -134,12 +144,11 @@ $screen-normal: 993px;
 }
 
 .inputContainer {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 3.76em;
+    display: grid;
+    margin-bottom: 1.76em;
     position: relative;
-    height: 1.9375em;
     width: 100%;
+    height: auto;
 }
 
 .buttonSection{
@@ -148,8 +157,12 @@ $screen-normal: 993px;
     justify-content: center;
     align-items: center;
     position: relative;
-    margin-bottom: 3em;
+    margin-top: 1rem;
     width: 100%;
+
+    @include small{
+      margin-bottom: 3rem;
+    }
 }
 
 .inputContainerAdressesTop{
@@ -172,7 +185,7 @@ $screen-normal: 993px;
   display: grid;
   grid-template-columns: 70% 30%;
   gap: 10px;
-  margin-bottom: 3em;
+  margin-bottom: 2em;
   position: relative;
   width: 100%;
   padding-right: 10px;

@@ -10,6 +10,7 @@ import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
 import Modal from '../../../Tools/Modal/Modal';
 import { BlockPicker, SketchPicker } from "react-color";
 import ColorPicker from './../../../Tools/ColorPicker/ColorPicker'
+import Spielwiese from './../../../Routes/Spielwiese'
 
 
 type OptionType = {
@@ -210,12 +211,9 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
           />
         </div>
 
-
+        <label className="inputLabel" htmlFor="address">Adresse</label>
         <div className='inputContainerAdressesTop'>
         <div>
-          <label className="inputLabel" htmlFor="address">
-            Adresse
-          </label>
           <input
             className="inputField"
             type="text"
@@ -285,10 +283,9 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
           </select>
         </div>
       </div>
-
+      <label className="inputLabel" htmlFor="period">Zeitraum</label>
       <div className="inputContainerTimeIntervall marginToButtonTournamentEdit">
                 <div className="inputContainer halfWidth">
-                    <label className="inputLabel" htmlFor="period">Zeitraum</label>
                     <DatePicker
                         id="periodFrom"
                         selected={periodFrom}
@@ -348,6 +345,8 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
       )}
       {errorMessage && <div className="errorMessage">{errorMessage}</div>}
     </form>
+
+    <Spielwiese></Spielwiese>
     </div>
   
   );
