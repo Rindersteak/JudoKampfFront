@@ -8,6 +8,8 @@ import stateassociationOptions from '../../../Config/StateAssociations';
 import './TournamentEdit.scss';
 import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
 import Modal from '../../../Tools/Modal/Modal';
+import { BlockPicker, SketchPicker } from "react-color";
+import ColorPicker from './../../../Tools/ColorPicker/ColorPicker'
 
 
 type OptionType = {
@@ -39,6 +41,20 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [listKey, setListKey] = useState(Math.random());
   const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState(false);
+
+
+    //creating state to store our color and also set color using onChange event for sketch picker
+    const [sketchPickerColor, setSketchPickerColor] = useState({
+      r: "241",
+      g: "112",
+      b: "19",
+      a: "1",
+    });
+    // destructuring rgba from state
+    const { r, g, b, a } = sketchPickerColor;
+  
+    //creating state to store our color and also set color using onChange event for block picker
+    const [blockPickerColor, setBlockPickerColor] = useState("#37d67a");
 
 
   const handleSuccessPopup =  (status: boolean)  => {
@@ -223,8 +239,6 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
         </div>
         </div>
 
-
-
         <div className='inputContainerAdressesBottom'>
         <div>
           <input
@@ -272,7 +286,7 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
         </div>
       </div>
 
-      <div className="inputContainerTimeIntervall">
+      <div className="inputContainerTimeIntervall marginToButtonTournamentEdit">
                 <div className="inputContainer halfWidth">
                     <label className="inputLabel" htmlFor="period">Zeitraum</label>
                     <DatePicker
@@ -296,6 +310,19 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
                     />
                 </div>
             </div>
+            <div className="colorContainer">
+          <label className="inputLabel colorContainerLabel">
+            Farbe der Kämpfer anpassen
+          </label>
+
+          <div className='firstColor'>
+          <ColorPicker></ColorPicker>
+          </div>
+
+          <div className='secondColor'>
+          <ColorPicker></ColorPicker>
+          </div>
+        </div>
 
       <div className='buttonSectionTournamentEdit'>
         <button className="blueButton" type="submit" disabled={loading}>

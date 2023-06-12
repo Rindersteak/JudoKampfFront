@@ -40,29 +40,27 @@ const ClubManager: React.FC = () => {
 
     return (
         <div className='innerContainerScrollbar'>
-                    <div className="innerContainer">
-            
-            <ClubForm onAddClub={() => { }} onShowSuccessPopup={handleSuccessPopup} />
-            
-            <div className="listSection">
-                <h1 className="titleStyleList">Vereinsliste</h1>
-                <ClubList key={listKey} detailedView={false} onDeleteClub={handleConfirmDelete} />
-            </div>
-            {showSuccessPopup && (
-                <div className="successPopup">
-                    Eintrag erfolgreich hinzugefügt!
+            <div className="innerContainer">
+                <ClubForm onAddClub={() => { }} onShowSuccessPopup={handleSuccessPopup} />
+                <div className="listSection">
+                    <h1 className="titleStyleList">Vereinsliste</h1>
+                    <ClubList key={listKey} detailedView={false} onDeleteClub={handleConfirmDelete} />
                 </div>
-            )}
-            {showConfirmDeletePopup && clubIDToDelete !== null && (
-                <Modal size="small" onClose={handleDeleteCanceled}>
-                    <ConfirmDelete
-                        onClose={handleDeleteCanceled}
-                        onConfirmDelete={handleDeleteConfirmed}
-                        idToDelete={clubIDToDelete}
-                    />
-                </Modal>
-            )}
-        </div>
+                {showSuccessPopup && (
+                    <div className="successPopup">
+                        Eintrag erfolgreich hinzugefügt!
+                    </div>
+                )}
+                {showConfirmDeletePopup && clubIDToDelete !== null && (
+                    <Modal size="small" onClose={handleDeleteCanceled}>
+                        <ConfirmDelete
+                            onClose={handleDeleteCanceled}
+                            onConfirmDelete={handleDeleteConfirmed}
+                            idToDelete={clubIDToDelete}
+                        />
+                    </Modal>
+                )}
+            </div>
         </div>
     );
 };

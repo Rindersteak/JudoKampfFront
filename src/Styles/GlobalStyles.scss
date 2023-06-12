@@ -1,5 +1,5 @@
-$screen-mid: 1030px;
-$screen-normal: 1031px;
+$screen-mid: 992px;
+$screen-normal: 993px;
 
 @mixin small{
   @media (max-width: #{$screen-mid}) {
@@ -45,7 +45,7 @@ $screen-normal: 1031px;
 
 .entryList {
     min-width: 30em;
-    padding-top: 1.25em; /* 20px/16 */
+    //padding-top: 1.25em; /* 20px/16 */
     padding-right: 0em;
     //max-height: 37.5em; /* 600px/16 */
     border-radius: 0.625em; /* 10px/16 */
@@ -186,7 +186,6 @@ $screen-normal: 1031px;
 
 .inputContainerTimeIntervall{
     display: grid;
-    margin-bottom: 1em;
     position: relative;
     height: 1.9375em;
     width: 100%;

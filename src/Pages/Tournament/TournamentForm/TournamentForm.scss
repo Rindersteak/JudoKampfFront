@@ -235,6 +235,9 @@ body .titleStyle {
     justify-content: space-between;
     align-items: center;
   }
-  
 
-  
+  .marginToButtonTournamentForm{
+    @include normal{
+        margin-bottom: 1rem;
+    }
+  }

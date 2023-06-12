@@ -2,10 +2,9 @@
 
 /* Importiert die Nunito Schriftart von Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
-@import url('./../../../Styles/GlobalStyles.scss');
 
-$screen-mid: 888px;
-$screen-normal: 1000px;
+$screen-mid: 992px;
+$screen-normal: 993px;
 
 @mixin small{
   @media (max-width: #{$screen-mid}) {
@@ -70,29 +69,6 @@ body .titleStyle {
     align-self: flex-end;
 }
 
-/* Styling für den "Hinzufügen" Button */
-.addButton {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 367px;
-    height: 1.6875em;
-    background: #001AFF;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 2px;
-    color: white;
-    font-family: 'Nunito', sans-serif;
-    font-style: normal;
-    font-size: 1.5em;
-    font-weight: 900;
-    line-height: 2.0625em;
-    letter-spacing: -0.02em;
-    border: none;
-    cursor: pointer;
-    margin-top: -1.125em;
-}
-
 .tournamentEditMain{
     display: flex;
     flex-direction: column;
@@ -109,7 +85,7 @@ body .titleStyle {
     justify-content: center;
     align-items: center;
     position: relative;
-    margin-top: 3em;
+    margin-top: 4rem;
     width: 100%;
 
     @include small{
@@ -253,4 +229,37 @@ body .titleStyle {
   }
   
 
+  .colorChangeContainer{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+  }
+
+  .hexLabel{
+    font-weight: bold;
+  }
+
+  .colorContainer{
+    display: grid;
+    grid-template-areas: 
+    'label label label'
+    'firstColor empty secondColor';
+    position: relative;
+    height: 1.9375em;
+    width: 100%;
+  }
+
+  .colorContainerLabel{
+    grid-area: label;
+  }
+
+  .firstColor{
+    grid-area: firstColor;
+  }
+
+  .secondColor{
+    grid-area: secondColor;
+  }
   
+  .marginToButtonTournamentEdit{
+    margin-bottom: 3rem;
+  }

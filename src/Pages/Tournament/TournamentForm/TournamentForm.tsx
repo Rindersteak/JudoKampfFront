@@ -148,7 +148,7 @@ const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
 
             </div>
 
-            <div className="inputContainerTimeIntervall">
+            <div className="inputContainerTimeIntervall marginToButtonTournamentForm">
                 <div className="inputContainer halfWidth">
                     <label className="inputLabel" htmlFor="period">Zeitraum</label>
                     <DatePicker

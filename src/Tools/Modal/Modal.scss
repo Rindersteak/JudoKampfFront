@@ -1,5 +1,5 @@
-$screen-mid: 1030px;
-$screen-normal: 1031px;
+$screen-mid: 992px;
+$screen-normal: 993px;
 
 @mixin small{
   @media (max-width: #{$screen-mid}) {
@@ -38,7 +38,7 @@ $screen-normal: 1031px;
     width: 80%;
     height: 90%;
     position: relative;
-    //overflow-y: auto;
+    overflow-y: auto;
 
 
 }
