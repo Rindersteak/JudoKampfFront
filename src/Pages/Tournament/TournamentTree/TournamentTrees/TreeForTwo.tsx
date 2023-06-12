@@ -1,29 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import { getFightList, getFightersList, getWinner } from '../../../../API/fightAPI';
 import TournamentBonsai from '../TournamentObjects/TournamentBonsai';
-import Banner from "../../../../Tools/Banner/Banner";
+import Banner from '../../../../Tools/Banner/Banner';
 import { Fight, Fighter, Fightgroup } from '../../../../types';
 import { useNavigate } from 'react-router-dom';
 import { getFightgroup } from '../../../../API/fightGroupAPI';
+import {
+  SingleEliminationBracket,
+  Match as TournamentMatch,
+  MATCH_STATES,
+  SVGViewer,
+} from '@g-loot/react-tournament-brackets';
 import '../TreeStyles.scss';
 
-
-export interface FighterRow {
-  fighter: string; // Name des Kämpfers
-  victories: number; // Anzahl der Siege
-  points: number; // Punktzahl
-  club: string; // Verein
+interface FighterRow {
+  fighter: string; 
+  victories: number;
+  points: number; 
+  club: string; 
 }
 
 interface TreeForTwoProps {
   fightgroupId: number;
 }
 
+interface MatchProps {
+  id: string;
+  nextMatchId: string;
+  startTime: string;
+  state: string;
+  participants: Array<string>;
+}
+
 const TreeForTwo: React.FC<TreeForTwoProps> = ({ fightgroupId }) => {
-  const [fights, setFights] = useState<Fight[]>([]);
+  const [fights, setFights] = useState<MatchProps[]>([]);
   const [winners, setWinners] = useState<Fighter[]>([]);
   const [fightersList, setFightersList] = useState<FighterRow[]>([]);
-  const [bannerTitle, setBannerTitle] = useState<string>("");
+  const [bannerTitle, setBannerTitle] = useState<string>('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,17 +44,10 @@ const TreeForTwo: React.FC<TreeForTwoProps> = ({ fightgroupId }) => {
       try {
         const fightgroup: Fightgroup = await getFightgroup(fightgroupId);
         const relevantFights = fightgroup.fights.slice(0, 3);
-        setFights(relevantFights);
-
-        const bannerTitle = `Tournieransicht für ${fightgroup.fighters.length} Kämpfer\nGewichtsklasse ${fightgroup.weightclass.name}, Altersklasse ${fightgroup.ageclass.name}`;
-        setBannerTitle(bannerTitle);
-
         const winnerPromises = relevantFights.map((fight) => getWinner(fight.id));
         const winnerData = await Promise.all(winnerPromises);
         setWinners(winnerData);
-
-        const fighters = await getFightersList(fightgroupId);
-        const fighterRows = fighters.map((fighter) => ({
+        const fighterRows = fightgroup.fighters.map((fighter) => ({
           fighter: `${fighter.firstname} ${fighter.lastname}`,
           victories: 0,
           points: 0,
@@ -49,11 +55,35 @@ const TreeForTwo: React.FC<TreeForTwoProps> = ({ fightgroupId }) => {
         }));
         setFightersList(fighterRows);
       } catch (error) {
-        console.error('Error fetching fight data:', error);
+        console.error('Fehler beim Abrufen der Kampfdaten:', error);
       }
     }
 
     fetchFightData();
+  }, [fightgroupId]);
+
+  useEffect(() => {
+    async function fetchFights() {
+      try {
+        const fightList = await getFightList(fightgroupId);
+        const matchComponents = fightList.fights.map((fight) => {
+          const match: MatchProps = {
+            id: fight.id.toString(),
+            nextMatchId: '',
+            startTime: '',
+            state: MATCH_STATES.UNDECIDED,
+            participants: [], 
+          };
+          return match;
+        });
+        setFights(matchComponents);
+      } catch (error) {
+        console.error('Error loading fight list:', error);
+      }
+    }
+    
+
+    fetchFights();
   }, [fightgroupId]);
 
   return (
@@ -63,52 +93,34 @@ const TreeForTwo: React.FC<TreeForTwoProps> = ({ fightgroupId }) => {
         <table className="tableStyle">
           <thead>
             <tr>
-              <th className="headerCell">
-                Kämpfer
-              </th>
-              <th className="headerCell">
-                Anzahl Siege
-              </th>
-              <th className="headerCell">
-                Punktanzahl
-              </th>
-              <th className="headerCell">
-                Verein
-              </th>
+              <th className="headerCell">Kämpfer</th>
+              <th className="headerCell">Anzahl Siege</th>
+              <th className="headerCell">Anzahl Punkte</th>
+              <th className="headerCell">Club</th>
             </tr>
           </thead>
           <tbody>
             {fightersList.map((fighterRow, index) => (
-              <tr
-                className="entryStyle"
-                key={index}>
-                <td>{fighterRow.fighter}</td>
-                <td>{fighterRow.victories}</td>
-                <td>{fighterRow.points}</td>
-                <td>{fighterRow.club}</td>
+              <tr key={index}>
+                <td className="dataCell">{fighterRow.fighter}</td>
+                <td className="dataCell">{fighterRow.victories}</td>
+                <td className="dataCell">{fighterRow.points}</td>
+                <td className="dataCell">{fighterRow.club}</td>
               </tr>
             ))}
           </tbody>
         </table>
-
-        {fights.map((fight, index) => (
-          <TournamentBonsai
-            key={index}
-            pair={{
-              firstNameBlue: fight.fighterBlue.firstname,
-              lastNameBlue: fight.fighterBlue.lastname,
-              clubBlue: fight.fighterBlue.club.name,
-              firstNameWhite: fight.fighterWhite.firstname,
-              lastNameWhite: fight.fighterWhite.lastname,
-              clubWhite: fight.fighterWhite.club.name,
-            }}
-            winner={{
-              firstName: winners[index].firstname,
-              lastName: winners[index].lastname,
-              club: winners[index].club.name,
-            }}
+      </div>
+      <div className="bracket-container">
+        <SVGViewer>
+          <SingleEliminationBracket
+            matches={fights}
+            matchComponent={TournamentMatch}
+            matchWidth={180}
+            matchHeight={80}
+            roundTitleComponent={(roundTitleProps) => <div {...roundTitleProps} />}
           />
-        ))}
+        </SVGViewer>
       </div>
     </div>
   );
