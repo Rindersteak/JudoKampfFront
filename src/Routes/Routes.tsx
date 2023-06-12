@@ -10,9 +10,6 @@ import ClubList from '../Pages/Club/ClubList/ClubList'
 import FightDetails from '../Pages/Fight/FightDetails/FightDetails'
 import TreeForTwo from '../Pages/Tournament/TournamentTree/TournamentTrees/TreeForTwo';
 import FightGroupList from '../Pages/FightGroup/FightGroupList';
-import TouranmentRules from '../Pages/Tournament/TournamentRules/TournamentRules';
-import TournamentManager from '../Pages/Tournament/TournamentManager/TournamentManager';
-
 interface AppRoutesProps {
   onOpenTournamentForm: () => void;
   onOpenFighterManager: () => void;

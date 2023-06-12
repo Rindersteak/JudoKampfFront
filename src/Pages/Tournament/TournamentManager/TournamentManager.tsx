@@ -33,7 +33,7 @@ const TournamentManager: React.FC = () => {
             onDeleteTournament={(tournamentId: number) => {}}
           />
         </div>
-        <div className='mainContainerContent'>
+        <div className='tournamentEditContainer'>
           <TournamentRules />
         </div>
         <div className='tournamentButtonsContainer'>
