@@ -32,6 +32,25 @@ const YellowCard = styled(StyledCard)({
   backgroundColor: "#FFD600"
 });
 
+function Timer() {
+  const [seconds, setSeconds] = useState(0);
+
+  const handleClick = () => {
+    setInterval(() => setSeconds(seconds + 1), 1000);
+  }
+
+  const formatTime = (time: number) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  }
+
+  return (
+    <div className='timer' style={{margin: '0 auto', color: '#FF0000'}} onClick={handleClick}>
+      {formatTime(seconds)}
+    </div>
+  );
+}
 
 function FightDetails() {
   return (
@@ -39,10 +58,11 @@ function FightDetails() {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Grid container spacing={2}>
-            <Grid item xs={12} style={{height: '50vh'}}>
+            <Grid item xs={12} style={{height: '35vh'}}>
               <Item className="header" sx={{ backgroundColor: '#272727', fontSize: '1.75em', color: '#FFC700', display: 'flex', alignItems: 'center', height: '100%', justifyContent: 'space-between'}}>
                 <div className='gewicht'>Gewicht</div>
-                <div className='timer' style={{ margin: '0 auto', color: '#FF0000' }}>00:00</div>
+                
+                <div className='timer' style={{ margin: '0 auto', color: '#FF0000' }}><Timer /></div>
                 <div className='vorrunde'>Vorrunde</div>
               </Item>
             </Grid>
@@ -92,6 +112,13 @@ function FightDetails() {
                     
                   </YellowCard>
                 </div>
+              </Item>
+            </Grid>
+          </Grid>
+          <Grid item xs={12}>
+            <Grid item xs={12} style={{height: '15vh'}}>
+              <Item className="header" sx={{ backgroundColor: 'white', fontSize: '1.75em', color: '#FFC700', display: 'flex', alignItems: 'center', height: '100%', justifyContent: 'space-between'}}>
+                  <div className='timer' style={{ margin: '0 auto', color: 'black' }}>00:00</div>
               </Item>
             </Grid>
           </Grid>
