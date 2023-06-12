@@ -177,10 +177,10 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
   const handleStateAssociationChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setStateAssociation(e.target.value);
   };
-
+// adjust formContainer for width of inputs
   return (
     <div className='tournamentEditMain'>
-      <form className='formContainer' onSubmit={handleSubmit}>
+      <form className='formContainer' onSubmit={handleSubmit}> 
       <h1 className="titleStyle">Turnier bearbeiten</h1>
 
         <div className="inputContainer">
@@ -324,20 +324,6 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
           </div>
         </div>
         
-
-      <div className='buttonSectionTournamentEdit'>
-        <button className="blueButton" type="submit" disabled={loading}>
-          {loading ? 'Laden...' : 'Änderung speichern'}
-        </button>
-        {showSuccessPopup && (
-                <div className="successPopup">
-                    Turnier wurde erfolgreich aktualisiert!
-                </div>
-            )}
-        <button className="redButton" type="button" onClick={handleDelete}>
-          Turnier löschen
-        </button>
-      </div>
       {showConfirmDeletePopup && (
         <Modal size="small" onClose={handleDeleteCanceled}>
           <ConfirmDelete

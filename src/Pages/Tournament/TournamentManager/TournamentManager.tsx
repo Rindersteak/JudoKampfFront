@@ -25,7 +25,6 @@ const TournamentManager: React.FC = () => {
   };
 
   return (
-    <div className='innerContainerScrollbar'>
       <div className='tournamentManagerContainer'>
         <div className='tournamentEditContainer'>
           <TournamentEdit
@@ -36,11 +35,22 @@ const TournamentManager: React.FC = () => {
         <div className='tournamentEditContainer'>
           <TournamentRules />
         </div>
-        <div className='tournamentButtonsContainer'>
-          {/* Add your update and delete buttons here */}
-        </div>
+      <div className='tournamentButtonsContainer'>
+        <div className='buttonSectionTournamentEdit'>
+        <button className="blueButton" type="submit" >
+         Änderung speichern!
+        </button>
+        {showSuccessPopup && (
+                <div className="successPopup">
+                    Turnier wurde erfolgreich aktualisiert!
+                </div>
+            )}
+        <button className="redButton" type="button" >
+          Turnier löschen
+        </button>
       </div>
     </div>
+      </div>
   );
 };
 

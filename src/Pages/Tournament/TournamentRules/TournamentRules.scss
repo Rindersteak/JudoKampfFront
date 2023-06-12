@@ -106,6 +106,7 @@ $screen-normal: 993px;
     justify-content: center;
     align-items: center;
     width: 100%;
+    padding-top: 20px;
 }
 
 .eponWasariContainer{
@@ -152,6 +153,7 @@ $screen-normal: 993px;
   grid-template-areas:
   'listWomen inputContent'
   'listMen inputContent';
+  padding-top: 20px;
 }
 
 .womenAgeClassesContainer{
@@ -160,6 +162,7 @@ $screen-normal: 993px;
   grid-template-columns: auto;
   width: 70%;
   background-color: #F9F9FC;
+  
 }
 
 .menAgeClassesContainer{
