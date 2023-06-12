@@ -108,7 +108,8 @@ $screen-normal: 993px;
     width: 100%;
     padding-top: 20px;
 }
-.inputContainerSecondRow{display: flex;
+.inputContainerSecondRow{
+    display: flex;
     flex-direction: column;
     margin-bottom: 1em;
     position: relative;

@@ -32,9 +32,10 @@ const TournamentManager: React.FC = () => {
             onDeleteTournament={(tournamentId: number) => {}}
           />
         </div>
-        <div className='tournamentEditContainer'>
+        <div className='tournamentRulesContainer'>
           <TournamentRules />
         </div>
+        
       <div className='tournamentButtonsContainer'>
         <div className='buttonSectionTournamentEdit'>
         <button className="blueButton" type="submit" >
@@ -50,7 +51,7 @@ const TournamentManager: React.FC = () => {
         </button>
       </div>
     </div>
-      </div>
+    </div>
   );
 };
 
