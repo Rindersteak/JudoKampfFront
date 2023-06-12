@@ -108,7 +108,13 @@ $screen-normal: 993px;
     width: 100%;
     padding-top: 20px;
 }
-
+.inputContainerSecondRow{display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+    position: relative;
+    height: 1.9375em;
+    width: 100%;
+}
 .eponWasariContainer{
   display: grid;
   grid-template-columns: auto;
@@ -116,7 +122,6 @@ $screen-normal: 993px;
 }
 
 .ageLimitAndFightDurationContainer,
-.holdTimeEponWasari,
 .pointsEponWasariContainer{
   display: grid;
   grid-template-columns: auto 4% auto;
@@ -126,6 +131,17 @@ $screen-normal: 993px;
     grid-template-columns: auto;
   }
 }
+
+.holdTimeEponWasari{
+    display: grid;
+  grid-template-columns: auto 4% auto;
+  margin-bottom: 1rem;
+
+  @include small{
+    grid-template-columns: auto;
+  }
+}  
+
 
 .ageLimitContainer,
 .holdTimeEpponContainer,
