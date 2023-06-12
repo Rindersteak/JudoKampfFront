@@ -8,10 +8,10 @@ import TournamentDetails from '../Pages/Tournament/TournamentDetails/TournamentD
 import TournamentList from '../Pages/Tournament/TournamentList/TournamentList';
 import ClubList from '../Pages/Club/ClubList/ClubList'
 import FightDetails from '../Pages/Fight/FightDetails/FightDetails'
-import TournamentEdit from '../Pages/Tournament/TournamentEdit/TournamentEdit';
 import TreeForTwo from '../Pages/Tournament/TournamentTree/TournamentTrees/TreeForTwo';
 import FightGroupList from '../Pages/FightGroup/FightGroupList';
-import Spielwiese from './Spielwiese';
+import TouranmentRules from '../Pages/Tournament/TournamentRules/TournamentRules';
+import TournamentManager from '../Pages/Tournament/TournamentManager/TournamentManager';
 
 interface AppRoutesProps {
   onOpenTournamentForm: () => void;
@@ -21,7 +21,7 @@ interface AppRoutesProps {
   onOpenTournamentList: () => void;
   onOpenClubManager: () => void;
   onOpenClubList: () => void;
-  onOpenTournamentEdit: () => void;
+  onOpenTournamentManager: () => void;
 }
 
 const AppRoutes: React.FC<AppRoutesProps> = ({
@@ -32,7 +32,7 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
   onOpenTournamentList,
   onOpenClubManager,
   onOpenClubList,
-  onOpenTournamentEdit
+  onOpenTournamentManager
 }) => (
   <Routes>
     <Route
@@ -62,7 +62,7 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
           onOpenFightGroupList={(tournamentId: string) => onOpenFightGroupList(tournamentId)}
           onOpenClubManager={onOpenClubManager}
           onOpenClubList={onOpenClubList}
-          onOpenTournamentEdit={onOpenTournamentEdit}
+          onOpenTournamentManager={onOpenTournamentManager}
         />
       }
     />
@@ -70,7 +70,6 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
     <Route path="/club-list" element={<ClubList onDeleteClub={() => { }} />} />
     <Route path="/fight-details" element={<FightDetails />} />
     <Route path="/tournament-tree-for-two/:fightgroupId" element={<TreeForTwo fightgroupId={1} />}/>
-    <Route path="/Spielwiese" element={<Spielwiese />} />
   </Routes>
 );
 

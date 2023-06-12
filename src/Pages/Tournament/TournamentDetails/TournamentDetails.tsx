@@ -15,12 +15,12 @@ interface TournamentDetailsProps {
   onOpenFighterManager: () => void;
   onOpenClubManager: () => void;
   onOpenClubList: () => void;
-  onOpenTournamentEdit: (tournamentId: string) => void;
+  onOpenTournamentManager: () => void;
   onOpenFightGroupList: (tournamentId: string) => void;
 }
 
 // Hauptkomponente TournamentDetails
-const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList, onOpenFighterManager, onOpenClubManager, onOpenClubList, onOpenTournamentEdit, onOpenFightGroupList }) => {
+const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenTournamentManager, onOpenFighterList, onOpenFighterManager, onOpenClubManager, onOpenClubList, onOpenFightGroupList }) => {
   // Hook, um URL-Parameter abzurufen
   const { tournamentId } = useParams<{ tournamentId: string | undefined }>();
   console.log(tournamentId)
@@ -78,7 +78,7 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList
         <CardThree tournamentId={tournamentId || ''} onOpenFighterManager={onOpenFighterManager} />
         <CardFour tournamentId={tournamentId || ''} onOpenClubList={onOpenClubList} />
         <CardFive tournamentId={tournamentId || ''} onOpenClubManager={onOpenClubManager} />
-        <CardSix tournamentId={tournamentId || ''} onOpenTournamentEdit={onOpenTournamentEdit} />
+        <CardSix tournamentId={tournamentId || ''} onOpenTournamentManager={onOpenTournamentManager} />
       </div>
     </div>
   );
@@ -168,9 +168,9 @@ const CardFive = ({ tournamentId, onOpenClubManager }: { tournamentId: string; o
   );
 };
 
-const CardSix = ({ tournamentId, onOpenTournamentEdit }: { tournamentId: string; onOpenTournamentEdit: (tournamentId: string) => void }) => {
+const CardSix = ({ tournamentId, onOpenTournamentManager }: { tournamentId: string; onOpenTournamentManager: (tournamentId: string) => void }) => {
   const handleCardSixClick = () => {
-    onOpenTournamentEdit(tournamentId);
+    onOpenTournamentManager(tournamentId);
   };
 
   return (

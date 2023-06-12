@@ -11,6 +11,7 @@ import ClubManager from '../Pages/Club/ClubManager/ClubManager';
 import ClubList from '../Pages/Club/ClubList/ClubList';
 import TournamentEdit from '../Pages/Tournament/TournamentEdit/TournamentEdit';
 import FightGroupList from '../Pages/FightGroup/FightGroupList';
+import TournamentManager from '../Pages/Tournament/TournamentManager/TournamentManager';
 
 interface TournamentEditProps {
   tournament?: Tournament;
@@ -20,7 +21,7 @@ interface TournamentEditProps {
 
 
 
-const App: React.FC = ({ }) => {
+const App: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState<React.ReactNode | null>(null);
   const [tournamentId, setTournamentId] = useState<string | undefined>();
@@ -104,6 +105,11 @@ const App: React.FC = ({ }) => {
     setModalOpen(true);
   };
 
+  const handleOpenTournamentManager = () => {
+    setModalContent(<TournamentManager />);
+    setModalOpen(true);
+  };
+
   return (
     <Router>
       <div className="container">
@@ -115,7 +121,7 @@ const App: React.FC = ({ }) => {
           onOpenTournamentList={handleOpenTournamentList}
           onOpenClubList={handleOpenClubList}
           onOpenClubManager={handleOpenClubManager}
-          onOpenTournamentEdit={handleOpenTournamentEdit}
+          onOpenTournamentManager={handleOpenTournamentManager}
         />
       </div>
       {modalOpen && (

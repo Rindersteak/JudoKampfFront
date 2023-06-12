@@ -179,8 +179,6 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
   };
 
   return (
-    <div style={{ display: 'flex' }}>
-      <div style={{ width: '50%' }}>
     <div className='tournamentEditMain'>
       <form className='formContainer' onSubmit={handleSubmit}>
       <h1 className="titleStyle">Turnier bearbeiten</h1>
@@ -351,36 +349,6 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
       )}
       {errorMessage && <div className="errorMessage">{errorMessage}</div>}
     </form>
-    </div>
-  
-    </div>
-    <div style={{ width: '50%', marginLeft: '20px' }}>
-        <Tabs>
-          <TabList>
-            <Tab>Mario</Tab>
-            <Tab disabled>Luigi</Tab>
-            <Tab>Peach</Tab>
-            <Tab>Yoshi</Tab>
-            <Tab>Toad</Tab>
-          </TabList>
-
-          <TabPanel>
-            {/* Content for Mario tab */}
-          </TabPanel>
-          <TabPanel>
-            {/* Content for Luigi tab */}
-          </TabPanel>
-          <TabPanel>
-            {/* Content for Peach tab */}
-          </TabPanel>
-          <TabPanel>
-            {/* Content for Yoshi tab */}
-          </TabPanel>
-          <TabPanel>
-            {/* Content for Toad tab */}
-          </TabPanel>
-        </Tabs>
-      </div>
     </div>
   );
 };
