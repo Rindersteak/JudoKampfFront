@@ -2,7 +2,7 @@ import { SketchPicker } from "react-color";
 import { useState, useEffect, useRef } from "react";
 import "./ColorPicker.scss";
 
-function App() {
+function ColorPicker() {
   const [sketchPickerColor, setSketchPickerColor] = useState({
     r: "241",
     g: "112",
@@ -99,4 +99,4 @@ function App() {
   );
 }
 
-export default App;
+export default ColorPicker;
