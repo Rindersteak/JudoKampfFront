@@ -221,7 +221,6 @@ $screen-normal: 993px;
     'label label label'
     'firstColor empty secondColor';
     position: relative;
-    height: 1.9375em;
     width: 100%;
   }
 
@@ -237,6 +236,12 @@ $screen-normal: 993px;
     grid-area: secondColor;
   }
   
-  .marginToButtonTournamentEdit{
-    margin-bottom: 3rem;
+  .marginToButtonColorContainer{
+    margin-bottom: 2rem;
+  }
+
+  .marginToButtonContainer{
+    @include normal{
+      margin-bottom: 3rem;
+    }
   }

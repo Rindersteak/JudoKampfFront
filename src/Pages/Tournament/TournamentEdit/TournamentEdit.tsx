@@ -284,7 +284,7 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
         </div>
       </div>
       <label className="inputLabel" htmlFor="period">Zeitraum</label>
-      <div className="inputContainerTimeIntervall marginToButtonTournamentEdit">
+      <div className="inputContainerTimeIntervall marginToButtonColorContainer">
                 <div className="inputContainer halfWidth">
                     <DatePicker
                         id="periodFrom"
@@ -307,7 +307,7 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
                     />
                 </div>
             </div>
-            <div className="colorContainer">
+            <div className="colorContainer marginToButtonContainer">
           <label className="inputLabel colorContainerLabel">
             Farbe der Kämpfer anpassen
           </label>
