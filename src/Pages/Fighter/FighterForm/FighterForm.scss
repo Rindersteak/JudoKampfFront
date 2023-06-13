@@ -3,16 +3,6 @@
 /* Importiert die Nunito Schriftart von Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
 
-/* Styling für den Formulartitel */
-.titleStyle {
-    font-family: 'Nunito';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 1.5em;
-    justify-content: center;
-    color: #001AFF;
-}
-
 .selectField {
     /* possibly need to adjust to make dynamic? */
     width: 104.5%;

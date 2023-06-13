@@ -47,9 +47,10 @@ $screen-normal: 993px;
 
 .modal.small .modal-content {
     width: 40%;
-
+    height: auto;
     @include small{
       width: 65%;
+      height: auto;
     }
     //height: 40%;
 }

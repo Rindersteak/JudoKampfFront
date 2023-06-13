@@ -13,16 +13,7 @@
     align-items: center;
   }
   
-  .titleStyleList {
-    color: #001AFF;
-    padding-bottom: 0em;
-    font-family: 'Nunito';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 1.5em;
-    text-align: center;
-  }
-  
+
   .headerStyle {
     font-family: 'Nunito';
     font-weight: 700;
@@ -90,19 +81,7 @@
     order: 6;
     flex-grow: 0;
   }
-  
-  .tableStyle th,
-  .tableStyle td {
-    padding: 0.6em;
-    text-align: left;
-    border-bottom: 1px solid #EEEEF2;
-  }
-  
-  .tableStyle th {
-    font-family: 'Nunito';
-    font-weight: 700;
-    color: #484964;
-  }
+
   
   .arrowButtonContainer {
     display: flex;
@@ -171,20 +150,11 @@
     left: 7px;
   }
   
-  .headerCell {
-    position: relative;
-  }
-  
   .headerCell button.arrowButton {
     position: absolute;
     top: 50%;
     right: 5px;
     transform: translateY(-50%);
-  }
-  
-  .tableStyle th,
-  .tableStyle td {
-    position: relative;
   }
   
   .tableStyle td::after {

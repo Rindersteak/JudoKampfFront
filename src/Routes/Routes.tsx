@@ -9,7 +9,7 @@ import TournamentList from '../Pages/Tournament/TournamentList/TournamentList';
 import ClubList from '../Pages/Club/ClubList/ClubList'
 import FightDetails from '../Pages/Fight/FightDetails/FightDetails'
 import TournamentEdit from '../Pages/Tournament/TournamentEdit/TournamentEdit';
-import TreeForTwo from '../Pages/Tournament/TournamentTree/TournamentTrees/TreeForTwo';
+//import TreeForTwo from '../Pages/Tournament/TournamentTree/TournamentTrees/TreeForTwo';
 import FightGroupList from '../Pages/FightGroup/FightGroupList';
 import Spielwiese from './Spielwiese';
 
@@ -69,7 +69,7 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
     <Route path="/tournament-list" element={<TournamentList onClose={onOpenTournamentList} />} />
     <Route path="/club-list" element={<ClubList onDeleteClub={() => { }} />} />
     <Route path="/fight-details" element={<FightDetails />} />
-    <Route path="/tournament-tree-for-two/:fightgroupId" element={<TreeForTwo fightgroupId={1} />}/>
+  
     <Route path="/Spielwiese" element={<Spielwiese />} />
   </Routes>
 );

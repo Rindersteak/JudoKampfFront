@@ -1,5 +1,5 @@
-$screen-mid: 535px;
-$screen-normal: 1000px;
+$screen-mid: 992px;
+$screen-normal: 993px;
 
 @mixin small{
   @media (max-width: #{$screen-mid}) {
