@@ -104,7 +104,7 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
   };
 
   return (
-    <form className='formContainer' onSubmit={handleSubmit}>
+    <form className='formContainer formWidthFighterForm' onSubmit={handleSubmit}>
       <h1 className="titleStyle">Neuen Teilnehmer hinzufügen</h1>
         <div className="inputContainer">
           <label className="inputLabel" htmlFor="firstName">Vorname</label>

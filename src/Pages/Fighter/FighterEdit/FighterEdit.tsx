@@ -117,7 +117,7 @@ const FighterEdit: React.FC<FighterEditProps> = ({ fighter, onUpdateFighter, onD
 
   return (
     <div className='fighterEditMain'>
-      <form className='formContainer' onSubmit={handleSubmit}>
+      <form className='formContainer formWidthFighterEdit' onSubmit={handleSubmit}>
       <h1 className="titleStyle">Teilnehmer bearbeiten</h1>
 
      

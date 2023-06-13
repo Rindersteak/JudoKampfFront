@@ -11,6 +11,7 @@ import ClubManager from '../Pages/Club/ClubManager/ClubManager';
 import ClubList from '../Pages/Club/ClubList/ClubList';
 import TournamentEdit from '../Pages/Tournament/TournamentEdit/TournamentEdit';
 import FightGroupList from '../Pages/FightGroup/FightGroupList';
+import TournamentManager from './../Pages/Tournament/TorunamentManager/TournamentManager'
 
 interface TournamentEditProps {
   tournament?: Tournament;
@@ -95,12 +96,7 @@ const App: React.FC = ({ }) => {
   };
 
   const handleOpenTournamentEdit = () => {
-    setModalContent(
-      <TournamentEdit
-        onUpdateTournament={handleUpdateTournament}
-        onDeleteTournament={handleDeleteTournament}
-      />
-    );
+    setModalContent(<TournamentManager/>);
     setModalOpen(true);
   };
 

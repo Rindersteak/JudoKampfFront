@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
-import Modal from '../../../Tools/Modal/Modal';
-import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
-import TournamentEdit from '../TournamentEdit/TournamentEdit';
-import './FighterManager.scss';
 import '../../../Styles/GlobalStyles.scss'
+import TournamentEdit from '../TournamentEdit/TournamentEdit';
+import Spielwiese from '../../../Routes/Spielwiese';
+import { Tournament } from '../../../types';
 
 const FighterManager: React.FC = () => {
     const [showSuccessPopup, setShowSuccessPopup] = useState(false);
-    const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState(false);
-    const [fighterIdToDelete, setFighterToDelete] = useState<number | null>(null);
     const [listKey, setListKey] = useState(Math.random());
 
     const handleSuccessPopup = (status: boolean) => {
@@ -20,9 +17,34 @@ const FighterManager: React.FC = () => {
             setListKey(Math.random());
         }
     };
+
+    interface TournamentEditProps {
+        tournament?: Tournament;
+        onUpdateTournament: (tournament: Tournament) => void;
+        onDeleteTournament: (tournamentId: string) => void;
+      }
+
+      const handleUpdateTournament = (tournamentId: Tournament) => {
+        // Add logic for updating the tournament
+        console.log('Update Tournament:', tournamentId);
+      };
+
+    
+
     return (
         <div className='innerContainerScrollbar'>
-            teest
+            <div className="innerContainer">
+            <TournamentEdit onUpdateTournament={function (tournament: Tournament): void {
+                    throw new Error('Function not implemented.');
+                } } onDeleteTournament={function (tournamentId: number): void {
+                    throw new Error('Function not implemented.');
+                } } />
+
+                
+                    <Spielwiese />
+                
+    
+        </div>
         </div>
     );
 };

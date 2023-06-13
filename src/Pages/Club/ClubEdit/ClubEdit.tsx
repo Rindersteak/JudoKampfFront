@@ -112,7 +112,7 @@ const ClubEdit: React.FC<ClubEditProps> = ({ club, onUpdateClub, onDeleteClub })
 
   return (
     <div className='clubEditMain'>
-      <form className='formContainer' onSubmit={handleSubmit}>
+      <form className='formContainer formWidthClubEdit' onSubmit={handleSubmit}>
       <h1 className="titleStyle">Verein bearbeiten</h1>
 
       <div className="inputContainer">

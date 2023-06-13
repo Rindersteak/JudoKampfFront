@@ -345,8 +345,6 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
       )}
       {errorMessage && <div className="errorMessage">{errorMessage}</div>}
     </form>
-
-    <Spielwiese></Spielwiese>
     </div>
   
   );

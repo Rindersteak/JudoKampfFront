@@ -46,8 +46,7 @@ $screen-normal: 993px;
     flex-direction: column;
     justify-content: center;
     align-items: center; /* zentriert die Elemente horizontal */
-    width: 35%;
-
+    
     @include small{
       width: 100%;
     }
@@ -222,7 +221,7 @@ $screen-normal: 993px;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    min-width: 870px;
+    min-width: 900px;
 
     @include small{
         display: grid;
