@@ -1,6 +1,6 @@
-const { app, BrowserWindow } = require('electron');
-const path = require('path');
-const url = require('url');
+const { app, BrowserWindow } = require("electron");
+const path = require("path");
+const url = require("url");
 
 let win;
 
@@ -13,22 +13,22 @@ function createWindow() {
     },
   });
 
-  win.loadURL('http://localhost:3000'); // URL des React-Entwicklungsmodus-Servers
+  win.loadURL("http://localhost:3000"); // URL des React-Entwicklungsmodus-Servers
 
-  win.on('closed', () => {
+  win.on("closed", () => {
     win = null;
   });
 }
 
-app.on('ready', createWindow);
+app.on("ready", createWindow);
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
     app.quit();
   }
 });
 
-app.on('activate', () => {
+app.on("activate", () => {
   if (win === null) {
     createWindow();
   }

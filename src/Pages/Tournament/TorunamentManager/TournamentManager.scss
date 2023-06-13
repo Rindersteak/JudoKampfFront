@@ -1,27 +1,26 @@
 $screen-mid: 992px;
 $screen-normal: 993px;
 
-@mixin small{
+@mixin small {
   @media (max-width: #{$screen-mid}) {
     @content;
   }
 }
 
-@mixin normal{
+@mixin normal {
   @media (min-width: #{$screen-normal}) {
     @content;
   }
 }
 
+.buttonContainerTournamentManager {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
 
-.buttonContainerTournamentManager{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-
-    @include small{
-        width: 75%;
-    }
+  @include small {
+    width: 75%;
+  }
 }

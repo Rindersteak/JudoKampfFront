@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { Fighter } from '../../../types';
-import { getFighters, deleteFighter } from '../../../API/fighterAPI';
-import { FiTrash2 } from 'react-icons/fi';
-import Modal from '../../../Tools/Modal/Modal';
-import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
-import FighterEdit from '../FighterEdit/FighterEdit';
-import './FighterList.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import React, { useEffect, useState } from "react";
+import { Fighter } from "../../../types";
+import { getFighters, deleteFighter } from "../../../API/fighterAPI";
+import { FiTrash2 } from "react-icons/fi";
+import Modal from "../../../Tools/Modal/Modal";
+import ConfirmDelete from "../../../Tools/ConfirmDelete/ConfirmDelete";
+import FighterEdit from "../FighterEdit/FighterEdit";
+import "./FighterList.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
 
 interface FighterListProps {
   detailedView?: boolean;
@@ -19,17 +19,20 @@ export const deleteFighterHandler = async (fighterId: number) => {
     await deleteFighter(fighterId);
     // Implementiere hier die Aktualisierung der Kämpferliste nach dem Löschen
   } catch (error) {
-    console.error('Fehler beim Löschen des Kämpfers:', error);
+    console.error("Fehler beim Löschen des Kämpfers:", error);
   }
 };
 
-const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDeleteFighter }) => {
+const FighterList: React.FC<FighterListProps> = ({
+  detailedView = true,
+  onDeleteFighter,
+}) => {
   const [backendFighters, setBackendFighters] = useState<Fighter[]>([]);
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
-  const [sortColumn, setSortColumn] = useState<string>('lastname');
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [sortColumn, setSortColumn] = useState<string>("lastname");
   const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState(false);
   const [fighterIdToDelete, setFighterToDelete] = useState<number | null>(null);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
 
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedFighter, setSelectedFighter] = useState<Fighter | null>(null);
@@ -40,29 +43,50 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
         const fighters = await getFighters();
         const fightersCopy = fighters.map((fighter: Fighter) => ({
           ...fighter,
-          birthdate: fighter.birthdate 
+          birthdate: fighter.birthdate,
         }));
 
         const sortedFighters = fightersCopy.sort((a: Fighter, b: Fighter) => {
-          if (sortColumn === 'lastname') {
-            return sortOrder === 'asc' ? a.lastname.localeCompare(b.lastname) : b.lastname.localeCompare(a.lastname);
-          } else if (sortColumn === 'club') {
-            return sortOrder === 'asc' ? a.club?.name?.localeCompare(b.club?.name || '') : b.club?.name?.localeCompare(a.club?.name || '');
-          } else if (sortColumn === 'city') {
-            return sortOrder === 'asc' ? a.club?.address?.city?.localeCompare(b.club?.address?.city || '') : b.club?.address?.city?.localeCompare(a.club?.address?.city || '');
-          } else if (sortColumn === 'id') {
-            return sortOrder === 'asc' ? a.id - b.id : b.id - a.id;
-          } else if (sortColumn === 'weightclass') {
-            return sortOrder === 'asc' ? (a.weightclass?.name || '').localeCompare(b.weightclass?.name || '') : (b.weightclass?.name || '').localeCompare(a.weightclass?.name || '');
-          } else if (sortColumn === 'birthdate') {
-            return sortOrder === 'asc' ? a.birthdate.localeCompare(b.birthdate) : b.birthdate.localeCompare(a.birthdate);
+          if (sortColumn === "lastname") {
+            return sortOrder === "asc"
+              ? a.lastname.localeCompare(b.lastname)
+              : b.lastname.localeCompare(a.lastname);
+          } else if (sortColumn === "club") {
+            return sortOrder === "asc"
+              ? a.club?.name?.localeCompare(b.club?.name || "")
+              : b.club?.name?.localeCompare(a.club?.name || "");
+          } else if (sortColumn === "city") {
+            return sortOrder === "asc"
+              ? a.club?.address?.city?.localeCompare(
+                  b.club?.address?.city || ""
+                )
+              : b.club?.address?.city?.localeCompare(
+                  a.club?.address?.city || ""
+                );
+          } else if (sortColumn === "id") {
+            return sortOrder === "asc" ? a.id - b.id : b.id - a.id;
+          } else if (sortColumn === "weightclass") {
+            return sortOrder === "asc"
+              ? (a.weightclass?.name || "").localeCompare(
+                  b.weightclass?.name || ""
+                )
+              : (b.weightclass?.name || "").localeCompare(
+                  a.weightclass?.name || ""
+                );
+          } else if (sortColumn === "birthdate") {
+            return sortOrder === "asc"
+              ? a.birthdate.localeCompare(b.birthdate)
+              : b.birthdate.localeCompare(a.birthdate);
           }
           return 0;
         });
-        
+
         setBackendFighters(sortedFighters);
       } catch (error) {
-        console.error('Fehler beim Laden der Kämpfer aus der Datenbank:', error);
+        console.error(
+          "Fehler beim Laden der Kämpfer aus der Datenbank:",
+          error
+        );
       }
     };
 
@@ -71,7 +95,7 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
 
   const handleSortClick = (column: string) => {
     setSortColumn(column);
-    setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   };
 
   const handleDeleteFighter = (event: React.MouseEvent, fighterId: number) => {
@@ -84,9 +108,11 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
     if (fighterIdToDelete !== null) {
       await deleteFighterHandler(fighterIdToDelete);
       setShowConfirmDeletePopup(false);
-      setBackendFighters(backendFighters.filter(fighter => fighter.id !== fighterIdToDelete));
+      setBackendFighters(
+        backendFighters.filter((fighter) => fighter.id !== fighterIdToDelete)
+      );
     }
-  }
+  };
 
   const handleDeleteCanceled = () => {
     setShowConfirmDeletePopup(false);
@@ -105,11 +131,16 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
     setSearchTerm(event.target.value);
   };
 
-  const filteredFighters = backendFighters.filter(fighter =>
-    fighter.lastname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    fighter.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (fighter.club?.name && fighter.club.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
-    (fighter.club?.address?.city && fighter.club.address.city.toLowerCase().includes(searchTerm.toLowerCase()))
+  const filteredFighters = backendFighters.filter(
+    (fighter) =>
+      fighter.lastname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      fighter.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (fighter.club?.name &&
+        fighter.club.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (fighter.club?.address?.city &&
+        fighter.club.address.city
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()))
   );
 
   return (
@@ -120,33 +151,47 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
         </div>
       )}
 
-      <div className='searchContainerForLists'>
+      <div className="searchContainerForLists">
         <input
-          className='searchField'
-          type='search'
-          placeholder='Teilnehmer suchen'
+          className="searchField"
+          type="search"
+          placeholder="Teilnehmer suchen"
           value={searchTerm}
           onChange={handleSearchChange}
         />
       </div>
 
-      <div className='listContainer'>
+      <div className="listContainer">
         <table className="tableStyle">
           <thead>
             <tr>
               <th className="headerCell">
                 Name
                 {detailedView && (
-                  <button className="arrowButton" onClick={() => handleSortClick('lastname')}>
-                    {sortOrder === 'asc' && sortColumn === 'lastname' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
+                  <button
+                    className="arrowButton"
+                    onClick={() => handleSortClick("lastname")}
+                  >
+                    {sortOrder === "asc" && sortColumn === "lastname" ? (
+                      <FontAwesomeIcon icon={faArrowDown} />
+                    ) : (
+                      <FontAwesomeIcon icon={faArrowUp} />
+                    )}
                   </button>
                 )}
               </th>
               <th className="headerCell">
                 Verein
                 {detailedView && (
-                  <button className="arrowButton" onClick={() => handleSortClick('club')}>
-                    {sortOrder === 'asc' && sortColumn === 'club' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
+                  <button
+                    className="arrowButton"
+                    onClick={() => handleSortClick("club")}
+                  >
+                    {sortOrder === "asc" && sortColumn === "club" ? (
+                      <FontAwesomeIcon icon={faArrowDown} />
+                    ) : (
+                      <FontAwesomeIcon icon={faArrowUp} />
+                    )}
                   </button>
                 )}
               </th>
@@ -154,26 +199,54 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
                 <>
                   <th className="headerCell">
                     Stadt
-                    <button className="arrowButton" onClick={() => handleSortClick('city')}>
-                      {sortOrder === 'asc' && sortColumn === 'city' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
+                    <button
+                      className="arrowButton"
+                      onClick={() => handleSortClick("city")}
+                    >
+                      {sortOrder === "asc" && sortColumn === "city" ? (
+                        <FontAwesomeIcon icon={faArrowDown} />
+                      ) : (
+                        <FontAwesomeIcon icon={faArrowUp} />
+                      )}
                     </button>
                   </th>
                   <th className="headerCell">
                     Teilnehmer-ID
-                    <button className="arrowButton" onClick={() => handleSortClick('id')}>
-                      {sortOrder === 'asc' && sortColumn === 'id' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
+                    <button
+                      className="arrowButton"
+                      onClick={() => handleSortClick("id")}
+                    >
+                      {sortOrder === "asc" && sortColumn === "id" ? (
+                        <FontAwesomeIcon icon={faArrowDown} />
+                      ) : (
+                        <FontAwesomeIcon icon={faArrowUp} />
+                      )}
                     </button>
                   </th>
                   <th className="headerCell">
                     Gewichtsklasse
-                    <button className="arrowButton" onClick={() => handleSortClick('weightclass')}>
-                      {sortOrder === 'asc' && sortColumn === 'weightclass' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
+                    <button
+                      className="arrowButton"
+                      onClick={() => handleSortClick("weightclass")}
+                    >
+                      {sortOrder === "asc" && sortColumn === "weightclass" ? (
+                        <FontAwesomeIcon icon={faArrowDown} />
+                      ) : (
+                        <FontAwesomeIcon icon={faArrowUp} />
+                      )}
                     </button>
                   </th>
                   <th className="headerCell">
                     Geburtsdatum
-                    <button className="arrowButton" onClick={() => handleSortClick('birthdate')}>
-                      {sortOrder === 'asc' && sortColumn === 'birthdate' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
+                    <button
+                      className="arrowButton"
+                      onClick={() => handleSortClick("birthdate")}
+                    >
+                      {sortOrder === "asc" && sortColumn === "birthdate" ? (
+                        <FontAwesomeIcon icon={faArrowDown} />
+                      ) : (
+                        <FontAwesomeIcon icon={faArrowUp} />
+                      )}
                     </button>
                   </th>
                 </>
@@ -191,7 +264,9 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
                   key={fighter.id}
                   onClick={() => handleEditFighter(fighter)} // Hinzufügen des onClick-Handlers für das Öffnen des Popups/Modals
                 >
-                  <td>{fighter.lastname} {fighter.firstname}</td>
+                  <td>
+                    {fighter.lastname} {fighter.firstname}
+                  </td>
                   <td>{fighter.club?.name}</td>
                   {detailedView && (
                     <>
@@ -201,7 +276,12 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
                       <td>{birthdateAsDate.toDateString()}</td>
                     </>
                   )}
-                  <td className="deleteIcon" onClick={(event) => handleDeleteFighter(event, fighter.id)}><FiTrash2 /></td>
+                  <td
+                    className="deleteIcon"
+                    onClick={(event) => handleDeleteFighter(event, fighter.id)}
+                  >
+                    <FiTrash2 />
+                  </td>
                 </tr>
               );
             })}
@@ -221,7 +301,11 @@ const FighterList: React.FC<FighterListProps> = ({ detailedView = true, onDelete
 
       {showEditModal && selectedFighter && (
         <Modal size="large" onClose={handleEditModalClose}>
-          <FighterEdit fighter={selectedFighter} onUpdateFighter={() => { }} onDeleteFighter={() => { }} />
+          <FighterEdit
+            fighter={selectedFighter}
+            onUpdateFighter={() => {}}
+            onDeleteFighter={() => {}}
+          />
         </Modal>
       )}
     </div>

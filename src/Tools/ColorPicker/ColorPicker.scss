@@ -1,20 +1,19 @@
-.colorPickerContainer{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    background-color: #EDEFF2;
-    width: 100%;
+.colorPickerContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #edeff2;
+  width: 100%;
 }
 
-.inputFieldContainer{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+.inputFieldContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-.sketch-picker{
-    z-index: 99;
-    position: absolute;
-
+.sketch-picker {
+  z-index: 99;
+  position: absolute;
 }

@@ -1,26 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import { Tournament } from '../../../types';
-import { getTotalParticipants } from '../../../API/fighterAPI';
-import { getTournaments, deleteTournament } from '../../../API/tournamentAPI';
-import { FiTrash2 } from 'react-icons/fi';
-import Modal from '../../../Tools/Modal/Modal';
-import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
-import './TournamentList.scss';
-import { useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowDown, faArrowUp} from '@fortawesome/free-solid-svg-icons';
+import React, { useEffect, useState } from "react";
+import { Tournament } from "../../../types";
+import { getTotalParticipants } from "../../../API/fighterAPI";
+import { getTournaments, deleteTournament } from "../../../API/tournamentAPI";
+import { FiTrash2 } from "react-icons/fi";
+import Modal from "../../../Tools/Modal/Modal";
+import ConfirmDelete from "../../../Tools/ConfirmDelete/ConfirmDelete";
+import "./TournamentList.scss";
+import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
 
 interface TournamentListProps {
   onClose: () => void;
 }
 
 const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
-  const [backendTournaments, setBackendTournaments] = useState<Tournament[]>([]);
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
-  const [sortColumn, setSortColumn] = useState<string>('name');
+  const [backendTournaments, setBackendTournaments] = useState<Tournament[]>(
+    []
+  );
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [sortColumn, setSortColumn] = useState<string>("name");
   const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState(false);
-  const [tournamentIdToDelete, setTournamentToDelete] = useState<number | null>(null);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [tournamentIdToDelete, setTournamentToDelete] = useState<number | null>(
+    null
+  );
+  const [searchTerm, setSearchTerm] = useState("");
 
   const navigate = useNavigate();
 
@@ -30,27 +34,39 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
         let tournaments = await getTournaments();
 
         tournaments = tournaments.sort((a: Tournament, b: Tournament) => {
-          if (sortColumn === 'name') {
-            return sortOrder === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
-          } else if (sortColumn === 'location') {
-            return sortOrder === 'asc' ? a.location.localeCompare(b.location) : b.location.localeCompare(a.location);
-          } else if (sortColumn === 'city') {
-            return sortOrder === 'asc' ? a.address.city.localeCompare(b.address.city) : b.address.city.localeCompare(a.address.city);
-          } else if (sortColumn === 'id') {
-            return sortOrder === 'asc' ? a.id - b.id : b.id - a.id;
-          } else if (sortColumn === 'participants') {
+          if (sortColumn === "name") {
+            return sortOrder === "asc"
+              ? a.name.localeCompare(b.name)
+              : b.name.localeCompare(a.name);
+          } else if (sortColumn === "location") {
+            return sortOrder === "asc"
+              ? a.location.localeCompare(b.location)
+              : b.location.localeCompare(a.location);
+          } else if (sortColumn === "city") {
+            return sortOrder === "asc"
+              ? a.address.city.localeCompare(b.address.city)
+              : b.address.city.localeCompare(a.address.city);
+          } else if (sortColumn === "id") {
+            return sortOrder === "asc" ? a.id - b.id : b.id - a.id;
+          } else if (sortColumn === "participants") {
             const aTotalParticipants = getTotalParticipants(a.fighters);
             const bTotalParticipants = getTotalParticipants(b.fighters);
-            return sortOrder === 'asc' ? aTotalParticipants - bTotalParticipants : bTotalParticipants - aTotalParticipants;
-          } else if (sortColumn === 'period') {
-            return sortOrder === 'asc' ? new Date(a.startdate).getTime() - new Date(b.startdate).getTime() : new Date(b.startdate).getTime() - new Date(a.startdate).getTime();
+            return sortOrder === "asc"
+              ? aTotalParticipants - bTotalParticipants
+              : bTotalParticipants - aTotalParticipants;
+          } else if (sortColumn === "period") {
+            return sortOrder === "asc"
+              ? new Date(a.startdate).getTime() -
+                  new Date(b.startdate).getTime()
+              : new Date(b.startdate).getTime() -
+                  new Date(a.startdate).getTime();
           }
           return 0;
         });
 
         setBackendTournaments(tournaments);
       } catch (error) {
-        console.error('Error loading backend tournaments:', error);
+        console.error("Error loading backend tournaments:", error);
       }
     };
 
@@ -68,7 +84,7 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
 
   const handleSortClick = (column: string) => {
     setSortColumn(column);
-    setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   };
 
   const handleDeleteTournament = (tournamentId: number) => {
@@ -80,7 +96,11 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
     if (tournamentIdToDelete !== null) {
       await deleteTournament(tournamentIdToDelete);
       setShowConfirmDeletePopup(false);
-      setBackendTournaments(backendTournaments.filter(tournament => tournament.id !== tournamentIdToDelete));
+      setBackendTournaments(
+        backendTournaments.filter(
+          (tournament) => tournament.id !== tournamentIdToDelete
+        )
+      );
     }
   };
 
@@ -98,8 +118,13 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
     const name = tournament.name.toLowerCase();
     const city = tournament.address.city.toLowerCase();
     const id = tournament.id.toString().toLowerCase();
-    const participants = getTotalParticipants(tournament.fighters).toString().toLowerCase();
-    const period = formatTournamentPeriod(tournament.startdate, tournament.enddate).toLowerCase();
+    const participants = getTotalParticipants(tournament.fighters)
+      .toString()
+      .toLowerCase();
+    const period = formatTournamentPeriod(
+      tournament.startdate,
+      tournament.enddate
+    ).toLowerCase();
 
     return (
       name.includes(searchTerm.toLowerCase()) ||
@@ -115,47 +140,82 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
       <div className="headerBanner">
         <h1 className="titleStyleList">Turnierliste</h1>
       </div>
-      <div className='searchContainerForLists'>
+      <div className="searchContainerForLists">
         <input
-          className='searchField'
-          type='search'
-          placeholder='Turnier suchen'
+          className="searchField"
+          type="search"
+          placeholder="Turnier suchen"
           value={searchTerm}
           onChange={handleSearchChange}
         />
       </div>
-      <div className='listContainer'>
+      <div className="listContainer">
         <table className="tableStyle">
           <thead>
             <tr>
               <th className="headerCell">
                 Name
-                <button className="arrowButton" onClick={() => handleSortClick('name')}>
-                  {sortOrder === 'asc' && sortColumn === 'name' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
+                <button
+                  className="arrowButton"
+                  onClick={() => handleSortClick("name")}
+                >
+                  {sortOrder === "asc" && sortColumn === "name" ? (
+                    <FontAwesomeIcon icon={faArrowDown} />
+                  ) : (
+                    <FontAwesomeIcon icon={faArrowUp} />
+                  )}
                 </button>
               </th>
               <th className="headerCell">
                 Stadt
-                <button className="arrowButton" onClick={() => handleSortClick('city')}>
-                  {sortOrder === 'asc' && sortColumn === 'city' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
+                <button
+                  className="arrowButton"
+                  onClick={() => handleSortClick("city")}
+                >
+                  {sortOrder === "asc" && sortColumn === "city" ? (
+                    <FontAwesomeIcon icon={faArrowDown} />
+                  ) : (
+                    <FontAwesomeIcon icon={faArrowUp} />
+                  )}
                 </button>
               </th>
               <th className="headerCell">
                 Turnier-ID
-                <button className="arrowButton" onClick={() => handleSortClick('id')}>
-                  {sortOrder === 'asc' && sortColumn === 'id' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
+                <button
+                  className="arrowButton"
+                  onClick={() => handleSortClick("id")}
+                >
+                  {sortOrder === "asc" && sortColumn === "id" ? (
+                    <FontAwesomeIcon icon={faArrowDown} />
+                  ) : (
+                    <FontAwesomeIcon icon={faArrowUp} />
+                  )}
                 </button>
               </th>
               <th className="headerCell">
                 Anzahl Teilnehmer
-                <button className="arrowButton" onClick={() => handleSortClick('participants')}>
-                  {sortOrder === 'asc' && sortColumn === 'participants' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
+                <button
+                  className="arrowButton"
+                  onClick={() => handleSortClick("participants")}
+                >
+                  {sortOrder === "asc" && sortColumn === "participants" ? (
+                    <FontAwesomeIcon icon={faArrowDown} />
+                  ) : (
+                    <FontAwesomeIcon icon={faArrowUp} />
+                  )}
                 </button>
               </th>
               <th className="headerCell">
                 Zeitraum
-                <button className="arrowButton" onClick={() => handleSortClick('period')}>
-                  {sortOrder === 'asc' && sortColumn === 'period' ? <FontAwesomeIcon icon={faArrowDown} /> : <FontAwesomeIcon icon={faArrowUp} />}
+                <button
+                  className="arrowButton"
+                  onClick={() => handleSortClick("period")}
+                >
+                  {sortOrder === "asc" && sortColumn === "period" ? (
+                    <FontAwesomeIcon icon={faArrowDown} />
+                  ) : (
+                    <FontAwesomeIcon icon={faArrowUp} />
+                  )}
                 </button>
               </th>
               <th className="headerCell"></th>
@@ -172,8 +232,19 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
                 <td>{tournament.address.city}</td>
                 <td>{tournament.id}</td>
                 <td>{getTotalParticipants(tournament.fighters)}</td>
-                <td>{formatTournamentPeriod(tournament.startdate, tournament.enddate)}</td>
-                <td className="deleteIcon" onClick={(e) => { e.stopPropagation(); handleDeleteTournament(tournament.id); }}>
+                <td>
+                  {formatTournamentPeriod(
+                    tournament.startdate,
+                    tournament.enddate
+                  )}
+                </td>
+                <td
+                  className="deleteIcon"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDeleteTournament(tournament.id);
+                  }}
+                >
                   <FiTrash2 />
                 </td>
               </tr>
@@ -184,7 +255,11 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
 
       {showConfirmDeletePopup && tournamentIdToDelete !== null && (
         <Modal size="small" onClose={handleDeleteCanceled}>
-          <ConfirmDelete onClose={handleDeleteCanceled} onConfirmDelete={handleDeleteConfirmed} idToDelete={tournamentIdToDelete} />
+          <ConfirmDelete
+            onClose={handleDeleteCanceled}
+            onConfirmDelete={handleDeleteConfirmed}
+            idToDelete={tournamentIdToDelete}
+          />
         </Modal>
       )}
     </div>

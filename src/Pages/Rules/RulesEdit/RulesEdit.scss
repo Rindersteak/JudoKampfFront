@@ -1,113 +1,110 @@
 $screen-mid: 992px;
 $screen-normal: 993px;
 
-@mixin small{
+@mixin small {
   @media (max-width: #{$screen-mid}) {
     @content;
   }
 }
 
-@mixin normal{
+@mixin normal {
   @media (min-width: #{$screen-normal}) {
     @content;
   }
 }
 
-.fightModeContainer{
-    display: grid;
-    grid-template-areas: 
-    'header header header'
-    'menuOne menuTwo menuThree'
-    'container container container';
-    margin-left: 1rem
+.fightModeContainer {
+  display: grid;
+  grid-template-areas:
+    "header header header"
+    "menuOne menuTwo menuThree"
+    "container container container";
+  margin-left: 1rem;
 }
 
-.headerBannerGridArea{
+.headerBannerGridArea {
   grid-area: header;
 }
 
 .fightModeContainer {
-    .menuClasses,
-    .menuRulesTeenagers,
-    .menuRulesAdults {
-      background-color: #F3F3F3;
+  .menuClasses,
+  .menuRulesTeenagers,
+  .menuRulesAdults {
+    background-color: #f3f3f3;
+    color: 001AFF;
+    padding: 10px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: lightgray;
+    }
+
+    &.selected {
+      background-color: white;
       color: 001AFF;
-      padding: 10px;
-      cursor: pointer;
-  
-      &:hover {
-        background-color: lightgray;
-      }
-  
-      &.selected {
-        background-color: white;
-        color: 001AFF;
-        border: 1px groove;
-      }
+      border: 1px groove;
     }
   }
-
-    .menuClasses,
-    .menuRulesAdults,
-    .menuRulesTeenagers{
-        font-family: 'Nunito';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 18px;
-        line-height: 25px;
-        color: #001AFF;
-        background-color: #F3F3F3;
-    }
-
-
-.menuRulesAdults{
-    grid-area: menuOne;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    border-radius: 5px 5px 0px 0px;
 }
 
-.menuRulesTeenagers{
-    grid-area: menuTwo;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px 5px 0px 0px;
-
+.menuClasses,
+.menuRulesAdults,
+.menuRulesTeenagers {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 25px;
+  color: #001aff;
+  background-color: #f3f3f3;
 }
 
-
-.menuClasses{
-    grid-area: menuThree;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px 5px 0px 0px;
+.menuRulesAdults {
+  grid-area: menuOne;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 5px 5px 0px 0px;
 }
 
-.contentContainer{
-    grid-area: container;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    border: 1px groove;
-    overflow: auto;
+.menuRulesTeenagers {
+  grid-area: menuTwo;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px 5px 0px 0px;
 }
 
-.mainContainerContent{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+.menuClasses {
+  grid-area: menuThree;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px 5px 0px 0px;
 }
 
-.eponWasariContainer{
+.contentContainer {
+  grid-area: container;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  border: 1px groove;
+  overflow: auto;
+}
+
+.mainContainerContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.eponWasariContainer {
   display: grid;
   grid-template-columns: auto;
   width: 100%;
@@ -115,64 +112,64 @@ $screen-normal: 993px;
 
 .ageLimitAndFightDurationContainer,
 .holdTimeEponWasari,
-.pointsEponWasariContainer{
+.pointsEponWasariContainer {
   display: grid;
   grid-template-columns: auto 4% auto;
   margin-bottom: 2rem;
-  
-  @include small{
+
+  @include small {
     grid-template-columns: auto;
   }
 }
 
 .ageLimitContainer,
 .holdTimeEpponContainer,
-.pointsEpponContainer{
+.pointsEpponContainer {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
 .fightDurationContainer,
-.pointsWasariContainer{
+.pointsWasariContainer {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   width: 100%;
 
-  @include small{
+  @include small {
     margin-top: 2rem;
   }
 }
 
-.mainContentContainer{
+.mainContentContainer {
   display: grid;
   width: 100%;
   grid-template-areas:
-  'listWomen inputContent'
-  'listMen inputContent';
+    "listWomen inputContent"
+    "listMen inputContent";
 }
 
-.womenAgeClassesContainer{
+.womenAgeClassesContainer {
   grid-area: listWomen;
   display: grid;
   grid-template-columns: auto;
   width: 70%;
-  background-color: #F9F9FC;
+  background-color: #f9f9fc;
 }
 
-.menAgeClassesContainer{
+.menAgeClassesContainer {
   grid-area: listMen;
   width: 70%;
   margin-top: 3%;
-  background-color: #F9F9FC;
+  background-color: #f9f9fc;
 }
 
-.category{
+.category {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  font-family: 'Nunito';
+  font-family: "Nunito";
   font-style: normal;
   width: 100%;
   font-weight: 700;
@@ -183,11 +180,11 @@ $screen-normal: 993px;
   border-top: 1px groove;
 }
 
-.rows{
+.rows {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  font-family: 'Nunito';
+  font-family: "Nunito";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -197,18 +194,16 @@ $screen-normal: 993px;
   padding-top: 5%;
   padding-bottom: 5%;
   border-bottom: 1px groove;
-
 }
 
-.classesInputContent{
+.classesInputContent {
   grid-area: inputContent;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   width: 100%;
- 
 }
 
-.marginToOtherFields{
+.marginToOtherFields {
   margin-bottom: 1rem;
 }

@@ -1,13 +1,13 @@
 $screen-mid: 1000px;
 $screen-normal: 1001px;
 
-@mixin small{
+@mixin small {
   @media (max-width: #{$screen-mid}) {
     @content;
   }
 }
 
-@mixin normal{
+@mixin normal {
   @media (min-width: #{$screen-normal}) {
     @content;
   }
@@ -23,13 +23,13 @@ $screen-normal: 1001px;
 */
 
 .successPopup {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    padding: 10px;
-    background-color: #4caf50;
-    color: white;
-    z-index: 1000;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.25);
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  z-index: 1000;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
 }

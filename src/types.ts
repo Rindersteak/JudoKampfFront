@@ -41,7 +41,6 @@ export type Fighter = {
   club: Club;
 };
 
-
 export type Fight = {
   id: number;
   fighterBlue: Fighter;
@@ -69,20 +68,17 @@ export type Fightgroup = {
   fights: Fight[];
 };
 
-
 export type Tournament = {
-  id: number,
-  name: string,
-  address: Address,
-  ageclass: AgeClass,
-  weightclass: WeightClass,
-  code: string,  
+  id: number;
+  name: string;
+  address: Address;
+  ageclass: AgeClass;
+  weightclass: WeightClass;
+  code: string;
   stateassociation: string;
-  location: string,
-  startdate: string,
-  enddate: string,
-  fighters: Fighter[],
-  fights: Fight[]
-}
-
-
+  location: string;
+  startdate: string;
+  enddate: string;
+  fighters: Fighter[];
+  fights: Fight[];
+};

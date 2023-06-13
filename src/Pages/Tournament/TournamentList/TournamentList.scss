@@ -11,25 +11,23 @@
 
 /* Inhalt von Ort und Tournier-ID blau, da sie klickbar sein sollen (Linking) */
 .idStyleContent,
-.locationStyleContent
-
-{
-    color: #484964;
-    flex: 1 1 0px;
-    min-height: auto;
-    background-color: #f9f9fc;
-    padding: 0.6em;
-    text-indent: 1em;
-    overflow-wrap: break-word; /* Fügt die Eigenschaft overflow-wrap hinzu, um den Text bei Bedarf zu umbrechen */
+.locationStyleContent {
+  color: #484964;
+  flex: 1 1 0px;
+  min-height: auto;
+  background-color: #f9f9fc;
+  padding: 0.6em;
+  text-indent: 1em;
+  overflow-wrap: break-word; /* Fügt die Eigenschaft overflow-wrap hinzu, um den Text bei Bedarf zu umbrechen */
 }
 
 .locationStyleContent {
-    color: #001AFF; /* Farbe für den Ort */
-    text-align: left;
+  color: #001aff; /* Farbe für den Ort */
+  text-align: left;
 }
 
 .idStyleContent {
-    color: #001AFF; /* Farbe für die Turnier-ID */
+  color: #001aff; /* Farbe für die Turnier-ID */
 }
 
 .locationStyleContent,
@@ -38,11 +36,11 @@
 }
 
 .clickable:hover {
-    background-color: rgba(0, 0, 0, 0.10);
-    cursor: pointer;
-  }
-  
-  .entryStyle:hover {
-    background-color: rgba(0, 0, 0, 0.10);
-    cursor: pointer;
-  }
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.entryStyle:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}

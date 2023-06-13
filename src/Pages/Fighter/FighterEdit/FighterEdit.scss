@@ -1,19 +1,19 @@
 $screen-mid: 992px;
 $screen-normal: 993px;
 
-@mixin small{
+@mixin small {
   @media (max-width: #{$screen-mid}) {
     @content;
   }
 }
 
-@mixin normal{
+@mixin normal {
   @media (min-width: #{$screen-normal}) {
     @content;
   }
 }
 
-.fighterEditMain{
+.fighterEditMain {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,21 +21,19 @@ $screen-normal: 993px;
   position: relative;
 }
 
-.buttonSectionFighterEdit{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 100%;
+.buttonSectionFighterEdit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
 }
 
-.marginTopWeightFighterEdit{
-  
-    margin-top: 2rem;
-
+.marginTopWeightFighterEdit {
+  margin-top: 2rem;
 }
 
-.formWidthFighterEdit{
+.formWidthFighterEdit {
   width: 35%;
 }

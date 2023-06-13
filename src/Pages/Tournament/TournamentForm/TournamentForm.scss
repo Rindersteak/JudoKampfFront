@@ -1,224 +1,213 @@
 /* TournamentForm.css */
 
 /* Importiert die Nunito Schriftart von Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap");
 
 $screen-mid: 992px;
 $screen-normal: 993px;
 
-@mixin small{
+@mixin small {
   @media (max-width: #{$screen-mid}) {
     @content;
   }
 }
 
-@mixin normal{
+@mixin normal {
   @media (min-width: #{$screen-normal}) {
     @content;
   }
 }
 
-.newTournamentMain{
-    display: flex;
-    justify-content: center;
-
+.newTournamentMain {
+  display: flex;
+  justify-content: center;
 }
 
-.buttonSectionTournamentForm{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    margin-top: 2em;
-    width: 100%;
+.buttonSectionTournamentForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-top: 2em;
+  width: 100%;
 
-    @include small{
-        margin-top: 3em;
-    }
+  @include small {
+    margin-top: 3em;
+  }
 }
 
 .inputFieldWide {
-    width: 243px;
-    box-sizing: border-box;
-    border: none;
-    background: none;
-    height: 30px;
-    border-radius: 5px;
-    padding: 0 0.625em;
-    font-family: 'Nunito', sans-serif;
-    font-size: 1em;
-    background: #EDEFF2;
-    align-self: flex-start;
+  width: 243px;
+  box-sizing: border-box;
+  border: none;
+  background: none;
+  height: 30px;
+  border-radius: 5px;
+  padding: 0 0.625em;
+  font-family: "Nunito", sans-serif;
+  font-size: 1em;
+  background: #edeff2;
+  align-self: flex-start;
 }
 
 .inputFieldSmall {
-    width: 117px;
-    box-sizing: border-box;
-    border: none;
-    background: none;
-    height: 30px;
-    border-radius: 5px;
-    padding: 0 0.625em;
-    font-family: 'Nunito', sans-serif;
-    font-size: 1em;
-    background: #EDEFF2;
-    align-self: flex-end;
+  width: 117px;
+  box-sizing: border-box;
+  border: none;
+  background: none;
+  height: 30px;
+  border-radius: 5px;
+  padding: 0 0.625em;
+  font-family: "Nunito", sans-serif;
+  font-size: 1em;
+  background: #edeff2;
+  align-self: flex-end;
 }
 
 /* Styling für Dropdown-Felder */
 .selectField {
-    width: 100%;
-    border-radius: 5px;
-    border: none;
-    padding: 0 0.625em;
-    font-family: 'Nunito', sans-serif;
-    font-size: 1em;
-    background: #EDEFF2;
-    appearance: none;
-    position: relative;
-    height: 1.9375em;
-    -moz-appearance: none;
-    -webkit-appearance: none;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  padding: 0 0.625em;
+  font-family: "Nunito", sans-serif;
+  font-size: 1em;
+  background: #edeff2;
+  appearance: none;
+  position: relative;
+  height: 1.9375em;
+  -moz-appearance: none;
+  -webkit-appearance: none;
 }
 
 /* Styling für das Pfeil-Icon von Dropdown-Feldern */
 .selectField:after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 0.625em;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid #001AFF;
-    transform: translateY(-50%);
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0.625em;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #001aff;
+  transform: translateY(-50%);
 }
 
 /* Styling für den Formularcontainer */
 .formContaineTournament {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; /* zentriert die Elemente horizontal */
-    height: 100%; /* Füllt die gesamte verfügbare Höhe des übergeordneten Containers aus */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* zentriert die Elemente horizontal */
+  height: 100%; /* Füllt die gesamte verfügbare Höhe des übergeordneten Containers aus */
 }
-
 
 /* Styling für den Container der Dropdown-Felder */
 .selectContainer {
-    position: relative;
-    display: inline-block;
-    width: 100%;
+  position: relative;
+  display: inline-block;
+  width: 100%;
 }
 
 /* Styling für das Pfeil-Icon von Dropdown-Feldern */
 .selectContainer:after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 0.625em;
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
-    border-top: 12px solid #001AFF;
-    transform: translateY(-50%);
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0.625em;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 12px solid #001aff;
+  transform: translateY(-50%);
 }
 
-
 .inputContainerSelect {
-    width: 100%;
-    border-radius: 5px;
-    border: none;
-    padding: 0 0.625em;
-    font-family: 'Nunito', sans-serif;
-    font-size: 1em;
-    background: #EDEFF2;
-    appearance: none;
-    position: relative;
-    height: 1.9375em;
-    box-sizing: border-box;
-  }
-  
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  padding: 0 0.625em;
+  font-family: "Nunito", sans-serif;
+  font-size: 1em;
+  background: #edeff2;
+  appearance: none;
+  position: relative;
+  height: 1.9375em;
+  box-sizing: border-box;
+}
 
 /* Styling für das Pfeil-Icon von Dropdown-Feldern */
 .inputContainerSelect:after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 0.625em;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid #001AFF;
-    transform: translateY(-50%);
-  }
-  
- 
-
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0.625em;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #001aff;
+  transform: translateY(-50%);
+}
 
 /* Styling für den Container der zwei Eingabefelder nebeneinander anordnet */
 .halfWidthWrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center; /* zentriert die Elemente horizontal */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center; /* zentriert die Elemente horizontal */
 }
-
 
 .halfWidthWrapperAddress {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center; /* zentriert die Elemente horizontal */
-    margin-top: -42px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center; /* zentriert die Elemente horizontal */
+  margin-top: -42px;
 }
-
 
 /* Styling für die Eingabefelder in dem "halbe Breite" Container */
 .inputContainer.halfWidth {
-    width: 100%;
-    margin-bottom: 2.9375em;
-    height: 1.9375em;
+  width: 100%;
+  margin-bottom: 2.9375em;
+  height: 1.9375em;
 }
-
-
 
 /* Entfernt den rechten Abstand vom letzten Eingabefeld in dem "halbe Breite" Container */
 .inputContainer.halfWidth:last-of-type {
-    margin-right: 0;
+  margin-right: 0;
 }
 
 .dashContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    margin-top: -0.5em;
-    top: -20px;
-  }
-  
-  .dash {
-    position: absolute;
-    font-family: 'Nunito';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 27px;
-    letter-spacing: -0.02em;
-    color: #000000;
-  }
-  
-  .halfWidthWrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-top: -0.5em;
+  top: -20px;
+}
 
-  .marginToButtonTournamentForm{
-    @include normal{
-        margin-bottom: 1rem;
-    }
-  }
+.dash {
+  position: absolute;
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 27px;
+  letter-spacing: -0.02em;
+  color: #000000;
+}
 
-  .formWidthTournamentForm{
-    width: 35%;
+.halfWidthWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.marginToButtonTournamentForm {
+  @include normal {
+    margin-bottom: 1rem;
   }
+}
+
+.formWidthTournamentForm {
+  width: 35%;
+}

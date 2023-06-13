@@ -1,15 +1,15 @@
-import { Tournament } from '../types';
-import { Fighter } from '../types';
-import { API_DOMAIN } from '../Config/apiConfig';
+import { Tournament } from "../types";
+import { Fighter } from "../types";
+import { API_DOMAIN } from "../Config/apiConfig";
 
 export async function postTournament(tournament: Tournament) {
   try {
     const response = await fetch(`${API_DOMAIN}/tournaments/`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(tournament)
+      body: JSON.stringify(tournament),
     });
 
     if (!response.ok) {
@@ -19,7 +19,7 @@ export async function postTournament(tournament: Tournament) {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('An error occurred while submitting the tournament:', error);
+    console.error("An error occurred while submitting the tournament:", error);
     throw error;
   }
 }
@@ -33,35 +33,41 @@ export async function getTournaments() {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error loading backend tournaments:', error);
+    console.error("Error loading backend tournaments:", error);
     throw error;
   }
 }
 
 export async function deleteTournament(tournamentId: number) {
   try {
-    const response = await fetch(`${API_DOMAIN}/tournaments/${tournamentId}/delete`, {
-      method: 'DELETE',
-    });
+    const response = await fetch(
+      `${API_DOMAIN}/tournaments/${tournamentId}/delete`,
+      {
+        method: "DELETE",
+      }
+    );
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
   } catch (error) {
-    console.error('An error occurred while deleting the tournament:', error);
+    console.error("An error occurred while deleting the tournament:", error);
     throw error;
   }
 }
 
 export async function putTournament(tournament: Tournament) {
   try {
-    const response = await fetch(`${API_DOMAIN}/tournaments/${tournament.id}/update`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(tournament),
-    });
+    const response = await fetch(
+      `${API_DOMAIN}/tournaments/${tournament.id}/update`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(tournament),
+      }
+    );
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -70,36 +76,41 @@ export async function putTournament(tournament: Tournament) {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('An error occurred while updating the tournament:', error);
+    console.error("An error occurred while updating the tournament:", error);
     throw error;
   }
 }
 
 export function getTotalTournaments(tournaments: Tournament[]): number {
-    const uniqueTournamentIds = new Set<number>();
-    tournaments.forEach((tournament) => {
-      if (tournament.id) {
-        uniqueTournamentIds.add(tournament.id);
-      }
-    });
-    return uniqueTournamentIds.size;
+  const uniqueTournamentIds = new Set<number>();
+  tournaments.forEach((tournament) => {
+    if (tournament.id) {
+      uniqueTournamentIds.add(tournament.id);
+    }
+  });
+  return uniqueTournamentIds.size;
 }
 
-  
- // Fighter in Tournament (nach ID) anlegen
+// Fighter in Tournament (nach ID) anlegen
 
- export async function postTournamentFighter(tournamentId: number, fighter: Fighter) {
+export async function postTournamentFighter(
+  tournamentId: number,
+  fighter: Fighter
+) {
   try {
-    const response = await fetch(`${API_DOMAIN}/tournaments/${tournamentId}/add-fighter`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(fighter)
-    });
+    const response = await fetch(
+      `${API_DOMAIN}/tournaments/${tournamentId}/add-fighter`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(fighter),
+      }
+    );
 
     if (response.status !== 200) {
-      throw new Error('Failed to add fighter');
+      throw new Error("Failed to add fighter");
     }
 
     const data = await response.json();
@@ -109,4 +120,3 @@ export function getTotalTournaments(tournaments: Tournament[]): number {
     throw error;
   }
 }
-
