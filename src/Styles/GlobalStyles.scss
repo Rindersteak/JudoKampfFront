@@ -54,7 +54,7 @@ $screen-normal: 993px;
 }
 
 .entryList {
-    min-width: 30em;
+    //min-width: 30em;
     //padding-top: 1.25em; /* 20px/16 */
     padding-right: 0em;
     //max-height: 37.5em; /* 600px/16 */
@@ -90,7 +90,7 @@ $screen-normal: 993px;
   display: flex;
   background: #EDEFF2;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   height: 2rem;
   width: 15rem;
   margin-bottom: 0.7rem;
@@ -103,7 +103,6 @@ $screen-normal: 993px;
     flex: 1;
     //max-height: 45.5em; /* 600px/16 */ --> Gut wenn nur die Listen geescrollt werden sollen
     border-radius: 0.625em; /* 10px/16 */
-    overflow: auto;
   
     @include small{
       width: 100%;
@@ -178,6 +177,7 @@ $screen-normal: 993px;
         display: flex;
         flex-direction: column;
         margin-bottom: 0.5em;
+        padding-right: 0px;
     }
 }
 
@@ -193,6 +193,7 @@ $screen-normal: 993px;
   @include small{
       display: flex;
       flex-direction: column;
+      padding-right: 0px;
       
   }
 }
@@ -220,8 +221,7 @@ $screen-normal: 993px;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    overflow-y: auto;
-    overflow-x: hidden;
+    min-width: 870px;
 
     @include small{
         display: grid;
@@ -294,4 +294,53 @@ $screen-normal: 993px;
 
 .redButton:hover {
   background: #720000;
+}
+
+.titleStyleList {
+  color: #001AFF;
+  padding-bottom: 1rem;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.5em;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.titleStyle {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.5em;
+  text-align: center;
+  color: #001AFF;
+  padding-bottom: 1rem;
+  justify-content: center;
+}
+
+.tableStyle th,
+.tableStyle td {
+  position: relative;
+  text-align: left;
+  border-bottom: 1px solid #EEEEF2;
+  //padding: 0.6rem; evtl. wieder aktivieren, wenn untere gelöcsht
+  padding-left: 2rem;//evtl. löschen
+  padding-right: 2rem;//evtl. löschen
+  padding-top: 0.6rem;//evtl. löschen
+  padding-bottom: 0.6rem;//evtl. löschen
+}
+
+.tableStyle th {
+  font-family: 'Nunito';
+  font-weight: 700;
+  color: #484964;
+}
+
+.headerCell {
+  position: relative;
+  min-width: 11rem;
+  @include small{
+    min-width: 12rem;
+  }
 }

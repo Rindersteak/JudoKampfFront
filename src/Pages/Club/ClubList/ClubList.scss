@@ -12,16 +12,6 @@
     align-items: center;
   }
   
-  .titleStyleList {
-    color: #001AFF;
-    padding-bottom: 0em;
-    font-family: 'Nunito';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 1.5em;
-    justify-content: center;
-    align-items: center;
-  }
 
   /*
   
@@ -100,23 +90,6 @@
   }
   
   
-  .tableStyle th,
-  .tableStyle td {
-    text-align: left;
-    border-bottom: 1px solid #EEEEF2;
-    //padding: 0.6rem; evtl. wieder aktivieren, wenn untere gelöcsht
-    padding-left: 2rem;//evtl. löschen
-    padding-right: 2rem;//evtl. löschen
-    padding-top: 0.6rem;//evtl. löschen
-    padding-bottom: 0.6rem;//evtl. löschen
-  }
-  
-  .tableStyle th {
-    font-family: 'Nunito';
-    font-weight: 700;
-    color: #484964;
-  }
-  
   .arrowButtonContainer {
     display: flex;
     align-items: center;
@@ -184,20 +157,11 @@
     left: 7px;
   }
   
-  .headerCell {
-    position: relative;
-  }
-  
   .headerCell button.arrowButton {
     position: absolute;
     top: 50%;
     right: 5px;
     transform: translateY(-50%);
-  }
-  
-  .tableStyle th,
-  .tableStyle td {
-    position: relative;
   }
   
   .tableStyle td::after {
