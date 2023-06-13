@@ -18,6 +18,8 @@ $screen-normal: 993px;
   }
 }
 
+
+
 .inputFieldWide {
     width: 243px;
     box-sizing: border-box;
@@ -62,9 +64,12 @@ $screen-normal: 993px;
     justify-content: center;
     align-items: center;
     position: relative;
-    margin-bottom: 2rem;
+    margin-bottom: .5rem;
     width: 100%;
 
+    @include normal{
+      height: 20%;
+    }
     @include small{
         margin-top: 5em;
     }
@@ -236,12 +241,14 @@ $screen-normal: 993px;
     grid-area: secondColor;
   }
   
-  .marginToButtonColorContainer{
+  .marginTimeIntervallToColorContainer{
     margin-bottom: 2rem;
   }
 
-  .marginToButtonContainer{
-    @include normal{
+  .marginColorContainerToButtonContainer{
       margin-bottom: 3rem;
-    }
+
+      @include small{
+        margin-bottom: 2rem;
+      }
   }

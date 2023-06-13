@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../../../Styles/GlobalStyles.scss'
+import './TournamentManager.scss'
 import TournamentEdit from '../TournamentEdit/TournamentEdit';
 import RulesEdit from '../../Rules/RulesEdit/RulesEdit';
 import { Tournament } from '../../../types';
@@ -7,6 +8,8 @@ import { Tournament } from '../../../types';
 const FighterManager: React.FC = () => {
     const [showSuccessPopup, setShowSuccessPopup] = useState(false);
     const [listKey, setListKey] = useState(Math.random());
+    const [loading, setLoading] = useState(false);
+  const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState(false);
 
     const handleSuccessPopup = (status: boolean) => {
         setShowSuccessPopup(status);
@@ -17,6 +20,10 @@ const FighterManager: React.FC = () => {
             setListKey(Math.random());
         }
     };
+
+    const handleDelete = async () => {
+        setShowConfirmDeletePopup(true);
+   };
 
     interface TournamentEditProps {
         tournament?: Tournament;
@@ -41,6 +48,21 @@ const FighterManager: React.FC = () => {
                 } } />
                 <RulesEdit />
         </div>
+        <div className='buttonSectionTournamentEdit'>
+            <div className='buttonContainerTournamentManager'>
+            <button className="blueButton" type="submit" disabled={loading}>
+          {loading ? 'Laden...' : 'Änderung speichern'}
+        </button>
+        {showSuccessPopup && (
+                <div className="successPopup">
+                    Turnier wurde erfolgreich aktualisiert!
+                </div>
+            )}
+        <button className="redButton" type="button" onClick={handleDelete}>
+          Turnier löschen
+        </button>
+            </div>
+      </div>
         </div>
     );
 };

@@ -150,9 +150,6 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
     }
   };
 
-  
-
-
   const handleDelete = async () => {
        setShowConfirmDeletePopup(true);
   };
@@ -284,7 +281,7 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
         </div>
       </div>
       <label className="inputLabel" htmlFor="period">Zeitraum</label>
-      <div className="inputContainerTimeIntervall marginToButtonColorContainer">
+      <div className="inputContainerTimeIntervall marginTimeIntervallToColorContainer">
                 <div className="inputContainer halfWidth">
                     <DatePicker
                         id="periodFrom"
@@ -307,7 +304,7 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
                     />
                 </div>
             </div>
-            <div className="colorContainer marginToButtonContainer">
+            <div className="colorContainer marginColorContainerToButtonContainer">
           <label className="inputLabel colorContainerLabel">
             Farbe der Kämpfer anpassen
           </label>
@@ -320,20 +317,6 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({onUpdateTournament, onDe
           <ColorPicker></ColorPicker>
           </div>
         </div>
-
-      <div className='buttonSectionTournamentEdit'>
-        <button className="blueButton" type="submit" disabled={loading}>
-          {loading ? 'Laden...' : 'Änderung speichern'}
-        </button>
-        {showSuccessPopup && (
-                <div className="successPopup">
-                    Turnier wurde erfolgreich aktualisiert!
-                </div>
-            )}
-        <button className="redButton" type="button" onClick={handleDelete}>
-          Turnier löschen
-        </button>
-      </div>
       {showConfirmDeletePopup && (
         <Modal size="small" onClose={handleDeleteCanceled}>
           <ConfirmDelete
