@@ -19,9 +19,6 @@ $screen-normal: 993px;
   gap: 15px;
   padding-bottom: 1rem;
   width: 100%;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  padding-bottom: 1.9rem;
 
   @include normal(){
     grid-template-columns: auto auto auto;
