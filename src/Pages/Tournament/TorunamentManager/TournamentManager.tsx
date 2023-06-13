@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../../../Styles/GlobalStyles.scss'
 import TournamentEdit from '../TournamentEdit/TournamentEdit';
-import Spielwiese from '../../../Routes/Spielwiese';
+import RulesEdit from '../../Rules/RulesEdit/RulesEdit';
 import { Tournament } from '../../../types';
 
 const FighterManager: React.FC = () => {
@@ -39,11 +39,7 @@ const FighterManager: React.FC = () => {
                 } } onDeleteTournament={function (tournamentId: number): void {
                     throw new Error('Function not implemented.');
                 } } />
-
-                
-                    <Spielwiese />
-                
-    
+                <RulesEdit />
         </div>
         </div>
     );
