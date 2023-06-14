@@ -43,9 +43,11 @@ const ClubList: React.FC<ClubListProps> = ({
         const clubs = await getClubs();
         const sortedClubs = clubs.sort((a: Club, b: Club) => {
           if (sortColumn === "name") {
+            const nameA = a.name ?? "";
+            const nameB = b.name ?? "";
             return sortOrder === "asc"
-              ? a.name.localeCompare(b.name)
-              : b.name.localeCompare(a.name);
+              ? nameA.localeCompare(nameB)
+              : nameB.localeCompare(nameA);
           } else if (sortColumn === "stateassociation") {
             const stateAssociationA = a.stateassociation ?? "";
             const stateAssociationB = b.stateassociation ?? "";
@@ -109,7 +111,7 @@ const ClubList: React.FC<ClubListProps> = ({
   };
 
   const filteredClubs = backendClubs.filter((club) =>
-    club.name.toLowerCase().includes(searchTerm.toLowerCase())
+    club.name?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (

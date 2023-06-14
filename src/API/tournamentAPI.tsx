@@ -1,5 +1,5 @@
 import { Tournament } from "../types";
-import { Fighter } from "../types";
+import { Fighter, FighterAdd } from "../types";
 import { API_DOMAIN } from "../Config/apiConfig";
 
 export async function postTournament(tournament: Tournament) {
@@ -95,7 +95,7 @@ export function getTotalTournaments(tournaments: Tournament[]): number {
 
 export async function postTournamentFighter(
   tournamentId: number,
-  fighter: Fighter
+  fighter: FighterAdd
 ) {
   try {
     const response = await fetch(
@@ -108,15 +108,36 @@ export async function postTournamentFighter(
         body: JSON.stringify(fighter),
       }
     );
+    console.log(JSON.stringify(fighter));
 
-    if (response.status !== 200) {
-      throw new Error("Failed to add fighter");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
 
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error(error);
+    console.error("An error occurred while submitting the fighter:", error);
+    throw error;
+  }
+}
+
+// By ID abrufen
+
+export async function getTournamentFightersList(tournamentId: number) {
+  try {
+    const response = await fetch(
+      `${API_DOMAIN}/tournaments/${tournamentId}/fighterslist`
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data as Fighter[];
+  } catch (error) {
+    console.error("Error loading tournament fighters list:", error);
     throw error;
   }
 }

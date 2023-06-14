@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Route, Routes, useParams } from "react-router-dom";
 import { Fighter } from "../../../types";
 import { getFighters, deleteFighter } from "../../../API/fighterAPI";
 import { FiTrash2 } from "react-icons/fi";
@@ -8,8 +9,10 @@ import FighterEdit from "../FighterEdit/FighterEdit";
 import "./FighterList.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { getTournamentFightersList } from "../../../API/tournamentAPI";
 
 interface FighterListProps {
+  tournamentId: string;
   detailedView?: boolean;
   onDeleteFighter: (fighterId: number) => void;
 }
@@ -37,14 +40,20 @@ const FighterList: React.FC<FighterListProps> = ({
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedFighter, setSelectedFighter] = useState<Fighter | null>(null);
 
+  const { tournamentId } = useParams();
+
   useEffect(() => {
     const loadBackendFighters = async () => {
       try {
-        const fighters = await getFighters();
+        const fighters = await getTournamentFightersList(
+          parseInt(tournamentId || "2")
+        );
         const fightersCopy = fighters.map((fighter: Fighter) => ({
           ...fighter,
           birthdate: fighter.birthdate,
         }));
+
+        console.log("Tournament FighterListID:", tournamentId);
 
         const sortedFighters = fightersCopy.sort((a: Fighter, b: Fighter) => {
           if (sortColumn === "lastname") {
@@ -53,14 +62,14 @@ const FighterList: React.FC<FighterListProps> = ({
               : b.lastname.localeCompare(a.lastname);
           } else if (sortColumn === "club") {
             return sortOrder === "asc"
-              ? a.club?.name?.localeCompare(b.club?.name || "")
-              : b.club?.name?.localeCompare(a.club?.name || "");
+              ? (a.club?.name || "").localeCompare(b.club?.name || "")
+              : (b.club?.name || "").localeCompare(a.club?.name || "");
           } else if (sortColumn === "city") {
             return sortOrder === "asc"
-              ? a.club?.address?.city?.localeCompare(
+              ? (a.club?.address?.city || "").localeCompare(
                   b.club?.address?.city || ""
                 )
-              : b.club?.address?.city?.localeCompare(
+              : (b.club?.address?.city || "").localeCompare(
                   a.club?.address?.city || ""
                 );
           } else if (sortColumn === "id") {
@@ -91,7 +100,7 @@ const FighterList: React.FC<FighterListProps> = ({
     };
 
     loadBackendFighters();
-  }, [sortOrder, sortColumn]);
+  }, [sortOrder, sortColumn, tournamentId]);
 
   const handleSortClick = (column: string) => {
     setSortColumn(column);

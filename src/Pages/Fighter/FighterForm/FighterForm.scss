@@ -3,6 +3,21 @@
 /* Importiert die Nunito Schriftart von Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap");
 
+$screen-mid: 992px;
+$screen-normal: 993px;
+
+@mixin small {
+  @media (max-width: #{$screen-mid}) {
+    @content;
+  }
+}
+
+@mixin normal {
+  @media (min-width: #{$screen-normal}) {
+    @content;
+  }
+}
+
 .selectField {
   /* possibly need to adjust to make dynamic? */
   width: 104.5%;
@@ -128,5 +143,7 @@
 }
 
 .formWidthFighterForm {
-  width: 35%;
+  @include normal{
+    width: 35%;
+  }
 }

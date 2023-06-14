@@ -6,7 +6,15 @@ import ConfirmDelete from "../../../Tools/ConfirmDelete/ConfirmDelete";
 import "./FighterManager.scss";
 import "../../../Styles/GlobalStyles.scss";
 
-const FighterManager: React.FC = () => {
+interface FighterManagerProps {
+  tournamentId: string;
+  onClose: () => void;
+}
+
+const FighterManager: React.FC<FighterManagerProps> = ({
+  tournamentId,
+  onClose,
+}) => {
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState(false);
   const [fighterIdToDelete, setFighterToDelete] = useState<number | null>(null);
@@ -26,6 +34,7 @@ const FighterManager: React.FC = () => {
     setShowConfirmDeletePopup(true);
     setFighterToDelete(fighterId);
   };
+
   const handleDeleteConfirmed = async () => {
     if (fighterIdToDelete !== null) {
       await deleteFighterHandler(fighterIdToDelete);
@@ -38,17 +47,18 @@ const FighterManager: React.FC = () => {
     setShowConfirmDeletePopup(false);
   };
 
+  console.log("Tournament ManagerID:", tournamentId);
   return (
     <div className="innerContainerScrollbar">
       <div className="innerContainer">
         <FighterForm
-          onAddFighter={() => {}}
+          tournamentId={tournamentId}
           onShowSuccessPopup={handleSuccessPopup}
         />
         <div className="listSection">
           <h1 className="titleStyleList">Teilnehmerliste</h1>
-
           <FighterList
+            tournamentId={tournamentId}
             key={listKey}
             detailedView={false}
             onDeleteFighter={handleConfirmDelete}

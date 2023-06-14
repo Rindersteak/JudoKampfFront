@@ -25,17 +25,12 @@ const FighterEdit: React.FC<FighterEditProps> = ({
 }) => {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
-  const [clubname, setClubName] = useState("");
   const [birthdate, setBirthDate] = useState<Date | null>(null);
   const [weight, setWeight] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [gender, setGender] = useState<{ value: string; label: string } | null>(
-    null
-  );
-  const [club, setClub] = useState<{ value: string; label: string } | null>(
-    null
-  );
+  const [gender, setGender] = useState<OptionType | null>(null);
+  const [club, setClub] = useState<OptionType | null>(null);
 
   const genderOptions = [
     { value: "m", label: "Männlich" },
@@ -93,9 +88,8 @@ const FighterEdit: React.FC<FighterEditProps> = ({
   useEffect(() => {
     setFirstName(fighter.firstname);
     setLastName(fighter.lastname);
-    setClubName(fighter.club.name);
     setBirthDate(new Date(fighter.birthdate));
-    setWeight(fighter.weight);
+    setWeight(fighter.weight || 0);
     setGender(
       genderOptions.find((option) => option.value === fighter.sex) || null
     );
@@ -123,10 +117,7 @@ const FighterEdit: React.FC<FighterEditProps> = ({
 
   return (
     <div className="fighterEditMain">
-      <form
-        className="formContainer formWidthFighterEdit"
-        onSubmit={handleSubmit}
-      >
+      <form className="formContainer formWidthFighterEdit" onSubmit={handleSubmit}>
         <h1 className="titleStyle">Teilnehmer bearbeiten</h1>
 
         <div className="inputContainer">
@@ -221,19 +212,19 @@ const FighterEdit: React.FC<FighterEditProps> = ({
             dateFormat="dd.MM.yyyy"
             required
           />
-          <div className="inputContainer marginTopWeightFighterEdit">
-            <label className="inputLabel" htmlFor="weight">
-              Gewicht
-            </label>
-            <input
-              className="inputField"
-              type="number"
-              id="weight"
-              value={weight}
-              onChange={(e) => setWeight(parseFloat(e.target.value))}
-              required
-            />
-          </div>
+        <div className="inputContainer marginTopWeightFighterEdit">
+          <label className="inputLabel" htmlFor="weight">
+            Gewicht
+          </label>
+          <input
+            className="inputField"
+            type="number"
+            id="weight"
+            value={weight}
+            onChange={(e) => setWeight(parseFloat(e.target.value))}
+            required
+          />
+            </div>
         </div>
 
         <div className="buttonSectionFighterEdit">

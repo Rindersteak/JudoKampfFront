@@ -78,7 +78,7 @@ const ClubForm: React.FC<ClubFormProps> = ({
   };
 
   return (
-    <form className="formContainer" onSubmit={handleSubmit}>
+    <form className="formContainer formWidthClubForm" onSubmit={handleSubmit}>
       <h1 className="titleStyle">Neuen Verein anlegen</h1>
 
       <div className="inputContainer">

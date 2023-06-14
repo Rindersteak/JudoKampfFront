@@ -1,8 +1,7 @@
-import { Fightgroup, Fighter } from "../types";
+import { Fightgroup, Fighter, Fight } from "../types";
 import { API_DOMAIN } from "../Config/apiConfig";
 
-export async function getFightList(fightgroupId: number) {
-  // Typ des Parameters hinzugefügt
+export async function getFightList(fightgroupId: number): Promise<Fight[]> {
   try {
     const response = await fetch(
       `${API_DOMAIN}/fightgroups/${fightgroupId}/fightlist`
@@ -13,7 +12,7 @@ export async function getFightList(fightgroupId: number) {
     }
 
     const data = await response.json();
-    return data as Fightgroup;
+    return data as Fight[];
   } catch (error) {
     console.error("Error loading fight list:", error);
     throw error;

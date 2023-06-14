@@ -22,8 +22,8 @@ import FightGroupList from "../../FightGroup/FightGroupList"; // Importiere die 
 
 // Definition der Eigenschaften für die TournamentDetails-Komponente
 interface TournamentDetailsProps {
-  onOpenFighterList: () => void;
-  onOpenFighterManager: () => void;
+  onOpenFighterList: (tournamentId: string) => void;
+  onOpenFighterManager: (tournamentId: string) => void;
   onOpenClubManager: () => void;
   onOpenClubList: () => void;
   onOpenTournamentEdit: (tournamentId: string) => void;
@@ -41,13 +41,16 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({
 }) => {
   // Hook, um URL-Parameter abzurufen
   const { tournamentId } = useParams<{ tournamentId: string | undefined }>();
-  console.log(tournamentId);
   // Setzen der anfänglichen Zustände mit Hooks
   const [backendTournaments, setBackendTournaments] = useState<Tournament[]>(
     []
   );
   const [tournament, setTournament] = useState<Tournament | null>(null);
   const [showFightGroupList, setShowFightGroupList] = useState(false); // Neuer Zustand
+  const handleOpenFightGroupListClick = () => {
+    onOpenFightGroupList(tournamentId || "");
+    setShowFightGroupList(true);
+  };
 
   // Effekt, der beim Start ausgeführt wird und die Turnierdaten abruft
   useEffect(() => {
@@ -95,7 +98,7 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({
       <div className="cards-container">
         <CardOne
           tournamentId={tournamentId || ""}
-          onOpenFightGroupList={handleOpenFightGroupList}
+          onOpenFightGroupList={handleOpenFightGroupListClick}
         />
         <CardTwo
           tournamentId={tournamentId || ""}
@@ -149,10 +152,10 @@ const CardTwo = ({
   onOpenFighterList,
 }: {
   tournamentId: string;
-  onOpenFighterList: () => void;
+  onOpenFighterList: (tournamentId: string) => void;
 }) => {
   const handleCardTwoClick = () => {
-    onOpenFighterList();
+    onOpenFighterList(tournamentId || "");
   };
 
   return (
@@ -172,11 +175,13 @@ const CardThree = ({
   onOpenFighterManager,
 }: {
   tournamentId: string;
-  onOpenFighterManager: () => void;
+  onOpenFighterManager: (tournamentId: string) => void;
 }) => {
   const handleCardThreeClick = () => {
-    onOpenFighterManager();
+    onOpenFighterManager(tournamentId);
   };
+
+  console.log("Tournament DetailsID:", tournamentId);
 
   return (
     <div className="card-three" onClick={handleCardThreeClick}>

@@ -34,10 +34,10 @@ const ClubEdit: React.FC<ClubEditProps> = ({
   };
 
   useEffect(() => {
-    setShortName(club.shortname);
+    setShortName(club.shortname || "");
     setAddressCity(club.address?.city || "");
     setAddressZipCode(club.address?.postalcode || "");
-    setClubName(club.name);
+    setClubName(club.name || "");
     setAddressStreet(club.address?.street || "");
     setAddressStreetNumber(club.address?.housenumber || "");
     setStateAssociation(String(club.stateassociation));

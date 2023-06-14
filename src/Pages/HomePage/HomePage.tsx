@@ -6,7 +6,6 @@ import "./HomePage.scss";
 import { useNavigate } from "react-router-dom";
 
 interface HomePageProps {
-  onOpenFighterManager: () => void;
   onOpenTournamentForm: () => void;
   onOpenTournamentList: () => void;
   onLogoClick: () => void;

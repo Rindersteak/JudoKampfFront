@@ -3,6 +3,21 @@
 /* Importiert die Nunito Schriftart von Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap");
 
+$screen-mid: 992px;
+$screen-normal: 993px;
+
+@mixin small {
+  @media (max-width: #{$screen-mid}) {
+    @content;
+  }
+}
+
+@mixin normal {
+  @media (min-width: #{$screen-normal}) {
+    @content;
+  }
+}
+
 /* Styling für den Container der zwei Eingabefelder nebeneinander anordnet */
 .halfWidthWrapper {
   display: flex;
@@ -165,4 +180,10 @@
   line-height: 19px;
   letter-spacing: -0.02em;
   color: #000000;
+}
+
+.formWidthClubForm{
+  @include normal{
+    width: 35%;
+  }
 }

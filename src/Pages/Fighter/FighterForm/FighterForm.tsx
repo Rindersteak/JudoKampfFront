@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Fighter } from "../../../types";
+import { FighterAdd } from "../../../types";
 import { postFighter } from "../../../API/fighterAPI";
 import { getClubs } from "../../../API/clubAPI";
+import { postTournamentFighter } from "../../../API/tournamentAPI";
 import "./FighterForm.scss";
 import "../../../Styles/GlobalStyles.scss";
 
 type Props = {
-  onAddFighter: (fighter: Fighter) => void;
+  tournamentId: string;
   onShowSuccessPopup: (status: boolean) => void;
 };
 
@@ -17,7 +18,7 @@ type OptionType = {
   label: string;
 };
 
-const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
+const FighterForm: React.FC<Props> = ({ tournamentId, onShowSuccessPopup }) => {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [clubname, setClubName] = useState("");
@@ -78,35 +79,30 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
     const birthdateAsString = birthdate?.toISOString();
 
     const fighter = {
-      id: 0,
       sex: gender?.value || "",
       firstname: firstname,
       lastname: lastname,
       birthdate: birthdateAsString,
-      weight: weight,
       club: {
         id: club?.value ? parseInt(club.value) : 0,
-        shortname: club?.value || "",
-        name: club?.label || "",
       },
     };
 
     try {
-      await postFighter(fighter);
-      onAddFighter(fighter);
+      console.log(tournamentId);
+      await postTournamentFighter(Number(tournamentId), fighter);
       onShowSuccessPopup(true);
       setLoading(false);
+      console.log("Tournament ID:", tournamentId);
     } catch (error) {
       setErrorMessage("(DB-Error) Fehler beim Anlegen!");
+      console.log("Tournament FormID:", tournamentId);
       setLoading(false);
     }
   };
 
   return (
-    <form
-      className="formContainer formWidthFighterForm"
-      onSubmit={handleSubmit}
-    >
+    <form className="formContainer formWidthFighterForm" onSubmit={handleSubmit}>
       <h1 className="titleStyle">Neuen Teilnehmer hinzufügen</h1>
       <div className="inputContainer">
         <label className="inputLabel" htmlFor="firstName">
@@ -201,19 +197,10 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
           required
         />
       </div>
-      <div className="inputContainer">
-        <label className="inputLabel" htmlFor="weight">
-          Gewicht
-        </label>
-        <input
-          className="inputField"
-          type="number"
-          id="weight"
-          value={weight}
-          onChange={(e) => setWeight(parseFloat(e.target.value))}
-          required
-        />
-      </div>
+      {/* <div className="inputContainer">
+          <label className="inputLabel" htmlFor="weight">Gewicht</label>
+          <input className="inputField" type="number" id="weight" value={weight} onChange={e => setWeight(parseFloat(e.target.value))} required />
+        </div> */}
 
       <div className="buttonSection">
         <button className="blueButton" type="submit" disabled={loading}>

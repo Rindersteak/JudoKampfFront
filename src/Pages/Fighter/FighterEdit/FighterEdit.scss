@@ -35,5 +35,7 @@ $screen-normal: 993px;
 }
 
 .formWidthFighterEdit {
-  width: 35%;
+  @include normal{
+    width: 35%;
+  }
 }

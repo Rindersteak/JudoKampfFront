@@ -23,8 +23,8 @@ export type Address = {
 
 export type Club = {
   id?: number;
-  shortname: string;
-  name: string;
+  shortname?: string;
+  name?: string;
   address?: Address;
   stateassociation?: string;
 };
@@ -36,7 +36,19 @@ export type Fighter = {
   lastname: string;
   birthdate: string;
   ageclass?: AgeClass;
-  weight: number;
+  weight?: number;
+  weightclass?: WeightClass;
+  club: Club;
+};
+
+export type FighterAdd = {
+  id?: number;
+  sex: string;
+  firstname: string;
+  lastname: string;
+  birthdate: string;
+  ageclass?: AgeClass;
+  weight?: number;
   weightclass?: WeightClass;
   club: Club;
 };

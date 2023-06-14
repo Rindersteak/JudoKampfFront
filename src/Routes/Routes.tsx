@@ -1,28 +1,36 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useParams } from "react-router-dom";
 import HomePage from "../Pages/HomePage/HomePage";
 import TournamentForm from "../Pages/Tournament/TournamentForm/TournamentForm";
 import FighterList from "../Pages/Fighter/FighterList/FighterList";
 import FighterManager from "../Pages/Fighter/FighterManager/FighterManager";
+import { Tournament, Fight } from "../types";
 import TournamentDetails from "../Pages/Tournament/TournamentDetails/TournamentDetails";
 import TournamentList from "../Pages/Tournament/TournamentList/TournamentList";
 import ClubList from "../Pages/Club/ClubList/ClubList";
 import FightDetails from "../Pages/Fight/FightDetails/FightDetails";
 import TournamentEdit from "../Pages/Tournament/TournamentEdit/TournamentEdit";
-//import TreeForTwo from '../Pages/Tournament/TournamentTree/TournamentTrees/TreeForTwo';
+import TreeForTwo from "../Pages/Tournament/TournamentTree/TournamentTrees/TreeForTwo";
 import FightGroupList from "../Pages/FightGroup/FightGroupList";
 import Spielwiese from "./Spielwiese";
 
 interface AppRoutesProps {
   onOpenTournamentForm: () => void;
-  onOpenFighterManager: () => void;
-  onOpenFighterList: () => void;
-  onOpenFightGroupList: (tournamentId: string) => void; // Ändere den Typ hier entsprechend der Anforderungen
+  onOpenFighterManager: (tournamentId: string) => void;
+  onOpenFighterList: (tournamentId: string) => void;
+  onOpenFightGroupList: (tournamentId: string) => void;
   onOpenTournamentList: () => void;
   onOpenClubManager: () => void;
   onOpenClubList: () => void;
   onOpenTournamentEdit: () => void;
+  fights: Fight[];
 }
+
+const FighterListWrapper = () => {
+  const { tournamentId = "defaultTournamentId" } = useParams();
+
+  return <FighterList onDeleteFighter={() => {}} tournamentId={tournamentId} />;
+};
 
 const AppRoutes: React.FC<AppRoutesProps> = ({
   onOpenTournamentForm,
@@ -33,6 +41,7 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
   onOpenClubManager,
   onOpenClubList,
   onOpenTournamentEdit,
+  fights,
 }) => (
   <Routes>
     <Route
@@ -40,7 +49,6 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
       element={
         <HomePage
           onOpenTournamentForm={onOpenTournamentForm}
-          onOpenFighterManager={onOpenFighterManager}
           onOpenTournamentList={onOpenTournamentList}
           onLogoClick={() => {}}
         />
@@ -50,20 +58,18 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
       path="/tournament-form"
       element={<TournamentForm onAddTournament={onOpenTournamentForm} />}
     />
-    <Route path="/fighter-manager" element={<FighterManager />} />
     <Route
-      path="/fighter-list"
-      element={<FighterList onDeleteFighter={() => {}} />} // Füge hier das onDeleteFighter-Prop hinzu
+      path="/fighter-list/:tournamentId"
+      element={<FighterListWrapper />}
     />
+
     <Route
       path="/tournament-details/:tournamentId"
       element={
         <TournamentDetails
           onOpenFighterList={onOpenFighterList}
           onOpenFighterManager={onOpenFighterManager}
-          onOpenFightGroupList={(tournamentId: string) =>
-            onOpenFightGroupList(tournamentId)
-          }
+          onOpenFightGroupList={onOpenFightGroupList}
           onOpenClubManager={onOpenClubManager}
           onOpenClubList={onOpenClubList}
           onOpenTournamentEdit={onOpenTournamentEdit}
@@ -76,9 +82,26 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
     />
     <Route path="/club-list" element={<ClubList onDeleteClub={() => {}} />} />
     <Route path="/fight-details" element={<FightDetails />} />
-
+    {fights.map((fight: Fight, index: number) => (
+      <Route
+        key={index}
+        path={`/tournament-tree/${fight.id}`}
+        element={getFightTreeComponent(fight)}
+      />
+    ))}
     <Route path="/Spielwiese" element={<Spielwiese />} />
   </Routes>
 );
+
+const getFightTreeComponent = (fight: Fight) => {
+  const participants = fight.fightGroup.fighters.length;
+  if (participants === 2) {
+    return <TreeForTwo fightgroupId={fight.fightGroup.id} />;
+  } else if (participants === 3) {
+    // Hier sollte die Komponente für Kämpfe mit drei Teilnehmern eingefügt werden
+  } else {
+    // Hier sollte die Komponente für Kämpfe mit mehr als drei Teilnehmern eingefügt werden
+  }
+};
 
 export default AppRoutes;
