@@ -155,8 +155,10 @@ const CardTwo = ({
   onOpenFighterList: (tournamentId: string) => void;
 }) => {
   const handleCardTwoClick = () => {
-    onOpenFighterList(tournamentId || "");
+    onOpenFighterList(tournamentId);
   };
+
+  console.log("Tournament DetailsID:", tournamentId);
 
   return (
     <div className="card-two" onClick={handleCardTwoClick}>
@@ -180,8 +182,6 @@ const CardThree = ({
   const handleCardThreeClick = () => {
     onOpenFighterManager(tournamentId);
   };
-
-  console.log("Tournament DetailsID:", tournamentId);
 
   return (
     <div className="card-three" onClick={handleCardThreeClick}>

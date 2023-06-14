@@ -58,10 +58,6 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
       path="/tournament-form"
       element={<TournamentForm onAddTournament={onOpenTournamentForm} />}
     />
-    <Route
-      path="/fighter-list/:tournamentId"
-      element={<FighterListWrapper />}
-    />
 
     <Route
       path="/tournament-details/:tournamentId"

@@ -124,7 +124,7 @@ export async function postTournamentFighter(
 
 // By ID abrufen
 
-export async function getTournamentFightersList(tournamentId: number) {
+export async function getTournamentFightersList(tournamentId: string) {
   try {
     const response = await fetch(
       `${API_DOMAIN}/tournaments/${tournamentId}/fighterslist`

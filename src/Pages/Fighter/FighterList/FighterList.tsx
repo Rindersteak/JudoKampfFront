@@ -27,6 +27,7 @@ export const deleteFighterHandler = async (fighterId: number) => {
 };
 
 const FighterList: React.FC<FighterListProps> = ({
+  tournamentId,
   detailedView = true,
   onDeleteFighter,
 }) => {
@@ -40,14 +41,12 @@ const FighterList: React.FC<FighterListProps> = ({
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedFighter, setSelectedFighter] = useState<Fighter | null>(null);
 
-  const { tournamentId } = useParams();
 
   useEffect(() => {
     const loadBackendFighters = async () => {
       try {
-        const fighters = await getTournamentFightersList(
-          parseInt(tournamentId || "2")
-        );
+        const fighters = await getTournamentFightersList(tournamentId!);
+
         const fightersCopy = fighters.map((fighter: Fighter) => ({
           ...fighter,
           birthdate: fighter.birthdate,
