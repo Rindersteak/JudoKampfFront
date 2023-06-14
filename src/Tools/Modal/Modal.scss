@@ -43,6 +43,10 @@ $screen-normal: 993px;
 
 .modal.large .modal-content {
   margin: 5vh;
+
+  @include small{
+    height: 69vh;
+  }
 }
 
 .modal.small .modal-content {
