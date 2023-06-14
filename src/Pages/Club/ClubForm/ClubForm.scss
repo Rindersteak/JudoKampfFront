@@ -1,0 +1,189 @@
+/* FighterForm.css */
+
+/* Importiert die Nunito Schriftart von Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap");
+
+$screen-mid: 992px;
+$screen-normal: 993px;
+
+@mixin small {
+  @media (max-width: #{$screen-mid}) {
+    @content;
+  }
+}
+
+@mixin normal {
+  @media (min-width: #{$screen-normal}) {
+    @content;
+  }
+}
+
+/* Styling für den Container der zwei Eingabefelder nebeneinander anordnet */
+.halfWidthWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  /* zentriert die Elemente horizontal */
+}
+
+/* Styling für die Eingabefelder in dem "halbe Breite" Container */
+.inputContainer.halfWidth {
+  width: 100%;
+  margin-bottom: 2.9375em;
+  height: 1.9375em;
+}
+
+/* Entfernt den rechten Abstand vom letzten Eingabefeld in dem "halbe Breite" Container */
+.inputContainer.halfWidth:last-of-type {
+  margin-right: 0;
+}
+
+.halfWidthWrapperAddress {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center; /* zentriert die Elemente horizontal */
+  margin-top: -42px;
+}
+@media (min-width: 768px) {
+  .halfWidthWrapperAddress {
+    flex-direction: row;
+  }
+}
+
+.inputFieldWide {
+  width: 243px;
+  box-sizing: border-box;
+  border: none;
+  background: none;
+  height: 30px;
+  border-radius: 5px;
+  padding: 0 0.625em;
+  font-family: "Nunito", sans-serif;
+  font-size: 1em;
+  background: #edeff2;
+  align-self: flex-start;
+}
+
+.inputFieldSmall {
+  width: 117px;
+  box-sizing: border-box;
+  border: none;
+  background: none;
+  height: 30px;
+  border-radius: 5px;
+  padding: 0 0.625em;
+  font-family: "Nunito", sans-serif;
+  font-size: 1em;
+  background: #edeff2;
+  align-self: flex-end;
+}
+
+.selectField {
+  /* possibly need to adjust to make dynamic? */
+  width: 104.5%;
+  border-radius: 5px;
+  border: none;
+  padding: 0 0.625em;
+  font-family: "Nunito", sans-serif;
+  font-size: 1em;
+  background: #edeff2;
+  appearance: none;
+  position: relative;
+  height: 1.9375em;
+  /* possibly need to adjust to make dynamic? */
+  left: -8px;
+
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+/* Styling für das Pfeil-Icon von Dropdown-Feldern */
+.selectField:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0.625em;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #001aff;
+  transform: translateY(-50%);
+}
+
+.inputContainerSelect {
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  padding: 0 0.625em;
+  font-family: "Nunito", sans-serif;
+  font-size: 1em;
+  background: #edeff2;
+  appearance: none;
+  position: relative;
+  height: 1.9375em;
+  box-sizing: border-box;
+}
+
+/* Styling für das Pfeil-Icon von Dropdown-Feldern */
+.inputContainerSelect:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0.625em;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #001aff;
+  transform: translateY(-50%);
+}
+
+.react-datepicker__input-container input {
+  width: 100%;
+  //margin-bottom: 2.9375em;
+  height: 1.9375em;
+  border: none;
+  background: none;
+  border-radius: 5px;
+  padding: 0 0.625em;
+  font-family: "Nunito", sans-serif;
+  font-size: 1em;
+  background: #edeff2;
+}
+
+.dropdown-field {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 44.83%;
+  bottom: 20.69%;
+  width: 367px;
+  height: 31.72px;
+  background: #edeff2;
+  border-radius: 5px;
+}
+
+.dropdown-field:hover {
+  cursor: pointer;
+}
+
+.dropdown-content {
+  position: absolute;
+  left: 2.72%;
+  right: 51.23%;
+  top: 20.69%;
+  bottom: 17.24%;
+  width: 169px;
+  height: 18.62px;
+  font-family: "Nunito";
+  font-weight: 200;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: -0.02em;
+  color: #000000;
+}
+
+.formWidthClubForm{
+  @include normal{
+    width: 35%;
+  }
+}

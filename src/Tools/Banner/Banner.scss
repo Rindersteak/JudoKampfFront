@@ -1,0 +1,60 @@
+$screen-mid: 992px;
+$screen-normal: 993px;
+
+@mixin small {
+  @media (max-width: #{$screen-mid}) {
+    @content;
+  }
+}
+
+@mixin normal {
+  @media (min-width: #{$screen-normal}) {
+    @content;
+  }
+}
+.topBanner {
+  background-color: rgba(39, 39, 39, 0.5);
+  display: grid;
+  grid-template-columns: 15% 10% 75%;
+  width: 100%;
+  padding-bottom: 1%;
+  padding-top: 1%;
+}
+
+.newBackIcon {
+  color: blue;
+  width: 100%;
+  height: 35%;
+}
+
+.newBackIcon:hover {
+  cursor: pointer;
+}
+
+.kodokanLogo {
+  width: 100%;
+  height: 100%;
+  margin-left: 2em;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.backButtonContainer {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  word-break: break-all;
+  color: white;
+  margin-right: 30%;
+}

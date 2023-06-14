@@ -1,0 +1,338 @@
+$screen-mid: 992px;
+$screen-normal: 993px;
+
+@mixin small {
+  @media (max-width: #{$screen-mid}) {
+    @content;
+  }
+}
+
+@mixin normal {
+  @media (min-width: #{$screen-normal}) {
+    @content;
+  }
+}
+
+.modal-open {
+  overflow: hidden;
+}
+
+.inputLabel {
+  font-family: "Nunito", sans-serif;
+  font-size: 1.25em;
+  font-weight: 700;
+  line-height: 1.35em;
+  letter-spacing: -0.02em;
+  color: #000000;
+  width: 100%;
+}
+
+.closeModalButtonContainer {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+  align-items: flex-start;
+}
+
+.closeModalButton {
+  font-size: 200%;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* zentriert die Elemente horizontal */
+
+  @include small {
+    width: 100%;
+  }
+}
+
+.entryList {
+  //min-width: 30em;
+  //padding-top: 1.25em; /* 20px/16 */
+  padding-right: 0em;
+  //max-height: 37.5em; /* 600px/16 */
+  border-radius: 0.625em; /* 10px/16 */
+  //overflow: auto;
+  @include small {
+    width: 100%;
+  }
+}
+
+.listContainer {
+  flex: 1;
+  max-height: 37.5em; /* 600px/16 */
+  border-radius: 0.625em; /* 10px/16 */
+  overflow: auto;
+
+  @include small {
+    width: 100%;
+  }
+}
+
+.searchContainerForLists {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin-left: 0.1rem;
+}
+
+.searchField {
+  display: flex;
+  background: #edeff2;
+  border: none;
+  border-radius: 10px;
+  height: 2rem;
+  width: 15rem;
+  margin-bottom: 0.7rem;
+  padding-left: 1rem;
+  padding-right: 0.5rem;
+}
+
+.innerContainerScrollbar {
+  flex: 1;
+  //max-height: 45.5em; /* 600px/16 */ --> Gut wenn nur die Listen geescrollt werden sollen
+  border-radius: 0.625em; /* 10px/16 */
+
+  @include small {
+    width: 100%;
+  }
+}
+
+.headerBanner {
+  margin-bottom: 2rem;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tableStyle {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #f9f9fc;
+  color: #484964;
+}
+
+.tableMinWidth {
+  min-width: 60rem;
+}
+
+.listSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 6rem;
+  margin-right: 1rem;
+
+  @include small {
+    margin-left: 0rem;
+  }
+}
+
+.inputContainer {
+  display: grid;
+  margin-bottom: 1.76em;
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.buttonSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-top: 1rem;
+  width: 100%;
+
+  @include small {
+    margin-bottom: 3rem;
+  }
+}
+
+.inputContainerAdressesTop {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  gap: 10px;
+  margin-bottom: 1em;
+  position: relative;
+  width: 100%;
+  padding-right: 10px;
+
+  @include small {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5em;
+    padding-right: 0px;
+  }
+}
+
+.inputContainerAdressesBottom {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  gap: 10px;
+  margin-bottom: 2em;
+  position: relative;
+  width: 100%;
+  padding-right: 10px;
+
+  @include small {
+    display: flex;
+    flex-direction: column;
+    padding-right: 0px;
+  }
+}
+
+.inputContainerTimeIntervall {
+  display: grid;
+  position: relative;
+  height: 1.9375em;
+  width: 100%;
+  grid-template-columns: auto 10% auto;
+  align-items: center;
+
+  /*
+    @include small{
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 10%;
+    }
+    */
+}
+
+.innerContainer {
+  @include normal {
+    justify-content: space-evenly;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    min-width: 900px;
+
+    @include small {
+      display: grid;
+      grid-template-columns: auto;
+    }
+  }
+}
+
+/* Styling für Eingabefelder */
+.inputField {
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  background: none;
+  height: 1.9375em;
+  border-radius: 5px;
+  padding: 0 0.625em;
+  font-family: "Nunito", sans-serif;
+  font-size: 1em;
+  background: #edeff2;
+}
+
+.blueButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 1.6875em;
+  background: #001aff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+  color: white;
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  font-size: 1.5em;
+  font-weight: 900;
+  line-height: 2.0625em;
+  letter-spacing: -0.02em;
+  border: none;
+  cursor: pointer;
+  margin-top: -1.125em;
+}
+
+.blueButton:hover {
+  background: #000a91;
+}
+
+.redButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 1.6875em;
+  background: #b40000;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+  color: white;
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  font-size: 1.5em;
+  font-weight: 900;
+  line-height: 2.0625em;
+  letter-spacing: -0.02em;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px; /* Hier wird der Abstand nach oben festgelegt */
+}
+
+.redButton:hover {
+  background: #720000;
+}
+
+.titleStyleList {
+  color: #001aff;
+  padding-bottom: 1rem;
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.5em;
+  justify-content: center;
+  align-items: center;
+}
+
+.titleStyle {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.5em;
+  text-align: center;
+  color: #001aff;
+  padding-bottom: 1rem;
+  justify-content: center;
+}
+
+.tableStyle th,
+.tableStyle td {
+  position: relative;
+  text-align: left;
+  border-bottom: 1px solid #eeeef2;
+  //padding: 0.6rem; evtl. wieder aktivieren, wenn untere gelöcsht
+  padding-left: 2rem; //evtl. löschen
+  padding-right: 2rem; //evtl. löschen
+  padding-top: 0.6rem; //evtl. löschen
+  padding-bottom: 0.6rem; //evtl. löschen
+}
+
+.tableStyle th {
+  font-family: "Nunito";
+  font-weight: 700;
+  color: #484964;
+}
+
+.headerCell {
+  position: relative;
+  min-width: 11rem;
+  @include small {
+    min-width: 12rem;
+  }
+}

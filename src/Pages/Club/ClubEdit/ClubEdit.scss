@@ -1,0 +1,28 @@
+$screen-mid: 992px;
+$screen-normal: 993px;
+
+@mixin small {
+  @media (max-width: #{$screen-mid}) {
+    @content;
+  }
+}
+
+@mixin normal {
+  @media (min-width: #{$screen-normal}) {
+    @content;
+  }
+}
+
+.clubEditMain {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.formWidthClubEdit {
+  @include normal{
+    width: 35%;
+  }
+}

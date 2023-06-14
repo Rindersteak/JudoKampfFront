@@ -1,0 +1,166 @@
+/*
+
+.listContainer {
+    padding-left: 1.25em;
+    padding-right: 1.25em;
+    border-radius: 0.625em;
+  }
+  */
+
+.centeredContainerHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.headerStyle {
+  font-family: "Nunito";
+  font-weight: 700;
+  color: #484964;
+}
+
+.headerContainer {
+  display: flex;
+}
+
+.nameStyleHeader,
+.clubStyleHeader {
+  flex: 1;
+  min-height: auto;
+  background-color: #f9f9fc;
+  padding: 0.6em;
+  text-indent: 1em;
+}
+
+.cityStyleHeader,
+.idStyleHeader,
+.weightClassStyleHeader,
+.birthdateStyleHeader {
+  flex: 1;
+  min-height: auto;
+  background-color: #f9f9fc;
+  padding: 0.6em;
+  text-indent: 1em;
+  color: #484964;
+}
+
+.contentContainer {
+  display: flex;
+}
+
+.nameStyle,
+.clubStyle {
+  flex: 1;
+  min-height: auto;
+  background-color: #f9f9fc;
+  padding: 0.6em;
+  text-indent: 1em;
+  color: #242533;
+}
+
+.cityStyle,
+.idStyle,
+.weightClassStyle,
+.birthdateStyle {
+  flex: 1;
+  min-height: auto;
+  background-color: #f9f9fc;
+  padding: 0.6em;
+  text-indent: 1em;
+  color: #484964;
+}
+
+.deleteIcon {
+  cursor: pointer;
+  color: #b40000;
+  font-size: 24px;
+  text-align: center;
+  flex: none;
+  order: 6;
+  flex-grow: 0;
+}
+
+.arrowButtonContainer {
+  display: flex;
+  align-items: center;
+}
+
+.arrowButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.arrowButton .arrow {
+  width: 5.83px;
+  height: 5.83px;
+  border: 1.2px solid #808192;
+  background-color: transparent;
+  transform: rotate(45deg);
+}
+
+.arrowButton .arrow:before,
+.arrowButton .arrow:after {
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background-color: #808192;
+}
+
+.arrowButton .arrow:before {
+  top: 2px;
+  left: 7px;
+}
+
+.arrowButton .arrow:after {
+  top: 7px;
+  left: 2px;
+}
+
+.arrowButton.asc .arrow:before,
+.arrowButton.desc .arrow:after {
+  display: none;
+}
+
+.arrowButton.asc .arrow:after,
+.arrowButton.desc .arrow:before {
+  width: 0;
+  height: 0;
+}
+
+.arrowButton.asc .arrow:after {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #808192;
+  top: 7px;
+  left: 2px;
+}
+
+.arrowButton.desc .arrow:before {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid #808192;
+  top: 2px;
+  left: 7px;
+}
+
+.headerCell button.arrowButton {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+}
+
+.tableStyle td::after {
+  content: "";
+  position: absolute;
+  width: 1px;
+  top: 0;
+  bottom: 0;
+  right: -1px;
+  background-color: #eeeef2;
+  display: none; /* Füge diese Zeile hinzu */
+}

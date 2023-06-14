@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { Fighter } from '../../../types';
-import { putFighter, deleteFighter } from '../../../API/fighterAPI';
-import Select from 'react-select';
+import React, { useState, useEffect } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { Fighter } from "../../../types";
+import { putFighter, deleteFighter } from "../../../API/fighterAPI";
+import Select from "react-select";
+import "../../../Styles/GlobalStyles.scss";
+import "./FighterEdit.scss";
 
 interface FighterEditProps {
   fighter: Fighter;
@@ -16,45 +18,46 @@ type OptionType = {
   label: string;
 };
 
-const FighterEdit: React.FC<FighterEditProps> = ({ fighter, onUpdateFighter, onDeleteFighter }) => {
+const FighterEdit: React.FC<FighterEditProps> = ({
+  fighter,
+  onUpdateFighter,
+  onDeleteFighter,
+}) => {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
-  const [clubname, setClubName] = useState("");
   const [birthdate, setBirthDate] = useState<Date | null>(null);
   const [weight, setWeight] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [gender, setGender] = useState<{ value: string; label: string; } | null>(null);
-  const [club, setClub] = useState<{ value: string; label: string; } | null>(null);
-
+  const [gender, setGender] = useState<OptionType | null>(null);
+  const [club, setClub] = useState<OptionType | null>(null);
 
   const genderOptions = [
-    { value: 'm', label: 'Männlich' },
-    { value: 'f', label: 'Weiblich' },
+    { value: "m", label: "Männlich" },
+    { value: "f", label: "Weiblich" },
   ];
 
   const clubOptions = [
-    { value: 'Verein 1', label: 'Verein 1' },
-    { value: 'Verein 2', label: 'Verein 2' },
+    { value: "Verein 1", label: "Verein 1" },
+    { value: "Verein 2", label: "Verein 2" },
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setErrorMessage('');
+    setErrorMessage("");
 
     if (!birthdate) {
-      setErrorMessage('Bitte Geburtsdatum eingeben.');
+      setErrorMessage("Bitte Geburtsdatum eingeben.");
       setLoading(false);
       return;
     }
 
     if (weight > 300) {
-      setErrorMessage('Max. 300');
+      setErrorMessage("Max. 300");
       setLoading(false);
       return;
     }
-    
 
     const birthdateAsString = birthdate.toISOString();
 
@@ -64,44 +67,43 @@ const FighterEdit: React.FC<FighterEditProps> = ({ fighter, onUpdateFighter, onD
       lastname,
       club: {
         ...fighter.club,
-        name: club?.value || '',
+        name: club?.value || "",
       },
       birthdate: birthdateAsString,
       weight,
-      sex: gender?.value || '',
+      sex: gender?.value || "",
     };
-
-    
 
     try {
       await putFighter(updatedFighter);
       onUpdateFighter(updatedFighter);
       setLoading(false);
     } catch (error) {
-      setErrorMessage('(DB-Error) Fehler beim Bearbeiten!');
+      setErrorMessage("(DB-Error) Fehler beim Bearbeiten!");
       setLoading(false);
     }
   };
-
 
   // initialisiert den Zustand der Komponente mit den Daten des übergebenen Fighter
   useEffect(() => {
     setFirstName(fighter.firstname);
     setLastName(fighter.lastname);
-    setClubName(fighter.club.name);
     setBirthDate(new Date(fighter.birthdate));
-    setWeight(fighter.weight);
-    setGender(genderOptions.find(option => option.value === fighter.sex) || null);
-    setClub(clubOptions.find(option => option.value === fighter.club.name) || null);
+    setWeight(fighter.weight || 0);
+    setGender(
+      genderOptions.find((option) => option.value === fighter.sex) || null
+    );
+    setClub(
+      clubOptions.find((option) => option.value === fighter.club.name) || null
+    );
   }, [fighter]);
-
 
   const handleDelete = async () => {
     try {
       await deleteFighter(fighter.id);
       onDeleteFighter(fighter.id);
     } catch (error) {
-      setErrorMessage('(DB-Error) Fehler beim Löschen!');
+      setErrorMessage("(DB-Error) Fehler beim Löschen!");
     }
   };
 
@@ -114,10 +116,10 @@ const FighterEdit: React.FC<FighterEditProps> = ({ fighter, onUpdateFighter, onD
   };
 
   return (
-    <form onSubmit={handleSubmit} className="formContainer">
-      <h1 className="titleStyle">Teilnehmer bearbeiten</h1>
+    <div className="fighterEditMain">
+      <form className="formContainer formWidthFighterEdit" onSubmit={handleSubmit}>
+        <h1 className="titleStyle">Teilnehmer bearbeiten</h1>
 
-      <div>
         <div className="inputContainer">
           <label className="inputLabel" htmlFor="firstName">
             Vorname
@@ -144,71 +146,62 @@ const FighterEdit: React.FC<FighterEditProps> = ({ fighter, onUpdateFighter, onD
             required
           />
         </div>
-      </div>
 
-      <div className="inputContainer">
-        <label className="inputLabel" htmlFor="gender">Geschlecht</label>
-        <div className='inputContainerSelect'>
-        <select
-          id="gender"
-          value={gender ? gender.value : ''}
-          onChange={(e) => {
-            const selectedOption = genderOptions.find(
-              (option) => option.value === e.target.value
-            );
-            handleGenderChange(selectedOption || null);
-          }}
-          required
-          className="selectField"
-        >
-          <option value="">            
-          </option>
-          {genderOptions.map((option: OptionType) => (
-            <option
-              key={option.value}
-              value={option.value}
+        <div className="inputContainer">
+          <label className="inputLabel" htmlFor="gender">
+            Geschlecht
+          </label>
+          <div className="inputContainerSelect">
+            <select
+              id="gender"
+              value={gender ? gender.value : ""}
+              onChange={(e) => {
+                const selectedOption = genderOptions.find(
+                  (option) => option.value === e.target.value
+                );
+                handleGenderChange(selectedOption || null);
+              }}
+              required
+              className="selectField"
             >
-              {option.label}
-            </option>
-          ))}
-        </select>
+              <option value=""></option>
+              {genderOptions.map((option: OptionType) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-      </div>
 
-
-      <div className="inputContainer">
-        <label className="inputLabel" htmlFor="club">
-          Verein
-        </label>
-        <div className='inputContainerSelect'>
-        <select
-          id="club"
-          value={club ? club.value : ''}
-          onChange={(e) => {
-            const selectedOption = clubOptions.find(
-              (option) => option.value === e.target.value
-            );
-            handleClubChange(selectedOption || null);
-          }}
-          required
-          className="selectField"
-        >
-          <option value="">
-          </option>
-          {clubOptions.map((option: OptionType) => (
-            <option
-              key={option.value}
-              value={option.value}
+        <div className="inputContainer">
+          <label className="inputLabel" htmlFor="club">
+            Verein
+          </label>
+          <div className="inputContainerSelect">
+            <select
+              id="club"
+              value={club ? club.value : ""}
+              onChange={(e) => {
+                const selectedOption = clubOptions.find(
+                  (option) => option.value === e.target.value
+                );
+                handleClubChange(selectedOption || null);
+              }}
+              required
+              className="selectField"
             >
-              {option.label}
-            </option>
-          ))}
-        </select>
+              <option value=""></option>
+              {clubOptions.map((option: OptionType) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-      </div>
 
-      <div className="halfWidthWrapper">
-        <div className="inputContainer halfWidth">
+        <div className="inputContainer">
           <label className="inputLabel" htmlFor="birthDate">
             Geburtsdatum
           </label>
@@ -219,8 +212,7 @@ const FighterEdit: React.FC<FighterEditProps> = ({ fighter, onUpdateFighter, onD
             dateFormat="dd.MM.yyyy"
             required
           />
-        </div>
-        <div className="inputContainer halfWidth">
+        <div className="inputContainer marginTopWeightFighterEdit">
           <label className="inputLabel" htmlFor="weight">
             Gewicht
           </label>
@@ -232,19 +224,22 @@ const FighterEdit: React.FC<FighterEditProps> = ({ fighter, onUpdateFighter, onD
             onChange={(e) => setWeight(parseFloat(e.target.value))}
             required
           />
+            </div>
         </div>
-      </div>
 
-      <button className="addButton" type="submit" disabled={loading}>
-        {loading ? 'Laden...' : 'Aktualisieren'}
-      </button>
+        <div className="buttonSectionFighterEdit">
+          <button className="blueButton" type="submit" disabled={loading}>
+            {loading ? "Laden..." : "Aktualisieren"}
+          </button>
 
-      <button className="addDeleteButton" type="button" onClick={handleDelete}>
-        Teilnehmer Löschen
-      </button>
+          <button className="redButton" type="button" onClick={handleDelete}>
+            Teilnehmer Löschen
+          </button>
+        </div>
 
-      {errorMessage && <div className="errorMessage">{errorMessage}</div>}
-    </form>
+        {errorMessage && <div className="errorMessage">{errorMessage}</div>}
+      </form>
+    </div>
   );
 };
 

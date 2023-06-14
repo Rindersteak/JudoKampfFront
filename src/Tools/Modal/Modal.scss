@@ -1,0 +1,56 @@
+$screen-mid: 992px;
+$screen-normal: 993px;
+
+@mixin small {
+  @media (max-width: #{$screen-mid}) {
+    @content;
+  }
+}
+
+@mixin normal {
+  @media (min-width: #{$screen-normal}) {
+    @content;
+  }
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Zentriert das Modal vertikal */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: 0s;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  background-color: white;
+  padding: 3rem;
+  border: 1px solid #888;
+  width: 80%;
+  height: 86%;
+  position: relative;
+  overflow-y: auto;
+}
+
+.modal.large .modal-content {
+  margin: 5vh;
+}
+
+.modal.small .modal-content {
+  width: 40%;
+  height: auto;
+  @include small {
+    width: 65%;
+    height: auto;
+  }
+  //height: 40%;
+}

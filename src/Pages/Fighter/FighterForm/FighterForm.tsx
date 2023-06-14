@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { Fighter } from '../../../types';
-import { postFighter } from '../../../API/fighterAPI';
-import { getClubs } from '../../../API/clubAPI';
-import './FighterForm.css';
-import Select from 'react-select';
+import React, { useState, useEffect } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { FighterAdd } from "../../../types";
+import { postFighter } from "../../../API/fighterAPI";
+import { getClubs } from "../../../API/clubAPI";
+import { postTournamentFighter } from "../../../API/tournamentAPI";
+import "./FighterForm.scss";
+import "../../../Styles/GlobalStyles.scss";
 
 type Props = {
-  onAddFighter: (fighter: Fighter) => void;
+  tournamentId: string;
   onShowSuccessPopup: (status: boolean) => void;
 };
 
@@ -17,7 +18,7 @@ type OptionType = {
   label: string;
 };
 
-const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
+const FighterForm: React.FC<Props> = ({ tournamentId, onShowSuccessPopup }) => {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [clubname, setClubName] = useState("");
@@ -30,8 +31,8 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
   const [clubOptions, setClubOptions] = useState<OptionType[]>([]);
 
   const genderOptions: OptionType[] = [
-    { value: 'm', label: 'Männlich' },
-    { value: 'f', label: 'Weiblich' }
+    { value: "m", label: "Männlich" },
+    { value: "f", label: "Weiblich" },
   ];
 
   useEffect(() => {
@@ -40,7 +41,7 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
         const clubs = await getClubs();
         const clubOptions = clubs.map((club: any) => ({
           value: club.id.toString(),
-          label: club.name
+          label: club.name,
         }));
         setClubOptions(clubOptions);
       } catch (error) {
@@ -78,132 +79,135 @@ const FighterForm: React.FC<Props> = ({ onAddFighter, onShowSuccessPopup }) => {
     const birthdateAsString = birthdate?.toISOString();
 
     const fighter = {
-      id: 0,
-      sex: gender?.value || '',
+      sex: gender?.value || "",
       firstname: firstname,
       lastname: lastname,
       birthdate: birthdateAsString,
-      weight: weight,
       club: {
         id: club?.value ? parseInt(club.value) : 0,
-        shortname: club?.value || '',
-        name: club?.label || '',
       },
     };
-    
 
     try {
-      await postFighter(fighter);
-      onAddFighter(fighter);
+      console.log(tournamentId);
+      await postTournamentFighter(Number(tournamentId), fighter);
       onShowSuccessPopup(true);
       setLoading(false);
+      console.log("Tournament ID:", tournamentId);
     } catch (error) {
       setErrorMessage("(DB-Error) Fehler beim Anlegen!");
+      console.log("Tournament FormID:", tournamentId);
       setLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="formContainer">
+    <form className="formContainer formWidthFighterForm" onSubmit={handleSubmit}>
       <h1 className="titleStyle">Neuen Teilnehmer hinzufügen</h1>
-
-      <div>
-        <div className="inputContainer">
-          <label className="inputLabel" htmlFor="firstName">Vorname</label>
-          <input className="inputField" type="text" id="firstName" value={firstname} onChange={e => setFirstName(e.target.value)} required />
-        </div>
-        <div className="inputContainer">
-          <label className="inputLabel" htmlFor="lastName">Nachname</label>
-          <input className="inputField" type="text" id="lastName" value={lastname} onChange={e => setLastName(e.target.value)} required />
-        </div>
+      <div className="inputContainer">
+        <label className="inputLabel" htmlFor="firstName">
+          Vorname
+        </label>
+        <input
+          className="inputField"
+          type="text"
+          id="firstName"
+          value={firstname}
+          onChange={(e) => setFirstName(e.target.value)}
+          required
+        />
       </div>
-
+      <div className="inputContainer">
+        <label className="inputLabel" htmlFor="lastName">
+          Nachname
+        </label>
+        <input
+          className="inputField"
+          type="text"
+          id="lastName"
+          value={lastname}
+          onChange={(e) => setLastName(e.target.value)}
+          required
+        />
+      </div>
 
       <div className="inputContainer">
-        <label className="inputLabel" htmlFor="gender">Geschlecht</label>
-        <div className='inputContainerSelect'>
-        <select
-          id="gender"
-          value={gender ? gender.value : ''}
-          onChange={(e) => {
-            const selectedOption = genderOptions.find(
-              (option) => option.value === e.target.value
-            );
-            handleGenderChange(selectedOption || null);
-          }}
-          required
-          className="selectField"
-        >
-          <option value="">            
-          </option>
-          {genderOptions.map((option: OptionType) => (
-            <option
-              key={option.value}
-              value={option.value}
-            >
-              {option.label}
-            </option>
-          ))}
-        </select>
+        <label className="inputLabel" htmlFor="gender">
+          Geschlecht
+        </label>
+        <div className="inputContainerSelect">
+          <select
+            id="gender"
+            value={gender ? gender.value : ""}
+            onChange={(e) => {
+              const selectedOption = genderOptions.find(
+                (option) => option.value === e.target.value
+              );
+              handleGenderChange(selectedOption || null);
+            }}
+            required
+            className="selectField"
+          >
+            <option value=""></option>
+            {genderOptions.map((option: OptionType) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
-
 
       <div className="inputContainer">
         <label className="inputLabel" htmlFor="club">
           Verein
         </label>
-        <div className='inputContainerSelect'>
-        <select
-          id="club"
-          value={club ? club.value : ''}
-          onChange={(e) => {
-            const selectedOption = clubOptions.find(
-              (option) => option.value === e.target.value
-            );
-            handleClubChange(selectedOption || null);
-          }}
-          required
-          className="selectField"
-        >
-          <option value="">
-          </option>
-          {clubOptions.map((option: OptionType) => (
-            <option
-              key={option.value}
-              value={option.value}
-            >
-              {option.label}
-            </option>
-          ))}
-        </select>
+        <div className="inputContainerSelect">
+          <select
+            id="club"
+            value={club ? club.value : ""}
+            onChange={(e) => {
+              const selectedOption = clubOptions.find(
+                (option) => option.value === e.target.value
+              );
+              handleClubChange(selectedOption || null);
+            }}
+            required
+            className="selectField"
+          >
+            <option value=""></option>
+            {clubOptions.map((option: OptionType) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
 
-
-
-
-      <div className="halfWidthWrapper">
-        <div className="inputContainer halfWidth">
-          <label className="inputLabel" htmlFor="birthDate">Geburtsdatum</label>
-          <DatePicker
-            id="birthDate"
-            selected={birthdate}
-            onChange={(date: Date | null) => setBirthDate(date)}
-            dateFormat="dd.MM.yyyy"
-            required
-          />
-        </div>
-        <div className="inputContainer halfWidth">
+      <div className="inputContainer">
+        <label className="inputLabel" htmlFor="birthDate">
+          Geburtsdatum
+        </label>
+        <DatePicker
+          id="birthDate"
+          selected={birthdate}
+          onChange={(date: Date | null) => setBirthDate(date)}
+          dateFormat="dd.MM.yyyy"
+          required
+        />
+      </div>
+      {/* <div className="inputContainer">
           <label className="inputLabel" htmlFor="weight">Gewicht</label>
           <input className="inputField" type="number" id="weight" value={weight} onChange={e => setWeight(parseFloat(e.target.value))} required />
-        </div>
+        </div> */}
+
+      <div className="buttonSection">
+        <button className="blueButton" type="submit" disabled={loading}>
+          {loading ? "Laden..." : "Hinzufügen"}
+        </button>
       </div>
 
-      <button className="addButton" type="submit" disabled={loading}>
-        {loading ? "Laden..." : "Hinzufügen"}
-      </button>
-          
       {errorMessage && <div className="errorMessage">{errorMessage}</div>}
     </form>
   );

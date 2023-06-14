@@ -1,70 +1,84 @@
-import React, { useState } from 'react';
-import FighterForm from '../FighterForm/FighterForm';
-import FighterList, { deleteFighterHandler } from '../FighterList/FighterList';
-import Modal from '../../../Tools/Modal/Modal';
-import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
-import './FighterManager.css';
+import React, { useState } from "react";
+import FighterForm from "../FighterForm/FighterForm";
+import FighterList, { deleteFighterHandler } from "../FighterList/FighterList";
+import Modal from "../../../Tools/Modal/Modal";
+import ConfirmDelete from "../../../Tools/ConfirmDelete/ConfirmDelete";
+import "./FighterManager.scss";
+import "../../../Styles/GlobalStyles.scss";
 
-const FighterManager: React.FC = () => {
-    const [showSuccessPopup, setShowSuccessPopup] = useState(false);
-    const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState(false);
-    const [fighterIdToDelete, setFighterToDelete] = useState<number | null>(null);
-    const [listKey, setListKey] = useState(Math.random());
+interface FighterManagerProps {
+  tournamentId: string;
+  onClose: () => void;
+}
 
-    const handleSuccessPopup = (status: boolean) => {
-        setShowSuccessPopup(status);
-        if (status) {
-            setTimeout(() => {
-                setShowSuccessPopup(false);
-            }, 3000);
-            setListKey(Math.random());
-        }
-    };
+const FighterManager: React.FC<FighterManagerProps> = ({
+  tournamentId,
+  onClose,
+}) => {
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState(false);
+  const [fighterIdToDelete, setFighterToDelete] = useState<number | null>(null);
+  const [listKey, setListKey] = useState(Math.random());
 
-    const handleConfirmDelete = (fighterId: number) => {
-        setShowConfirmDeletePopup(true);
-        setFighterToDelete(fighterId);
+  const handleSuccessPopup = (status: boolean) => {
+    setShowSuccessPopup(status);
+    if (status) {
+      setTimeout(() => {
+        setShowSuccessPopup(false);
+      }, 3000);
+      setListKey(Math.random());
     }
-    const handleDeleteConfirmed = async () => {
-        if (fighterIdToDelete !== null) {
-            await deleteFighterHandler(fighterIdToDelete);
-            setShowConfirmDeletePopup(false);
-            setListKey(Math.random());
-        }
-    }
+  };
 
-    const handleDeleteCanceled = () => {
-        setShowConfirmDeletePopup(false);
-    }
+  const handleConfirmDelete = (fighterId: number) => {
+    setShowConfirmDeletePopup(true);
+    setFighterToDelete(fighterId);
+  };
 
-    return (
-        <div className="innerContainer">
-            <div className="formContainer">
-                <FighterForm onAddFighter={() => { }} onShowSuccessPopup={handleSuccessPopup} />
-            </div>
-            <div className="listSection">
-                <h1 className="titleStyleList">Teilnehmerliste</h1>
-                <div className="listContainer">
-                    <FighterList key={listKey} detailedView={false} onDeleteFighter={handleConfirmDelete} />
-                </div>
-            </div>
-            {showSuccessPopup && (
-                <div className="successPopup">
-                    Eintrag erfolgreich hinzugefügt!
-                </div>
-            )}
-            {showConfirmDeletePopup && fighterIdToDelete !== null && (
-                <Modal size="small" onClose={handleDeleteCanceled}>
-                    <ConfirmDelete
-                        onClose={handleDeleteCanceled}
-                        onConfirmDelete={handleDeleteConfirmed}
-                        idToDelete={fighterIdToDelete}
-                    />
-                </Modal>
-            )}
+  const handleDeleteConfirmed = async () => {
+    if (fighterIdToDelete !== null) {
+      await deleteFighterHandler(fighterIdToDelete);
+      setShowConfirmDeletePopup(false);
+      setListKey(Math.random());
+    }
+  };
+
+  const handleDeleteCanceled = () => {
+    setShowConfirmDeletePopup(false);
+  };
+
+  console.log("Tournament ManagerID:", tournamentId);
+  return (
+    <div className="innerContainerScrollbar">
+      <div className="innerContainer">
+        <FighterForm
+          tournamentId={tournamentId}
+          onShowSuccessPopup={handleSuccessPopup}
+        />
+        <div className="listSection">
+          <h1 className="titleStyleList">Teilnehmerliste</h1>
+          <FighterList
+            tournamentId={tournamentId}
+            key={listKey}
+            detailedView={false}
+            onDeleteFighter={handleConfirmDelete}
+          />
         </div>
-    );
+        {showSuccessPopup && (
+          <div className="successPopup">Eintrag erfolgreich hinzugefügt!</div>
+        )}
+        {showConfirmDeletePopup && fighterIdToDelete !== null && (
+          <Modal size="small" onClose={handleDeleteCanceled}>
+            <ConfirmDelete
+              onClose={handleDeleteCanceled}
+              onConfirmDelete={handleDeleteConfirmed}
+              idToDelete={fighterIdToDelete}
+            />
+          </Modal>
+        )}
+      </div>
+    </div>
+  );
 };
-
 
 export default FighterManager;

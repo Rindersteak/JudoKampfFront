@@ -3,7 +3,8 @@ import ClubForm from '../ClubForm/ClubForm';
 import ClubList, { deleteClubHandler } from '../ClubList/ClubList';
 import Modal from '../../../Tools/Modal/Modal';
 import ConfirmDelete from '../../../Tools/ConfirmDelete/ConfirmDelete';
-import './ClubManager.css';
+import './ClubManager.scss';
+import './../../../Styles/GlobalStyles.scss'
 
 const ClubManager: React.FC = () => {
     const [showSuccessPopup, setShowSuccessPopup] = useState(false);
@@ -38,30 +39,28 @@ const ClubManager: React.FC = () => {
     }
 
     return (
-        <div className="innerContainer">
-            <div className="formContainer">
+        <div className='innerContainerScrollbar'>
+            <div className="innerContainer">
                 <ClubForm onAddClub={() => { }} onShowSuccessPopup={handleSuccessPopup} />
-            </div>
-            <div className="listSection">
-                <h1 className="titleStyleList">Vereinsliste</h1>
-                <div className="listContainer">
+                <div className="listSection">
+                    <h1 className="titleStyleList">Vereinsliste</h1>
                     <ClubList key={listKey} detailedView={false} onDeleteClub={handleConfirmDelete} />
                 </div>
+                {showSuccessPopup && (
+                    <div className="successPopup">
+                        Eintrag erfolgreich hinzugefügt!
+                    </div>
+                )}
+                {showConfirmDeletePopup && clubIDToDelete !== null && (
+                    <Modal size="small" onClose={handleDeleteCanceled}>
+                        <ConfirmDelete
+                            onClose={handleDeleteCanceled}
+                            onConfirmDelete={handleDeleteConfirmed}
+                            idToDelete={clubIDToDelete}
+                        />
+                    </Modal>
+                )}
             </div>
-            {showSuccessPopup && (
-                <div className="successPopup">
-                    Eintrag erfolgreich hinzugefügt!
-                </div>
-            )}
-            {showConfirmDeletePopup && clubIDToDelete !== null && (
-                <Modal size="small" onClose={handleDeleteCanceled}>
-                    <ConfirmDelete
-                        onClose={handleDeleteCanceled}
-                        onConfirmDelete={handleDeleteConfirmed}
-                        idToDelete={clubIDToDelete}
-                    />
-                </Modal>
-            )}
         </div>
     );
 };

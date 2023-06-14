@@ -1,0 +1,149 @@
+/* FighterForm.css */
+
+/* Importiert die Nunito Schriftart von Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap");
+
+$screen-mid: 992px;
+$screen-normal: 993px;
+
+@mixin small {
+  @media (max-width: #{$screen-mid}) {
+    @content;
+  }
+}
+
+@mixin normal {
+  @media (min-width: #{$screen-normal}) {
+    @content;
+  }
+}
+
+.selectField {
+  /* possibly need to adjust to make dynamic? */
+  width: 104.5%;
+  border-radius: 5px;
+  border: none;
+  padding: 0 0.625em;
+  font-family: "Nunito", sans-serif;
+  font-size: 1em;
+  background: #edeff2;
+  appearance: none;
+  position: relative;
+  height: 1.9375em;
+  /* possibly need to adjust to make dynamic? */
+  left: -8px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+/* Styling für das Pfeil-Icon von Dropdown-Feldern */
+.selectField:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0.625em;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #001aff;
+  transform: translateY(-50%);
+}
+
+/* Styling für den Container der Dropdown-Felder */
+.selectContainer {
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  padding: 0 0.625em;
+  font-family: "Nunito", sans-serif;
+  font-size: 1em;
+  background: #edeff2;
+  appearance: none;
+  position: relative;
+  height: 1.9375em;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+/* Styling für das Pfeil-Icon von Dropdown-Feldern */
+.selectContainer:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0.625em;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #001aff;
+  transform: translateY(-50%);
+}
+
+.inputContainerSelect {
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  padding: 0 0.625em;
+  font-family: "Nunito", sans-serif;
+  font-size: 1em;
+  background: #edeff2;
+  appearance: none;
+  position: relative;
+  height: 1.9375em;
+  box-sizing: border-box;
+}
+
+/* Styling für das Pfeil-Icon von Dropdown-Feldern */
+.inputContainerSelect:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0.625em;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #001aff;
+  transform: translateY(-50%);
+}
+
+/* Styling für den Container der zwei Eingabefelder nebeneinander anordnet */
+.halfWidthWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  /* zentriert die Elemente horizontal */
+}
+
+/* Styling für die Eingabefelder in dem "halbe Breite" Container */
+.inputContainer.halfWidth {
+  width: 100%;
+  margin-bottom: 2.9375em;
+  height: 1.9375em;
+}
+
+/* Entfernt den rechten Abstand vom letzten Eingabefeld in dem "halbe Breite" Container */
+.inputContainer.halfWidth:last-of-type {
+  margin-right: 0;
+}
+
+.react-datepicker__input-container input {
+  width: 100%;
+  //margin-bottom: 2.9375em;
+  height: 1.9375em;
+  border: none;
+  background: none;
+  border-radius: 5px;
+  padding: 0 0.625em;
+  font-family: "Nunito", sans-serif;
+  font-size: 1em;
+  background: #edeff2;
+}
+
+.selectContainer {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.formWidthFighterForm {
+  @include normal{
+    width: 35%;
+  }
+}

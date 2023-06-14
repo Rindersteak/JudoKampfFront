@@ -1,36 +1,58 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { getTournaments, getTotalTournaments } from '../../../API/tournamentAPI';
-import './TournamentDetails.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClipboardList, faGear, faPencil, faPeopleArrows, faPlus, faTree, faTrophy } from '@fortawesome/free-solid-svg-icons';
-import { Tournament } from '../../../types';
-import Banner from '../../../Tools/Banner/Banner';
-import FighterDetails from '../../Fight/FightDetails/FightDetails'
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import {
+  getTournaments,
+  getTotalTournaments,
+} from "../../../API/tournamentAPI";
+import "./TournamentDetails.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faClipboardList,
+  faGear,
+  faPencil,
+  faPeopleArrows,
+  faPlus,
+  faTree,
+  faTrophy,
+} from "@fortawesome/free-solid-svg-icons";
+import { Tournament } from "../../../types";
+import Banner from "../../../Tools/Banner/Banner";
+import FighterDetails from "../../Fight/FightDetails/FightDetails";
+import FightGroupList from "../../FightGroup/FightGroupList"; // Importiere die FightGroupList-Komponente
 
 // Definition der Eigenschaften für die TournamentDetails-Komponente
 interface TournamentDetailsProps {
-  onOpenFighterList: () => void;
-  onOpenFighterManager: () => void;
+  onOpenFighterList: (tournamentId: string) => void;
+  onOpenFighterManager: (tournamentId: string) => void;
   onOpenClubManager: () => void;
   onOpenClubList: () => void;
   onOpenTournamentEdit: (tournamentId: string) => void;
-  
+  onOpenFightGroupList: (tournamentId: string) => void;
 }
 
-
 // Hauptkomponente TournamentDetails
-const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList, onOpenFighterManager, onOpenClubManager, onOpenClubList, onOpenTournamentEdit }) => {
-    
-
-    // Hook, um URL-Parameter abzurufen
+const TournamentDetails: React.FC<TournamentDetailsProps> = ({
+  onOpenFighterList,
+  onOpenFighterManager,
+  onOpenClubManager,
+  onOpenClubList,
+  onOpenTournamentEdit,
+  onOpenFightGroupList,
+}) => {
+  // Hook, um URL-Parameter abzurufen
   const { tournamentId } = useParams<{ tournamentId: string | undefined }>();
-  console.log(tournamentId)
-    // Setzen der anfänglichen Zustände mit Hooks
-  const [backendTournaments, setBackendTournaments] = useState<Tournament[]>([]);
+  // Setzen der anfänglichen Zustände mit Hooks
+  const [backendTournaments, setBackendTournaments] = useState<Tournament[]>(
+    []
+  );
   const [tournament, setTournament] = useState<Tournament | null>(null);
+  const [showFightGroupList, setShowFightGroupList] = useState(false); // Neuer Zustand
+  const handleOpenFightGroupListClick = () => {
+    onOpenFightGroupList(tournamentId || "");
+    setShowFightGroupList(true);
+  };
 
-   // Effekt, der beim Start ausgeführt wird und die Turnierdaten abruft
+  // Effekt, der beim Start ausgeführt wird und die Turnierdaten abruft
   useEffect(() => {
     const fetchTournaments = async () => {
       try {
@@ -39,17 +61,23 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList
         const tournament = getTournamentDetailsById(tournamentId, tournaments);
         setTournament(tournament);
       } catch (error) {
-        console.error('Error loading tournaments:', error);
+        console.error("Error loading tournaments:", error);
       }
     };
 
     fetchTournaments();
   }, [tournamentId]);
 
-  
+  const handleOpenFightGroupList = () => {
+    onOpenFightGroupList(tournamentId || "");
+    setShowFightGroupList(true); // Zustand auf true setzen
+  };
 
-    // Funktion zum Abrufen der Turnierdetails anhand der ID
-  const getTournamentDetailsById = (tournamentId: string | undefined, tournaments: Tournament[]): Tournament | null => {
+  // Funktion zum Abrufen der Turnierdetails anhand der ID
+  const getTournamentDetailsById = (
+    tournamentId: string | undefined,
+    tournaments: Tournament[]
+  ): Tournament | null => {
     if (!tournamentId) {
       return null;
     }
@@ -57,52 +85,56 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({ onOpenFighterList
     return tournament || null;
   };
 
-
   // Render der Komponente
   return (
     <div className="app">
-
       {/* Banner mit dem Turniernamen und der ID anzeigen */}
       <Banner
-        title={`Turnier "${tournament ? tournament.name : ''}"`}
-        subtitle={`ID${tournament ? tournament.id : ''}`}
+        title={`Turnier "${tournament ? tournament.name : ""}"`}
+        subtitle={`ID${tournament ? tournament.id : ""}`}
       />
       {/* Für den Edit-Button kann hier einfach der Button aus der Banner.tsx aufgerufen werden */}
-
       {/* Container für die Karten */}
-
-      
-
       <div className="cards-container">
-        <CardOne tournamentId={tournamentId || ''} />
-        <CardTwo tournamentId={tournamentId || ''} onOpenFighterList={onOpenFighterList} />
-        <CardThree tournamentId={tournamentId || ''} onOpenFighterManager={onOpenFighterManager} />
-        <CardFour tournamentId={tournamentId || ''} onOpenClubList={onOpenClubList} />
-        <CardFive tournamentId={tournamentId || ''} onOpenClubManager={onOpenClubManager} />
-        <CardSix tournamentId={tournamentId || ''} onOpenTournamentEdit={onOpenTournamentEdit} />
+        <CardOne
+          tournamentId={tournamentId || ""}
+          onOpenFightGroupList={handleOpenFightGroupListClick}
+        />
+        <CardTwo
+          tournamentId={tournamentId || ""}
+          onOpenFighterList={onOpenFighterList}
+        />
+        <CardThree
+          tournamentId={tournamentId || ""}
+          onOpenFighterManager={onOpenFighterManager}
+        />
+        <CardFour
+          tournamentId={tournamentId || ""}
+          onOpenClubList={onOpenClubList}
+        />
+        <CardFive
+          tournamentId={tournamentId || ""}
+          onOpenClubManager={onOpenClubManager}
+        />
+        <CardSix
+          tournamentId={tournamentId || ""}
+          onOpenTournamentEdit={onOpenTournamentEdit}
+        />
       </div>
-      {/* Aktueller Kampf: Label anzeigen */}
-      {/*
-      <div className="currentFightLabel">Aktueller Kampf:</div>
-      <div className="previewTransparent">
-        <div className="currentFightPreview">
-          <FighterDetails />
-        </div>
-      </div>
-        */}
     </div>
   );
-
 };
 
-
-const CardOne = ({ tournamentId }: { tournamentId: string }) => {
-  const navigate = useNavigate();
-
+const CardOne = ({
+  tournamentId,
+  onOpenFightGroupList,
+}: {
+  tournamentId: string;
+  onOpenFightGroupList: () => void;
+}) => {
   const handleCardOneClick = () => {
-    navigate(`/tournament-details/${tournamentId}`);
+    onOpenFightGroupList();
   };
-
   return (
     <div className="card-one" onClick={handleCardOneClick}>
       <div className="card-content">
@@ -115,10 +147,18 @@ const CardOne = ({ tournamentId }: { tournamentId: string }) => {
   );
 };
 
-const CardTwo = ({ tournamentId, onOpenFighterList }: { tournamentId: string, onOpenFighterList: () => void }) => {
+const CardTwo = ({
+  tournamentId,
+  onOpenFighterList,
+}: {
+  tournamentId: string;
+  onOpenFighterList: (tournamentId: string) => void;
+}) => {
   const handleCardTwoClick = () => {
-    onOpenFighterList();
+    onOpenFighterList(tournamentId);
   };
+
+  console.log("Tournament DetailsID:", tournamentId);
 
   return (
     <div className="card-two" onClick={handleCardTwoClick}>
@@ -132,9 +172,15 @@ const CardTwo = ({ tournamentId, onOpenFighterList }: { tournamentId: string, on
   );
 };
 
-const CardThree = ({ tournamentId, onOpenFighterManager }: { tournamentId: string, onOpenFighterManager: () => void }) => {
+const CardThree = ({
+  tournamentId,
+  onOpenFighterManager,
+}: {
+  tournamentId: string;
+  onOpenFighterManager: (tournamentId: string) => void;
+}) => {
   const handleCardThreeClick = () => {
-    onOpenFighterManager();
+    onOpenFighterManager(tournamentId);
   };
 
   return (
@@ -149,14 +195,19 @@ const CardThree = ({ tournamentId, onOpenFighterManager }: { tournamentId: strin
   );
 };
 
-
-const CardFour = ({ tournamentId, onOpenClubList }: { tournamentId: string, onOpenClubList: () => void }) => {
-  const handleCardThreeClick = () => {
+const CardFour = ({
+  tournamentId,
+  onOpenClubList,
+}: {
+  tournamentId: string;
+  onOpenClubList: () => void;
+}) => {
+  const handleCardFourClick = () => {
     onOpenClubList();
   };
 
   return (
-    <div className="card-four" onClick={handleCardThreeClick}>
+    <div className="card-four" onClick={handleCardFourClick}>
       <div className="card-content">
         <div className="card-icon-blue">
           <FontAwesomeIcon icon={faClipboardList} />
@@ -167,14 +218,19 @@ const CardFour = ({ tournamentId, onOpenClubList }: { tournamentId: string, onOp
   );
 };
 
-
-const CardFive = ({ tournamentId, onOpenClubManager }: { tournamentId: string, onOpenClubManager: () => void }) => {
-  const handleCardThreeClick = () => {
+const CardFive = ({
+  tournamentId,
+  onOpenClubManager,
+}: {
+  tournamentId: string;
+  onOpenClubManager: () => void;
+}) => {
+  const handleCardFiveClick = () => {
     onOpenClubManager();
   };
 
   return (
-    <div className="card-five" onClick={handleCardThreeClick}>
+    <div className="card-five" onClick={handleCardFiveClick}>
       <div className="card-content">
         <div className="card-icon-white">
           <FontAwesomeIcon icon={faPlus} />
@@ -185,7 +241,13 @@ const CardFive = ({ tournamentId, onOpenClubManager }: { tournamentId: string, o
   );
 };
 
-const CardSix = ({ tournamentId, onOpenTournamentEdit }: { tournamentId: string, onOpenTournamentEdit: (tournamentId: string) => void }) => {
+const CardSix = ({
+  tournamentId,
+  onOpenTournamentEdit,
+}: {
+  tournamentId: string;
+  onOpenTournamentEdit: (tournamentId: string) => void;
+}) => {
   const handleCardSixClick = () => {
     onOpenTournamentEdit(tournamentId);
   };
@@ -201,8 +263,5 @@ const CardSix = ({ tournamentId, onOpenTournamentEdit }: { tournamentId: string,
     </div>
   );
 };
-
-
-
 
 export default TournamentDetails;
