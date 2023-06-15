@@ -7,6 +7,8 @@ import { getClubs } from "../../../API/clubAPI";
 import { postTournamentFighter } from "../../../API/tournamentAPI";
 import "./FighterForm.scss";
 import "../../../Styles/GlobalStyles.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 type Props = {
   tournamentId: string;
@@ -204,7 +206,7 @@ const FighterForm: React.FC<Props> = ({ tournamentId, onShowSuccessPopup }) => {
 
       <div className="buttonSection">
         <button className="blueButton" type="submit" disabled={loading}>
-          {loading ? "Laden..." : "Hinzufügen"}
+        {loading ? <FontAwesomeIcon icon={faSpinner} spin={true} /> : "Hinzufügen"}
         </button>
       </div>
 

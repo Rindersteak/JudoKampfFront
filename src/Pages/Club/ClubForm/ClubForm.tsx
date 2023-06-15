@@ -5,6 +5,8 @@ import { postClub } from "../../../API/clubAPI";
 import "./ClubForm.scss";
 import stateassociationOptions from "../../../Config/StateAssociations";
 import "../../../Styles/GlobalStyles.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 type ClubFormProps = {
   onAddClub: (club: Club) => void;
@@ -173,7 +175,7 @@ const ClubForm: React.FC<ClubFormProps> = ({
 
       <div className="buttonSection">
         <button className="blueButton" type="submit" disabled={loading}>
-          {loading ? "Laden..." : "Hinzufügen"}
+        {loading ? <FontAwesomeIcon icon={faSpinner} spin={true} /> : "Hinzufügen"}
         </button>
       </div>
 

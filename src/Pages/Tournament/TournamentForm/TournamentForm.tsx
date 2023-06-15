@@ -6,6 +6,8 @@ import { Address, Tournament } from "../../../types";
 import { postTournament } from "../../../API/tournamentAPI";
 import stateassociationOptions from "../../../Config/StateAssociations";
 import "../../../Styles/GlobalStyles.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 type Props = {
   onAddTournament: (tournament: Tournament) => void;
@@ -223,7 +225,7 @@ const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
 
         <div className="buttonSectionTournamentForm">
           <button className="blueButton" type="submit" disabled={loading}>
-            {loading ? "Laden..." : "Hinzufügen"}
+          {loading ? <FontAwesomeIcon icon={faSpinner} spin={true} /> : "Hinzufügen"}
           </button>
         </div>
 

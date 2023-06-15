@@ -2,6 +2,8 @@
 import React from "react";
 import "./ConfirmDelete.scss";
 import useDeleteHandler from "../MessageHandling/ErrorHandler";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 interface ConfirmDeleteProps {
   onClose: () => void;
@@ -30,7 +32,7 @@ const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({
           disabled={loading}
           onClick={onClose}
         >
-          {loading ? "Laden..." : "Nein, behalten"}
+          {loading ? "Nein, behalten" : "Nein, behalten"}
         </button>
         <button
           className="redButton"
@@ -38,7 +40,11 @@ const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({
           disabled={loading}
           onClick={handleDelete}
         >
-          {loading ? "Laden..." : "Ja, löschen"}
+          {loading ? (
+            <FontAwesomeIcon icon={faSpinner} spin={true} />
+          ) : (
+            "Ja, löschen"
+          )}
         </button>
       </div>
       {errorMessage && <div className="errorMessage">{errorMessage}</div>}
