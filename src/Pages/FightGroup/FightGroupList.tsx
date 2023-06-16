@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Fightgroup } from "../../types";
+import { Fight, Fightgroup } from "../../types";
 import { getFightgroupsByTournamentId } from "../../API/fightGroupAPI";
+import { getFight } from "../../API/fightAPI";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { getFightTreeComponent } from "../../Tools/FightTree/FightTreeComponents";
 import "./FightGroupList.scss";
 
 interface FightGroupListProps {
@@ -39,11 +41,40 @@ const FightGroupList: React.FC<FightGroupListProps> = ({ tournamentId }) => {
     setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   };
 
-  const handleRowClick = (group: Fightgroup) => {
-    navigate(`/tournament-tree-for-two/${group.id}`, {
-      state: { bannerTitle: group.name },
-    });
+
+
+  const handleRowClick = async (group: Fightgroup) => {
+    try {
+      const fight = await getFight();
+      setFightGroups([group]); // Update the state with the new group
+  
+      const { component, id, count } = getFightTreeComponent(group); // Get the appropriate component based on the number of fighters
+  
+      let pageName;
+      if (count < 2) {
+        pageName = "none";
+      } else if (count >= 3 && count <= 6) {
+        pageName = "three-to-six";
+      } else if (count >= 7 && count <= 8) {
+        pageName = "seven-to-eight";
+      } else {
+        pageName = "more-than-eight";
+      }
+  
+      // Now use the pageName in the path
+      const path = `/tree-for-${pageName}/${id}`;
+  
+      navigate(path, {
+        state: { bannerTitle: group.name, element: component },
+      });
+    } catch (error) {
+      console.error("Error loading fight:", error);
+    }
   };
+  
+  
+  
+
 
   const sortedFightGroups = fightGroups.sort((a: Fightgroup, b: Fightgroup) => {
     if (sortColumn === "gender") {

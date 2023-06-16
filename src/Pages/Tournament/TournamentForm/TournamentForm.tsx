@@ -67,25 +67,10 @@ const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
         state: "",
         postalcode: addressZipCode,
       },
-      stateassociation: stateassociation,
-      ageclass: {
-        id: 0,
-        name: "", // You need to set the correct value here
-        lowerAge: 0, // You need to set the correct value here
-        upperAge: 0, // You need to set the correct value here
-      },
-      weightclass: {
-        id: 0,
-        name: "", // You need to set the correct value here
-        upperBoundary: 0, // You need to set the correct value here
-        lowerBoundary: 0, // You need to set the correct value here
-      },
-      code: "", // You need to set the correct value here
       location: tournamentLocation, // You need to set the correct location here
       startdate: periodFrom.toISOString(),
       enddate: periodTo.toISOString(),
       fighters: [], // You need to set the correct fighters here
-      fights: [], // You need to set the correct fights here
     };
 
     try {

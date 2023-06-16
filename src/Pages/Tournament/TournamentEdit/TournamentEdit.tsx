@@ -134,7 +134,6 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({
       ...tournament!,
       name: tournamentName,
       location: tournamentLocation,
-      stateassociation: stateassociation,
       address: {
         ...tournament!.address,
         city: addressCity,

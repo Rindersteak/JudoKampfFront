@@ -65,9 +65,11 @@ export type Fight = {
   blue_fouls: number;
   white_fouls: number;
   winner: Fighter;
-  stage: string;
-  fightGroup: Fightgroup;
+  lastFight: any; 
+  nextFight: any; 
 };
+
+
 
 export type Fightgroup = {
   id: number;
@@ -84,13 +86,9 @@ export type Tournament = {
   id: number;
   name: string;
   address: Address;
-  ageclass: AgeClass;
-  weightclass: WeightClass;
-  code: string;
-  stateassociation: string;
   location: string;
   startdate: string;
   enddate: string;
   fighters: Fighter[];
-  fights: Fight[];
+  fightgroups?: Fightgroup[];
 };
