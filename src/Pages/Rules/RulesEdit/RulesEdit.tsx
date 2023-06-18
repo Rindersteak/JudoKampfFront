@@ -26,7 +26,7 @@ const RulesEdit = () => {
         <div className="eponWasariContainer">
           <div className="pointsEponWasariContainer">
             <div className="pointsEpponContainer">
-              <label className="inputLabel">Punkte Eppon:</label>
+              <label className="inputLabel">Punkte Ippon:</label>
               <input className="inputField"></input>
             </div>
             <div></div>
@@ -38,7 +38,7 @@ const RulesEdit = () => {
 
           <div className="holdTimeEponWasari">
             <div className="holdTimeEpponContainer">
-              <label className="inputLabel">Haltezeit Eppon:</label>
+              <label className="inputLabel">Haltezeit Ippon:</label>
               <input className="inputField"></input>
             </div>
 
