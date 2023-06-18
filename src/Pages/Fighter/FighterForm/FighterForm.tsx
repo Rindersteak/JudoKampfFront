@@ -8,7 +8,7 @@ import { postTournamentFighter } from "../../../API/tournamentAPI";
 import "./FighterForm.scss";
 import "../../../Styles/GlobalStyles.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDown, faCirclePlus, faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 type Props = {
   tournamentId: string;
@@ -162,7 +162,7 @@ const FighterForm: React.FC<Props> = ({ tournamentId, onShowSuccessPopup }) => {
 
       <div className="inputContainer">
         <label className="inputLabel" htmlFor="club">
-          Verein
+          Verein <FontAwesomeIcon className="clubPlusIcon" icon={faCirclePlus} />
         </label>
         <div className="inputContainerSelect">
           <select
