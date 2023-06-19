@@ -34,6 +34,7 @@ export type Fighter = {
   sex: string;
   firstname: string;
   lastname: string;
+  age?: number;
   birthdate: string;
   ageclass?: AgeClass;
   weight?: number;
@@ -91,4 +92,15 @@ export type Tournament = {
   enddate: string;
   fighters: Fighter[];
   fightgroups?: Fightgroup[];
+  rule?: Rule;
+};
+
+export type Rule = {
+  id: number;
+  tournament: Tournament;
+  fightDruation: number;
+  pointsTillWin: number;
+  holdingTime: number;
+  goldenScore: boolean;
+  youth: boolean;
 };
