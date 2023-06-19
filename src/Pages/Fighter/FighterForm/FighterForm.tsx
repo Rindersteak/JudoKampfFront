@@ -8,7 +8,13 @@ import { postTournamentFighter } from "../../../API/tournamentAPI";
 import "./FighterForm.scss";
 import "../../../Styles/GlobalStyles.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowDown, faCirclePlus, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowDown,
+  faCirclePlus,
+  faSpinner,
+} from "@fortawesome/free-solid-svg-icons";
+import ClubManager from "../../Club/ClubManager/ClubManager";
+import Modal from "../../../Tools/Modal/Modal";
 
 type Props = {
   tournamentId: string;
@@ -31,6 +37,7 @@ const FighterForm: React.FC<Props> = ({ tournamentId, onShowSuccessPopup }) => {
   const [gender, setGender] = useState<OptionType | null>(null);
   const [club, setClub] = useState<OptionType | null>(null);
   const [clubOptions, setClubOptions] = useState<OptionType[]>([]);
+  const [showClubManager, setShowClubManager] = useState(false);
 
   const genderOptions: OptionType[] = [
     { value: "m", label: "Männlich" },
@@ -59,6 +66,14 @@ const FighterForm: React.FC<Props> = ({ tournamentId, onShowSuccessPopup }) => {
 
   const handleClubChange = (newValue: OptionType | null) => {
     setClub(newValue);
+  };
+
+  const handleOpenClubManager = () => {
+    setShowClubManager(true);
+  };
+
+  const handeCloseClubManager = () => {
+    setShowClubManager(false);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -104,7 +119,10 @@ const FighterForm: React.FC<Props> = ({ tournamentId, onShowSuccessPopup }) => {
   };
 
   return (
-    <form className="formContainer formWidthFighterForm" onSubmit={handleSubmit}>
+    <form
+      className="formContainer formWidthFighterForm"
+      onSubmit={handleSubmit}
+    >
       <h1 className="titleStyle">Neuen Teilnehmer hinzufügen</h1>
       <div className="inputContainer">
         <label className="inputLabel" htmlFor="firstName">
@@ -162,7 +180,12 @@ const FighterForm: React.FC<Props> = ({ tournamentId, onShowSuccessPopup }) => {
 
       <div className="inputContainer">
         <label className="inputLabel" htmlFor="club">
-          Verein <FontAwesomeIcon className="clubPlusIcon" icon={faCirclePlus} />
+          Verein{" "}
+          <FontAwesomeIcon
+            className="clubPlusIcon"
+            icon={faCirclePlus}
+            onClick={handleOpenClubManager}
+          />
         </label>
         <div className="inputContainerSelect">
           <select
@@ -206,11 +229,19 @@ const FighterForm: React.FC<Props> = ({ tournamentId, onShowSuccessPopup }) => {
 
       <div className="buttonSection">
         <button className="blueButton" type="submit" disabled={loading}>
-        {loading ? <FontAwesomeIcon icon={faSpinner} spin={true} /> : "Hinzufügen"}
+          {loading ? (
+            <FontAwesomeIcon icon={faSpinner} spin={true} />
+          ) : (
+            "Hinzufügen"
+          )}
         </button>
       </div>
-
       {errorMessage && <div className="errorMessage">{errorMessage}</div>}
+      {showClubManager && (
+        <Modal size="large" onClose={handeCloseClubManager}>
+          <ClubManager />
+        </Modal>
+      )}
     </form>
   );
 };
