@@ -87,7 +87,7 @@ const FightGroupList: React.FC<FightGroupListProps> = ({
 
             return {
               group,
-              participants: fighters.length,
+              participants: getFightersListByFightgroupId.length,
             };
           } catch (error) {
             console.error("Error fetching fighters list:", error);
@@ -203,18 +203,16 @@ const FightGroupList: React.FC<FightGroupListProps> = ({
             </tr>
           </thead>
           <tbody>
-            {sortedFightGroups.map((item) => (
-              <tr
-                key={item.group.id}
-                onClick={() => handleRowClick(item.group)}
-              >
-                <td>{item.group.sex}</td>
-                <td>{item.group.ageclass.name}</td>
-                <td>{item.group.weightclass.name}</td>
-                <td>{item.group.ageclass.name}</td>
-                <td>{item.participants}</td>
-              </tr>
-            ))}
+          {sortedFightGroups.map((item) => (
+  <tr key={item.group.id} onClick={() => handleRowClick(item.group)}>
+    <td>{item.group.sex}</td>
+    <td>{item.group.ageclass && item.group.ageclass.name}</td>
+    <td>{item.group.weightclass && item.group.weightclass.name}</td>
+    <td>{item.participants}</td>
+  </tr>
+))}
+
+
           </tbody>
         </table>
       </div>

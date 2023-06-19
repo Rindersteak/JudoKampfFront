@@ -122,8 +122,6 @@ export async function postTournamentFighter(
   }
 }
 
-// By ID abrufen
-
 export async function getTournamentFightersList(tournamentId: string) {
   try {
     const response = await fetch(
