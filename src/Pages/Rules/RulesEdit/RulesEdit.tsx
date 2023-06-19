@@ -13,10 +13,14 @@ const RulesEdit = () => {
   const rulesContent = () => {
     return (
       <div className="mainContainerContent">
-        <div className="inputContainer">
-          <label className="inputLabel">Golden Score:</label>
-          <input className="inputField"></input>
-        </div>
+      <div className="inputContainer">
+        <label className="inputLabel">Golden Score:</label>
+        <select className="inputField">
+          <option value="option1">Ja, beschränkt</option>
+          <option value="option2">Ja, unbeschränkt</option>
+          <option value="option3">Nein</option>
+        </select>
+      </div>
 
         <div className="inputContainer">
           <label className="inputLabel">Anzahl Strafen:</label>
