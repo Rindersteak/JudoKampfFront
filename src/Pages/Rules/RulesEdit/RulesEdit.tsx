@@ -66,12 +66,17 @@ const RulesEdit = () => {
           <div className="rows">Weibliche Jugend U11</div>
           <div className="rows">Weibliche Jugend U13</div>
           <div className="rows">Weibliche Jugend U15</div>
+          <div className="rows">Frauen U18</div>
+          <div className="rows">Frauen</div>
+
         </div>
         <div className="menAgeClassesContainer">
           <div className="category">Männer</div>
           <div className="rows">Männliche Jugend U11</div>
           <div className="rows">Männliche Jugend U13</div>
           <div className="rows">Männliche Jugend U15</div>
+          <div className="rows">Männer U18</div>
+          <div className="rows">Männer</div>
         </div>
 
         <div className="classesInputContent">
