@@ -12,7 +12,7 @@ import ClubList from "../Pages/Club/ClubList/ClubList";
 import TournamentEdit from "../Pages/Tournament/TournamentEdit/TournamentEdit";
 import FightGroupList from "../Pages/FightGroup/FightGroupList";
 import { getFightList } from '../API/fightAPI';
-import TournamentManager from "./../Pages/Tournament/TorunamentManager/TournamentManager";
+import TournamentManager from "./../Pages/Tournament/TournamentManager/TournamentManager";
 
 interface TournamentEditProps {
   tournament?: Tournament;
