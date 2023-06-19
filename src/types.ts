@@ -79,7 +79,6 @@ export type Fightgroup = {
   ageclass: AgeClass;
   weightclass: WeightClass;
   sex: string;
-  fighters: Fighter[];
   fights: Fight[];
 };
 
@@ -90,7 +89,6 @@ export type Tournament = {
   location: string;
   startdate: string;
   enddate: string;
-  fighters: Fighter[];
   fightgroups?: Fightgroup[];
   rule?: Rule;
 };

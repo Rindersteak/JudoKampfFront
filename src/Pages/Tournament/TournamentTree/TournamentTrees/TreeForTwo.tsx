@@ -36,7 +36,7 @@ const TreeForTwo: React.FC<TreeForTwoProps> = ({ fightgroupId }) => {
         const relevantFights = fightgroup.fights.slice(0, 3);
         setFights(relevantFights);
 
-        const bannerTitle = `Tournieransicht für ${fightgroup.fighters.length} Kämpfer\nGewichtsklasse ${fightgroup.weightclass.name}, Altersklasse ${fightgroup.ageclass.name}`;
+        const bannerTitle = `Tournieransicht für 2 Kämpfer\nGewichtsklasse ${fightgroup.weightclass.name}, Altersklasse ${fightgroup.ageclass.name}`;
         setBannerTitle(bannerTitle);
 
         const winnerPromises = relevantFights.map((fight) =>

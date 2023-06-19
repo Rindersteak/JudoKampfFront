@@ -70,7 +70,6 @@ const TournamentForm: React.FC<Props> = ({ onAddTournament }) => {
       location: tournamentLocation, // You need to set the correct location here
       startdate: periodFrom.toISOString(),
       enddate: periodTo.toISOString(),
-      fighters: [], // You need to set the correct fighters here
     };
 
     try {

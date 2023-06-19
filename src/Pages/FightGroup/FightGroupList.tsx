@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Fight, Fightgroup } from "../../types";
-import { getFightgroupsByTournamentId } from "../../API/fightGroupAPI";
+import {
+  getFightgroupsByTournamentId,
+  getFightersListByFightgroupId,
+} from "../../API/fightGroupAPI";
 import { getFight } from "../../API/fightAPI";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,7 +16,9 @@ interface FightGroupListProps {
   onClose: () => void;
 }
 
-const FightGroupList: React.FC<FightGroupListProps> = ({ tournamentId }) => {
+const FightGroupList: React.FC<FightGroupListProps> = ({
+  tournamentId,
+}) => {
   const [fightGroups, setFightGroups] = useState<Fightgroup[]>([]);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [sortColumn, setSortColumn] = useState<string>("gender");
@@ -41,65 +46,87 @@ const FightGroupList: React.FC<FightGroupListProps> = ({ tournamentId }) => {
     setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   };
 
-
-
-  const handleRowClick = async (group: Fightgroup) => {
+  const handleRowClick = async (group: Fightgroup | null) => {
     try {
-      const fight = await getFight();
-      setFightGroups([group]); // Update the state with the new group
-  
-      const { component, id, count } = getFightTreeComponent(group); // Get the appropriate component based on the number of fighters
-  
-      let pageName;
-      if (count < 2) {
-        pageName = "none";
-      } else if (count >= 3 && count <= 6) {
-        pageName = "three-to-six";
-      } else if (count >= 7 && count <= 8) {
-        pageName = "seven-to-eight";
-      } else {
-        pageName = "more-than-eight";
+      if (group) {
+        const fight = await getFight();
+        setFightGroups([group]);
+
+        const treeComponent = await getFightTreeComponent(group);
+        const { component, id, count } = treeComponent;
+
+        let pageName;
+        if (count < 2) {
+          pageName = "none";
+        } else if (count >= 3 && count <= 6) {
+          pageName = "three-to-six";
+        } else if (count >= 7 && count <= 8) {
+          pageName = "seven-to-eight";
+        } else {
+          pageName = "more-than-eight";
+        }
+
+        // Now use the pageName in the path
+        const path = `/tree-for-${pageName}/${id}`;
+
+        navigate(path, {
+          state: { bannerTitle: group.name, element: component },
+        });
       }
-  
-      // Now use the pageName in the path
-      const path = `/tree-for-${pageName}/${id}`;
-  
-      navigate(path, {
-        state: { bannerTitle: group.name, element: component },
-      });
     } catch (error) {
       console.error("Error loading fight:", error);
     }
   };
-  
-  
-  
 
+  useEffect(() => {
+    const loadSortedFightGroups = async () => {
+      const sortedFightGroups = await Promise.all(
+        fightGroups.map(async (group: Fightgroup) => {
+          try {
+            const fighters = await getFightersListByFightgroupId(group.id);
 
-  const sortedFightGroups = fightGroups.sort((a: Fightgroup, b: Fightgroup) => {
-    if (sortColumn === "gender") {
-      return sortOrder === "asc"
-        ? a.sex.localeCompare(b.sex)
-        : b.sex.localeCompare(a.sex);
-    } else if (sortColumn === "ageclass") {
-      return sortOrder === "asc"
-        ? a.ageclass.name.localeCompare(b.ageclass.name)
-        : b.ageclass.name.localeCompare(a.ageclass.name);
-    } else if (sortColumn === "weightclass") {
-      return sortOrder === "asc"
-        ? a.weightclass.name.localeCompare(b.weightclass.name)
-        : b.weightclass.name.localeCompare(a.weightclass.name);
-    } else if (sortColumn === "participants") {
-      return sortOrder === "asc"
-        ? a.fighters.length - b.fighters.length
-        : b.fighters.length - a.fighters.length;
-    }
-    return 0;
-  });
+            return {
+              group,
+              participants: fighters.length,
+            };
+          } catch (error) {
+            console.error("Error fetching fighters list:", error);
+            return null;
+          }
+        })
+      );
+
+      const filteredFightGroups = sortedFightGroups.filter(
+        (item) => item !== null
+      ) as { group: Fightgroup; participants: number }[];
+
+      filteredFightGroups.sort((a, b) => {
+        if (sortColumn === "gender") {
+          // Sorting logic based on gender
+        } else if (sortColumn === "ageclass") {
+          // Sorting logic based on age class
+        } else if (sortColumn === "weightclass") {
+          // Sorting logic based on weight class
+        } else if (sortColumn === "participants") {
+          return sortOrder === "asc"
+            ? a.participants - b.participants
+            : b.participants - a.participants;
+        }
+        return 0;
+      });
+
+      setSortedFightGroups(filteredFightGroups);
+    };
+
+    loadSortedFightGroups();
+  }, [fightGroups, sortColumn, sortOrder]);
+
+  const [sortedFightGroups, setSortedFightGroups] = useState<
+    { group: Fightgroup; participants: number }[]
+  >([]);
 
   return (
     <div className="fightGroupList">
-      {" "}
       {/* CSS-Klasse für FightGroupList hinzugefügt */}
       <div className="headerBanner">
         <h1 className="titleStyleList">Kampfgruppen</h1>
@@ -176,13 +203,16 @@ const FightGroupList: React.FC<FightGroupListProps> = ({ tournamentId }) => {
             </tr>
           </thead>
           <tbody>
-            {sortedFightGroups.map((group) => (
-              <tr key={group.id} onClick={() => handleRowClick(group)}>
-                <td>{group.sex}</td>
-                <td>{group.ageclass.name}</td>
-                <td>{group.weightclass.name}</td>
-                <td>{group.ageclass.name}</td>
-                <td>{group.fighters.length}</td>
+            {sortedFightGroups.map((item) => (
+              <tr
+                key={item.group.id}
+                onClick={() => handleRowClick(item.group)}
+              >
+                <td>{item.group.sex}</td>
+                <td>{item.group.ageclass.name}</td>
+                <td>{item.group.weightclass.name}</td>
+                <td>{item.group.ageclass.name}</td>
+                <td>{item.participants}</td>
               </tr>
             ))}
           </tbody>
