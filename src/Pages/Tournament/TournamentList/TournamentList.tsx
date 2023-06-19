@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Tournament } from "../../../types";
-import { getTotalParticipants } from "../../../API/fighterAPI";
-import { getTournaments, deleteTournament } from "../../../API/tournamentAPI";
+import { getTournaments, deleteTournament, getTournamentFightersList } from "../../../API/tournamentAPI";
 import { FiTrash2 } from "react-icons/fi";
 import Modal from "../../../Tools/Modal/Modal";
 import ConfirmDelete from "../../../Tools/ConfirmDelete/ConfirmDelete";
@@ -49,8 +48,8 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
           } else if (sortColumn === "id") {
             return sortOrder === "asc" ? a.id - b.id : b.id - a.id;
           } else if (sortColumn === "participants") {
-            const aTotalParticipants = getTotalParticipants(a.fighters);
-            const bTotalParticipants = getTotalParticipants(b.fighters);
+            const aTotalParticipants = getTournamentFightersList.length;
+            const bTotalParticipants = getTournamentFightersList.length;
             return sortOrder === "asc"
               ? aTotalParticipants - bTotalParticipants
               : bTotalParticipants - aTotalParticipants;
@@ -118,7 +117,7 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
     const name = tournament.name.toLowerCase();
     const city = tournament.address.city.toLowerCase();
     const id = tournament.id.toString().toLowerCase();
-    const participants = getTotalParticipants(tournament.fighters)
+    const participants = getTournamentFightersList.length
       .toString()
       .toLowerCase();
     const period = formatTournamentPeriod(
@@ -231,7 +230,7 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
                 <td>{tournament.name}</td>
                 <td>{tournament.address.city}</td>
                 <td>{tournament.id}</td>
-                <td>{getTotalParticipants(tournament.fighters)}</td>
+                <td>{getTournamentFightersList.length}</td>
                 <td>
                   {formatTournamentPeriod(
                     tournament.startdate,
