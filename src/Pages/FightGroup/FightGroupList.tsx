@@ -66,8 +66,8 @@ const FightGroupList: React.FC<FightGroupListProps> = ({
           pageName = "more-than-eight";
         }
 
-        // Now use the pageName in the path
-        const path = `/tree-for-${pageName}/${id}`;
+        // use the pageName in the path
+        const path = `/tree-for-${pageName}/`;
 
         navigate(path, {
           state: { bannerTitle: group.name, element: component },

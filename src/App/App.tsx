@@ -1,35 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router } from "react-router-dom";
-import AppRoutes from "../Routes/Routes";
-import Modal from "../Tools/Modal/Modal";
-import TournamentList from "../Pages/Tournament/TournamentList/TournamentList";
-import TournamentForm from "../Pages/Tournament/TournamentForm/TournamentForm";
-import FighterList from "../Pages/Fighter/FighterList/FighterList";
-import FighterManager from "../Pages/Fighter/FighterManager/FighterManager";
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import AppRoutes from '../Routes/Routes';
+import Modal from '../Tools/Modal/Modal';
+import TournamentList from '../Pages/Tournament/TournamentList/TournamentList';
+import TournamentForm from '../Pages/Tournament/TournamentForm/TournamentForm';
+import FighterList from '../Pages/Fighter/FighterList/FighterList';
+import FighterManager from '../Pages/Fighter/FighterManager/FighterManager';
 import { Tournament, Fight, Fightgroup } from '../types';
-import ClubManager from "../Pages/Club/ClubManager/ClubManager";
-import ClubList from "../Pages/Club/ClubList/ClubList";
-import TournamentEdit from "../Pages/Tournament/TournamentEdit/TournamentEdit";
-import FightGroupList from "../Pages/FightGroup/FightGroupList";
+import ClubManager from '../Pages/Club/ClubManager/ClubManager';
+import ClubList from '../Pages/Club/ClubList/ClubList';
+import TournamentEdit from '../Pages/Tournament/TournamentEdit/TournamentEdit';
+import FightGroupList from '../Pages/FightGroup/FightGroupList';
 import { getFightList } from '../API/fightAPI';
-import TournamentManager from "./../Pages/Tournament/TournamentManager/TournamentManager";
+import TournamentManager from './../Pages/Tournament/TournamentManager/TournamentManager';
 
-interface TournamentEditProps {
-  tournament?: Tournament;
-  onUpdateTournament: (tournament: Tournament) => void;
-  onDeleteTournament: (tournamentId: string) => void;
-}
-
-interface FighterManagerContainerProps {
-  tournamentId: string;
-  onOpenFighterManager: () => void;
-}
+const handleOpenTreeForSix = (fightgroupId: string) => {
+  console.log('Open TreeForThreeToSix:', fightgroupId);
+};
 
 const App: React.FC = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState<React.ReactNode | null>(null);
-    const [fights, setFights] = useState<Fight[]>([]);
-  const [fightgroupId, setFightgroupId] = useState<number | undefined>(undefined);
+  const [modalOpen, setModalOpen] = React.useState(false);
+  const [modalContent, setModalContent] = React.useState<React.ReactNode | null>(null);
+  const [fights, setFights] = React.useState<Fight[]>([]);
+  const [fightgroupId, setFightgroupId] = React.useState<number | undefined>(undefined);
 
   useEffect(() => {
     async function fetchFightList() {
@@ -42,21 +35,16 @@ const App: React.FC = () => {
         console.error('Error fetching fight list:', error);
       }
     }
-  
+
     fetchFightList();
   }, [fightgroupId]);
-  
+
   const handleOpenTournamentForm = () => {
-    setModalContent(
-      <TournamentForm
-        onAddTournament={handleAddTournament}
-      />
-    );
+    setModalContent(<TournamentForm onAddTournament={handleAddTournament} />);
     setModalOpen(true);
   };
 
   const handleAddTournament = (tournament: Tournament) => {
-    // Add logic for adding the tournament
     console.log('Add Tournament:', tournament);
   };
 
@@ -67,21 +55,23 @@ const App: React.FC = () => {
 
   const handleOpenFighterManager = async (tournamentId: string) => {
     if (tournamentId !== undefined) {
-      setModalContent(<FighterManager tournamentId={tournamentId} onClose={handleCloseModal} />);
+      setModalContent(
+        <FighterManager tournamentId={tournamentId} onClose={handleCloseModal} />
+      );
       setModalOpen(true);
     }
   };
-  
-  
 
   const handleOpenFighterList = async (tournamentId: string) => {
     try {
-    setModalContent(<FighterList tournamentId={tournamentId} onDeleteFighter={handleDeleteFighter} />);
-    setModalOpen(true);
-  } catch (error) {
-    console.error('Error loading fighter List by ID:', error);
-  }
-};
+      setModalContent(
+        <FighterList tournamentId={tournamentId} onDeleteFighter={handleDeleteFighter} />
+      );
+      setModalOpen(true);
+    } catch (error) {
+      console.error('Error loading fighter List by ID:', error);
+    }
+  };
 
   const handleOpenFightGroupList = async (tournamentId: string) => {
     try {
@@ -91,33 +81,30 @@ const App: React.FC = () => {
       console.error('Error loading fight groups by tournament ID:', error);
     }
   };
-  
 
-  
-  
   const handleOpenClubList = () => {
     setModalContent(<ClubList onDeleteClub={handleDeleteClub} />);
     setModalOpen(true);
   };
 
   const handleDeleteClub = (clubID: number) => {
-    // Add logic for deleting the fighter
     console.log('Delete Club:', clubID);
   };
 
   const handleDeleteFighter = (fighterId: number) => {
-    // Add logic for deleting the fighter
     console.log('Delete Fighter:', fighterId);
   };
 
   const handleDeleteTournament = (tournamentId: number) => {
-    // Add logic for deleting the tournament
     console.log('Delete Tournament:', tournamentId);
   };
 
   const handleUpdateTournament = (tournamentId: Tournament) => {
-    // Add logic for updating the tournament
     console.log('Update Tournament:', tournamentId);
+  };
+
+  const handleOpenTreeForThreeToSix = (fightgroupId: string) => {
+    handleOpenTreeForSix(fightgroupId);
   };
 
   const handleCloseModal = () => {
@@ -130,9 +117,7 @@ const App: React.FC = () => {
   };
 
   const handleOpenTournamentEdit = () => {
-    setModalContent(
-      <TournamentManager/>
-    );
+    setModalContent(<TournamentManager />);
     setModalOpen(true);
   };
 
@@ -148,7 +133,8 @@ const App: React.FC = () => {
           onOpenClubList={handleOpenClubList}
           onOpenClubManager={handleOpenClubManager}
           onOpenTournamentEdit={handleOpenTournamentEdit}
-          fights={fights} // Übergebe das fights-Prop hier
+          onOpenTreeForSix={handleOpenTreeForThreeToSix}
+          fights={fights}
         />
       </div>
       {modalOpen && (
