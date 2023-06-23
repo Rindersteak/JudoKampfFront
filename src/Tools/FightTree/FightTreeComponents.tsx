@@ -6,23 +6,26 @@ import TreeForNone from "../../Pages/Tournament/TournamentTree/TournamentTrees/T
 import TreeForThreeToSix from "../../Pages/Tournament/TournamentTree/TournamentTrees/TreeForThreeToSix";
 import TreeForSevenToEight from "../../Pages/Tournament/TournamentTree/TournamentTrees/TreeForSevenToEight";
 import TreeForMoreThanEight from "../../Pages/Tournament/TournamentTree/TournamentTrees/TreeForMoreThanEight";
-import { getFightgroups } from "../../API/fightGroupAPI";
+import { getFightersListByFightgroupId } from "../../API/fightGroupAPI";
 
 export const getFightTreeComponent = async (fightgroup: Fightgroup) => {
-  const  fighters  = await getFightgroups(); 
+  const fighters = await getFightersListByFightgroupId(fightgroup.id);
   const participants = fighters.length;
 
+  let componentName;
   if (participants < 2) {
-    return { component: TreeForNone, id: fightgroup.id, count: participants };
+    componentName = "TreeForNone";
   } else if (participants === 2) {
-    return { component: TreeForTwo, id: fightgroup.id, count: participants };
+    componentName = "TreeForTwo";
   } else if (participants >= 3 && participants <= 6) {
-    return { component: TreeForThreeToSix, id: fightgroup.id, count: participants };
+    componentName = "TreeForThreeToSix";
   } else if (participants >= 7 && participants <= 8) {
-    return { component: TreeForSevenToEight, id: fightgroup.id, count: participants };
+    componentName = "TreeForSevenToEight";
   } else if (participants > 8) {
-    return { component: TreeForMoreThanEight, id: fightgroup.id, count: participants };
+    componentName = "TreeForMoreThanEight";
   } else {
-    return { component: null, id: fightgroup.id, count: participants };
+    componentName = null;
   }
+
+  return { component: componentName, id: fightgroup.id, count: participants };
 };

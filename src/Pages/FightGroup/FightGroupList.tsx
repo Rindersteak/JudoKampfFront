@@ -51,10 +51,10 @@ const FightGroupList: React.FC<FightGroupListProps> = ({
       if (group) {
         const fight = await getFight();
         setFightGroups([group]);
-
+  
         const treeComponent = await getFightTreeComponent(group);
         const { component, id, count } = treeComponent;
-
+  
         let pageName;
         if (count < 2) {
           pageName = "none";
@@ -65,10 +65,10 @@ const FightGroupList: React.FC<FightGroupListProps> = ({
         } else {
           pageName = "more-than-eight";
         }
-
+  
         // use the pageName in the path
         const path = `/tree-for-${pageName}/`;
-
+  
         navigate(path, {
           state: { bannerTitle: group.name, element: component },
         });
@@ -77,6 +77,7 @@ const FightGroupList: React.FC<FightGroupListProps> = ({
       console.error("Error loading fight:", error);
     }
   };
+  
 
   useEffect(() => {
     const loadSortedFightGroups = async () => {
@@ -87,7 +88,7 @@ const FightGroupList: React.FC<FightGroupListProps> = ({
 
             return {
               group,
-              participants: getFightersListByFightgroupId.length,
+              participants: fighters.length, 
             };
           } catch (error) {
             console.error("Error fetching fighters list:", error);
@@ -95,6 +96,7 @@ const FightGroupList: React.FC<FightGroupListProps> = ({
           }
         })
       );
+
 
       const filteredFightGroups = sortedFightGroups.filter(
         (item) => item !== null
@@ -206,8 +208,9 @@ const FightGroupList: React.FC<FightGroupListProps> = ({
           {sortedFightGroups.map((item) => (
   <tr key={item.group.id} onClick={() => handleRowClick(item.group)}>
     <td>{item.group.sex}</td>
-    <td>{item.group.ageclass && item.group.ageclass.name}</td>
+    <td>Alter?!</td>
     <td>{item.group.weightclass && item.group.weightclass.name}</td>
+    <td>{item.group.ageclass && item.group.ageclass.name}</td>
     <td>{item.participants}</td>
   </tr>
 ))}

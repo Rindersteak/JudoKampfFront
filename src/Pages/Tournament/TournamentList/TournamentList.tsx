@@ -13,8 +13,12 @@ interface TournamentListProps {
   onClose: () => void;
 }
 
+interface TournamentExtended extends Tournament {
+  participants: number;
+}
+
 const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
-  const [backendTournaments, setBackendTournaments] = useState<Tournament[]>(
+  const [backendTournaments, setBackendTournaments] = useState<TournamentExtended[]>(
     []
   );
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
@@ -32,7 +36,12 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
       try {
         let tournaments = await getTournaments();
 
-        tournaments = tournaments.sort((a: Tournament, b: Tournament) => {
+        for (let i = 0; i < tournaments.length; i++) {
+          const participantsList = await getTournamentFightersList(tournaments[i].id);
+          tournaments[i].participants = participantsList.length;
+        }
+
+        tournaments = tournaments.sort((a: TournamentExtended, b: TournamentExtended) => {
           if (sortColumn === "name") {
             return sortOrder === "asc"
               ? a.name.localeCompare(b.name)
@@ -134,6 +143,7 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
     );
   });
 
+
   return (
     <div className="entryList">
       <div className="headerBanner">
@@ -230,7 +240,7 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
                 <td>{tournament.name}</td>
                 <td>{tournament.address.city}</td>
                 <td>{tournament.id}</td>
-                <td>{getTournamentFightersList.length}</td>
+                <td>{tournament.participants}</td>
                 <td>
                   {formatTournamentPeriod(
                     tournament.startdate,
@@ -251,6 +261,8 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
           </tbody>
         </table>
       </div>
+
+      
 
       {showConfirmDeletePopup && tournamentIdToDelete !== null && (
         <Modal size="small" onClose={handleDeleteCanceled}>

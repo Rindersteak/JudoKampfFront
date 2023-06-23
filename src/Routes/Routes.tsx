@@ -119,7 +119,7 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
     <Route path="/tree-for-none" element={<TreeForNone />} />
     <Route path="/tree-for-two" element={<TreeForTwoWrapper />} />
     <Route
-      path="/tree-for-three-to-six/:fightgroupId"
+      path="/tree-for-three-to-six/"
       element={<TreeForThreeToSixWrapper onOpenTreeForSix={handleOpenTreeForSix} />} 
     />
     <Route path="/tree-for-seven-to-eight" element={<TreeForSevenToEight />} />
