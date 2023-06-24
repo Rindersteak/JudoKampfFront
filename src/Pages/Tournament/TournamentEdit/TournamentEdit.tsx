@@ -169,7 +169,8 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({
         setShowConfirmDeletePopup(false);
         window.location.href = "/"; //after successful deleting tournament, route user back to HomePage
       } catch (error) {
-        setErrorMessage("(DB-Error) Fehler beim Löschen!");
+        setErrorMessage("(DB-Error) Fehler beim Lösche" +
+            "n!");
       }
     }
   };
