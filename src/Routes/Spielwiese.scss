@@ -13,197 +13,82 @@ $screen-normal: 993px;
   }
 }
 
-.fightModeContainer {
+.mainContainerFighterDetails{
   display: grid;
   grid-template-areas:
-    "header header header"
-    "menuOne menuTwo menuThree"
-    "container container container";
-  margin-left: 1rem;
+  "fightGroup fighterOne fighterTwo"
+  "button button button";
+  width: 100vw;
+
+  @include small{
+    display: grid;
+    grid-template-areas:
+    "fightGroup"
+    "fighterOne"
+    "fighterTwo"
+    "button";
+  }
 }
 
-.headerBannerGridArea {
-  grid-area: header;
+.fightGroupContainer{
+  grid-area: fightGroup;
+  display: flex;
+  flex-direction: column;
+  padding-inline: 10%;
+  padding-block: 5%;
+
+  @include small{
+    width: 100vw;
+    padding-inline: 5%;
+    padding-top: 5%;
+    padding-bottom: 0%;
+  }
 }
 
-.fightModeContainer {
-  .menuClasses,
-  .menuRulesTeenagers,
-  .menuRulesAdults {
-    background-color: #f3f3f3;
-    color: 001AFF;
-    padding: 10px;
-    cursor: pointer;
+.fighterOneContainer{
+  grid-area: fighterOne;
+  display: flex;
+  flex-direction: column;
+  padding-inline: 10%;
+  padding-block: 5%;
 
-    &:hover {
-      background-color: lightgray;
+  @include small{
+    width: 100vw;
+    padding-inline: 5%;
+    padding-top: 5%;
+    padding-bottom: 0%;
+  }
+
+}
+
+.fighterTwoContainer{
+  grid-area: fighterTwo;
+  display: flex;
+  flex-direction: column;
+  padding-inline: 10%;
+  padding-block: 5%;
+
+  @include small{
+    width: 100vw;
+    padding-inline: 5%;
+    padding-top: 5%;
+    padding-bottom: 0%;
+  }
+
+}
+
+.buttonContainer{
+  grid-area: button;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+
+  .blueButtonWidth{
+    width: 27vw;
+
+    @include small{
+      width: 90vw;
     }
-
-    &.selected {
-      background-color: white;
-      color: 001AFF;
-      border: 1px groove;
-    }
   }
-}
-
-.menuClasses,
-.menuRulesAdults,
-.menuRulesTeenagers {
-  font-family: "Nunito";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 25px;
-  color: #001aff;
-  background-color: #f3f3f3;
-}
-
-.menuRulesAdults {
-  grid-area: menuOne;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  border-radius: 5px 5px 0px 0px;
-}
-
-.menuRulesTeenagers {
-  grid-area: menuTwo;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px 5px 0px 0px;
-}
-
-.menuClasses {
-  grid-area: menuThree;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px 5px 0px 0px;
-}
-
-.contentContainer {
-  grid-area: container;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  border: 1px groove;
-  overflow: auto;
-}
-
-.mainContainerContent {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.eponWasariContainer {
-  display: grid;
-  grid-template-columns: auto;
-  width: 100%;
-}
-
-.ageLimitAndFightDurationContainer,
-.holdTimeEponWasari,
-.pointsEponWasariContainer {
-  display: grid;
-  grid-template-columns: auto 4% auto;
-  margin-bottom: 2rem;
-
-  @include small {
-    grid-template-columns: auto;
-  }
-}
-
-.ageLimitContainer,
-.holdTimeEpponContainer,
-.pointsEpponContainer {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.fightDurationContainer,
-.pointsWasariContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 100%;
-
-  @include small {
-    margin-top: 2rem;
-  }
-}
-
-.mainContentContainer {
-  display: grid;
-  width: 100%;
-  grid-template-areas:
-    "listWomen inputContent"
-    "listMen inputContent";
-}
-
-.womenAgeClassesContainer {
-  grid-area: listWomen;
-  display: grid;
-  grid-template-columns: auto;
-  width: 70%;
-  background-color: #f9f9fc;
-}
-
-.menAgeClassesContainer {
-  grid-area: listMen;
-  width: 70%;
-  margin-top: 3%;
-  background-color: #f9f9fc;
-}
-
-.category {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  font-family: "Nunito";
-  font-style: normal;
-  width: 100%;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 16px;
-  padding: 10%;
-  border-bottom: 1px groove;
-  border-top: 1px groove;
-}
-
-.rows {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  font-family: "Nunito";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 16px;
-  padding-left: 10%;
-  padding-right: 10%;
-  padding-top: 5%;
-  padding-bottom: 5%;
-  border-bottom: 1px groove;
-}
-
-.classesInputContent {
-  grid-area: inputContent;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 100%;
-}
-
-.marginToOtherFields {
-  margin-bottom: 1rem;
 }

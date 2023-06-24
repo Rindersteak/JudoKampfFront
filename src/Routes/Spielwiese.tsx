@@ -3,158 +3,247 @@ import logo from "../img/kodokan_logo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowAltCircleLeft } from "@fortawesome/free-regular-svg-icons";
 import "./Spielwiese.scss";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 type MenuOption = "menuRulesAdults" | "menuRulesTeenagers" | "menuClasses";
 
 const Spielwiese = () => {
   const [selectedMenu, setSelectedMenu] = useState<MenuOption | null>(null);
+    const [birthdate, setBirthDate] = useState<Date | null>(null);
 
-  const handleMenuClick = (menu: MenuOption) => {
-    setSelectedMenu(menu);
-  };
-
-  const rulesContent = () => {
     return (
-      <div className="mainContainerContent">
-        <div className="inputContainer">
-          <label className="inputLabel">Golden Score:</label>
-          <input className="inputField"></input>
-        </div>
+    <div className="mainContainerFighterDetails">
 
-        <div className="inputContainer">
-          <label className="inputLabel">Anzahl Strafen:</label>
-          <input className="inputField"></input>
-        </div>
+        <div className="fightGroupContainer">
+            <h1 className="titleStyleList">
+                Kampfgruppe
+            </h1>
 
-        <div className="eponWasariContainer">
-          <div className="pointsEponWasariContainer">
-            <div className="pointsEpponContainer">
-              <label className="inputLabel">Punkte Eppon:</label>
-              <input className="inputField"></input>
-            </div>
-            <div></div>
-            <div className="pointsWasariContainer">
-              <label className="inputLabel">Punkte Wasari:</label>
-              <input className="inputField"></input>
-            </div>
-          </div>
-
-          <div className="holdTimeEponWasari">
-            <div className="holdTimeEpponContainer">
-              <label className="inputLabel">Haltezeit Eppon:</label>
-              <input className="inputField"></input>
+            <div className="inputContainer">
+                <label className="inputLabel">
+                    Geschlecht
+                </label>
+                <input
+                    className="inputField"
+                    type="text"
+                    readOnly
+                    required
+                />
             </div>
 
-            <div></div>
-
-            <div className="pointsWasariContainer">
-              <label className="inputLabel">Haltezeit Wasari:</label>
-              <input className="inputField"></input>
+            <div className="inputContainer">
+                <label className="inputLabel">
+                    Jugend/Erwachsene
+                </label>
+                <input
+                    className="inputField"
+                    type="text"
+                    readOnly
+                    required
+                />
             </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
 
-  const classInputContent = () => {
-    return <div></div>;
-  };
-
-  const classContent = () => {
-    return (
-      <div className="mainContentContainer">
-        <div className="womenAgeClassesContainer">
-          <div className="category">Frauen</div>
-          <div className="rows">Weibliche Jugend U11</div>
-          <div className="rows">Weibliche Jugend U13</div>
-          <div className="rows">Weibliche Jugend U15</div>
-        </div>
-        <div className="menAgeClassesContainer">
-          <div className="category">Männer</div>
-          <div className="rows">Männliche Jugend U11</div>
-          <div className="rows">Männliche Jugend U13</div>
-          <div className="rows">Männliche Jugend U15</div>
-        </div>
-
-        <div className="classesInputContent">
-          <div className="inputContainer">
-            <label className="inputLabel">Klassenname</label>
-            <input className="inputField"></input>
-          </div>
-
-          <div className="ageLimitAndFightDurationContainer">
-            <div className="ageLimitContainer">
-              <label className="inputLabel">Altersgrenze</label>
-              <input className="inputField"></input>
+            <div className="inputContainer">
+                <label className="inputLabel">
+                    Gwichtsklasse
+                </label>
+                <input
+                    className="inputField"
+                    type="text"
+                    readOnly
+                    required
+                />
             </div>
-            <div></div>
-            <div className="fightDurationContainer">
-              <label className="inputLabel">Kampfzeit (min)</label>
-              <input className="inputField"></input>
+
+            <div className="inputContainer">
+                <label className="inputLabel">
+                    Altersklasse
+                </label>
+                <input
+                    className="inputField"
+                    type="text"
+                    readOnly
+                    required
+                />
             </div>
-          </div>
 
-          <div className="inputContainer">
-            <label className="inputLabel">Gewicht (kg)</label>
-            <input className="inputField marginToOtherFields"></input>
-            <input className="inputField marginToOtherFields"></input>
-            <input className="inputField marginToOtherFields"></input>
-            <input className="inputField marginToOtherFields"></input>
-            <input className="inputField marginToOtherFields"></input>
-          </div>
+            <div className="inputContainer">
+                <label className="inputLabel">
+                    Kampf-ID
+                </label>
+                <input
+                    className="inputField"
+                    type="text"
+                    readOnly
+                    required
+                />
+            </div>
+
         </div>
-      </div>
-    );
-  };
 
-  const renderContent = () => {
-    switch (selectedMenu) {
-      case "menuRulesAdults":
-        return rulesContent();
-      case "menuRulesTeenagers":
-        return rulesContent();
-      case "menuClasses":
-        return classContent();
-      default:
-        return <div>Bitte wähle oben eine Option aus</div>;
-    }
-  };
+        <div className="fighterOneContainer">
+            <h1 className="titleStyleList">
+                Kämpfer 1
+            </h1>
+            <div className="inputContainer">
+                <label className="inputLabel" htmlFor="firstName">
+                    Vorname
+                </label>
+                <input
+                    className="inputField"
+                    type="text"
+                    readOnly
+                    required
+                />
+            </div>
 
-  return (
-    <div className="fightModeContainer">
-      <div className="headerBanner headerBannerGridArea">
-        <h1 className="titleStyleList">Kampfmodus / Regelwerk anpassen</h1>
-      </div>
-      <div
-        className={`menuRulesAdults ${
-          selectedMenu === "menuRulesAdults" ? "selected" : ""
-        }`}
-        onClick={() => handleMenuClick("menuRulesAdults")}
-      >
-        Regeln Erwachsene
-      </div>
+            <div className="inputContainer">
+                <label className="inputLabel">
+                    Nachname
+                </label>
+                <input
+                    className="inputField"
+                    type="text"
+                    readOnly
+                    required
+                />
+            </div>
 
-      <div
-        className={`menuRulesTeenagers ${
-          selectedMenu === "menuRulesTeenagers" ? "selected" : ""
-        }`}
-        onClick={() => handleMenuClick("menuRulesTeenagers")}
-      >
-        Regeln Jugendliche
-      </div>
+            <div className="inputContainer">
+                <label className="inputLabel">
+                    Verein
+                </label>
+                <input
+                    className="inputField"
+                    type="text"
+                    readOnly
+                    required
+                />
+            </div>
 
-      <div
-        className={`menuClasses ${
-          selectedMenu === "menuClasses" ? "selected" : ""
-        }`}
-        onClick={() => handleMenuClick("menuClasses")}
-      >
-        Klassen
-      </div>
+            <div className="inputContainer">
+                <label className="inputLabel">
+                    Landesverband
+                </label>
+                <input
+                    className="inputField"
+                    type="text"
+                    readOnly
+                    required
+                />
+            </div>
 
-      <div className="contentContainer">{renderContent()}</div>
+            <div className="inputContainer">
+                <label className="inputLabel" htmlFor="birthDate">
+                    Geburtsdatum
+                </label>
+                <DatePicker
+                    id="birthDate"
+                    dateFormat="dd.MM.yyyy"
+                    onChange={(date: Date | null) => setBirthDate(date)}
+                    readOnly
+                    required
+                />
+                <div className="inputContainer marginTopWeightFighterEdit">
+                    <label className="inputLabel">
+                        Gewicht (in Kg)
+                    </label>
+                    <input
+                        className="inputField"
+                        type="number"
+                        required
+                    />
+                </div>
+            </div>
+
+
+        </div>
+
+        <div className="fighterTwoContainer">
+            <h1 className="titleStyleList">
+                Kämpfer 2
+            </h1>
+
+            <div className="inputContainer">
+                <label className="inputLabel" htmlFor="firstName">
+                    Vorname
+                </label>
+                <input
+                    className="inputField"
+                    type="text"
+                    readOnly
+                    required
+                />
+            </div>
+
+            <div className="inputContainer">
+                <label className="inputLabel">
+                    Nachname
+                </label>
+                <input
+                    className="inputField"
+                    type="text"
+                    readOnly
+                    required
+                />
+            </div>
+
+            <div className="inputContainer">
+                <label className="inputLabel">
+                    Verein
+                </label>
+                <input
+                    className="inputField"
+                    type="text"
+                    readOnly
+                    required
+                />
+            </div>
+
+            <div className="inputContainer">
+                <label className="inputLabel">
+                    Landesverband
+                </label>
+                <input
+                    className="inputField"
+                    type="text"
+                    readOnly
+                    required
+                />
+            </div>
+
+            <div className="inputContainer">
+                <label className="inputLabel" htmlFor="birthDate">
+                    Geburtsdatum
+                </label>
+                <DatePicker
+                    id="birthDate"
+                    dateFormat="dd.MM.yyyy"
+                    onChange={(date: Date | null) => setBirthDate(date)}
+                    readOnly
+                    required
+                />
+                <div className="inputContainer marginTopWeightFighterEdit">
+                    <label className="inputLabel">
+                        Gewicht (in Kg)
+                    </label>
+                    <input
+                        className="inputField"
+                        type="number"
+                        required
+                    />
+                </div>
+            </div>
+        </div>
+        <div className="buttonContainer">
+            <button className="blueButton blueButtonWidth">
+                Kampf starten
+            </button>
+
+        </div>
     </div>
+
   );
 };
 
