@@ -84,14 +84,6 @@ function FightDetails() {
     margin: "0 10px",
   });
 
-  const [redCardFighterWhite1, setRedCardCount] = useState(false);
-  const [yellowCardFighterWhite2, setYellowCardCount1] = useState(false);
-  const [yellowCardFighterWhite3, setYellowCardCount2] = useState(false);
-
-  const [redCardFighterBlue4, setRedCardCount2] = useState(false);
-  const [yellowCardFighterBlue5, setYellowCardCount3] = useState(false);
-  const [yellowCardFighterBlue6, setYellowCardCount4] = useState(false);
-
   const RedCard = styled(StyledCard)({
     backgroundColor: "#FF0000",
   });
@@ -99,6 +91,14 @@ function FightDetails() {
   const YellowCard = styled(StyledCard)({
     backgroundColor: "#FFD600",
   });
+
+  const [redCardFighterWhite1, setRedCardCount] = useState(false);
+  const [yellowCardFighterWhite2, setYellowCardCount1] = useState(false);
+  const [yellowCardFighterWhite3, setYellowCardCount2] = useState(false);
+
+  const [redCardFighterBlue4, setRedCardCount2] = useState(false);
+  const [yellowCardFighterBlue5, setYellowCardCount3] = useState(false);
+  const [yellowCardFighterBlue6, setYellowCardCount4] = useState(false);
 
   //Timer1
   const [remainingTime, setRemainingTime] = useState(
