@@ -18,9 +18,9 @@ const FightDetails = () => {
           setIsCounting(false);
         }else if (isCounting && isWhite || !isCounting && isWhite) {
           setSeconds(0);
-          setIsWhite(false)
-          setIsCounting(true)
-          setIsBlue(true)
+          setIsWhite(false);
+          setIsCounting(true);
+          setIsBlue(true);
         } else {
           setIsCounting(true);
           setIsBlue(true);
@@ -31,8 +31,8 @@ const FightDetails = () => {
           setIsCounting(false);
         }else if (isCounting && isBlue || !isCounting && isBlue) {
           setSeconds(0);
-          setIsBlue(false)
-          setIsWhite(true)
+          setIsBlue(false);
+          setIsWhite(true);
           setIsCounting(true)
         } else {
           setIsCounting(true);
