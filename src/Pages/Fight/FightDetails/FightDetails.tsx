@@ -268,7 +268,7 @@ function FightDetails() {
       <Grid container spacing={0.1}>
         <Grid item xs={12}>
           <Grid>
-            <Grid item xs={12} style={{ height: "35vh" }}>
+            <Grid item xs={12} style={{ height: "20vh" }}>
               <Item
                 className="header"
                 sx={{
@@ -287,7 +287,7 @@ function FightDetails() {
 
                 <div
                   className="timer"
-                  style={{ margin: "0 auto", color: "#FF0000" }}
+                  style={{ margin: "0 auto", color: "#FF0000", fontWeight:"bold", fontSize:"5rem", paddingRight: "5rem"}}
                 >
                   <Timer1
                     fightData={undefined}
@@ -304,7 +304,7 @@ function FightDetails() {
 
         <Grid item xs={12}>
           <Grid container spacing={0.1}>
-            <Grid item xs={6} style={{ height: "50vh" }}>
+            <Grid item xs={6} style={{ height: "80vh" }}>
               <Item
                 sx={{
                   backgroundColor: "white",
@@ -367,7 +367,7 @@ function FightDetails() {
                 </div>
               </Item>
             </Grid>
-            <Grid item xs={6} style={{ height: "50vh" }}>
+            <Grid item xs={6} style={{ height: "80vh" }}>
               <Item
                 sx={{
                   backgroundColor: "blue",
@@ -433,21 +433,25 @@ function FightDetails() {
           </Grid>
 
           <Grid item xs={12}>
-            <Grid item xs={12} style={{ height: "15vh" }}>
+            <Grid item xs={12} style={{ }}>
               <Item
                 className="header"
                 sx={{
                   backgroundColor: "white",
+                  position: "absolute",
+                  top: "88%",
+                  left: "45%",
+                  width: "10%",
+                  border: "7px solid black",
                   fontSize: "1.75em",
                   color: "#FFC700",
                   display: "flex",
                   alignItems: "center",
-                  height: "100%",
                 }}
               >
                 <div
                   className="timer"
-                  style={{ margin: "auto", color: "black" }}
+                  style={{ margin: "auto", color: "red", fontWeight:"bold"}}
                 >
                   <Timer2 onClick={() => console.log("Timer clicked!")} />
                 </div>
