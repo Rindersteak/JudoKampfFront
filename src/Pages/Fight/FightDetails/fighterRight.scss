@@ -1,0 +1,58 @@
+.rightFigherContainer{
+    background-color: blue;
+    display: grid;
+    grid-template-columns: auto;
+    width: 50%;
+}
+
+.nameTextRight{ 
+    color: white;
+    font-size: 3rem;
+
+
+}
+
+.clubTextRight{
+    color: white;
+    font-size: 2.5rem;
+
+}
+
+.landesverbandTextRight{
+    color: white;
+    font-size: 2rem;
+}
+
+.fighterStatsContainer{
+    display: grid;
+    grid-template-columns: 10% 5% auto;
+    width: 100%;
+    height: 60.5vh;
+}
+
+.ipponFighterRight{
+    display: flex;
+    justify-content: flex-start;
+    font-weight: bold;
+    font-size: 5rem;
+    margin-left: 1rem;
+    color: white;
+}
+
+.wazaariRightFighter{
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 1rem;
+    font-weight: bold;
+    font-size: 3.5rem;
+    margin-right: 1rem;
+    color: white;
+}
+
+.cardContainer{
+    display: flex;
+    justify-content: flex-end;
+    font-weight: bold;
+    font-size: 3.5rem;
+    margin-right: 1rem;
+}
