@@ -59,8 +59,15 @@ const TreeForThreeToSixWrapper = ({ onOpenTreeForSix }: { onOpenTreeForSix: (fig
     }
   }, [fightgroupId, navigate, onOpenTreeForSix]);
 
+  // If there is a fightgroupId, render TreeForThreeToSix
+  if (fightgroupId) {
+    return <TreeForThreeToSix fightgroupId={Number(fightgroupId)} />;
+  } else {
+    console.log('No ID for TreeForThreeToSix');
+  }
   return null; // Return null or a placeholder component if needed
 };
+
 
 const FighterListWrapper = () => {
   const { tournamentId = 'defaultTournamentId' } = useParams();
@@ -71,6 +78,7 @@ const FighterListWrapper = () => {
 const handleOpenTreeForSix = (fightgroupId: string) => {
   console.log('Open TreeForThreeToSix:', fightgroupId);
 };
+
 
 const AppRoutes: React.FC<AppRoutesProps> = ({
   onOpenTournamentForm,
