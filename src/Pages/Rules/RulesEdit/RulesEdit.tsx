@@ -1,62 +1,186 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./RulesEdit.scss";
+import {getRules} from "../../../API/rulesAPI";
+import { useLocation } from "react-router-dom";
+
 
 type MenuOption = "menuRulesAdults" | "menuRulesTeenagers" | "menuClasses";
 
 const RulesEdit = () => {
   const [selectedMenu, setSelectedMenu] = useState<MenuOption | null>(null);
+  const [rulesData, setRulesData] = useState(null);
+  const [error, setError] = useState<Error | null>(null);
+
+  const location = useLocation(); // get current URL
+  const tournamentId = location.pathname.split("/").pop() || "";
+
+  const [goldenScoreAdult, setGoldenScoreAdult] = useState("");
+  const [anzahlStrafenAdult, setAnzahlStrafenAdult] = useState("");
+  const [punkteIpponAdult, setPunkteIpponAdult] = useState("");
+  const [punkteWasariAdult, setPunkteWasariAdult] = useState("");
+  const [haltezeitIpponAdult, setHaltezeitIpponAdult] = useState("");
+  const [haltezeitWasariAdult, setHaltezeitWasariAdult] = useState("");
+
+  const [goldenScoreYouth, setGoldenScoreYouth] = useState("");
+  const [anzahlStrafenYouth, setAnzahlStrafenYouth] = useState("");
+  const [punkteIpponYouth, setPunkteIpponYouth] = useState("");
+  const [punkteWasariYouth, setPunkteWasariYouth] = useState("");
+  const [haltezeitIpponYouth, setHaltezeitIpponYouth] = useState("");
+  const [haltezeitWasariYouth, setHaltezeitWasariYouth] = useState("");
+
+  useEffect(() => {
+    const fetchRules = async () => {
+      try {
+        const data = await getRules(tournamentId);
+        console.log(data)
+        setRulesData(data);
+      } catch (error) {
+        console.error("Error loading tournament:", error);
+      }
+    };
+  
+    fetchRules();
+  }, [tournamentId]);
 
   const handleMenuClick = (menu: MenuOption) => {
     setSelectedMenu(menu);
   };
 
-  const rulesContent = () => {
+  const rulesContentAdult = () => {
     return (
       <div className="mainContainerContent">
-      <div className="inputContainer">
-        <label className="inputLabel">Golden Score:</label>
-        <select className="inputField">
-          <option value="option1">Ja, beschränkt</option>
-          <option value="option2">Ja, unbeschränkt</option>
-          <option value="option3">Nein</option>
-        </select>
-      </div>
+        <div className="inputContainer">
+          <label className="inputLabel">Golden Score:</label>
+          <select
+            className="inputField"
+            value={goldenScoreAdult}
+            onChange={(e) => setGoldenScoreAdult(e.target.value)}
+          >
+            <option value="option1">Ja, beschränkt</option>
+            <option value="option2">Ja, unbeschränkt</option>
+            <option value="option3">Nein</option>
+          </select>
+        </div>
 
         <div className="inputContainer">
           <label className="inputLabel">Anzahl Strafen:</label>
-          <input className="inputField"></input>
+          <input
+            className="inputField"
+            value={anzahlStrafenAdult}
+            onChange={(e) => setAnzahlStrafenAdult(e.target.value)}
+          />
         </div>
 
         <div className="eponWasariContainer">
           <div className="pointsEponWasariContainer">
             <div className="pointsEpponContainer">
               <label className="inputLabel">Punkte Ippon:</label>
-              <input className="inputField"></input>
+              <input className="inputField"
+            value={punkteIpponAdult}
+            onChange={(e) => setPunkteIpponAdult(e.target.value)}
+          />
             </div>
             <div></div>
             <div className="pointsWasariContainer">
               <label className="inputLabel">Punkte Wasari:</label>
-              <input className="inputField"></input>
+              <input className="inputField"
+                      value={punkteWasariAdult}
+                      onChange={(e) => setPunkteWasariAdult(e.target.value)}
+                    />
             </div>
           </div>
 
           <div className="holdTimeEponWasari">
             <div className="holdTimeEpponContainer">
               <label className="inputLabel">Haltezeit Ippon:</label>
-              <input className="inputField"></input>
+              <input className="inputField"
+                      value={haltezeitIpponAdult}
+                      onChange={(e) => setHaltezeitIpponAdult(e.target.value)}
+                    />
             </div>
 
             <div></div>
 
             <div className="pointsWasariContainer">
               <label className="inputLabel">Haltezeit Wasari:</label>
-              <input className="inputField"></input>
+              <input className="inputField"
+                      value={haltezeitWasariAdult}
+                      onChange={(e) => setHaltezeitWasariAdult(e.target.value)}
+                    />
             </div>
           </div>
         </div>
       </div>
     );
   };
+
+  const rulesContentYouth = () => {
+    return (
+      <div className="mainContainerContent">
+        <div className="inputContainer">
+          <label className="inputLabel">Golden Score:</label>
+          <select
+            className="inputField"
+            value={goldenScoreYouth}
+            onChange={(e) => setGoldenScoreYouth(e.target.value)}
+          >
+            <option value="option1">Ja, beschränkt</option>
+            <option value="option2">Ja, unbeschränkt</option>
+            <option value="option3">Nein</option>
+          </select>
+        </div>
+
+        <div className="inputContainer">
+          <label className="inputLabel">Anzahl Strafen:</label>
+          <input className="inputField"
+                      value={anzahlStrafenYouth}
+                      onChange={(e) => setAnzahlStrafenYouth(e.target.value)}
+                    />
+        </div>
+
+        <div className="eponWasariContainer">
+          <div className="pointsEponWasariContainer">
+            <div className="pointsEpponContainer">
+              <label className="inputLabel">Punkte Ippon:</label>
+              <input className="inputField"
+                      value={punkteIpponYouth}
+                      onChange={(e) => setPunkteIpponYouth(e.target.value)}
+                    />
+            </div>
+            <div></div>
+            <div className="pointsWasariContainer">
+              <label className="inputLabel">Punkte Wasari:</label>
+              <input className="inputField"
+                      value={punkteWasariYouth}
+                      onChange={(e) => setPunkteWasariYouth(e.target.value)}
+                    />
+            </div>
+          </div>
+
+          <div className="holdTimeEponWasari">
+            <div className="holdTimeEpponContainer">
+              <label className="inputLabel">Haltezeit Ippon:</label>
+              <input className="inputField"
+                      value={haltezeitIpponYouth}
+                      onChange={(e) => setHaltezeitIpponYouth(e.target.value)}
+                    />
+            </div>
+
+            <div></div>
+
+            <div className="pointsWasariContainer">
+              <label className="inputLabel">Haltezeit Wasari:</label>
+              <input className="inputField"
+                      value={haltezeitWasariYouth}
+                      onChange={(e) => setHaltezeitWasariYouth(e.target.value)}
+                    />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
 
   const classInputContent = () => {
     return <div></div>;
@@ -117,9 +241,9 @@ const RulesEdit = () => {
   const renderContent = () => {
     switch (selectedMenu) {
       case "menuRulesAdults":
-        return rulesContent();
+        return rulesContentAdult();
       case "menuRulesTeenagers":
-        return rulesContent();
+        return rulesContentYouth();
       case "menuClasses":
         return classContent();
       default:
@@ -147,7 +271,7 @@ const RulesEdit = () => {
         }`}
         onClick={() => handleMenuClick("menuRulesTeenagers")}
       >
-        Regeln Jugendliche
+        Regeln Jugend
       </div>
 
       <div
