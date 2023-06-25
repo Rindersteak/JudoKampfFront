@@ -92,12 +92,24 @@ const FighterEdit: React.FC<FighterEditProps> = ({
           label: club.name,
         }));
         setClubOptions(clubOptions);
+  
+        // Initialisieren des Club-Zustands nach dem Laden der Clubs
+        if (fighter.club && fighter.club.id) { // Überprüfen, ob club und club.id existieren
+          const clubId = fighter.club.id.toString();
+          const clubOption = clubOptions.find((option: OptionType) => option.value === clubId)
+          setClub(clubOption || null);
+        } else {
+          setClub(null);
+        }
+        
       } catch (error) {
         console.log("Error fetching clubs:", error);
       }
     }
     fetchClubs();
-  }, []);
+  }, [fighter]); 
+  
+  
 
   // initialisiert den Zustand der Komponente mit den Daten des übergebenen Fighter
   useEffect(() => {
@@ -110,7 +122,9 @@ const FighterEdit: React.FC<FighterEditProps> = ({
     );
     setClub(
       clubOptions.find((option) => option.value === fighter.club) || null
+      
     );
+    
   }, [fighter]);
   
 

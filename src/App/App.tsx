@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useParams, useNavigate } from 'react-router-dom';
 import AppRoutes from '../Routes/Routes';
 import Modal from '../Tools/Modal/Modal';
 import TournamentList from '../Pages/Tournament/TournamentList/TournamentList';

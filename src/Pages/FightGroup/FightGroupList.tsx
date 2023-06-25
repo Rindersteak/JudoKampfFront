@@ -31,6 +31,9 @@ const FightGroupList: React.FC<FightGroupListProps> = ({
           const groups = await getFightgroupsByTournamentId(
             parseInt(tournamentId)
           );
+
+          // Console.log kann noch weg
+          console.log(groups)
           setFightGroups(groups);
         }
       } catch (error) {
@@ -102,13 +105,26 @@ const FightGroupList: React.FC<FightGroupListProps> = ({
         (item) => item !== null
       ) as { group: Fightgroup; participants: number }[];
 
+
+      // Sortierung für Filter
+      
       filteredFightGroups.sort((a, b) => {
         if (sortColumn === "gender") {
-          // Sorting logic based on gender
+          return sortOrder === "asc"
+            ? a.group.sex.localeCompare(b.group.sex)
+            : b.group.sex.localeCompare(a.group.sex);
         } else if (sortColumn === "ageclass") {
-          // Sorting logic based on age class
+          const aValue = a.group.ageclass ? a.group.ageclass.name : "";
+          const bValue = b.group.ageclass ? b.group.ageclass.name : "";
+          return sortOrder === "asc"
+            ? aValue.localeCompare(bValue)
+            : bValue.localeCompare(aValue);
         } else if (sortColumn === "weightclass") {
-          // Sorting logic based on weight class
+          const aValue = a.group.weightclass ? a.group.weightclass.name : "";
+          const bValue = b.group.weightclass ? b.group.weightclass.name : "";
+          return sortOrder === "asc"
+            ? aValue.localeCompare(bValue)
+            : bValue.localeCompare(aValue);
         } else if (sortColumn === "participants") {
           return sortOrder === "asc"
             ? a.participants - b.participants
@@ -116,6 +132,7 @@ const FightGroupList: React.FC<FightGroupListProps> = ({
         }
         return 0;
       });
+      
 
       setSortedFightGroups(filteredFightGroups);
     };
@@ -209,8 +226,8 @@ const FightGroupList: React.FC<FightGroupListProps> = ({
   <tr key={item.group.id} onClick={() => handleRowClick(item.group)}>
     <td>{item.group.sex}</td>
     <td>Alter?!</td>
-    <td>{item.group.weightclass && item.group.weightclass.name}</td>
-    <td>{item.group.ageclass && item.group.ageclass.name}</td>
+    <td>{item.group.weightclass ? item.group.weightclass.name : "N/A"}</td>
+<td>{item.group.ageclass ? item.group.ageclass.name : "N/A"}</td>
     <td>{item.participants}</td>
   </tr>
 ))}
