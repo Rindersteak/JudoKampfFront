@@ -49,7 +49,7 @@ const TreeForThreeToSix: React.FC<TreeForThreeToSixProps> = ({ fightgroupId }) =
         setFightersList(fighterRows);
 
         // setting the banner title
-        const bannerTitle = `Tournieransicht für ${fighters.length} Kämpfer`;
+        const bannerTitle = `Turnieransicht für ${fighters.length} Kämpfer`;
         const bannerSubtitle = `Gewichtsklasse ${fightgroup.weightclass.name}, Altersklasse ${fightgroup.ageclass.name}`;
         setBannerTitle(bannerTitle);
         setBannerSubtitle(bannerSubtitle);
