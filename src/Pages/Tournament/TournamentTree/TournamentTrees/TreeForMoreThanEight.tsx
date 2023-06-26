@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
 
-const TreeForMoreThanEight: React.FC = () => {
+interface Props {
+  fightgroupId: number;
+}
 
-    useEffect(() => {
-        console.log('8+');
-      }, []);
+const TreeForMoreThanEight: React.FC<Props> = ({ fightgroupId }) => {
+  useEffect(() => {
+    console.log('8+');
+  }, []);
 
-    return <div>8+</div>;
-  };
-  
+  return <div>8+</div>;
+};
 
 export default TreeForMoreThanEight;

@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
 
-const TreeForNone: React.FC = () => {
+interface Props {
+  fightgroupId: number;
+}
 
-    useEffect(() => {
-        console.log('not enough fighters');
-      }, []);
+const TreeForNone: React.FC<Props> = ({ fightgroupId }) => {
+  useEffect(() => {
+    console.log('Not enough fighters');
+  }, []);
 
-    return <div>Not enough fighters</div>;
-  };
-  
+  return <div>Not enough fighters</div>;
+};
 
 export default TreeForNone;

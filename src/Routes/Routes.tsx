@@ -33,6 +33,20 @@ interface AppRoutesProps {
 }
 
 
+// Tree Wrappers
+
+const TreeForNoneWrapper = () => {
+  const { fightgroupId } = useParams();
+  // Convert to number
+  const fightgroupIdNumber = fightgroupId ? Number(fightgroupId) : undefined;
+
+  // Conditional rendering
+  if (fightgroupIdNumber === undefined) {
+    return <div>Error: No fight group ID provided</div>;
+  }
+
+  return <TreeForNone fightgroupId={fightgroupIdNumber} />;
+};
 
 const TreeForTwoWrapper = () => {
   const { fightgroupId } = useParams();
@@ -46,6 +60,20 @@ const TreeForTwoWrapper = () => {
 
   return <TreeForTwo fightgroupId={fightgroupIdNumber} />;
 };
+
+const TreeForSevenToEightWrapper = () => {
+  const { fightgroupId } = useParams();
+  // Convert to number
+  const fightgroupIdNumber = fightgroupId ? Number(fightgroupId) : undefined;
+
+  // Conditional rendering
+  if (fightgroupIdNumber === undefined) {
+    return <div>Error: No fight group ID provided</div>;
+  }
+
+  return <TreeForSevenToEight fightgroupId={fightgroupIdNumber} />;
+};
+
 
 const TreeForThreeToSixWrapper = ({ onOpenTreeForSix }: { onOpenTreeForSix: (fightgroupId: string) => void }) => {
   const { fightgroupId } = useParams<{ fightgroupId: string }>();
@@ -64,9 +92,26 @@ const TreeForThreeToSixWrapper = ({ onOpenTreeForSix }: { onOpenTreeForSix: (fig
     return <TreeForThreeToSix fightgroupId={Number(fightgroupId)} />;
   } else {
     console.log('No ID for TreeForThreeToSix');
+    console.log(fightgroupId);
   }
   return null; // Return null or a placeholder component if needed
 };
+
+const TreeForMoreThanEightWrapper = () => {
+  const { fightgroupId } = useParams();
+  // Convert to number
+  const fightgroupIdNumber = fightgroupId ? Number(fightgroupId) : undefined;
+
+  // Conditional rendering
+  if (fightgroupIdNumber === undefined) {
+    return <div>Error: No fight group ID provided</div>;
+  }
+
+  return <TreeForMoreThanEight fightgroupId={fightgroupIdNumber} />;
+};
+
+
+
 
 
 const FighterListWrapper = () => {
@@ -124,14 +169,14 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
       <Route key={index} path={`/tournament-tree/${fight.id}`} />
     ))}
     <Route path="/Spielwiese" element={<Spielwiese />} />
-    <Route path="/tree-for-none" element={<TreeForNone />} />
+    <Route path="/tree-for-none" element={<TreeForNoneWrapper />} />
     <Route path="/tree-for-two" element={<TreeForTwoWrapper />} />
     <Route
-      path="/tree-for-three-to-six/"
-      element={<TreeForThreeToSixWrapper onOpenTreeForSix={handleOpenTreeForSix} />} 
-    />
-    <Route path="/tree-for-seven-to-eight" element={<TreeForSevenToEight />} />
-    <Route path="/tree-for-more-than-eight" element={<TreeForMoreThanEight />} />
+  path="/tree-for-three-to-six/:fightgroupId"
+  element={<TreeForThreeToSixWrapper onOpenTreeForSix={handleOpenTreeForSix} />}
+/>
+<Route path="/tree-for-seven-to-eight" element={<TreeForSevenToEightWrapper />} />
+<Route path="/tree-for-more-than-eight" element={<TreeForMoreThanEightWrapper />} />
   </Routes>
 );
 
