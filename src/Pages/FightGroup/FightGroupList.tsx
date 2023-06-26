@@ -32,8 +32,6 @@ const FightGroupList: React.FC<FightGroupListProps> = ({
             parseInt(tournamentId)
           );
 
-          // Console.log kann noch weg
-          console.log(groups)
           setFightGroups(groups);
         }
       } catch (error) {

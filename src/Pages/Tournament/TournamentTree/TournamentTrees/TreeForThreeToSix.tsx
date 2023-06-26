@@ -10,38 +10,32 @@ import { Fight, Fighter, Fightgroup } from "../../../../types";
 import { useNavigate } from "react-router-dom";
 import { getFightgroup } from "../../../../API/fightGroupAPI";
 import "../TreeStyles.scss";
+import { getFightersListByFightgroupId } from "../../../../API/fightGroupAPI";
 
 export interface FighterRow {
-  fighter: string; // Name des Kämpfers
-  victories: number; // Anzahl der Siege
-  points: number; // Punktzahl
-  club?: string; // Verein
+  fighter: string; 
+  victories: number;
+  points: number;
+  club?: string;
 }
 
 interface TreeForThreeToSixProps {
   fightgroupId: number;
 }
 
-const TreeForThreeToSix: React.FC<TreeForThreeToSixProps> = ({
-  fightgroupId,
-}) => {
+const TreeForThreeToSix: React.FC<TreeForThreeToSixProps> = ({ fightgroupId }) => {
   const [fights, setFights] = useState<Fight[]>([]);
   const [winners, setWinners] = useState<Fighter[]>([]);
   const [fightersList, setFightersList] = useState<FighterRow[]>([]);
   const [bannerTitle, setBannerTitle] = useState<string>("");
   const navigate = useNavigate();
 
-  console.log("FG-ID", fightgroupId);
-
   useEffect(() => {
     async function fetchFightData() {
       try {
         const fightgroup: Fightgroup = await getFightgroup(fightgroupId);
 
-        const bannerTitle = `Tournieransicht für 3-6 Kämpfer\nGewichtsklasse ${fightgroup.weightclass.name}, Altersklasse ${fightgroup.ageclass.name}`;
-        setBannerTitle(bannerTitle);
-
-        const fighters = await getFightersList(fightgroupId);
+        const fighters = await getFightersListByFightgroupId(fightgroupId);
         const fighterRows = fighters.map((fighter) => ({
           fighter: `${fighter.firstname} ${fighter.lastname}`,
           victories: 0,
@@ -49,6 +43,10 @@ const TreeForThreeToSix: React.FC<TreeForThreeToSixProps> = ({
           club: fighter.club.name,
         }));
         setFightersList(fighterRows);
+
+        // setting the banner title
+        const bannerTitle = `Tournieransicht für ${fighters.length} Kämpfer\nGewichtsklasse ${fightgroup.weightclass.name}, Altersklasse ${fightgroup.ageclass.name}`;
+        setBannerTitle(bannerTitle);
       } catch (error) {
         console.error("Error fetching fight data:", error);
       }
