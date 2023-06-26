@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
 
-const TreeForSevenToEight: React.FC = () => {
+interface Props {
+  fightgroupId: number;
+}
 
-    useEffect(() => {
-        console.log('7-8');
-      }, []);
+const TreeForSevenToEight: React.FC<Props> = ({ fightgroupId }) => {
+  useEffect(() => {
+    console.log('7-8');
+  }, []);
 
-    return <div>7-8</div>;
-  };
-  
+  return <div>7-8</div>;
+};
 
 export default TreeForSevenToEight;

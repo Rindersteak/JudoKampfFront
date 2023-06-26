@@ -69,8 +69,8 @@ const FightGroupList: React.FC<FightGroupListProps> = ({
           pageName = "more-than-eight";
         }
   
-        // use the pageName in the path
-        const path = `/tree-for-${pageName}/`;
+        // Verwenden Sie die pageName in dem Pfad und übergeben Sie die fightgroupId als String
+        const path = `/tree-for-${pageName}/${group.id.toString()}`;
   
         navigate(path, {
           state: { bannerTitle: group.name, element: component },
@@ -80,6 +80,8 @@ const FightGroupList: React.FC<FightGroupListProps> = ({
       console.error("Error loading fight:", error);
     }
   };
+  
+  
   
 
   useEffect(() => {
