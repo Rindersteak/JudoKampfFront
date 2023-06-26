@@ -28,7 +28,11 @@ const TreeForThreeToSix: React.FC<TreeForThreeToSixProps> = ({ fightgroupId }) =
   const [winners, setWinners] = useState<Fighter[]>([]);
   const [fightersList, setFightersList] = useState<FighterRow[]>([]);
   const [bannerTitle, setBannerTitle] = useState<string>("");
+  const [bannerSubtitle, setBannerSubtitle] = useState<string>("");
   const navigate = useNavigate();
+  
+
+  
 
   useEffect(() => {
     async function fetchFightData() {
@@ -45,8 +49,10 @@ const TreeForThreeToSix: React.FC<TreeForThreeToSixProps> = ({ fightgroupId }) =
         setFightersList(fighterRows);
 
         // setting the banner title
-        const bannerTitle = `Tournieransicht für ${fighters.length} Kämpfer\nGewichtsklasse ${fightgroup.weightclass.name}, Altersklasse ${fightgroup.ageclass.name}`;
+        const bannerTitle = `Tournieransicht für ${fighters.length} Kämpfer`;
+        const bannerSubtitle = `Gewichtsklasse ${fightgroup.weightclass.name}, Altersklasse ${fightgroup.ageclass.name}`;
         setBannerTitle(bannerTitle);
+        setBannerSubtitle(bannerSubtitle);
       } catch (error) {
         console.error("Error fetching fight data:", error);
       }
@@ -59,9 +65,11 @@ const TreeForThreeToSix: React.FC<TreeForThreeToSixProps> = ({ fightgroupId }) =
     navigate("/fight-details"); 
   };
 
+  
+
   return (
     <div className="tournament-shell">
-      <Banner subtitle={bannerTitle} />
+    <Banner title={bannerTitle} subtitle={bannerSubtitle} />
       <div className="tournament-table">
         <table className="tableStyle">
           <thead>
