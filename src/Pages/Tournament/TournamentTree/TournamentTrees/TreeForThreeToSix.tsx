@@ -22,9 +22,9 @@ interface TreeForThreeToSixProps {
   fightgroupId: number;
 }
 
-
-
-const TreeForThreeToSix: React.FC<TreeForThreeToSixProps> = ({ fightgroupId }) => {
+const TreeForThreeToSix: React.FC<TreeForThreeToSixProps> = ({
+  fightgroupId,
+}) => {
   const [fights, setFights] = useState<Fight[]>([]);
   const [winners, setWinners] = useState<Fighter[]>([]);
   const [fightersList, setFightersList] = useState<FighterRow[]>([]);
@@ -40,7 +40,6 @@ const TreeForThreeToSix: React.FC<TreeForThreeToSixProps> = ({ fightgroupId }) =
 
         const bannerTitle = `Tournieransicht für 3-6 Kämpfer\nGewichtsklasse ${fightgroup.weightclass.name}, Altersklasse ${fightgroup.ageclass.name}`;
         setBannerTitle(bannerTitle);
-
 
         const fighters = await getFightersList(fightgroupId);
         const fighterRows = fighters.map((fighter) => ({
@@ -58,6 +57,10 @@ const TreeForThreeToSix: React.FC<TreeForThreeToSixProps> = ({ fightgroupId }) =
     fetchFightData();
   }, [fightgroupId]);
 
+  const handleStartFight1 = () => {
+    navigate("/fight-details/1"); // Weiterleitung zum Fight mit ID 1
+  };
+
   return (
     <div className="tournament-shell">
       <Banner subtitle={bannerTitle} />
@@ -73,7 +76,7 @@ const TreeForThreeToSix: React.FC<TreeForThreeToSixProps> = ({ fightgroupId }) =
           </thead>
           <tbody>
             {fightersList.map((fighterRow, index) => (
-              <tr className="entryStyle" key={index}>
+              <tr key={index}>
                 <td>{fighterRow.fighter}</td>
                 <td>{fighterRow.victories}</td>
                 <td>{fighterRow.points}</td>
@@ -83,6 +86,9 @@ const TreeForThreeToSix: React.FC<TreeForThreeToSixProps> = ({ fightgroupId }) =
           </tbody>
         </table>
       </div>
+      <button className="redButton" onClick={handleStartFight1}>
+        Fight 1 starten
+      </button>
     </div>
   );
 };

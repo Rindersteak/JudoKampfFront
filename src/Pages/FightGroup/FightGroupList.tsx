@@ -17,7 +17,7 @@ interface FightGroupListProps {
 }
 
 const FightGroupList: React.FC<FightGroupListProps> = ({
-  tournamentId,
+  tournamentId, onClose
 }) => {
   const [fightGroups, setFightGroups] = useState<Fightgroup[]>([]);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
@@ -69,17 +69,19 @@ const FightGroupList: React.FC<FightGroupListProps> = ({
           pageName = "more-than-eight";
         }
   
-        // Verwenden Sie die pageName in dem Pfad und übergeben Sie die fightgroupId als String
         const path = `/tree-for-${pageName}/${group.id.toString()}`;
   
         navigate(path, {
           state: { bannerTitle: group.name, element: component },
         });
+  
+        onClose(); 
       }
     } catch (error) {
       console.error("Error loading fight:", error);
     }
   };
+  
   
   
   
