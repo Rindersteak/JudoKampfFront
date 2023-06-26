@@ -58,9 +58,9 @@ export type Fight = {
   id: number;
   fighterBlue: Fighter;
   fighterWhite: Fighter;
-  blue_wasari: number;
+  blue_wazaari: number;
   blue_ippon: number;
-  white_wasari: number;
+  white_wazaari: number;
   white_ippon: number;
   fight_duration: number;
   blue_fouls: number;

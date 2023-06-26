@@ -3,6 +3,11 @@ import "./FighterLeft.scss";
 import "react-datepicker/dist/react-datepicker.css";
 import { Card, Paper, styled } from "@mui/material";
 import FightData from "./FightData";
+import { updatePoints } from "../../../API/fightAPI";
+
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 const FighterLeft = () => {
   const Item = styled(Paper)(({ theme }) => ({
@@ -29,35 +34,67 @@ const FighterLeft = () => {
   });
 
   const fightData = FightData(); // Call the FightData component to access the fightData state
-  const [ipponLeftFighter, setIpponLeftFighter] = useState(fightData?.white_ippon || 1);
-  const [wazaariLeftFighter, setWazaariLeftFighter] = useState(0);
-  const [cardIndex, setCardIndex] = useState(-1); // Aktuell angezeigte Karte (-1 für keine Karte)
-  
+  const [ipponLeftFighter, setIpponLeftFighter] = useState(fightData?.white_ippon || 0);
+  console.log("test" + fightData?.white_ippon)
+  const [wazaariLeftFighter, setWazaariLeftFighter] = useState(fightData?.white_wazaari || 0);
+  const [cardIndex, setCardIndex] = useState(fightData?.white_fouls || -1); // Aktuell angezeigte Karte (-1 für keine Karte)
+
+
   useEffect(() => {
-    const handleKeyPress = (event: { key: string }) => {
+    if (fightData?.white_ippon) {
+      setIpponLeftFighter(fightData.white_ippon); // Timer-Wert mit fightData.fight_duration überschreiben, falls vorhanden
+    }
+
+    if (fightData?.white_wazaari) {
+      setWazaariLeftFighter(fightData.white_wazaari); // Timer-Wert mit fightData.fight_duration überschreiben, falls vorhanden
+    }
+
+    if (fightData?.white_fouls) {
+      setCardIndex(fightData.white_fouls); // Timer-Wert mit fightData.fight_duration überschreiben, falls vorhanden
+    }
+  }, [fightData]);
+
+
+  useEffect(() => {
+    const handleKeyPress = async (event: { key: string }) => {
       if (event.key === "U" || event.key === "u") {
         if (ipponLeftFighter === 0) {
           setIpponLeftFighter(1);
+          updatePoints(1,"add","white","ippon"); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
         } else if (ipponLeftFighter === 1) {
           setIpponLeftFighter(0);
+          updatePoints(1,"remove","white","ippon"); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
         }
       } else if (event.key === "Q" || event.key === "q") {
-        if (wazaariLeftFighter < 2) {
+        if (wazaariLeftFighter < 2 ) {
           setWazaariLeftFighter((prevWazaari) => prevWazaari + 1);
+          updatePoints(1,"set","white","wazaari", wazaariLeftFighter+1); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
         } else {
           setWazaariLeftFighter(0);
+          updatePoints(1,"set","white","wazaari",0); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
+          setIpponLeftFighter(1);
+          await sleep(1000);
+          updatePoints(1,"add","white","ippon"); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
         }
       }
 
       if (event.key === "A" || event.key === "a") {
         if (cardIndex === -1) {
           setCardIndex(0); // Zeige die erste Karte an
+          updatePoints(1,"set","white","foul",-1); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
+          console.log("a");
         } else if (cardIndex === 0) {
           setCardIndex(1); // Zeige die zweite Karte an
+          updatePoints(1,"set","white","foul",0); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
+          console.log("b");
         } else if (cardIndex === 1) {
           setCardIndex(2); // Zeige die dritte Karte an
+          updatePoints(1,"set","white","foul",1); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
+          console.log("c");
         } else if (cardIndex === 2) {
           setCardIndex(-1); // Verstecke alle Karten
+          updatePoints(1,"set","white","foul",2); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
+          console.log("d");
         }
       }
     };
