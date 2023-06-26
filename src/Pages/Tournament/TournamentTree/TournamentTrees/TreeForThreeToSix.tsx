@@ -58,7 +58,7 @@ const TreeForThreeToSix: React.FC<TreeForThreeToSixProps> = ({
   }, [fightgroupId]);
 
   const handleStartFight1 = () => {
-    navigate("/fight-details/1"); // Weiterleitung zum Fight mit ID 1
+    navigate("/fight-details"); 
   };
 
   return (
@@ -87,7 +87,7 @@ const TreeForThreeToSix: React.FC<TreeForThreeToSixProps> = ({
         </table>
       </div>
       <button className="redButton" onClick={handleStartFight1}>
-        Fight 1 starten
+        Kampf 1 starten
       </button>
     </div>
   );
