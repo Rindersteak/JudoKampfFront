@@ -1,8 +1,27 @@
+$screen-mid: 992px;
+$screen-normal: 993px;
+
+@mixin small {
+  @media (max-width: #{$screen-mid}) {
+    @content;
+  }
+}
+
+@mixin normal {
+  @media (min-width: #{$screen-normal}) {
+    @content;
+  }
+}
+
 .rightFigherContainer{
     background-color: blue;
     display: grid;
     grid-template-columns: auto;
     width: 50%;
+
+    @include small{
+        width: 100%;
+    }
 }
 
 .nameTextRight{ 

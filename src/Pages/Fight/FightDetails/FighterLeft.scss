@@ -1,8 +1,27 @@
+$screen-mid: 992px;
+$screen-normal: 993px;
+
+@mixin small {
+  @media (max-width: #{$screen-mid}) {
+    @content;
+  }
+}
+
+@mixin normal {
+  @media (min-width: #{$screen-normal}) {
+    @content;
+  }
+}
+
 .leftFigherContainer{
     background-color: white;
     display: grid;
     grid-template-columns: auto;
     width: 50%;
+
+    @include small{
+        width: 100%;
+    }
 }
 
 .nameText{
@@ -42,14 +61,6 @@
     display: flex;
     justify-content: flex-start;
     margin-top: 1rem;
-    font-weight: bold;
-    font-size: 3.5rem;
-    margin-right: 1rem;
-}
-
-.cardContainer{
-    display: flex;
-    justify-content: flex-end;
     font-weight: bold;
     font-size: 3.5rem;
     margin-right: 1rem;

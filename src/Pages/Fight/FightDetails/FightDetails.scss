@@ -1,3 +1,19 @@
+$screen-mid: 992px;
+$screen-normal: 993px;
+
+@mixin small {
+  @media (max-width: #{$screen-mid}) {
+    @content;
+  }
+}
+
+@mixin normal {
+  @media (min-width: #{$screen-normal}) {
+    @content;
+  }
+}
+
+
 .gewicht{
   font-size: 3rem;
   font-weight: bold;
@@ -13,6 +29,11 @@
 .fighterStatsMiddle{
   display: flex;
   flex-direction: row;
+
+  @include small{
+    display: grid;
+    grid-template-columns: auto;
+  }
 }
 
 .floatingBottomTimer{
