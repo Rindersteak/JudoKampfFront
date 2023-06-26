@@ -2,25 +2,9 @@ import React, { useState, useEffect } from "react";
 import "./FighterLeft.scss";
 import "react-datepicker/dist/react-datepicker.css";
 import { Card, Paper, styled } from "@mui/material";
-import { getFight, getFightById } from "../../../API/fightAPI";
-import { Fight } from "../../../types";
+import FightData from "./FightData";
 
 const FighterLeft = () => {
-
-  const [fightData, setFightData] = useState<Fight | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const fight: Fight = await getFightById(1);
-        setFightData((prevState) => fight);
-        } catch (error) {
-        console.error("Error fetching fight:", error);
-      }
-    };
-    fetchData();
-  }, []);
-
   const Item = styled(Paper)(({ theme }) => ({
     //backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
@@ -47,6 +31,7 @@ const FighterLeft = () => {
   const [ipponLeftFighter, setIpponLeftFighter] = useState(0);
   const [wazaariLeftFighter, setWazaariLeftFighter] = useState(0);
   const [cardIndex, setCardIndex] = useState(-1); // Aktuell angezeigte Karte (-1 für keine Karte)
+  const fightData = FightData(); // Call the FightData component to access the fightData state
 
   useEffect(() => {
     const handleKeyPress = (event: { key: string }) => {
@@ -63,7 +48,7 @@ const FighterLeft = () => {
           setWazaariLeftFighter(0);
         }
       }
-  
+
       if (event.key === "A" || event.key === "a") {
         if (cardIndex === -1) {
           setCardIndex(0); // Zeige die erste Karte an
@@ -76,9 +61,9 @@ const FighterLeft = () => {
         }
       }
     };
-  
+
     document.addEventListener("keydown", handleKeyPress);
-  
+
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
@@ -86,11 +71,16 @@ const FighterLeft = () => {
 
   return (
     <div className="leftFigherContainer">
-      <div className="nameText">{fightData?.fighterWhite.lastname}, {" "} {fightData?.fighterWhite.firstname}</div>
+      <div className="nameText">
+        {fightData?.fighterWhite?.lastname},{" "}
+        {fightData?.fighterWhite?.firstname}
+      </div>
 
-      <div className="clubText">{fightData?.fighterWhite.club.name}</div>
+      <div className="clubText">{fightData?.fighterWhite?.club?.name}</div>
 
-      <div className="landesverbandText">{fightData?.fighterWhite.club.stateassociation}</div>
+      <div className="landesverbandText">
+        {fightData?.fighterWhite?.club?.stateassociation}
+      </div>
 
       <div className="fighterStatsContainer">
         <div className="ipponFighter">{ipponLeftFighter}</div>
@@ -98,9 +88,16 @@ const FighterLeft = () => {
         <div className="wazaariFighter">{wazaariLeftFighter}</div>
 
         <div className="cardContainer">
-          <RedCard style={{ display: cardIndex === 2 ? "block" : "none" }} /> {/* Anzeige der roten Karte */}
-          <YellowCard style={{ display: cardIndex >= 0 ? "block" : "none" }} /> {/* Anzeige der gelben Karten */}
-          <YellowCard style={{ display: cardIndex >= 1 ? "block" : "none" }} /> {/* Anzeige der gelben Karten */}
+          <RedCard style={{ display: cardIndex === 2 ? "block" : "none" }} />{" "}
+          {/* Anzeige der roten Karte */}
+          <YellowCard
+            style={{ display: cardIndex >= 0 ? "block" : "none" }}
+          />{" "}
+          {/* Anzeige der gelben Karten */}
+          <YellowCard
+            style={{ display: cardIndex >= 1 ? "block" : "none" }}
+          />{" "}
+          {/* Anzeige der gelben Karten */}
         </div>
       </div>
     </div>

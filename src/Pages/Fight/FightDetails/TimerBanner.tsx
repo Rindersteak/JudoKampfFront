@@ -1,26 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./TimerBanner.scss";
 import "react-datepicker/dist/react-datepicker.css";
-import { Fight } from "../../../types";
-import { getFight, getFightById } from "../../../API/fightAPI";
+import FightData from "./FightData";
 
 const TimerBanner = () => {
-  const [timer, setTimer] = useState(120);
+  const fightData = FightData(); // Hier rufe die FightData-Komponente auf
+  const [timer, setTimer] = useState(fightData?.fight_duration || 120);
   const [isRunning, setIsRunning] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [fightData, setFightData] = useState<Fight | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const fight: Fight = await getFightById(1);
-        setFightData((prevState) => fight);
-        } catch (error) {
-        console.error("Error fetching fight:", error);
-      }
-    };
-    fetchData();
-  }, []);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -48,9 +35,9 @@ const TimerBanner = () => {
         setIsRunning((prevIsRunning) => !prevIsRunning);
       }
     };
-  
+
     document.addEventListener("keydown", handleKeyPress);
-  
+
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
@@ -71,7 +58,9 @@ const TimerBanner = () => {
       tabIndex={0}
       onKeyUp={handleKeyUp}
     >
-      <div className="weightClassText">{fightData?.fighterWhite.weightclass?.name}</div>
+      <div className="weightClassText">
+        {fightData?.fighterWhite.weightclass?.name}
+      </div>
 
       <div className="timerText">{formatTime(timer)}</div>
 

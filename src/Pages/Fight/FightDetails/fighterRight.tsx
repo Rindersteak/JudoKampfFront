@@ -2,25 +2,10 @@ import React, { useState, useEffect } from "react";
 import "./fighterRight.scss";
 import "react-datepicker/dist/react-datepicker.css";
 import { Card, Paper, styled } from "@mui/material";
-import { Fight } from "../../../types";
-import { getFightById } from "../../../API/fightAPI";
+import FightData from "./FightData";
 
 const FighterLeft = () => {
-  
-  const [fightData, setFightData] = useState<Fight | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const fight: Fight = await getFightById(1);
-        setFightData((prevState) => fight);
-        } catch (error) {
-        console.error("Error fetching fight:", error);
-      }
-    };
-    fetchData();
-  }, []);
-
+  const fightData = FightData(); // Hier rufe die FightData-Komponente auf
   const Item = styled(Paper)(({ theme }) => ({
     //backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
@@ -63,7 +48,7 @@ const FighterLeft = () => {
           setWazaariLeftFighter(0);
         }
       }
-  
+
       if (event.key === "D" || event.key === "d") {
         if (cardIndex === -1) {
           setCardIndex(0); // Zeige die erste Karte an
@@ -76,9 +61,9 @@ const FighterLeft = () => {
         }
       }
     };
-  
+
     document.addEventListener("keydown", handleKeyPress);
-  
+
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
@@ -86,11 +71,15 @@ const FighterLeft = () => {
 
   return (
     <div className="rightFigherContainer">
-      <div className="nameTextRight">{fightData?.fighterBlue.lastname},{" "} {fightData?.fighterBlue.firstname}</div>
+      <div className="nameTextRight">
+        {fightData?.fighterWhite?.lastname}, {fightData?.fighterBlue.firstname}
+      </div>
 
       <div className="clubTextRight">{fightData?.fighterBlue.club.name}</div>
 
-      <div className="landesverbandTextRight">{fightData?.fighterBlue.club.stateassociation}</div>
+      <div className="landesverbandTextRight">
+        {fightData?.fighterBlue.club.stateassociation}
+      </div>
 
       <div className="fighterStatsContainer">
         <div className="ipponFighterRight">{ipponLeftFighter}</div>
@@ -98,9 +87,16 @@ const FighterLeft = () => {
         <div className="wazaariRightFighter">{wazaariLeftFighter}</div>
 
         <div className="cardContainer">
-          <RedCard style={{ display: cardIndex === 2 ? "block" : "none" }} /> {/* Anzeige der roten Karte */}
-          <YellowCard style={{ display: cardIndex >= 0 ? "block" : "none" }} /> {/* Anzeige der gelben Karten */}
-          <YellowCard style={{ display: cardIndex >= 1 ? "block" : "none" }} /> {/* Anzeige der gelben Karten */}
+          <RedCard style={{ display: cardIndex === 2 ? "block" : "none" }} />{" "}
+          {/* Anzeige der roten Karte */}
+          <YellowCard
+            style={{ display: cardIndex >= 0 ? "block" : "none" }}
+          />{" "}
+          {/* Anzeige der gelben Karten */}
+          <YellowCard
+            style={{ display: cardIndex >= 1 ? "block" : "none" }}
+          />{" "}
+          {/* Anzeige der gelben Karten */}
         </div>
       </div>
     </div>
