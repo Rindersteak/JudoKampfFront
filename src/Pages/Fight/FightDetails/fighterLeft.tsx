@@ -28,11 +28,11 @@ const FighterLeft = () => {
     backgroundColor: "#FFD600",
   });
 
-  const [ipponLeftFighter, setIpponLeftFighter] = useState(0);
+  const fightData = FightData(); // Call the FightData component to access the fightData state
+  const [ipponLeftFighter, setIpponLeftFighter] = useState(fightData?.white_ippon || 1);
   const [wazaariLeftFighter, setWazaariLeftFighter] = useState(0);
   const [cardIndex, setCardIndex] = useState(-1); // Aktuell angezeigte Karte (-1 für keine Karte)
-  const fightData = FightData(); // Call the FightData component to access the fightData state
-
+  
   useEffect(() => {
     const handleKeyPress = (event: { key: string }) => {
       if (event.key === "U" || event.key === "u") {

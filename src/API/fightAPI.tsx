@@ -84,3 +84,35 @@ export async function getFightById(fightId: number) {
     throw error;
   }
 }
+
+export async function updateTimerDuration(timer: number, fightId: number) {
+  try {
+    const response = await fetch(`${API_DOMAIN}/fights/${fightId}/fight-duration/${timer}`);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data as Fight;
+  } catch (error) {
+    console.error('Error loading fight:', error);
+    throw error;
+  }
+}
+
+export async function get(timer: number, fightId: number) {
+  try {
+    const response = await fetch(`${API_DOMAIN}/fights/${fightId}/fight-duration/${timer}`);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data as Fight;
+  } catch (error) {
+    console.error('Error loading fight:', error);
+    throw error;
+  }
+}

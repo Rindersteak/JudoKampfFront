@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./TimerBanner.scss";
 import "react-datepicker/dist/react-datepicker.css";
 import FightData from "./FightData";
+import { updateTimerDuration } from "../../../API/fightAPI";
 
 const TimerBanner = () => {
   const fightData = FightData(); // Hier rufe die FightData-Komponente auf
@@ -21,6 +22,7 @@ const TimerBanner = () => {
     if (isRunning && timer > 0) {
       interval = setInterval(() => {
         setTimer((prevTimer) => prevTimer - 1);
+        //updateTimerDuration(timer, 1); // Hier rufe die updateTimerDuration-Funktion auf
       }, 1000);
     }
 
