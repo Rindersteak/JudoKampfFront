@@ -5,9 +5,15 @@ import FightData from "./FightData";
 
 const TimerBanner = () => {
   const fightData = FightData(); // Hier rufe die FightData-Komponente auf
-  const [timer, setTimer] = useState(fightData?.fight_duration || 120);
+  const [timer, setTimer] = useState(10); // Initialer Wert auf 10 setzen
   const [isRunning, setIsRunning] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (fightData?.fight_duration) {
+      setTimer(fightData.fight_duration); // Timer-Wert mit fightData.fight_duration überschreiben, falls vorhanden
+    }
+  }, [fightData]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
