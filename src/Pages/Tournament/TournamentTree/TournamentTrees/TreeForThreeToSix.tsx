@@ -22,6 +22,8 @@ interface TreeForThreeToSixProps {
   fightgroupId: number;
 }
 
+
+
 const TreeForThreeToSix: React.FC<TreeForThreeToSixProps> = ({ fightgroupId }) => {
   const [fights, setFights] = useState<Fight[]>([]);
   const [winners, setWinners] = useState<Fighter[]>([]);
@@ -29,21 +31,16 @@ const TreeForThreeToSix: React.FC<TreeForThreeToSixProps> = ({ fightgroupId }) =
   const [bannerTitle, setBannerTitle] = useState<string>("");
   const navigate = useNavigate();
 
+  console.log("FG-ID", fightgroupId);
+
   useEffect(() => {
     async function fetchFightData() {
       try {
         const fightgroup: Fightgroup = await getFightgroup(fightgroupId);
-        const relevantFights = fightgroup.fights.slice(0, 3);
-        setFights(relevantFights);
 
-        const bannerTitle = `Tournieransicht für 2 Kämpfer\nGewichtsklasse ${fightgroup.weightclass.name}, Altersklasse ${fightgroup.ageclass.name}`;
+        const bannerTitle = `Tournieransicht für 3-6 Kämpfer\nGewichtsklasse ${fightgroup.weightclass.name}, Altersklasse ${fightgroup.ageclass.name}`;
         setBannerTitle(bannerTitle);
 
-        const winnerPromises = relevantFights.map((fight) =>
-          getWinner(fight.id)
-        );
-        const winnerData = await Promise.all(winnerPromises);
-        setWinners(winnerData);
 
         const fighters = await getFightersList(fightgroupId);
         const fighterRows = fighters.map((fighter) => ({
