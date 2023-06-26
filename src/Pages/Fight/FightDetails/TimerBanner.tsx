@@ -1,11 +1,26 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./TimerBanner.scss";
 import "react-datepicker/dist/react-datepicker.css";
+import { Fight } from "../../../types";
+import { getFight, getFightById } from "../../../API/fightAPI";
 
 const TimerBanner = () => {
   const [timer, setTimer] = useState(120);
   const [isRunning, setIsRunning] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [fightData, setFightData] = useState<Fight | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fight: Fight = await getFightById(1);
+        setFightData((prevState) => fight);
+        } catch (error) {
+        console.error("Error fetching fight:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -56,11 +71,11 @@ const TimerBanner = () => {
       tabIndex={0}
       onKeyUp={handleKeyUp}
     >
-      <div className="weightClassText">Gewichtsklasse</div>
+      <div className="weightClassText">{fightData?.fighterWhite.weightclass?.name}</div>
 
       <div className="timerText">{formatTime(timer)}</div>
 
-      <div className="fightID">1</div>
+      <div className="fightID">{fightData?.id}</div>
     </div>
   );
 };

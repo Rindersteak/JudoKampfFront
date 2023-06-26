@@ -2,8 +2,25 @@ import React, { useState, useEffect } from "react";
 import "./fighterRight.scss";
 import "react-datepicker/dist/react-datepicker.css";
 import { Card, Paper, styled } from "@mui/material";
+import { Fight } from "../../../types";
+import { getFightById } from "../../../API/fightAPI";
 
 const FighterLeft = () => {
+  
+  const [fightData, setFightData] = useState<Fight | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fight: Fight = await getFightById(1);
+        setFightData((prevState) => fight);
+        } catch (error) {
+        console.error("Error fetching fight:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
   const Item = styled(Paper)(({ theme }) => ({
     //backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
@@ -69,11 +86,11 @@ const FighterLeft = () => {
 
   return (
     <div className="rightFigherContainer">
-      <div className="nameTextRight">Vorname, Nachname</div>
+      <div className="nameTextRight">{fightData?.fighterBlue.lastname},{" "} {fightData?.fighterBlue.firstname}</div>
 
-      <div className="clubTextRight">Verein</div>
+      <div className="clubTextRight">{fightData?.fighterBlue.club.name}</div>
 
-      <div className="landesverbandTextRight">Landesverband</div>
+      <div className="landesverbandTextRight">{fightData?.fighterBlue.club.stateassociation}</div>
 
       <div className="fighterStatsContainer">
         <div className="ipponFighterRight">{ipponLeftFighter}</div>
