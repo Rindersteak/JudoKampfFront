@@ -81,19 +81,19 @@ const FighterLeft = () => {
       if (event.key === "A" || event.key === "a") {
         if (cardIndex === -1) {
           setCardIndex(0); // Zeige die erste Karte an
-          updatePoints(1,"set","white","foul",-1); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
+          updatePoints(1,"set","white","foul",0); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
           console.log("a");
         } else if (cardIndex === 0) {
           setCardIndex(1); // Zeige die zweite Karte an
-          updatePoints(1,"set","white","foul",0); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
+          updatePoints(1,"set","white","foul",1); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
           console.log("b");
         } else if (cardIndex === 1) {
           setCardIndex(2); // Zeige die dritte Karte an
-          updatePoints(1,"set","white","foul",1); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
+          updatePoints(1,"set","white","foul",2); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
           console.log("c");
         } else if (cardIndex === 2) {
           setCardIndex(-1); // Verstecke alle Karten
-          updatePoints(1,"set","white","foul",2); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
+          updatePoints(1,"set","white","foul",-1); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
           console.log("d");
         }
       }
