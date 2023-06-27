@@ -91,7 +91,7 @@ export async function putFighter(fighter: Fighter) {
 export async function setFighterWeightDirect(fighterId: number, weight: number) {
   try {
     const response = await fetch(`${API_DOMAIN}/fighters/${fighterId}/set-weight/${weight}`, {
-      method: "PUT"
+      method: "PATCH"
     });
 
     if (!response.ok) {
@@ -106,7 +106,7 @@ export async function setFighterWeightDirect(fighterId: number, weight: number) 
 export async function setFighterWeight(fighterId: number) {
   try {
     const response = await fetch(`${API_DOMAIN}/fighters/${fighterId}/set-weight`, {
-      method: "PUT"
+      method: "PATCH"
     });
 
     if (!response.ok) {
