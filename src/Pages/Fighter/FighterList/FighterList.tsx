@@ -351,7 +351,7 @@ const FighterList: React.FC<FighterListProps> = ({
         </Modal>
       )}
       {showAddWeightModal && selectedFighter !== null && (
-          <Modal onClose={handleAddWeightModalClose}>
+          <Modal size="small" onClose={handleAddWeightModalClose}>
             <FighterAddWeight
                 fighter={selectedFighter}
                 onWeightAdded={handleWeightAdded}
