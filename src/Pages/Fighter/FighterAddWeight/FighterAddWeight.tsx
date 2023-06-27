@@ -34,7 +34,7 @@ const FighterAddWeight: React.FC<FighterAddWeightProps> = ({ fighter, onWeightAd
             <h1 className={"titleStyle"}>Gewicht eintragen</h1>
             <form onSubmit={handleFormSubmit}>
                 <div className={"inputContainer"}>
-                <label className="inputStyle">
+                <label className="inputLabel">
                     Gewicht (in kg)
                     <input type="number" value={weight} onChange={handleWeightChange} className="inputField"/>
                 </label>
