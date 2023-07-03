@@ -31,10 +31,12 @@ const TreeForTwo: React.FC<TreeForTwoProps> = ({ fightgroupId }) => {
 
   useEffect(() => {
     async function fetchFightData() {
-      try {
-        const fightgroup: Fightgroup = await getFightgroup(fightgroupId);
-        const relevantFights = fightgroup.fights.slice(0, 3);
-        setFights(relevantFights);
+    try {
+      const fightgroup: Fightgroup = await getFightgroup(fightgroupId);
+
+      // relevantFights ist erst mal nur testweise
+      const relevantFights = fightgroup.fightpools[0].fights.slice(0, 3);
+      setFights(relevantFights);
 
         const bannerTitle = `Tournieransicht für 2 Kämpfer\nGewichtsklasse ${fightgroup.weightclass.name}, Altersklasse ${fightgroup.ageclass.name}`;
         setBannerTitle(bannerTitle);

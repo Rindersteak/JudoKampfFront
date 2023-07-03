@@ -79,7 +79,8 @@ export type Fightgroup = {
   ageclass: AgeClass;
   weightclass: WeightClass;
   sex: string;
-  fights: Fight[];
+  fighters: Fighter[];
+  fightpools: Fightpool[];
 };
 
 export type Tournament = {
@@ -95,10 +96,22 @@ export type Tournament = {
 
 export type Rule = {
   id: number;
-  tournament: Tournament;
-  fightDruation: number;
-  pointsTillWin: number;
-  holdingTime: number;
-  goldenScore: boolean;
-  youth: boolean;
+  pointsWazaariAdult: number;
+  pointsWazaariYouth: number;
+  pointsIpponAdult: number;
+  pointsIpponYouth: number;
+  holdingTimeIpponAdult: number;
+  holdingTimeIpponYouth: number;
+  holdingTimeWazaariAdult: number;
+  holdingTimeWazaariYouth: number;
+  foulsAdult: number;
+  foulsYouth: number;
+  goldenScoreAdult: ["", "", ""];
+  goldenScoreYouth: ["", "", ""];
+};
+
+export type Fightpool = {
+ id: number;
+ fighters: Fighter[];
+ fights: Fight [];
 };
