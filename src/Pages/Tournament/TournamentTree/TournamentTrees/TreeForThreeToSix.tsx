@@ -48,7 +48,7 @@ const TreeForThreeToSix: React.FC<TreeForThreeToSixProps> = ({ fightgroupId }) =
         }));
         setFightersList(fighterRows);
 
-        // setting the banner title
+        // banner title
         const bannerTitle = `Turnieransicht für ${fighters.length} Kämpfer`;
         const bannerSubtitle = `Gewichtsklasse ${fightgroup.weightclass.name}, Altersklasse ${fightgroup.ageclass.name}`;
         setBannerTitle(bannerTitle);
@@ -61,6 +61,8 @@ const TreeForThreeToSix: React.FC<TreeForThreeToSixProps> = ({ fightgroupId }) =
     fetchFightData();
   }, [fightgroupId]);
 
+
+
   const handleStartFight1 = () => {
     navigate("/fight-details"); 
   };
@@ -68,6 +70,8 @@ const TreeForThreeToSix: React.FC<TreeForThreeToSixProps> = ({ fightgroupId }) =
   
 
   return (
+
+      // Banner und Tabelle für Fighter der Group
     <div className="tournament-shell">
     <Banner title={bannerTitle} subtitle={bannerSubtitle} />
       <div className="tournament-table">
@@ -97,6 +101,29 @@ const TreeForThreeToSix: React.FC<TreeForThreeToSixProps> = ({ fightgroupId }) =
       </button>
     </div>
   );
+
+  // Tabelle für Fights
+  <div className="tournament-table">
+    <table className="tableStyle">
+      <thead>
+      <tr>
+        <th className="headerCell">Blauer Kämpfer</th>
+        <th className="headerCell">Weißer Kämpfer</th>
+        <th className="headerCell">Gewinner</th>
+      </tr>
+      </thead>
+      <tbody>
+      {fights.map((fight, index) => (
+          <tr key={index}>
+            <td>{`${fight.fighterBlue.firstname} ${fight.fighterBlue.lastname}`}</td>
+            <td>{`${fight.fighterWhite.firstname} ${fight.fighterWhite.lastname}`}</td>
+            <td>{`${fight.winner.firstname} ${fight.winner.lastname}`}</td>
+          </tr>
+      ))}
+      </tbody>
+    </table>
+  </div>
+
 };
 
 export default TreeForThreeToSix;
