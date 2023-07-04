@@ -5,24 +5,30 @@ import TimerBanner from "./TimerBanner";
 import FighterLeft from "./fighterLeft";
 import FighterRight from "./fighterRight";
 import TimerBottom from "./TimerBottom";
+import FightData from "./FightData";
 
-const FightDetails = () => {
- 
+interface FightDetailsProps {
+    fightId: number;
+}
 
-  return (
-    <div className="mainFightDetails">
-      <div className="timerBannerTop">
-        <TimerBanner />
-      </div>
+const FightDetails: React.FC<FightDetailsProps> = ({ fightId }) => {
 
-      <div className="fighterStatsMiddle">
-        <FighterLeft />
-        <FighterRight />
-      </div>
-      
-      <TimerBottom/>
-    </div>
-  );
+
+    return (
+        <div className="mainFightDetails">
+            <div className="timerBannerTop">
+                <TimerBanner fightId={fightId} />
+            </div>
+
+            <div className="fighterStatsMiddle">
+                <FighterLeft fightId={fightId} />
+                <FighterRight fightId={fightId} />
+            </div>
+
+            <TimerBottom />
+        </div>
+    );
 };
 
 export default FightDetails;
+

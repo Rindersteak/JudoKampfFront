@@ -1,7 +1,7 @@
-import { Fightgroup, Fighter, Fight } from "../types";
+import { Fightpool, Fighter, Fight } from "../types";
 import { API_DOMAIN } from "../Config/apiConfig";
 
-export async function getFightPoolById(fightpoolId: number): Promise<Fightgroup> {
+export async function getFightPoolById(fightpoolId: number): Promise<Fightpool> {
     try {
         const response = await fetch(`${API_DOMAIN}/fightpools/${fightpoolId}`);
 
@@ -10,23 +10,23 @@ export async function getFightPoolById(fightpoolId: number): Promise<Fightgroup>
         }
 
         const data = await response.json();
-        return data as Fightgroup;
+        return data as Fightpool;
     } catch (error) {
         console.error('Error loading fightpool:', error);
         throw error;
     }
 }
 
-export async function getAllFightPools(): Promise<Fightgroup[]> {
+export async function getAllFightPools(): Promise<Fightpool[]> {
     try {
-        const response = await fetch(`${API_DOMAIN}/fightpools`);
+        const response = await fetch(`${API_DOMAIN}/fightpools/`);
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const data = await response.json();
-        return data as Fightgroup[];
+        return data as Fightpool[];
     } catch (error) {
         console.error('Error loading fightpools:', error);
         throw error;

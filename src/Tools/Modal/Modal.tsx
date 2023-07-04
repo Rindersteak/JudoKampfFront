@@ -6,8 +6,9 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 interface ModalProps {
   onClose: () => void;
   children: ReactNode;
-  size?: "small" | "large";
+  size?: "small" | "large" | "xxl";
 }
+
 
 const Modal: FC<ModalProps> = ({ onClose, children, size = "large" }) => {
   useEffect(() => {

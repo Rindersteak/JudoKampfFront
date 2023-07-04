@@ -4,8 +4,12 @@ import "react-datepicker/dist/react-datepicker.css";
 import FightData from "./FightData";
 import { updateTimerDuration } from "../../../API/fightAPI";
 
-const TimerBanner = () => {
-  const fightData = FightData(); // Hier rufe die FightData-Komponente auf
+interface TimerBannerProps {
+  fightId: number;
+}
+
+const TimerBanner: React.FC<TimerBannerProps> = ({ fightId }) => {
+  const fightData = FightData({ fightId }); // Hier rufe die FightData-Komponente auf
   const [timer, setTimer] = useState(10); // Initialer Wert auf 10 setzen
   const [isRunning, setIsRunning] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);

@@ -9,8 +9,12 @@ function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-const FighterRight = () => {
-  const fightData = FightData(); // Hier rufe die FightData-Komponente auf
+interface fighterRightProps {
+  fightId: number;
+}
+
+const FighterRight: React.FC<fighterRightProps> = ({ fightId }) => {
+  const fightData = FightData({ fightId }); // Hier rufe die FightData-Komponente auf
   const Item = styled(Paper)(({ theme }) => ({
     //backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,

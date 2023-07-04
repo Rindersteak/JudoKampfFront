@@ -6,7 +6,7 @@ import TournamentList from '../Pages/Tournament/TournamentList/TournamentList';
 import TournamentForm from '../Pages/Tournament/TournamentForm/TournamentForm';
 import FighterList from '../Pages/Fighter/FighterList/FighterList';
 import FighterManager from '../Pages/Fighter/FighterManager/FighterManager';
-import { Tournament, Fight, Fightgroup } from '../types';
+import { Tournament, Fight, Fightgroup, Fightpool } from '../types';
 import ClubManager from '../Pages/Club/ClubManager/ClubManager';
 import ClubList from '../Pages/Club/ClubList/ClubList';
 import TournamentEdit from '../Pages/Tournament/TournamentEdit/TournamentEdit';
@@ -134,7 +134,7 @@ const App: React.FC = () => {
           onOpenClubManager={handleOpenClubManager}
           onOpenTournamentEdit={handleOpenTournamentEdit}
           onOpenTreeForSix={handleOpenTreeForThreeToSix}
-          fights={fights}
+          fightpool={fights}
         />
       </div>
       {modalOpen && (

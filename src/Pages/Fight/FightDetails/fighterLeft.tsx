@@ -9,7 +9,11 @@ function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-const FighterLeft = () => {
+interface fighterLeftProps {
+  fightId: number;
+}
+
+const FighterLeft: React.FC<fighterLeftProps> = ({ fightId }) => {
   const Item = styled(Paper)(({ theme }) => ({
     //backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
@@ -33,7 +37,7 @@ const FighterLeft = () => {
     backgroundColor: "#FFD600",
   });
 
-  const fightData = FightData(); // Call the FightData component to access the fightData state
+  const fightData = FightData({ fightId }); // Call the FightData component to access the fightData state
   const [ipponLeftFighter, setIpponLeftFighter] = useState(fightData?.white_ippon || 0);
   console.log("test" + fightData?.white_ippon)
   const [wazaariLeftFighter, setWazaariLeftFighter] = useState(fightData?.white_wazaari || 0);

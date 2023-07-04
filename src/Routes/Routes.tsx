@@ -4,7 +4,7 @@ import HomePage from '../Pages/HomePage/HomePage';
 import TournamentForm from '../Pages/Tournament/TournamentForm/TournamentForm';
 import FighterList from '../Pages/Fighter/FighterList/FighterList';
 import FighterManager from '../Pages/Fighter/FighterManager/FighterManager';
-import { Tournament, Fight, Fightgroup } from '../types';
+import { Tournament, Fight, Fightgroup, Fightpool } from '../types';
 import TournamentDetails from '../Pages/Tournament/TournamentDetails/TournamentDetails';
 import TournamentList from '../Pages/Tournament/TournamentList/TournamentList';
 import ClubList from '../Pages/Club/ClubList/ClubList';
@@ -29,7 +29,7 @@ interface AppRoutesProps {
   onOpenClubList: () => void;
   onOpenTournamentEdit: () => void;
   onOpenTreeForSix: (fightgroupId: string) => void;
-  fights: Fight[];
+  fightpool: Fight[];
 }
 
 
@@ -112,6 +112,18 @@ const TreeForMoreThanEightWrapper = () => {
 
 
 
+const FightDetailsWrapper = () => {
+  const { fightId } = useParams();
+  // Convert to number
+  const fightIdNumber = fightId ? Number(fightId) : undefined;
+
+  // Conditional rendering
+  if (fightIdNumber === undefined) {
+    return <div>Error: No fight ID provided</div>;
+  }
+
+  return <FightDetails fightId={fightIdNumber} />;
+};
 
 
 const FighterListWrapper = () => {
@@ -135,7 +147,7 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
   onOpenClubList,
   onOpenTournamentEdit,
   onOpenTreeForSix = handleOpenTreeForSix,
-    fights,
+    fightpool,
 }) => (
   <Routes>
     <Route
@@ -164,8 +176,8 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
     />
     <Route path="/tournament-list" element={<TournamentList onClose={onOpenTournamentList} />} />
     <Route path="/club-list" element={<ClubList onDeleteClub={() => {}} />} />
-    <Route path="/fight-details" element={<FightDetails />} />
-    {fights.map((fight: Fight, index: number) => (
+    <Route path="/fight-details/:fightId" element={<FightDetailsWrapper />} />
+    {fightpool.map((fight: Fight, index: number) => (
       <Route key={index} path={`/tournament-tree/${fight.id}`} />
     ))}
     <Route path="/Spielwiese" element={<Spielwiese />} />
