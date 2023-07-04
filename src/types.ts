@@ -102,3 +102,23 @@ export type Rule = {
   goldenScore: boolean;
   youth: boolean;
 };
+
+export type RulesData = {
+  femaleYouthU11?: ClassData;
+  femaleYouthU13?: ClassData;
+  femaleYouthU15?: ClassData;
+  womenU18?: ClassData;
+  women?: ClassData;
+  maleYouthU11?: ClassData;
+  maleYouthU13?: ClassData;
+  maleYouthU15?: ClassData;
+  menU18?: ClassData;
+  men?: ClassData;
+};
+
+export type ClassData = {
+  className: string;
+  ageLimit: string;
+  fightDuration: string;
+  weights: string[];
+};
