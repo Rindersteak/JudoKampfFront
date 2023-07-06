@@ -32,3 +32,36 @@ export async function getAllFightPools(): Promise<Fightpool[]> {
         throw error;
     }
 }
+
+
+export async function getFightsByFightpoolId(fightpoolId: number): Promise<Fight[]> {
+    try {
+        const response = await fetch(`${API_DOMAIN}/fightpools/${fightpoolId}/fights`);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data as Fight[];
+    } catch (error) {
+        console.error('Error loading fights:', error);
+        throw error;
+    }
+}
+
+export async function getFightersByFightpoolId(fightpoolId: number): Promise<Fighter[]> {
+    try {
+        const response = await fetch(`${API_DOMAIN}/fightpools/${fightpoolId}/fighters`);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data as Fighter[];
+    } catch (error) {
+        console.error('Error loading fighters:', error);
+        throw error;
+    }
+}

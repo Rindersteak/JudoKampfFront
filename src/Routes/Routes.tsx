@@ -21,16 +21,19 @@ import TreeForMoreThanEight from '../Pages/Tournament/TournamentTree/TournamentT
 
 interface AppRoutesProps {
   onOpenTournamentForm: () => void;
-  onOpenFighterManager: (tournamentId: string) => void;
-  onOpenFighterList: (tournamentId: string) => void;
-  onOpenFightGroupList: (tournamentId: string) => void;
+  onOpenFighterManager: (tournamentId: string) => Promise<void>;
+  onOpenFighterList: (tournamentId: string) => Promise<void>;
+  onOpenFightGroupList: (tournamentId: string) => Promise<void>;
   onOpenTournamentList: () => void;
-  onOpenClubManager: () => void;
   onOpenClubList: () => void;
+  onOpenClubManager: () => void;
   onOpenTournamentEdit: () => void;
+  onOpenTreeForTwo: (fightgroupId: string) => void;
   onOpenTreeForSix: (fightgroupId: string) => void;
+  onOpenTreeForSevenToEight: (fightgroupId: string) => void;
   fightpool: Fight[];
 }
+
 
 
 // Tree Wrappers
@@ -48,31 +51,50 @@ const TreeForNoneWrapper = () => {
   return <TreeForNone fightgroupId={fightgroupIdNumber} />;
 };
 
-const TreeForTwoWrapper = () => {
-  const { fightgroupId } = useParams();
-  // Convert to number
-  const fightgroupIdNumber = fightgroupId ? Number(fightgroupId) : undefined;
+const TreeForTwoWrapper = ({ onOpenTreeForTwo }: { onOpenTreeForTwo: (fightgroupId: string) => void }) => {
+  const { fightgroupId } = useParams<{ fightgroupId: string }>();
+  const navigate = useNavigate();
 
-  // Conditional rendering
-  if (fightgroupIdNumber === undefined) {
-    return <div>Error: No fight group ID provided</div>;
+  useEffect(() => {
+    if (fightgroupId) {
+      onOpenTreeForTwo(fightgroupId);
+    } else {
+      navigate('/'); // Handle the case when no fightgroupId is provided
+    }
+  }, [fightgroupId, navigate, onOpenTreeForTwo]);
+
+  // If there is a fightgroupId, render TreeForTwo
+  if (fightgroupId) {
+    return <TreeForTwo fightgroupId={Number(fightgroupId)} />;
+  } else {
+    console.log('No ID for TreeForTwo');
+    console.log(fightgroupId);
   }
-
-  return <TreeForTwo fightgroupId={fightgroupIdNumber} />;
+  return null; // Return null or a placeholder component if needed
 };
 
-const TreeForSevenToEightWrapper = () => {
-  const { fightgroupId } = useParams();
-  // Convert to number
-  const fightgroupIdNumber = fightgroupId ? Number(fightgroupId) : undefined;
+const TreeForSevenToEightWrapper = ({ onOpenTreeForSevenToEight }: { onOpenTreeForSevenToEight: (fightgroupId: string) => void }) => {
+  const { fightgroupId } = useParams<{ fightgroupId: string }>();
+  const navigate = useNavigate();
 
-  // Conditional rendering
-  if (fightgroupIdNumber === undefined) {
-    return <div>Error: No fight group ID provided</div>;
+  useEffect(() => {
+    if (fightgroupId) {
+      onOpenTreeForSevenToEight(fightgroupId);
+    } else {
+      navigate('/'); // Handle the case when no fightgroupId is provided
+    }
+  }, [fightgroupId, navigate, onOpenTreeForSevenToEight]);
+
+  // If there is a fightgroupId, render TreeForSevenToEight
+  if (fightgroupId) {
+    return <TreeForSevenToEight fightgroupId={Number(fightgroupId)} />;
+  } else {
+    console.log('No ID for TreeForSevenToEight');
+    console.log(fightgroupId);
   }
-
-  return <TreeForSevenToEight fightgroupId={fightgroupIdNumber} />;
+  return null; // Return null or a placeholder component if needed
 };
+
 
 
 const TreeForThreeToSixWrapper = ({ onOpenTreeForSix }: { onOpenTreeForSix: (fightgroupId: string) => void }) => {
@@ -136,6 +158,14 @@ const handleOpenTreeForSix = (fightgroupId: string) => {
   console.log('Open TreeForThreeToSix:', fightgroupId);
 };
 
+const handleOpenTreeForTwo = (fightgroupId: string) => {
+  console.log('Open TreeForTwo:', fightgroupId);
+};
+
+const handleOpenTreeForSevenToEight = (fightgroupId: string) => {
+  console.log('Open TreeForSevenToEight:', fightgroupId);
+};
+
 
 const AppRoutes: React.FC<AppRoutesProps> = ({
   onOpenTournamentForm,
@@ -182,12 +212,19 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
     ))}
     <Route path="/Spielwiese" element={<Spielwiese />} />
     <Route path="/tree-for-none" element={<TreeForNoneWrapper />} />
-    <Route path="/tree-for-two" element={<TreeForTwoWrapper />} />
+    <Route
+        path="/tree-for-two/:fightgroupId"
+        element={<TreeForTwoWrapper onOpenTreeForTwo={handleOpenTreeForTwo} />}
+    />
+
     <Route
   path="/tree-for-three-to-six/:fightgroupId"
   element={<TreeForThreeToSixWrapper onOpenTreeForSix={handleOpenTreeForSix} />}
 />
-<Route path="/tree-for-seven-to-eight" element={<TreeForSevenToEightWrapper />} />
+    <Route
+        path="/tree-for-seven-to-eight/:fightgroupId"
+        element={<TreeForSevenToEightWrapper onOpenTreeForSevenToEight={handleOpenTreeForSevenToEight} />}
+    />
 <Route path="/tree-for-more-than-eight" element={<TreeForMoreThanEightWrapper />} />
   </Routes>
 );

@@ -14,9 +14,19 @@ import FightGroupList from '../Pages/FightGroup/FightGroupList';
 import { getFightList } from '../API/fightAPI';
 import TournamentManager from './../Pages/Tournament/TournamentManager/TournamentManager';
 
+const handleOpenTreeForTwo = (fightgroupId: string) => {
+  console.log('Open TreeForTwo:', fightgroupId);
+};
+
 const handleOpenTreeForSix = (fightgroupId: string) => {
   console.log('Open TreeForThreeToSix:', fightgroupId);
 };
+
+const handleOpenTreeForSevenToEight = (fightgroupId: string) => {
+  console.log('Open TreeForSevenToEight:', fightgroupId);
+};
+
+
 
 const App: React.FC = () => {
   const [modalOpen, setModalOpen] = React.useState(false);
@@ -106,6 +116,12 @@ const App: React.FC = () => {
   const handleOpenTreeForThreeToSix = (fightgroupId: string) => {
     handleOpenTreeForSix(fightgroupId);
   };
+  const handleOpenTreeForTwo = (fightgroupId: string) => {
+    handleOpenTreeForTwo(fightgroupId);
+  };
+  const handleOpenTreeForSevenToEight = (fightgroupId: string) => {
+    handleOpenTreeForSevenToEight(fightgroupId);
+  };
 
   const handleCloseModal = () => {
     setModalOpen(false);
@@ -133,7 +149,9 @@ const App: React.FC = () => {
           onOpenClubList={handleOpenClubList}
           onOpenClubManager={handleOpenClubManager}
           onOpenTournamentEdit={handleOpenTournamentEdit}
+          onOpenTreeForTwo={handleOpenTreeForTwo}
           onOpenTreeForSix={handleOpenTreeForThreeToSix}
+          onOpenTreeForSevenToEight={handleOpenTreeForSevenToEight}
           fightpool={fights}
         />
       </div>

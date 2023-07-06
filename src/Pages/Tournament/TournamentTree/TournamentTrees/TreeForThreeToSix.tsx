@@ -118,7 +118,9 @@ const TreeForThreeToSix: React.FC<TreeForThreeToSixProps> = ({ fightgroupId }) =
             </tbody>
           </table>
         </div>
-
+          <div className="titleStyle">
+            <h1> Kämpfe</h1>
+        </div>
         <div className="tournament-table">
           <table className="tableStyle">
             <thead>
@@ -135,12 +137,19 @@ const TreeForThreeToSix: React.FC<TreeForThreeToSixProps> = ({ fightgroupId }) =
                   <td>{`${fight.fighterBlue?.firstname || 'N/A'} ${fight.fighterBlue?.lastname || 'N/A'}`}</td>
                   <td>{`${fight.fighterWhite?.firstname || 'N/A'} ${fight.fighterWhite?.lastname || 'N/A'}`}</td>
                   <td>{`${fight.winner?.firstname || 'Kampf nicht gestartet'} ${fight.winner?.lastname || ''}`}</td>
-                  <td><button className="redButton" onClick={() => handleStartFight(fight.id)}>Kampf starten</button></td>
+                  <td>
+                    <div className="buttonContainer">
+                      <button className="blueButton" onClick={() => handleStartFight(fight.id)}>
+                        Kampf starten
+                      </button>
+                    </div>
+                  </td>
                 </tr>
             ))}
             </tbody>
           </table>
         </div>
+
         {isModalOpen && selectedFightId && (
             <Modal size="xxl" onClose={handleCloseModal}>
               <FightDetails fightId={selectedFightId} />
