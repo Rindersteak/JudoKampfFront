@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import "./RulesEdit.scss";
 import {getRules} from "../../../API/rulesAPI";
 import { useLocation } from "react-router-dom";
-
+import {
+  deleteTournament,
+  postTournament,
+  getTournaments,
+} from "../../../API/tournamentAPI";
+import { Tournament } from "../../../types";
 
 type MenuOption = "menuRulesAdults" | "menuRulesTeenagers" | "menuClasses";
 
@@ -10,6 +15,7 @@ const RulesEdit = () => {
   const [selectedMenu, setSelectedMenu] = useState<MenuOption | null>(null);
   const [rulesData, setRulesData] = useState(null);
   const [error, setError] = useState<Error | null>(null);
+  const [tournament, setTournament] = useState<Tournament | null>(null);
 
   const location = useLocation(); // get current URL
   const tournamentId = location.pathname.split("/").pop() || "";
@@ -28,19 +34,60 @@ const RulesEdit = () => {
   const [haltezeitIpponYouth, setHaltezeitIpponYouth] = useState("");
   const [haltezeitWasariYouth, setHaltezeitWasariYouth] = useState("");
 
-  useEffect(() => {
-    const fetchRules = async () => {
+   // Funktion zum Abrufen der Turnierdetails anhand der ID
+   useEffect(() => {
+    const fetchTournament = async () => {
       try {
-        const data = await getRules(tournamentId);
-        console.log(data)
-        setRulesData(data);
+        const tournaments = await getTournaments();
+        const tournament = getTournamentDetailsById(
+          tournamentId ?? undefined,
+          tournaments
+        );
+        setTournament(tournament);
+        const selectedTournament = tournaments.find(
+          (t: Tournament) => t.id === tournament?.id
+        );
+        console.log(selectedTournament);
+        if (selectedTournament) {
+          setGoldenScoreAdult(selectedTournament.rule.goldenScoreAdult);
+
+          setAnzahlStrafenAdult(selectedTournament.rule.foulsAdult);
+          setPunkteIpponAdult(selectedTournament.rule.pointsIpponAdult);
+          setPunkteWasariAdult(selectedTournament.rule.pointsWazaariAdult);
+          setHaltezeitIpponAdult(selectedTournament.rule.holdingTimeIpponAdult);
+          setHaltezeitWasariAdult(selectedTournament.rule.holdingTimeWazaariAdult);
+
+
+          setGoldenScoreYouth(selectedTournament.rule.goldenScoreYouth);
+
+          setAnzahlStrafenYouth(selectedTournament.rule.foulsYouth);
+          setPunkteIpponYouth(selectedTournament.rule.pointsIpponYouth);
+          setPunkteWasariYouth(selectedTournament.rule.pointsWazaariYouth);
+          setHaltezeitIpponYouth(selectedTournament.rule.holdingTimeIpponYouth);
+          setHaltezeitWasariYouth(selectedTournament.rule.holdingTimeWazaariYouth);
+
+        }
       } catch (error) {
         console.error("Error loading tournament:", error);
       }
     };
-  
-    fetchRules();
+
+    fetchTournament();
   }, [tournamentId]);
+
+  const getTournamentDetailsById = (
+    tournamentId: string | undefined,
+    tournaments: Tournament[]
+  ): Tournament | null => {
+    if (!tournamentId) {
+      console.log("keine ID");
+      return null;
+    }
+    const tournament = tournaments.find((t) => t.id === parseInt(tournamentId));
+    //console.log(tournament)
+    return tournament || null;
+  };
+
 
   const handleMenuClick = (menu: MenuOption) => {
     setSelectedMenu(menu);
@@ -66,8 +113,10 @@ const RulesEdit = () => {
           <label className="inputLabel">Anzahl Strafen:</label>
           <input
             className="inputField"
+            type = "text"
+            id = "anzahlStrafenAdult"
             value={anzahlStrafenAdult}
-            onChange={(e) => setAnzahlStrafenAdult(e.target.value)}
+            onChange={(event) => setAnzahlStrafenAdult(event.target.value)}
           />
         </div>
 
@@ -82,7 +131,7 @@ const RulesEdit = () => {
             </div>
             <div></div>
             <div className="pointsWasariContainer">
-              <label className="inputLabel">Punkte Wasari:</label>
+              <label className="inputLabel">Punkte Waza-ari:</label>
               <input className="inputField"
                       value={punkteWasariAdult}
                       onChange={(e) => setPunkteWasariAdult(e.target.value)}
@@ -102,7 +151,7 @@ const RulesEdit = () => {
             <div></div>
 
             <div className="pointsWasariContainer">
-              <label className="inputLabel">Haltezeit Wasari:</label>
+              <label className="inputLabel">Haltezeit Waza-ari:</label>
               <input className="inputField"
                       value={haltezeitWasariAdult}
                       onChange={(e) => setHaltezeitWasariAdult(e.target.value)}
@@ -149,7 +198,7 @@ const RulesEdit = () => {
             </div>
             <div></div>
             <div className="pointsWasariContainer">
-              <label className="inputLabel">Punkte Wasari:</label>
+              <label className="inputLabel">Punkte Waza-ari:</label>
               <input className="inputField"
                       value={punkteWasariYouth}
                       onChange={(e) => setPunkteWasariYouth(e.target.value)}
@@ -169,7 +218,7 @@ const RulesEdit = () => {
             <div></div>
 
             <div className="pointsWasariContainer">
-              <label className="inputLabel">Haltezeit Wasari:</label>
+              <label className="inputLabel">Haltezeit Waza-ari:</label>
               <input className="inputField"
                       value={haltezeitWasariYouth}
                       onChange={(e) => setHaltezeitWasariYouth(e.target.value)}
