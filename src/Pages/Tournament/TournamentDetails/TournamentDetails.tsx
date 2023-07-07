@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   getTournaments,
-  getTotalTournaments,
 } from "../../../API/tournamentAPI";
 import "./TournamentDetails.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,16 +9,11 @@ import Modal from "./../../../Tools/Modal/Modal";
 import {
   faClipboardList,
   faGear,
-  faPencil,
-  faPeopleArrows,
   faPlus,
-  faTree,
   faTrophy,
 } from "@fortawesome/free-solid-svg-icons";
 import { Tournament } from "../../../types";
 import Banner from "../../../Tools/Banner/Banner";
-import FighterDetails from "../../Fight/FightDetails/FightDetails";
-import FightGroupList from "../../FightGroup/FightGroupList"; // Importiere die FightGroupList-Komponente
 import ConfirmDelete from "../../../Tools/ConfirmDelete/ConfirmDelete";
 
 // Definition der Eigenschaften für die TournamentDetails-Komponente
@@ -137,7 +131,6 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({
             <ConfirmDelete
               onClose={handleModalClose}
               onConfirmDelete={handleConfirmed}
-              idToDelete={Number(tournamentId)}
               text="Möchten Sie die Turniergrupep wirklich erzeugen?"
               subTextAvailable = {true}
               subText="Hinweis: Die Teilnehmer werden den Kampfgruppen automatisch zugeordnet.Es können anschießend keine weiteren Teilnehmer hinzugefügt werden!"

@@ -8,7 +8,7 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 interface ConfirmDeleteProps {
   onClose: () => void;
   onConfirmDelete: () => Promise<void>;
-  idToDelete: number;
+  idToDelete?: number;
   text: string;
   subTextAvailable: boolean
   subText?: string
