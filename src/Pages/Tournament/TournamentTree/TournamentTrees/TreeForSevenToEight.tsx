@@ -114,7 +114,6 @@ const TreeForSevenToEight: React.FC<TreeForSevenToEightProps> = ({ fightgroupId 
   const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState(false);
 
   const handleModalClose = () => {
-    navigate("/");
     setShowConfirmDeletePopup(false);
   };
 
@@ -228,7 +227,7 @@ const TreeForSevenToEight: React.FC<TreeForSevenToEightProps> = ({ fightgroupId 
               subText="Hinweis: Nach Kampfstart können die Turnierklassen nicht mehr geändert werden! Sofern einer Turniergruppe nur ein Teilnehmer zugeordnet ist, sollten die Gewichts-klassen in den Einstellungen des Turniers entsprechend angepasst werden."
               topButtonClassName="#b40000"
               bottomButtonClassName="#001aff"
-              buttonTextBlue="Nein, Klasse anpassen"
+              buttonTextBlue="Nein, Zurück"
               buttonTextRed="Ja, starten"
             />
           </Modal>

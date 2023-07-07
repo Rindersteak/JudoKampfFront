@@ -14,6 +14,7 @@ import { getFightersListByFightgroupId } from "../../../../API/fightGroupAPI";
 import { getAllFightPools } from "../../../../API/fightPoolAPI";
 import Modal from '../../../../Tools/Modal/Modal';
 import FightDetails from "../../../Fight/FightDetails/FightDetails";
+import ConfirmDelete from "../../../../Tools/ConfirmDelete/ConfirmDelete";
 
 
 export interface FighterRow {
@@ -92,6 +93,23 @@ const TreeForTwo: React.FC<TreeForTwoProps> = ({ fightgroupId }) => {
     fetchFightPools();
   }, []);
 
+
+  const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState(false);
+  const [fightID, setFightID] = useState(-1);
+  const handleModalClose = () => {
+    setShowConfirmDeletePopup(false);
+  };
+
+  const handleConfirmed = async () => {
+    handleStartFight(fightID)
+    handleModalClose();
+  };
+
+  const handleOpenModal = (fightID:number) => {
+    setFightID(fightID);
+    setShowConfirmDeletePopup(true);
+  }
+
   return (
       <div className="tournament-shell">
         <Banner title={bannerTitle} subtitle={bannerSubtitle} />
@@ -139,9 +157,9 @@ const TreeForTwo: React.FC<TreeForTwoProps> = ({ fightgroupId }) => {
                   <td>{`${fight.winner?.firstname || 'Kampf nicht gestartet'} ${fight.winner?.lastname || ''}`}</td>
                   <td>
                     <div className="buttonContainer">
-                      <button className="blueButton" onClick={() => handleStartFight(fight.id)}>
-                        Kampf starten
-                      </button>
+                    <button className="blueButton" onClick={() => handleOpenModal(fight.id)}>
+                          Kampf starten
+                    </button>
                     </div>
                   </td>
                 </tr>
@@ -149,6 +167,23 @@ const TreeForTwo: React.FC<TreeForTwoProps> = ({ fightgroupId }) => {
             </tbody>
           </table>
         </div>
+
+        {showConfirmDeletePopup && (
+          <Modal size="small" onClose={handleModalClose}>
+            <ConfirmDelete
+              onClose={handleModalClose}
+              onConfirmDelete={handleConfirmed}
+              text="Möchten Sie den Kampf wirklich starten?"
+              subTextAvailable = {true}
+              subText="Hinweis: Nach Kampfstart können die Turnierklassen nicht mehr geändert werden! Sofern einer Turniergruppe nur ein Teilnehmer zugeordnet ist, sollten die Gewichts-klassen in den Einstellungen des Turniers entsprechend angepasst werden."
+              topButtonClassName="#b40000"
+              bottomButtonClassName="#001aff"
+              buttonTextBlue="Nein, Zurück"
+              buttonTextRed="Ja, starten"
+            />
+          </Modal>
+        )}
+
 
         {isModalOpen && selectedFightId && (
             <Modal size="xxl" onClose={handleCloseModal}>
