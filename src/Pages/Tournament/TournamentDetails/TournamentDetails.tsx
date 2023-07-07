@@ -6,6 +6,7 @@ import {
 } from "../../../API/tournamentAPI";
 import "./TournamentDetails.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Modal from "./../../../Tools/Modal/Modal";
 import {
   faClipboardList,
   faGear,
@@ -19,6 +20,7 @@ import { Tournament } from "../../../types";
 import Banner from "../../../Tools/Banner/Banner";
 import FighterDetails from "../../Fight/FightDetails/FightDetails";
 import FightGroupList from "../../FightGroup/FightGroupList"; // Importiere die FightGroupList-Komponente
+import ConfirmDelete from "../../../Tools/ConfirmDelete/ConfirmDelete";
 
 // Definition der Eigenschaften für die TournamentDetails-Komponente
 interface TournamentDetailsProps {
@@ -85,6 +87,17 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({
     return tournament || null;
   };
 
+  const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState(false);
+
+  const handleModalClose = () => {
+    setShowConfirmDeletePopup(false);
+  };
+
+  const handleConfirmed = async () => {
+    onOpenFightGroupList(tournamentId||"");
+    handleModalClose();
+  };
+
   // Render der Komponente
   return (
     <div className="app">
@@ -96,10 +109,7 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({
       {/* Für den Edit-Button kann hier einfach der Button aus der Banner.tsx aufgerufen werden */}
       {/* Container für die Karten */}
       <div className="cards-container">
-        <CardOne
-          tournamentId={tournamentId || ""}
-          onOpenFightGroupList={handleOpenFightGroupListClick}
-        />
+      <CardOne setShowConfirmDeletePopup={setShowConfirmDeletePopup} />
         <CardTwo
           tournamentId={tournamentId || ""}
           onOpenFighterList={onOpenFighterList}
@@ -121,27 +131,44 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({
           onOpenTournamentEdit={onOpenTournamentEdit}
         />
       </div>
+
+      {showConfirmDeletePopup && (
+          <Modal size="small" onClose={handleModalClose}>
+            <ConfirmDelete
+              onClose={handleModalClose}
+              onConfirmDelete={handleConfirmed}
+              idToDelete={Number(tournamentId)}
+              text="Möchten Sie die Turniergrupep wirklich erzeugen?"
+              subTextAvailable = {true}
+              subText="Hinweis: Die Teilnehmer werden den Kampfgruppen automatisch zugeordnet.Es können anschießend keine weiteren Teilnehmer hinzugefügt werden!"
+              topButtonClassName="#b40000"
+              bottomButtonClassName="#001aff"
+              buttonTextBlue="Nein, zurück"
+              buttonTextRed="Ja, erzeugen"
+            />
+          </Modal>
+        )}
     </div>
   );
 };
 
-const CardOne = ({
-  tournamentId,
-  onOpenFightGroupList,
-}: {
-  tournamentId: string;
-  onOpenFightGroupList: () => void;
-}) => {
+
+interface CardOneProps {
+  setShowConfirmDeletePopup: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const CardOne: React.FC<CardOneProps> = ({ setShowConfirmDeletePopup }) => {
   const handleCardOneClick = () => {
-    onOpenFightGroupList();
+    setShowConfirmDeletePopup(true);
   };
+
   return (
     <div className="card-one" onClick={handleCardOneClick}>
       <div className="card-content">
         <div className="card-icon-white">
           <FontAwesomeIcon icon={faTrophy} />
         </div>
-        <div className="card-text-white">Turnierbaum</div>
+        <div className="card-text-white">Turniergruppen generieren</div>
       </div>
     </div>
   );

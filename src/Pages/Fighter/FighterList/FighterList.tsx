@@ -347,6 +347,12 @@ const FighterList: React.FC<FighterListProps> = ({
             onClose={handleDeleteCanceled}
             onConfirmDelete={handleDeleteConfirmed}
             idToDelete={fighterIdToDelete}
+            text="Möchten Sie den Eintrag wirklich löschen?"
+            subTextAvailable = {false}
+            topButtonClassName="#b40000"
+            bottomButtonClassName="#001aff"
+            buttonTextBlue="Nein, behalten"
+            buttonTextRed="Ja, löschen"
           />
         </Modal>
       )}

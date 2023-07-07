@@ -270,6 +270,12 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
             onClose={handleDeleteCanceled}
             onConfirmDelete={handleDeleteConfirmed}
             idToDelete={tournamentIdToDelete}
+            text="Möchten Sie den Eintrag wirklich löschen?"
+            subTextAvailable = {false}
+            topButtonClassName="#b40000"
+            bottomButtonClassName="#001aff"
+            buttonTextBlue="Nein, behalten"
+            buttonTextRed="Ja, löschen"
           />
         </Modal>
       )}

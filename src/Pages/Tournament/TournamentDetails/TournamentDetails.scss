@@ -19,7 +19,7 @@ $screen-normal: 993px;
   width: 100%;
 
   @include normal() {
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 33vw 33vw 33vw;
   }
 
   @include small {

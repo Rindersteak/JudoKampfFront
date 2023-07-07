@@ -9,12 +9,25 @@ interface ConfirmDeleteProps {
   onClose: () => void;
   onConfirmDelete: () => Promise<void>;
   idToDelete: number;
+  text: string;
+  subTextAvailable: boolean
+  subText?: string
+  buttonTextBlue: string;
+  buttonTextRed: string;
+  topButtonClassName: string
+  bottomButtonClassName: string
 }
 
 const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({
   onClose,
   onConfirmDelete,
-  idToDelete,
+  text,
+  subTextAvailable,
+  subText,
+  buttonTextBlue,
+  buttonTextRed,
+  topButtonClassName,
+  bottomButtonClassName
 }) => {
   const { loading, errorMessage, handleDelete } = useDeleteHandler({
     onDelete: onConfirmDelete,
@@ -23,19 +36,29 @@ const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({
   return (
     <div className="confirmDeletePopUp">
       <div className="deleteTitleStyle">
-        Möchten Sie den Eintrag wirklich löschen?
+        {text}
       </div>
+      {subTextAvailable ? (
+          <div className="subText">
+            {subText}
+          </div>
+          ) : (
+            <div>
+              </div>
+          )}
       <div className="buttonContainer">
         <button
           className="blueButton"
           type="submit"
+          style={{backgroundColor:topButtonClassName}}
           disabled={loading}
           onClick={onClose}
         >
-          {loading ? "Nein, behalten" : "Nein, behalten"}
+          {loading ? buttonTextBlue : buttonTextBlue}
         </button>
         <button
           className="redButton"
+          style={{backgroundColor:bottomButtonClassName}}
           type="submit"
           disabled={loading}
           onClick={handleDelete}
@@ -43,7 +66,7 @@ const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({
           {loading ? (
             <FontAwesomeIcon icon={faSpinner} spin={true} />
           ) : (
-            "Ja, löschen"
+            buttonTextRed
           )}
         </button>
       </div>
