@@ -1,14 +1,8 @@
 .floatingBottomTimer{
-    display: flex;  
-    position: fixed;
+    display: flex;
     background-color: white;
     color: red;
     border: 1rem solid black;
-    top: 85vh;
-    left: 40vw;
-    width: 20vw;
-    height: 10vh;
-    min-width: 20vw;
     justify-content: center;
     align-items: center;
     font-weight: bold;

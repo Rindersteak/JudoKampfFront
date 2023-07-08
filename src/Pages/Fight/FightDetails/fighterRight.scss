@@ -18,6 +18,7 @@ $screen-normal: 993px;
     display: grid;
     grid-template-columns: auto;
     width: 50%;
+    grid-template-rows: .2fr .2fr .2fr;
 
     @include small{
         width: 100%;
@@ -27,26 +28,28 @@ $screen-normal: 993px;
 .nameTextRight{ 
     color: white;
     font-size: 3rem;
-
+    padding-inline: 1rem;
 
 }
 
 .clubTextRight{
     color: white;
     font-size: 2.5rem;
+    padding-inline: 1rem;
 
 }
 
 .landesverbandTextRight{
     color: white;
     font-size: 2rem;
+    padding-inline: 1rem;
 }
 
 .fighterStatsContainer{
     display: grid;
     grid-template-columns: 10% 5% auto;
     width: 100%;
-    height: 60.5vh;
+    padding-inline: 1rem;
 }
 
 .ipponFighterRight{
@@ -54,24 +57,23 @@ $screen-normal: 993px;
     justify-content: flex-start;
     font-weight: bold;
     font-size: 5rem;
-    margin-left: 1rem;
     color: white;
 }
 
 .wazaariRightFighter{
     display: flex;
     justify-content: flex-start;
+    margin-left: 1rem;
     margin-top: 1rem;
     font-weight: bold;
     font-size: 3.5rem;
-    margin-right: 1rem;
     color: white;
 }
 
 .cardContainer{
     display: flex;
     justify-content: flex-end;
+    margin-top: 1rem;
     font-weight: bold;
     font-size: 3.5rem;
-    margin-right: 1rem;
 }

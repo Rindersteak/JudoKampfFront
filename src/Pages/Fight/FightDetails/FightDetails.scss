@@ -13,6 +13,9 @@ $screen-normal: 993px;
   }
 }
 
+.mainFightDetails{
+  min-width: 60vh;
+}
 
 .gewicht{
   font-size: 3rem;
@@ -29,6 +32,7 @@ $screen-normal: 993px;
 .fighterStatsMiddle{
   display: flex;
   flex-direction: row;
+  height: 80%;
 
   @include small{
     display: grid;
