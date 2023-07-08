@@ -14,6 +14,7 @@ import { getFightersListByFightgroupId, getFightpoolsByFightgroupId } from "../.
 import { getAllFightPools } from "../../../../API/fightPoolAPI";
 import Modal from '../../../../Tools/Modal/Modal';
 import FightDetails from "../../../Fight/FightDetails/FightDetails";
+import ConfirmDelete from "../../../../Tools/ConfirmDelete/ConfirmDelete";
 
 export interface FighterRow {
   id: number;
@@ -34,14 +35,10 @@ const TreeForSevenToEight: React.FC<TreeForSevenToEightProps> = ({ fightgroupId 
   const [bannerTitle, setBannerTitle] = useState<string>("");
   const [bannerSubtitle, setBannerSubtitle] = useState<string>("");
   const navigate = useNavigate();
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedFightId, setSelectedFightId] = useState<number | null>(null);
-
-
   const [fightPools, setFightPools] = useState<Fightpool[]>([]);
-
-
+  const [fightID, setFightID] = useState(-1);
 
 
   const handleStartFight = (fightId: number) => {
@@ -114,6 +111,21 @@ const TreeForSevenToEight: React.FC<TreeForSevenToEightProps> = ({ fightgroupId 
   const fightsFromPool2 = fightPools.length > 1 ? fightPools[1].fights : [];
 
 
+  const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState(false);
+
+  const handleModalClose = () => {
+    setShowConfirmDeletePopup(false);
+  };
+
+  const handleConfirmed = async () => {
+    handleStartFight(fightID)
+    handleModalClose();
+  };
+
+  const handleOpenModal = (fightID:number) => {
+    setFightID(fightID);
+    setShowConfirmDeletePopup(true);
+  }
 
   return (
       <div className="tournament-shell">
@@ -194,7 +206,7 @@ const TreeForSevenToEight: React.FC<TreeForSevenToEightProps> = ({ fightgroupId 
                     <td>{`${fight.winner?.firstname || 'Kampf nicht gestartet'} ${fight.winner?.lastname || ''}`}</td>
                     <td>
                       <div className="buttonContainer">
-                        <button className="blueButton" onClick={() => handleStartFight(fight.id)}>
+                        <button className="blueButton" onClick={() => handleOpenModal(fight.id)}>
                           Kampf starten
                         </button>
                       </div>
@@ -205,7 +217,21 @@ const TreeForSevenToEight: React.FC<TreeForSevenToEightProps> = ({ fightgroupId 
             </table>
         ))}
 
-
+      {showConfirmDeletePopup && (
+          <Modal size="small" onClose={handleModalClose}>
+            <ConfirmDelete
+              onClose={handleModalClose}
+              onConfirmDelete={handleConfirmed}
+              text="Möchten Sie den Kampf wirklich starten?"
+              subTextAvailable = {true}
+              subText="Hinweis: Nach Kampfstart können die Turnierklassen nicht mehr geändert werden! Sofern einer Turniergruppe nur ein Teilnehmer zugeordnet ist, sollten die Gewichts-klassen in den Einstellungen des Turniers entsprechend angepasst werden."
+              topButtonClassName="#b40000"
+              bottomButtonClassName="#001aff"
+              buttonTextBlue="Nein, Zurück"
+              buttonTextRed="Ja, starten"
+            />
+          </Modal>
+        )}
 
         {isModalOpen && selectedFightId && (
             <Modal size="xxl" onClose={handleCloseModal}>
