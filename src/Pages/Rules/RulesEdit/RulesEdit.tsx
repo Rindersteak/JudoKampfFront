@@ -16,6 +16,9 @@ const RulesEdit = () => {
   const [rulesData, setRulesData] = useState(null);
   const [error, setError] = useState<Error | null>(null);
   const [tournament, setTournament] = useState<Tournament | null>(null);
+// ...
+const [selectedOption, setSelectedOption] = useState<string | null>(null);
+// ...
 
   const location = useLocation(); // get current URL
   const tournamentId = location.pathname.split("/").pop() || "";
@@ -230,30 +233,130 @@ const RulesEdit = () => {
     );
   };
 
-
-  const classInputContent = () => {
-    return <div></div>;
+  const handleCategoryOptionClick = (option: string) => {
+    setSelectedOption(option);
   };
 
+      
+
+
+
+
+
   const classContent = () => {
-    return (
-      <div className="mainContentContainer">
-        <div className="womenAgeClassesContainer">
+    if (selectedOption === "Weibliche Jugend U11") {
+      // Render content for Weibliche Jugend U11
+      return (
+        <div>
+          <div className="mainContentContainer">
+          <div className="womenAgeClassesContainer">
           <div className="category">Frauen</div>
-          <div className="rows">Weibliche Jugend U11</div>
-          <div className="rows">Weibliche Jugend U13</div>
-          <div className="rows">Weibliche Jugend U15</div>
-          <div className="rows">Frauen U18</div>
-          <div className="rows">Frauen</div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U11")}>
+            Weibliche Jugend U11
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U13")}>
+            Weibliche Jugend U13
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U15")}>
+            Weibliche Jugend U15
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Frauen U18")}>
+            Frauen U18
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Frauen")}>
+            Frauen
+          </div>
 
         </div>
         <div className="menAgeClassesContainer">
           <div className="category">Männer</div>
-          <div className="rows">Männliche Jugend U11</div>
-          <div className="rows">Männliche Jugend U13</div>
-          <div className="rows">Männliche Jugend U15</div>
-          <div className="rows">Männer U18</div>
-          <div className="rows">Männer</div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U11")}>
+            Männliche Jugend U11
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U13")}>
+          Männliche Jugend U13
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U15")}>
+          Männliche Jugend U15
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männer U18")}>
+          Männer U18
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männer")}>
+          Männer
+          </div>
+        </div>
+        <div className="classesInputContent">
+          <div className="inputContainer">
+            <label className="inputLabel">Klassenname</label>
+            <input className="inputField"></input>
+          </div>
+
+          <div className="ageLimitAndFightDurationContainer">
+            <div className="ageLimitContainer">
+              <label className="inputLabel">Altersgrenze</label>
+              <input className="inputField"></input>
+            </div>
+            <div></div>
+            <div className="fightDurationContainer">
+              <label className="inputLabel">Kampfzeit (min)</label>
+              <input className="inputField"></input>
+            </div>
+          </div>
+
+          <div className="inputContainer">
+            <label className="inputLabel">Gewicht (kg)</label>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+          </div>
+        </div>
+      </div>
+        </div>
+      );
+    } else if (selectedOption === "Weibliche Jugend U13") {
+      // Render content for Weibliche Jugend U13
+      return (
+        <div>
+          <div className="mainContentContainer">
+          <div className="womenAgeClassesContainer">
+          <div className="category">Frauen</div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U11")}>
+            Weibliche Jugend U11
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U13")}>
+            Weibliche Jugend U13
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U15")}>
+            Weibliche Jugend U15
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Frauen U18")}>
+            Frauen U18
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Frauen")}>
+            Frauen
+          </div>
+
+        </div>
+        <div className="menAgeClassesContainer">
+          <div className="category">Männer</div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U11")}>
+            Männliche Jugend U11
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U13")}>
+          Männliche Jugend U13
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U15")}>
+          Männliche Jugend U15
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männer U18")}>
+          Männer U18
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männer")}>
+          Männer
+          </div>
         </div>
 
         <div className="classesInputContent">
@@ -284,8 +387,687 @@ const RulesEdit = () => {
           </div>
         </div>
       </div>
-    );
+        </div>
+      );
+    } else if (selectedOption === "Weibliche Jugend U15") {
+      // Render content for Weibliche Jugend U15
+      return (
+        <div>
+          <div className="mainContentContainer">
+          <div className="womenAgeClassesContainer">
+          <div className="category">Frauen</div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U11")}>
+            Weibliche Jugend U11
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U13")}>
+            Weibliche Jugend U13
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U15")}>
+            Weibliche Jugend U15
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Frauen U18")}>
+            Frauen U18
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Frauen")}>
+            Frauen
+          </div>
+
+        </div>
+        <div className="menAgeClassesContainer">
+          <div className="category">Männer</div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U11")}>
+            Männliche Jugend U11
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U13")}>
+          Männliche Jugend U13
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U15")}>
+          Männliche Jugend U15
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männer U18")}>
+          Männer U18
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männer")}>
+          Männer
+          </div>
+        </div>
+
+        <div className="classesInputContent">
+          <div className="inputContainer">
+            <label className="inputLabel">Klassenname</label>
+            <input className="inputField"></input>
+          </div>
+
+          <div className="ageLimitAndFightDurationContainer">
+            <div className="ageLimitContainer">
+              <label className="inputLabel">Altersgrenze</label>
+              <input className="inputField"></input>
+            </div>
+            <div></div>
+            <div className="fightDurationContainer">
+              <label className="inputLabel">Kampfzeit (min)</label>
+              <input className="inputField"></input>
+            </div>
+          </div>
+
+          <div className="inputContainer">
+            <label className="inputLabel">Gewicht (kg)</label>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+          </div>
+        </div>
+      </div>
+        </div>
+      );
+    } else if (selectedOption === "Frauen U18") {
+      // Render content for Frauen U18
+      return (
+        <div>
+          <div className="mainContentContainer">
+          <div className="womenAgeClassesContainer">
+          <div className="category">Frauen</div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U11")}>
+            Weibliche Jugend U11
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U13")}>
+            Weibliche Jugend U13
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U15")}>
+            Weibliche Jugend U15
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Frauen U18")}>
+            Frauen U18
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Frauen")}>
+            Frauen
+          </div>
+
+        </div>
+        <div className="menAgeClassesContainer">
+          <div className="category">Männer</div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U11")}>
+            Männliche Jugend U11
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U13")}>
+          Männliche Jugend U13
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U15")}>
+          Männliche Jugend U15
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männer U18")}>
+          Männer U18
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männer")}>
+          Männer
+          </div>
+        </div>
+
+        <div className="classesInputContent">
+          <div className="inputContainer">
+            <label className="inputLabel">Klassenname</label>
+            <input className="inputField"></input>
+          </div>
+
+          <div className="ageLimitAndFightDurationContainer">
+            <div className="ageLimitContainer">
+              <label className="inputLabel">Altersgrenze</label>
+              <input className="inputField"></input>
+            </div>
+            <div></div>
+            <div className="fightDurationContainer">
+              <label className="inputLabel">Kampfzeit (min)</label>
+              <input className="inputField"></input>
+            </div>
+          </div>
+
+          <div className="inputContainer">
+            <label className="inputLabel">Gewicht (kg)</label>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+          </div>
+        </div>
+      </div>
+        </div>
+      );
+    } else if (selectedOption === "Frauen") {
+      // Render content for Frauen
+      return (
+        <div>
+          <div className="mainContentContainer">
+          <div className="womenAgeClassesContainer">
+          <div className="category">Frauen</div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U11")}>
+            Weibliche Jugend U11
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U13")}>
+            Weibliche Jugend U13
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U15")}>
+            Weibliche Jugend U15
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Frauen U18")}>
+            Frauen U18
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Frauen")}>
+            Frauen
+          </div>
+
+        </div>
+        <div className="menAgeClassesContainer">
+          <div className="category">Männer</div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U11")}>
+            Männliche Jugend U11
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U13")}>
+          Männliche Jugend U13
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U15")}>
+          Männliche Jugend U15
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männer U18")}>
+          Männer U18
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männer")}>
+          Männer
+          </div>
+        </div>
+
+        <div className="classesInputContent">
+          <div className="inputContainer">
+            <label className="inputLabel">Klassenname</label>
+            <input className="inputField"></input>
+          </div>
+
+          <div className="ageLimitAndFightDurationContainer">
+            <div className="ageLimitContainer">
+              <label className="inputLabel">Altersgrenze</label>
+              <input className="inputField"></input>
+            </div>
+            <div></div>
+            <div className="fightDurationContainer">
+              <label className="inputLabel">Kampfzeit (min)</label>
+              <input className="inputField"></input>
+            </div>
+          </div>
+
+          <div className="inputContainer">
+            <label className="inputLabel">Gewicht (kg)</label>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+          </div>
+        </div>
+      </div>
+        </div>
+      );
+    } else if (selectedOption === "Männliche Jugend U11") {
+      // Render content for Weibliche Jugend U11
+      return (
+        <div>
+          <div className="mainContentContainer">
+          <div className="womenAgeClassesContainer">
+          <div className="category">Frauen</div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U11")}>
+            Weibliche Jugend U11
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U13")}>
+            Weibliche Jugend U13
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U15")}>
+            Weibliche Jugend U15
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Frauen U18")}>
+            Frauen U18
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Frauen")}>
+            Frauen
+          </div>
+
+        </div>
+        <div className="menAgeClassesContainer">
+          <div className="category">Männer</div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U11")}>
+            Männliche Jugend U11
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U13")}>
+          Männliche Jugend U13
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U15")}>
+          Männliche Jugend U15
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männer U18")}>
+          Männer U18
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männer")}>
+          Männer
+          </div>
+        </div>
+
+        <div className="classesInputContent">
+          <div className="inputContainer">
+            <label className="inputLabel">Klassenname</label>
+            <input className="inputField"></input>
+          </div>
+
+          <div className="ageLimitAndFightDurationContainer">
+            <div className="ageLimitContainer">
+              <label className="inputLabel">Altersgrenze</label>
+              <input className="inputField"></input>
+            </div>
+            <div></div>
+            <div className="fightDurationContainer">
+              <label className="inputLabel">Kampfzeit (min)</label>
+              <input className="inputField"></input>
+            </div>
+          </div>
+
+          <div className="inputContainer">
+            <label className="inputLabel">Gewicht (kg)</label>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+          </div>
+        </div>
+      </div>
+        </div>
+      );
+    } else if (selectedOption === "Männliche Jugend U13") {
+      // Render content for Weibliche Jugend U13
+      return (
+        <div>
+          <div className="mainContentContainer">
+          <div className="womenAgeClassesContainer">
+          <div className="category">Frauen</div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U11")}>
+            Weibliche Jugend U11
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U13")}>
+            Weibliche Jugend U13
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U15")}>
+            Weibliche Jugend U15
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Frauen U18")}>
+            Frauen U18
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Frauen")}>
+            Frauen
+          </div>
+
+        </div>
+        <div className="menAgeClassesContainer">
+          <div className="category">Männer</div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U11")}>
+            Männliche Jugend U11
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U13")}>
+          Männliche Jugend U13
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U15")}>
+          Männliche Jugend U15
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männer U18")}>
+          Männer U18
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männer")}>
+          Männer
+          </div>
+        </div>
+
+        <div className="classesInputContent">
+          <div className="inputContainer">
+            <label className="inputLabel">Klassenname</label>
+            <input className="inputField"></input>
+          </div>
+
+          <div className="ageLimitAndFightDurationContainer">
+            <div className="ageLimitContainer">
+              <label className="inputLabel">Altersgrenze</label>
+              <input className="inputField"></input>
+            </div>
+            <div></div>
+            <div className="fightDurationContainer">
+              <label className="inputLabel">Kampfzeit (min)</label>
+              <input className="inputField"></input>
+            </div>
+          </div>
+
+          <div className="inputContainer">
+            <label className="inputLabel">Gewicht (kg)</label>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+          </div>
+        </div>
+      </div>
+        </div>
+      );
+    } else if (selectedOption === "Männliche Jugend U15") {
+      // Render content for Weibliche Jugend U15
+      return (
+        <div>
+          <div className="mainContentContainer">
+          <div className="womenAgeClassesContainer">
+          <div className="category">Frauen</div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U11")}>
+            Weibliche Jugend U11
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U13")}>
+            Weibliche Jugend U13
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U15")}>
+            Weibliche Jugend U15
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Frauen U18")}>
+            Frauen U18
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Frauen")}>
+            Frauen
+          </div>
+
+        </div>
+        <div className="menAgeClassesContainer">
+          <div className="category">Männer</div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U11")}>
+            Männliche Jugend U11
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U13")}>
+          Männliche Jugend U13
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U15")}>
+          Männliche Jugend U15
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männer U18")}>
+          Männer U18
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männer")}>
+          Männer
+          </div>
+        </div>
+
+        <div className="classesInputContent">
+          <div className="inputContainer">
+            <label className="inputLabel">Klassenname MU15</label>
+            <input className="inputField"></input>
+          </div>
+
+          <div className="ageLimitAndFightDurationContainer">
+            <div className="ageLimitContainer">
+              <label className="inputLabel">Altersgrenze</label>
+              <input className="inputField"></input>
+            </div>
+            <div></div>
+            <div className="fightDurationContainer">
+              <label className="inputLabel">Kampfzeit (min)</label>
+              <input className="inputField"></input>
+            </div>
+          </div>
+
+          <div className="inputContainer">
+            <label className="inputLabel">Gewicht (kg)</label>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+          </div>
+        </div>
+      </div>
+        </div>
+      );
+    } else if (selectedOption === "Männer U18") {
+      // Render content for Frauen U18
+      return (
+        <div>
+          <div className="mainContentContainer">
+          <div className="womenAgeClassesContainer">
+          <div className="category">Frauen</div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U11")}>
+            Weibliche Jugend U11
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U13")}>
+            Weibliche Jugend U13
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U15")}>
+            Weibliche Jugend U15
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Frauen U18")}>
+            Frauen U18
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Frauen")}>
+            Frauen
+          </div>
+
+        </div>
+        <div className="menAgeClassesContainer">
+          <div className="category">Männer</div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U11")}>
+            Männliche Jugend U11
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U13")}>
+          Männliche Jugend U13
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U15")}>
+          Männliche Jugend U15
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männer U18")}>
+          Männer U18
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männer")}>
+          Männer
+          </div>
+        </div>
+
+        <div className="classesInputContent">
+          <div className="inputContainer">
+            <label className="inputLabel">Klassenname</label>
+            <input className="inputField"></input>
+          </div>
+
+          <div className="ageLimitAndFightDurationContainer">
+            <div className="ageLimitContainer">
+              <label className="inputLabel">Altersgrenze</label>
+              <input className="inputField"></input>
+            </div>
+            <div></div>
+            <div className="fightDurationContainer">
+              <label className="inputLabel">Kampfzeit (min)</label>
+              <input className="inputField"></input>
+            </div>
+          </div>
+
+          <div className="inputContainer">
+            <label className="inputLabel">Gewicht (kg)</label>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+          </div>
+        </div>
+      </div>
+        </div>
+      );
+    } else if (selectedOption === "Männer") {
+      // Render content for Frauen
+      return (
+        <div>
+          <div className="mainContentContainer">
+          <div className="womenAgeClassesContainer">
+          <div className="category">Frauen</div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U11")}>
+            Weibliche Jugend U11
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U13")}>
+            Weibliche Jugend U13
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U15")}>
+            Weibliche Jugend U15
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Frauen U18")}>
+            Frauen U18
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Frauen")}>
+            Frauen
+          </div>
+
+        </div>
+        <div className="menAgeClassesContainer">
+          <div className="category">Männer</div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U11")}>
+            Männliche Jugend U11
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U13")}>
+          Männliche Jugend U13
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U15")}>
+          Männliche Jugend U15
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männer U18")}>
+          Männer U18
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männer")}>
+          Männer
+          </div>
+        </div>
+
+        <div className="classesInputContent">
+          <div className="inputContainer">
+            <label className="inputLabel">Klassenname Männer</label>
+            <input className="inputField"></input>
+          </div>
+
+          <div className="ageLimitAndFightDurationContainer">
+            <div className="ageLimitContainer">
+              <label className="inputLabel">Altersgrenze</label>
+              <input className="inputField"></input>
+            </div>
+            <div></div>
+            <div className="fightDurationContainer">
+              <label className="inputLabel">Kampfzeit (min)</label>
+              <input className="inputField"></input>
+            </div>
+          </div>
+
+          <div className="inputContainer">
+            <label className="inputLabel">Gewicht (kg)</label>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+          </div>
+        </div>
+      </div>
+        </div>
+      );
+    } else {
+      // Render default content
+      return (
+        <div>
+          <div className="mainContentContainer">
+        <div className="womenAgeClassesContainer">
+          <div className="category">Frauen</div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U11")}>
+            Weibliche Jugend U11
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U13")}>
+            Weibliche Jugend U13
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U15")}>
+            Weibliche Jugend U15
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Frauen U18")}>
+            Frauen U18
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Frauen")}>
+            Frauen
+          </div>
+
+        </div>
+        <div className="menAgeClassesContainer">
+          <div className="category">Männer</div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U11")}>
+            Männliche Jugend U11
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U13")}>
+          Männliche Jugend U13
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männliche Jugend U15")}>
+          Männliche Jugend U15
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männer U18")}>
+          Männer U18
+          </div>
+          <div className="rows" onClick={() => handleCategoryOptionClick("Männer")}>
+          Männer
+          </div>
+        </div>
+      </div>
+      <div className="mainContentContainer">
+        <div className="womenAgeClassesContainer">
+          <div className="category">Frauen</div>
+          <div className="rows">Weibliche Jugend U11</div>
+          <div className="rows">Weibliche Jugend U13</div>
+          <div className="rows">Weibliche Jugend U15</div>
+          <div className="rows">Frauen U18</div>
+          <div className="rows">Frauen</div>
+
+        </div>
+        <div className="menAgeClassesContainer">
+          <div className="category">Männer</div>
+          <div className="rows">Männliche Jugend U11</div>
+          <div className="rows">Männliche Jugend U13</div>
+          <div className="rows">Männliche Jugend U15</div>
+          <div className="rows">Männer U18</div>
+          <div className="rows">Männer</div>
+        </div>
+        </div>
+        <div className="classesInputContent">
+          <div className="inputContainer">
+            <label className="inputLabel">Klassenname</label>
+            <input className="inputField"></input>
+          </div>
+
+          <div className="ageLimitAndFightDurationContainer">
+            <div className="ageLimitContainer">
+              <label className="inputLabel">Altersgrenze</label>
+              <input className="inputField"></input>
+            </div>
+            <div></div>
+            <div className="fightDurationContainer">
+              <label className="inputLabel">Kampfzeit (min)</label>
+              <input className="inputField"></input>
+            </div>
+          </div>
+
+          <div className="inputContainer">
+            <label className="inputLabel">Gewicht (kg)</label>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+            <input className="inputField marginToOtherFields"></input>
+          </div>
+        </div>
+      
+        </div>
+      );
+    }
   };
+
 
   const renderContent = () => {
     switch (selectedMenu) {
