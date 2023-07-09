@@ -1,3 +1,5 @@
+// Manager vereinen Form und List (Erstellen und Liste)
+
 import React, { useState } from "react";
 import "../../../Styles/GlobalStyles.scss";
 import "./TournamentManager.scss";

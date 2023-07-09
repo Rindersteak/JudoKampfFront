@@ -1,3 +1,5 @@
+// Die Popups. Gibt es in small, large, xxl
+
 import React, { FC, ReactNode, useEffect } from "react";
 import "./Modal.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

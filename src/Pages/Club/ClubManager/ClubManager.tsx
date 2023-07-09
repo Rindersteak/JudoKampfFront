@@ -1,3 +1,5 @@
+// Manager vereinen Form und List (Erstellen und Liste)
+
 import React, { useState } from 'react';
 import ClubForm from '../ClubForm/ClubForm';
 import ClubList, { deleteClubHandler } from '../ClubList/ClubList';

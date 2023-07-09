@@ -1,3 +1,5 @@
+// Manager vereinen Form und List (Erstellen und Liste)
+
 import React, { useState } from "react";
 import FighterForm from "../FighterForm/FighterForm";
 import FighterList, { deleteFighterHandler } from "../FighterList/FighterList";
