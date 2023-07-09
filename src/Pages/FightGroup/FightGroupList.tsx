@@ -184,15 +184,16 @@ const FightGroupList: React.FC<FightGroupListProps> = ({
   return (
     <div className="fightGroupList">
       {/* CSS-Klasse für FightGroupList hinzugefügt */}
-      <div className="headerBanner">
+      <div className="topContainerFightGroupList">
+        <div></div>
+        <div className="headerBanner">
         <h1 className="titleStyleList">Kampfgruppen</h1>
-
         </div>
-        <div className="buttonFightGroupList">
+
         <button className="blueButton buttonThin"  onClick={handleStartTournament}>
           Turnier starten
         </button>
-        </div>
+      </div>
       <div className="listContainer">
         <table className="tableStyle tableMinWidth">
           <thead>
