@@ -978,7 +978,7 @@ const [selectedOption, setSelectedOption] = useState<string | null>(null);
       return (
         <div>
           <div className="mainContentContainer">
-        <div className="womenAgeClassesContainer">
+          <div className="womenAgeClassesContainer">
           <div className="category">Frauen</div>
           <div className="rows" onClick={() => handleCategoryOptionClick("Weibliche Jugend U11")}>
             Weibliche Jugend U11
@@ -1015,29 +1015,10 @@ const [selectedOption, setSelectedOption] = useState<string | null>(null);
           Männer
           </div>
         </div>
-      </div>
-      <div className="mainContentContainer">
-        <div className="womenAgeClassesContainer">
-          <div className="category">Frauen</div>
-          <div className="rows">Weibliche Jugend U11</div>
-          <div className="rows">Weibliche Jugend U13</div>
-          <div className="rows">Weibliche Jugend U15</div>
-          <div className="rows">Frauen U18</div>
-          <div className="rows">Frauen</div>
 
-        </div>
-        <div className="menAgeClassesContainer">
-          <div className="category">Männer</div>
-          <div className="rows">Männliche Jugend U11</div>
-          <div className="rows">Männliche Jugend U13</div>
-          <div className="rows">Männliche Jugend U15</div>
-          <div className="rows">Männer U18</div>
-          <div className="rows">Männer</div>
-        </div>
-        </div>
         <div className="classesInputContent">
           <div className="inputContainer">
-            <label className="inputLabel">Klassenname</label>
+            <label className="inputLabel">Klassenname Männer</label>
             <input className="inputField"></input>
           </div>
 
@@ -1062,7 +1043,7 @@ const [selectedOption, setSelectedOption] = useState<string | null>(null);
             <input className="inputField marginToOtherFields"></input>
           </div>
         </div>
-      
+      </div>
         </div>
       );
     }
