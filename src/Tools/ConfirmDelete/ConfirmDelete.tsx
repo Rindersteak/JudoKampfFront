@@ -1,4 +1,6 @@
-// ConfirmDelete.tsx
+// ConfirmDelete wird auch anderweitig verwendet. Nicht nur für das Bestätigen von Löschanfragen
+
+
 import React from "react";
 import "./ConfirmDelete.scss";
 import useDeleteHandler from "../MessageHandling/ErrorHandler";
