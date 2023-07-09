@@ -3,18 +3,24 @@ import { Fight, Fightgroup } from "../../types";
 import {
   getFightgroupsByTournamentId,
   getFightersListByFightgroupId,
-} from "../../API/fightGroupAPI";
+  createFightPools,
+} from  "../../API/fightGroupAPI";
 import { getFight } from "../../API/fightAPI";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { getFightTreeComponent } from "../../Tools/FightTree/FightTreeComponents";
 import "./FightGroupList.scss";
+import ConfirmDelete from "../../Tools/ConfirmDelete/ConfirmDelete";
+import Modal from "../../Tools/Modal/Modal";
 
 interface FightGroupListProps {
   tournamentId?: string;
   onClose: () => void;
 }
+
+
+
 
 const FightGroupList: React.FC<FightGroupListProps> = ({
   tournamentId, onClose
@@ -23,6 +29,32 @@ const FightGroupList: React.FC<FightGroupListProps> = ({
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [sortColumn, setSortColumn] = useState<string>("gender");
   const navigate = useNavigate();
+  const [selectedFightId, setSelectedFightId] = useState<number | null>(null);
+  const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState(false);
+  const [groupId, setgroupId] = useState(-2);
+  const [loadedFightGroups, setloadedFightGroups] = useState(-1); 
+
+  const handleModalClose = () => {
+    setShowConfirmDeletePopup(false);
+  };
+
+  const handleOpenModal = (groupId:number) => {
+    setShowConfirmDeletePopup(true);
+  }
+
+  const handleConfirmed = async () => {
+    createFightPools(tournamentId||"")
+    setloadedFightGroups(loadedFightGroups);
+    handleModalClose();
+  };
+
+
+  // für den Turnier-Starten-Button
+  const handleStartTournament = () => {
+    handleOpenModal(groupId);
+  };
+  
+
 
   useEffect(() => {
     const loadFightGroups = async () => {
@@ -52,13 +84,15 @@ const FightGroupList: React.FC<FightGroupListProps> = ({
       if (group) {
         const fight = await getFight();
         setFightGroups([group]);
-  
         const treeComponent = await getFightTreeComponent(group);
         const { component, id, count } = treeComponent;
+
   
         let pageName;
         if (count < 2) {
           pageName = "none";
+        } else if (count == 2) {
+          pageName = "two";
         } else if (count >= 3 && count <= 6) {
           pageName = "three-to-six";
         } else if (count >= 7 && count <= 8) {
@@ -88,6 +122,7 @@ const FightGroupList: React.FC<FightGroupListProps> = ({
     const loadSortedFightGroups = async () => {
       const sortedFightGroups = await Promise.all(
         fightGroups.map(async (group: Fightgroup) => {
+          const setloadedFightGroups = group;
           try {
             const fighters = await getFightersListByFightgroupId(group.id);
 
@@ -151,7 +186,13 @@ const FightGroupList: React.FC<FightGroupListProps> = ({
       {/* CSS-Klasse für FightGroupList hinzugefügt */}
       <div className="headerBanner">
         <h1 className="titleStyleList">Kampfgruppen</h1>
-      </div>
+
+        </div>
+        <div className="buttonFightGroupList">
+        <button className="blueButton buttonThin"  onClick={handleStartTournament}>
+          Turnier starten
+        </button>
+        </div>
       <div className="listContainer">
         <table className="tableStyle tableMinWidth">
           <thead>
@@ -238,6 +279,22 @@ const FightGroupList: React.FC<FightGroupListProps> = ({
           </tbody>
         </table>
       </div>
+
+            {showConfirmDeletePopup && (
+          <Modal size="small" onClose={handleModalClose}>
+            <ConfirmDelete
+              onClose={handleModalClose}
+              onConfirmDelete={handleConfirmed}
+              text="Möchten Sie das Turnier wirklich starten?"
+              subTextAvailable = {true}
+              subText="Hinweis: Nach Kampfstart können die Turnierklassen nicht mehr geändert werden! Sofern einer Turniergruppe nur ein Teilnehmer zugeordnet ist, sollten die Gewichts-klassen in den Einstellungen des Turniers entsprechend angepasst werden."
+              topButtonClassName="#b40000"
+              bottomButtonClassName="#001aff"
+              buttonTextBlue="Nein, Zurück"
+              buttonTextRed="Ja, starten"
+            />
+          </Modal>
+        )}
     </div>
   );
 };

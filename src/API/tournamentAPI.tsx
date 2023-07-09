@@ -139,3 +139,21 @@ export async function getTournamentFightersList(tournamentId: string) {
     throw error;
   }
 }
+
+export async function createFightgroups(tournamentId: string): Promise<void> {
+  try {
+    const response = await fetch(`${API_DOMAIN}/tournaments/${tournamentId}/create-fightgroups`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+  } catch (error) {
+    console.error("Error creating fightgroups:", error);
+    throw error;
+  }
+}

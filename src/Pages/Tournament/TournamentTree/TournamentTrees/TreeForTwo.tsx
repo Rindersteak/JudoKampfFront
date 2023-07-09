@@ -10,8 +10,7 @@ import { Fight, Fighter, Fightgroup, Fightpool } from "../../../../types";
 import { useNavigate } from "react-router-dom";
 import { getFightgroup } from "../../../../API/fightGroupAPI";
 import "../TreeStyles.scss";
-import { getFightersListByFightgroupId } from "../../../../API/fightGroupAPI";
-import { getAllFightPools } from "../../../../API/fightPoolAPI";
+import { getFightersListByFightgroupId, getFightpoolsByFightgroupId } from "../../../../API/fightGroupAPI";
 import Modal from '../../../../Tools/Modal/Modal';
 import FightDetails from "../../../Fight/FightDetails/FightDetails";
 import ConfirmDelete from "../../../../Tools/ConfirmDelete/ConfirmDelete";
@@ -84,7 +83,7 @@ const TreeForTwo: React.FC<TreeForTwoProps> = ({ fightgroupId }) => {
   useEffect(() => {
     async function fetchFightPools() {
       try {
-        const pools = await getAllFightPools();
+        const pools = await getFightpoolsByFightgroupId(fightgroupId);
         setFightPools(pools);
       } catch (error) {
         console.error("Error fetching fight pools:", error);
