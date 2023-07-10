@@ -63,37 +63,37 @@ const FighterRight: React.FC<fighterRightProps> = ({ fightId }) => {
       if (event.key === "O" || event.key === "o") {
         if (ipponRightFighter === 0) {
           setIpponRightFighter(1);
-          updatePoints(1,"add","blue","ippon"); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
+          updatePoints(fightId,"add","blue","ippon"); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
         } else if (ipponRightFighter === 1) {
           setIpponRightFighter(0);
-          updatePoints(1,"remove","blue","ippon"); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
+          updatePoints(fightId,"remove","blue","ippon"); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
         }
       } else if (event.key === "E" || event.key === "e") {
         if (wazaariRightFighter < 2) {
           setWazaariRightFighter((prevWazaari) => prevWazaari + 1);
-          updatePoints(1,"set","blue","wazaari", wazaariRightFighter+1); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
+          updatePoints(fightId,"set","blue","wazaari", wazaariRightFighter+1); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
         } else {
           setWazaariRightFighter(0);
-          updatePoints(1,"set","blue","wazaari",0); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
+          updatePoints(fightId,"set","blue","wazaari",0); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
           setIpponRightFighter(1);
           await sleep(1000);
-          updatePoints(1,"add","blue","ippon"); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
+          updatePoints(fightId,"add","blue","ippon"); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
         }
       }
 
       if (event.key === "D" || event.key === "d") {
         if (cardIndex === -1) {
           setCardIndex(0); // Zeige die erste Karte an
-          updatePoints(1,"set","blue","foul",0); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
+          updatePoints(fightId,"set","blue","foul",0); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
         } else if (cardIndex === 0) {
           setCardIndex(1); // Zeige die zweite Karte an
-          updatePoints(1,"set","blue","foul",1); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
+          updatePoints(fightId,"set","blue","foul",1); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
         } else if (cardIndex === 1) {
           setCardIndex(2); // Zeige die dritte Karte an
-          updatePoints(1,"set","blue","foul",2); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
+          updatePoints(fightId,"set","blue","foul",2); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
         } else if (cardIndex === 2) {
           setCardIndex(-1); // Verstecke alle Karten
-          updatePoints(1,"set","blue","foul",-1); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
+          updatePoints(fightId,"set","blue","foul",-1); // ID MUSS ANGEPASST WERDEN, IST NOCH HARDCODED
         }
       }
     };
