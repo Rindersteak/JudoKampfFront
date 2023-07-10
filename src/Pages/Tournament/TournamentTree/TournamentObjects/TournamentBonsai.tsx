@@ -1,3 +1,5 @@
+// Nicht verwendet (Geplant für Baum)
+
 import React from "react";
 import TournamentPair, { ITournamentPair } from "./TournamentPair";
 import "../TreeStyles.scss";

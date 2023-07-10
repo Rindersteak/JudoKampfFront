@@ -1,3 +1,5 @@
+// Nicht verwendet (Geplant für Baum)
+
 import React from "react";
 import "../TreeStyles.scss";
 
