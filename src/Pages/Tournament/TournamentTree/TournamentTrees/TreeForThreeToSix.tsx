@@ -155,7 +155,7 @@ const TreeForThreeToSix: React.FC<TreeForThreeToSixProps> = ({ fightgroupId }) =
                   <td>{`${fight.winner?.firstname || 'Kampf nicht gestartet'} ${fight.winner?.lastname || ''}`}</td>
                   <td>
                     <div className="buttonContainer">
-                    <button className="blueButton" onClick={() => handleOpenModal(fight.id)}>
+                    <button className="blueButton" onClick={() => handleStartFight(fight.id)}>
                           Kampf starten
                     </button>
                     </div>
