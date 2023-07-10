@@ -269,7 +269,7 @@ const FightGroupList: React.FC<FightGroupListProps> = ({
           {sortedFightGroups.map((item) => (
   <tr key={item.group.id} onClick={() => handleRowClick(item.group)}>
     <td>{item.group.sex}</td>
-    <td>Alter?!</td>
+    <td>{item.group.name}</td>
     <td>{item.group.weightclass ? item.group.weightclass.name : "N/A"}</td>
 <td>{item.group.ageclass ? item.group.ageclass.name : "N/A"}</td>
     <td>{item.participants}</td>

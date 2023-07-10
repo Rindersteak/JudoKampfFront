@@ -10,7 +10,7 @@ interface TimerBannerProps {
 
 const TimerBanner: React.FC<TimerBannerProps> = ({ fightId }) => {
   const fightData = FightData({ fightId }); // Hier rufe die FightData-Komponente auf
-  const [timer, setTimer] = useState(10); // Initialer Wert auf 10 setzen
+  const [timer, setTimer] = useState(120); // Initialer Wert auf 10 setzen
   const [isRunning, setIsRunning] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
