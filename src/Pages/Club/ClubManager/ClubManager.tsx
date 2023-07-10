@@ -1,3 +1,5 @@
+// Manager vereinen Form und List (Erstellen und Liste)
+
 import React, { useState } from 'react';
 import ClubForm from '../ClubForm/ClubForm';
 import ClubList, { deleteClubHandler } from '../ClubList/ClubList';
@@ -57,6 +59,12 @@ const ClubManager: React.FC = () => {
                             onClose={handleDeleteCanceled}
                             onConfirmDelete={handleDeleteConfirmed}
                             idToDelete={clubIDToDelete}
+                            text="Möchten Sie den Eintrag wirklich löschen?"
+                            subTextAvailable = {false}
+                            topButtonClassName="#b40000"
+                            bottomButtonClassName="#001aff"
+                            buttonTextBlue="Nein, behalten"
+                            buttonTextRed="Ja, löschen"
                         />
                     </Modal>
                 )}

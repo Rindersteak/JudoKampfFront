@@ -6,6 +6,7 @@ import { putFighter, deleteFighter } from "../../../API/fighterAPI";
 import Select from "react-select";
 import "../../../Styles/GlobalStyles.scss";
 import "./FighterEdit.scss";
+import { getClubs } from "../../../API/clubAPI";
 
 interface FighterEditProps {
   fighter: Fighter;
@@ -31,16 +32,14 @@ const FighterEdit: React.FC<FighterEditProps> = ({
   const [loading, setLoading] = useState(false);
   const [gender, setGender] = useState<OptionType | null>(null);
   const [club, setClub] = useState<OptionType | null>(null);
+  const [clubOptions, setClubOptions] = useState<OptionType[]>([]);
+
 
   const genderOptions = [
     { value: "m", label: "Männlich" },
     { value: "f", label: "Weiblich" },
   ];
-
-  const clubOptions = [
-    { value: "Verein 1", label: "Verein 1" },
-    { value: "Verein 2", label: "Verein 2" },
-  ];
+  
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -84,6 +83,34 @@ const FighterEdit: React.FC<FighterEditProps> = ({
     }
   };
 
+  useEffect(() => {
+    async function fetchClubs() {
+      try {
+        const clubs = await getClubs();
+        const clubOptions = clubs.map((club: any) => ({
+          value: club.id.toString(),
+          label: club.name,
+        }));
+        setClubOptions(clubOptions);
+  
+        // Initialisieren des Club-Zustands nach dem Laden der Clubs
+        if (fighter.club && fighter.club.id) { // Überprüfen, ob club und club.id existieren
+          const clubId = fighter.club.id.toString();
+          const clubOption = clubOptions.find((option: OptionType) => option.value === clubId)
+          setClub(clubOption || null);
+        } else {
+          setClub(null);
+        }
+        
+      } catch (error) {
+        console.log("Error fetching clubs:", error);
+      }
+    }
+    fetchClubs();
+  }, [fighter]); 
+  
+  
+
   // initialisiert den Zustand der Komponente mit den Daten des übergebenen Fighter
   useEffect(() => {
     setFirstName(fighter.firstname);
@@ -94,9 +121,12 @@ const FighterEdit: React.FC<FighterEditProps> = ({
       genderOptions.find((option) => option.value === fighter.sex) || null
     );
     setClub(
-      clubOptions.find((option) => option.value === fighter.club.name) || null
+      clubOptions.find((option) => option.value === fighter.club) || null
+      
     );
+    
   }, [fighter]);
+  
 
   const handleDelete = async () => {
     try {

@@ -1,0 +1,69 @@
+$screen-mid: 992px;
+$screen-normal: 993px;
+
+@mixin small {
+  @media (max-width: #{$screen-mid}) {
+    @content;
+  }
+}
+
+@mixin normal {
+  @media (min-width: #{$screen-normal}) {
+    @content;
+  }
+}
+
+.leftFigherContainer{
+    background-color: white;
+    display: grid;
+    grid-template-columns: auto;
+    width: 50%;
+    grid-template-rows: .2fr .2fr .2fr;
+
+    @include small{
+        width: 100%;
+        height: 50%;
+    }
+}
+
+.nameText{
+    color: black;
+    font-size: 3rem;
+    padding-inline: 1rem;
+
+}
+
+.clubText{
+    color: black;
+    font-size: 2.5rem;
+    padding-inline: 1rem;
+}
+
+.landesverbandText{
+    color: black;
+    font-size: 2rem;
+    padding-inline: 1rem;
+}
+
+.fighterStatsContainer{
+    display: grid;
+    grid-template-columns: 10% 5% auto;
+    width: 100%;
+   
+}
+
+.ipponFighter{
+    display: flex;
+    justify-content: flex-start;
+    font-weight: bold;
+    font-size: 5rem;
+}
+
+.wazaariFighter{
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 1rem;
+    font-weight: bold;
+    margin-left: 1rem;
+    font-size: 3.5rem;
+}

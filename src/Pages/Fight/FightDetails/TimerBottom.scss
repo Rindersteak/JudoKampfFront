@@ -1,0 +1,23 @@
+.floatingBottomTimer{
+    display: flex;
+    background-color: white;
+    color: red;
+    border: 1rem solid black;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 4rem;
+  }
+  
+  .blueBackground {
+    background-color: blue;
+    color: white;
+    transition: ease-out 1s;
+    /* Weitere Stile für den blauen Hintergrund, falls gewünscht */
+  }
+  
+  .whiteBackground{
+    background-color: white;
+    transition: ease-out 1s;
+    color: black;
+  }

@@ -34,6 +34,7 @@ export type Fighter = {
   sex: string;
   firstname: string;
   lastname: string;
+  age?: number;
   birthdate: string;
   ageclass?: AgeClass;
   weight?: number;
@@ -57,17 +58,19 @@ export type Fight = {
   id: number;
   fighterBlue: Fighter;
   fighterWhite: Fighter;
-  blue_wasari: number;
+  blue_wazaari: number;
   blue_ippon: number;
-  white_wasari: number;
+  white_wazaari: number;
   white_ippon: number;
   fight_duration: number;
   blue_fouls: number;
   white_fouls: number;
   winner: Fighter;
-  stage: string;
-  fightGroup: Fightgroup;
+  lastFight: any; 
+  nextFight: any; 
 };
+
+
 
 export type Fightgroup = {
   id: number;
@@ -77,20 +80,38 @@ export type Fightgroup = {
   weightclass: WeightClass;
   sex: string;
   fighters: Fighter[];
-  fights: Fight[];
+  fightpools: Fightpool[];
 };
 
 export type Tournament = {
   id: number;
   name: string;
   address: Address;
-  ageclass: AgeClass;
-  weightclass: WeightClass;
-  code: string;
-  stateassociation: string;
   location: string;
   startdate: string;
   enddate: string;
-  fighters: Fighter[];
-  fights: Fight[];
+  fightgroups?: Fightgroup[];
+  rule?: Rule;
+};
+
+export type Rule = {
+  id: number;
+  pointsWazaariAdult: number;
+  pointsWazaariYouth: number;
+  pointsIpponAdult: number;
+  pointsIpponYouth: number;
+  holdingTimeIpponAdult: number;
+  holdingTimeIpponYouth: number;
+  holdingTimeWazaariAdult: number;
+  holdingTimeWazaariYouth: number;
+  foulsAdult: number;
+  foulsYouth: number;
+  goldenScoreAdult: ["", "", ""];
+  goldenScoreYouth: ["", "", ""];
+};
+
+export type Fightpool = {
+ id: number;
+ fighters: Fighter[];
+ fights: Fight [];
 };

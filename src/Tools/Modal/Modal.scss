@@ -43,6 +43,10 @@ $screen-normal: 993px;
 
 .modal.large .modal-content {
   margin: 5vh;
+
+  @include small{
+    height: 69vh;
+  }
 }
 
 .modal.small .modal-content {
@@ -54,3 +58,10 @@ $screen-normal: 993px;
   }
   //height: 40%;
 }
+
+.modal.xxl .modal-content {
+  width: 95%;
+  height: 95%;
+  margin: 0;
+}
+

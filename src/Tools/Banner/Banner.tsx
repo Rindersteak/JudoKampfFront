@@ -1,3 +1,5 @@
+// Banner mit automatischem title
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,7 +22,6 @@ const Banner: React.FC<BannerProps> = ({
   onOptionalButtonClick,
   onLogoClick,
 }) => {
-  //let titleClass = subtitle ? "title-with-subtitle" : "title-only";
   const navigate = useNavigate();
 
   const handleGoBack = () => {
@@ -50,8 +51,8 @@ const Banner: React.FC<BannerProps> = ({
       </div>
 
       <div className="titleContainer">
-        <h1>{title}</h1>
-        <h1>{subtitle}</h1>
+        {title && <h1 className="title">{title}</h1>}
+        {subtitle && <h2 className="subtitle">{subtitle}</h2>}
       </div>
     </div>
   );

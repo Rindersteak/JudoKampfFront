@@ -222,6 +222,12 @@ const ClubEdit: React.FC<ClubEditProps> = ({
               onClose={handleDeleteCanceled}
               onConfirmDelete={handleDeleteConfirmed}
               idToDelete={club.id || 0}
+              text="Möchten Sie den Eintrag wirklich löschen?"
+              subTextAvailable = {false}
+              topButtonClassName="#b40000"
+              bottomButtonClassName="#001aff"
+              buttonTextBlue="Nein, behalten"
+              buttonTextRed="Ja, löschen"
             />
           </Modal>
         )}

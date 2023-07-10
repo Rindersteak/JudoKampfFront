@@ -1,3 +1,5 @@
+// Die Popups. Gibt es in small, large, xxl
+
 import React, { FC, ReactNode, useEffect } from "react";
 import "./Modal.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,8 +8,9 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 interface ModalProps {
   onClose: () => void;
   children: ReactNode;
-  size?: "small" | "large";
+  size?: "small" | "large" | "xxl";
 }
+
 
 const Modal: FC<ModalProps> = ({ onClose, children, size = "large" }) => {
   useEffect(() => {

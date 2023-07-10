@@ -23,11 +23,11 @@ export interface FighterRow {
   club?: string;
 }
 
-interface TreeForTwoProps {
+interface TreeForThreeToSixProps {
   fightgroupId: number;
 }
 
-const TreeForTwo: React.FC<TreeForTwoProps> = ({ fightgroupId }) => {
+const TreeForThreeToSix: React.FC<TreeForThreeToSixProps> = ({ fightgroupId }) => {
   const [fights, setFights] = useState<Fight[]>([]);
   const [winners, setWinners] = useState<Fighter[]>([]);
   const [fightersList, setFightersList] = useState<FighterRow[]>([]);
@@ -92,7 +92,6 @@ const TreeForTwo: React.FC<TreeForTwoProps> = ({ fightgroupId }) => {
     fetchFightPools();
   }, []);
 
-
   const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState(false);
   const [fightID, setFightID] = useState(-1);
   const handleModalClose = () => {
@@ -135,8 +134,8 @@ const TreeForTwo: React.FC<TreeForTwoProps> = ({ fightgroupId }) => {
             </tbody>
           </table>
         </div>
-        <div className="titleStyle">
-          <h1> Kämpfe</h1>
+          <div className="titleStyle">
+            <h1> Kämpfe</h1>
         </div>
         <div className="tournament-table">
           <table className="tableStyle">
@@ -183,7 +182,6 @@ const TreeForTwo: React.FC<TreeForTwoProps> = ({ fightgroupId }) => {
           </Modal>
         )}
 
-
         {isModalOpen && selectedFightId && (
             <Modal size="xxl" onClose={handleCloseModal}>
               <FightDetails fightId={selectedFightId} />
@@ -195,4 +193,4 @@ const TreeForTwo: React.FC<TreeForTwoProps> = ({ fightgroupId }) => {
 
 };
 
-export default TreeForTwo;
+export default TreeForThreeToSix;

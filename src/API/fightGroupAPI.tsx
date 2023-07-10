@@ -1,5 +1,6 @@
-import { Fightgroup } from "../types";
+import { Fightgroup, Fightpool } from "../types";
 import { API_DOMAIN } from "../Config/apiConfig";
+import { Fighter } from "../types";
 
 export async function getFightgroups() {
   try {
@@ -65,6 +66,56 @@ export async function getFightgroup(fightgroupId: number) {
     return data as Fightgroup;
   } catch (error) {
     console.error("Error loading fightgroup:", error);
+    throw error;
+  }
+}
+
+export async function getFightersListByFightgroupId(fightgroupId: number) {
+  try {
+    const response = await fetch(`${API_DOMAIN}/fightgroups/${fightgroupId}/fighterslist`);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    return data as Fighter[];
+  } catch (error) {
+    console.error('Error loading fighters list by fightgroup ID:', error);
+    throw error;
+  }
+}
+
+export async function getFightpoolsByFightgroupId(fightgroupId: number): Promise<Fightpool[]> {
+  try {
+    const response = await fetch(`${API_DOMAIN}/fightgroups/${fightgroupId}/fightpools`);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data as Fightpool[];
+  } catch (error) {
+    console.error('Error loading fightpools:', error);
+    throw error;
+  }
+}
+
+export async function createFightPools(fightgroupId: string): Promise<void> {
+  try {
+    const response = await fetch(`${API_DOMAIN}/fightgroups/${fightgroupId}/create-fightpools`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+  } catch (error) {
+    console.error("Error creating fightpools:", error);
     throw error;
   }
 }

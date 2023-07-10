@@ -134,7 +134,6 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({
       ...tournament!,
       name: tournamentName,
       location: tournamentLocation,
-      stateassociation: stateassociation,
       address: {
         ...tournament!.address,
         city: addressCity,
@@ -170,7 +169,8 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({
         setShowConfirmDeletePopup(false);
         window.location.href = "/"; //after successful deleting tournament, route user back to HomePage
       } catch (error) {
-        setErrorMessage("(DB-Error) Fehler beim Löschen!");
+        setErrorMessage("(DB-Error) Fehler beim Lösche" +
+            "n!");
       }
     }
   };
@@ -340,6 +340,12 @@ const TournamentEdit: React.FC<TournamentEditProps> = ({
               onClose={handleDeleteCanceled}
               onConfirmDelete={handleDeleteConfirmed}
               idToDelete={Number(tournamentId)}
+              text="Möchten Sie den Eintrag wirklich löschen?"
+              subTextAvailable = {false}
+              topButtonClassName="#b40000"
+              bottomButtonClassName="#001aff"
+              buttonTextBlue="Nein, behalten"
+              buttonTextRed="Ja, löschen"
             />
           </Modal>
         )}

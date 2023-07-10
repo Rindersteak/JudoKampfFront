@@ -8,8 +8,10 @@ import ConfirmDelete from "../../../Tools/ConfirmDelete/ConfirmDelete";
 import FighterEdit from "../FighterEdit/FighterEdit";
 import "./FighterList.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDown, faArrowUp, faBalanceScale } from "@fortawesome/free-solid-svg-icons";
 import { getTournamentFightersList } from "../../../API/tournamentAPI";
+import FighterAddWeight from "../FighterAddWeight/FighterAddWeight";
+
 
 interface FighterListProps {
   tournamentId: string;
@@ -41,6 +43,24 @@ const FighterList: React.FC<FighterListProps> = ({
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedFighter, setSelectedFighter] = useState<Fighter | null>(null);
 
+  const [showAddWeightModal, setShowAddWeightModal] = useState(false);
+
+
+  const handleAddWeight = (event: React.MouseEvent, fighter: Fighter) => {
+    event.stopPropagation();
+    setSelectedFighter(fighter);
+    setShowAddWeightModal(true);
+  };
+
+
+  const handleAddWeightModalClose = () => {
+    setShowAddWeightModal(false);
+  };
+
+  const handleWeightAdded = () => {
+    setShowAddWeightModal(false);
+    // Hier eventuell die Liste der Fighter aktualisieren
+  };
 
   useEffect(() => {
     const loadBackendFighters = async () => {
@@ -245,6 +265,20 @@ const FighterList: React.FC<FighterListProps> = ({
                     </button>
                   </th>
                   <th className="headerCell">
+                    Gewicht
+                    <button
+                        className="arrowButton"
+                        onClick={() => handleSortClick("id")}
+                    >
+                      {sortOrder === "asc" && sortColumn === "id" ? (
+                          <FontAwesomeIcon icon={faArrowDown} />
+                      ) : (
+                          <FontAwesomeIcon icon={faArrowUp} />
+                      )}
+                    </button>
+                  </th>
+
+                  <th className="headerCell">
                     Geburtsdatum
                     <button
                       className="arrowButton"
@@ -281,15 +315,25 @@ const FighterList: React.FC<FighterListProps> = ({
                       <td>{fighter.club?.address?.city}</td>
                       <td>{fighter.id}</td>
                       <td>{fighter.weightclass?.name}</td>
+
+                      <td className="addWeightIcon">
+                        <FontAwesomeIcon
+                            icon={faBalanceScale}
+                            onClick={(event) => handleAddWeight(event, fighter)}
+                        />
+                      </td>
+
                       <td>{birthdateAsDate.toDateString()}</td>
                     </>
                   )}
+
                   <td
                     className="deleteIcon"
                     onClick={(event) => handleDeleteFighter(event, fighter.id)}
                   >
                     <FiTrash2 />
                   </td>
+
                 </tr>
               );
             })}
@@ -303,10 +347,23 @@ const FighterList: React.FC<FighterListProps> = ({
             onClose={handleDeleteCanceled}
             onConfirmDelete={handleDeleteConfirmed}
             idToDelete={fighterIdToDelete}
+            text="Möchten Sie den Eintrag wirklich löschen?"
+            subTextAvailable = {false}
+            topButtonClassName="#b40000"
+            bottomButtonClassName="#001aff"
+            buttonTextBlue="Nein, behalten"
+            buttonTextRed="Ja, löschen"
           />
         </Modal>
       )}
-
+      {showAddWeightModal && selectedFighter !== null && (
+          <Modal size="small" onClose={handleAddWeightModalClose}>
+            <FighterAddWeight
+                fighter={selectedFighter}
+                onWeightAdded={handleWeightAdded}
+            />
+          </Modal>
+      )}
       {showEditModal && selectedFighter && (
         <Modal size="large" onClose={handleEditModalClose}>
           <FighterEdit
@@ -316,6 +373,7 @@ const FighterList: React.FC<FighterListProps> = ({
           />
         </Modal>
       )}
+
     </div>
   );
 };

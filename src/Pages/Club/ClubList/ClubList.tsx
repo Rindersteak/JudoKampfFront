@@ -194,6 +194,12 @@ const ClubList: React.FC<ClubListProps> = ({
             onClose={handleDeleteCanceled}
             onConfirmDelete={handleDeleteConfirmed}
             idToDelete={clubIdToDelete}
+            text="Möchten Sie den Eintrag wirklich löschen?"
+            subTextAvailable = {false}
+            topButtonClassName="#b40000"
+            bottomButtonClassName="#001aff"
+            buttonTextBlue="Nein, behalten"
+            buttonTextRed="Ja, löschen"
           />
         </Modal>
       )}

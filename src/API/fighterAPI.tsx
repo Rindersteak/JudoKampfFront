@@ -86,3 +86,34 @@ export async function putFighter(fighter: Fighter) {
     throw error;
   }
 }
+
+// HTTP Weight
+export async function setFighterWeightDirect(fighterId: number, weight: number) {
+  try {
+    const response = await fetch(`${API_DOMAIN}/fighters/${fighterId}/set-weight/${weight}`, {
+      method: "PATCH"
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+  } catch (error) {
+    console.error(`Error setting weight for fighter ${fighterId}:`, error);
+    throw error;
+  }
+}
+
+export async function setFighterWeight(fighterId: number) {
+  try {
+    const response = await fetch(`${API_DOMAIN}/fighters/${fighterId}/set-weight`, {
+      method: "PATCH"
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+  } catch (error) {
+    console.error(`Error clearing weight for fighter ${fighterId}:`, error);
+    throw error;
+  }
+}

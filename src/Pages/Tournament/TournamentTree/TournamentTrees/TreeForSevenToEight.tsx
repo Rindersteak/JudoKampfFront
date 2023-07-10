@@ -11,46 +11,59 @@ import { useNavigate } from "react-router-dom";
 import { getFightgroup } from "../../../../API/fightGroupAPI";
 import "../TreeStyles.scss";
 import { getFightersListByFightgroupId, getFightpoolsByFightgroupId } from "../../../../API/fightGroupAPI";
-import Modal from '../../../../Tools/Modal/Modal';
+import { getAllFightPools } from "../../../../API/fightPoolAPI";
 import FightDetails from "../../../Fight/FightDetails/FightDetails";
-import ConfirmDelete from "../../../../Tools/ConfirmDelete/ConfirmDelete";
+import Modal from "../../../../Tools/Modal/Modal";
 
 
 export interface FighterRow {
+  id: number;
   fighter: string;
   victories: number;
   points: number;
   club?: string;
 }
 
-interface TreeForTwoProps {
+interface TreeForSevenToEightProps {
   fightgroupId: number;
 }
 
-const TreeForTwo: React.FC<TreeForTwoProps> = ({ fightgroupId }) => {
+const TreeForSevenToEight: React.FC<TreeForSevenToEightProps> = ({ fightgroupId }) => {
   const [fights, setFights] = useState<Fight[]>([]);
   const [winners, setWinners] = useState<Fighter[]>([]);
   const [fightersList, setFightersList] = useState<FighterRow[]>([]);
   const [bannerTitle, setBannerTitle] = useState<string>("");
   const [bannerSubtitle, setBannerSubtitle] = useState<string>("");
   const navigate = useNavigate();
-
-
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [selectedFightId, setSelectedFightId] = useState<number | null>(null);
+  const [fightPools, setFightPools] = useState<Fightpool[]>([]);
+
+
 
   const handleStartFight = (fightId: number) => {
-    setSelectedFightId(fightId); // Setze den ausgewählten Kampf
-    setIsModalOpen(true); // Öffne das Modal
+    setSelectedFightId(fightId);
   };
 
+
   const handleCloseModal = () => {
-    setSelectedFightId(null); // Entferne den ausgewählten Kampf
-    setIsModalOpen(false); // Schließe das Modal
+    setSelectedFightId(null);
+    setIsModalOpen(false);
   };
+
   function getFightsFromFightPools() {
-    return fightPools.flatMap(pool => pool.fights);
+    return fightPools.flatMap(pool => pool && pool.fights ? pool.fights : []);
   }
+
+  function getFightersFromPool(pool: Fightpool, fightersList: FighterRow[]) {
+    if (pool && pool.fights) {
+      const fighterIdsFromPool = pool.fights.flatMap(fight => [fight.fighterBlue?.id, fight.fighterWhite?.id]);
+      return fightersList.filter((fighterRow: FighterRow) => fighterIdsFromPool.includes(fighterRow.id));
+    }
+    return [];
+  }
+
 
   useEffect(() => {
     async function fetchFightData() {
@@ -59,6 +72,7 @@ const TreeForTwo: React.FC<TreeForTwoProps> = ({ fightgroupId }) => {
 
         const fighters = await getFightersListByFightgroupId(fightgroupId);
         const fighterRows = fighters.map((fighter) => ({
+          id: fighter.id,
           fighter: `${fighter.firstname} ${fighter.lastname}`,
           victories: 0,
           points: 0,
@@ -78,7 +92,7 @@ const TreeForTwo: React.FC<TreeForTwoProps> = ({ fightgroupId }) => {
     fetchFightData();
   }, [fightgroupId]);
 
-  const [fightPools, setFightPools] = useState<Fightpool[]>([]);
+
 
   useEffect(() => {
     async function fetchFightPools() {
@@ -90,31 +104,25 @@ const TreeForTwo: React.FC<TreeForTwoProps> = ({ fightgroupId }) => {
       }
     }
     fetchFightPools();
-  }, []);
+  }, [fightgroupId]);
+
+// Extracting fights from each pool
+  const fightsFromPool1 = fightPools.length ? fightPools[0].fights : [];
+  const fightsFromPool2 = fightPools.length > 1 ? fightPools[1].fights : [];
 
 
-  const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState(false);
-  const [fightID, setFightID] = useState(-1);
-  const handleModalClose = () => {
-    setShowConfirmDeletePopup(false);
-  };
 
-  const handleConfirmed = async () => {
-    handleStartFight(fightID)
-    handleModalClose();
-  };
 
-  const handleOpenModal = (fightID:number) => {
-    setFightID(fightID);
-    setShowConfirmDeletePopup(true);
-  }
+
 
   return (
       <div className="tournament-shell">
         <Banner title={bannerTitle} subtitle={bannerSubtitle} />
 
         <div className="tournament-table">
+          {/* Table 1 */}
           <table className="tableStyle">
+            <caption>Pool 1</caption>
             <thead>
             <tr>
               <th className="headerCell">Kämpfer</th>
@@ -124,7 +132,8 @@ const TreeForTwo: React.FC<TreeForTwoProps> = ({ fightgroupId }) => {
             </tr>
             </thead>
             <tbody>
-            {fightersList.map((fighterRow, index) => (
+
+            {getFightersFromPool(fightPools[0], fightersList).map((fighterRow, index) => (
                 <tr key={index}>
                   <td>{fighterRow.fighter}</td>
                   <td>{fighterRow.victories}</td>
@@ -134,54 +143,68 @@ const TreeForTwo: React.FC<TreeForTwoProps> = ({ fightgroupId }) => {
             ))}
             </tbody>
           </table>
+
+          {/* Table 2 */}
+          {fightPools.length > 1 && (
+              <table className="tableStyle">
+                <caption>Pool 2</caption>
+                <thead>
+                <tr>
+                  <th className="headerCell">Kämpfer</th>
+                  <th className="headerCell">Anzahl Siege</th>
+                  <th className="headerCell">Punktanzahl</th>
+                  <th className="headerCell">Verein</th>
+                </tr>
+                </thead>
+                <tbody>
+                {getFightersFromPool(fightPools[1], fightersList).map((fighterRow, index) => (
+                    <tr key={index}>
+                      <td>{fighterRow.fighter}</td>
+                      <td>{fighterRow.victories}</td>
+                      <td>{fighterRow.points}</td>
+                      <td>{fighterRow.club}</td>
+                    </tr>
+                ))}
+                </tbody>
+              </table>
+          )}
         </div>
+
+
         <div className="titleStyle">
           <h1> Kämpfe</h1>
         </div>
-        <div className="tournament-table">
-          <table className="tableStyle">
-            <thead>
-            <tr>
-              <th className="headerCell">Blauer Kämpfer</th>
-              <th className="headerCell">Weißer Kämpfer</th>
-              <th className="headerCell">Gewinner</th>
-              <th className="headerCell">Aktionen</th>
-            </tr>
-            </thead>
-            <tbody>
-            {getFightsFromFightPools().map((fight: Fight, index: number) => (
-                <tr key={index}>
-                  <td>{`${fight.fighterBlue?.firstname || 'N/A'} ${fight.fighterBlue?.lastname || 'N/A'}`}</td>
-                  <td>{`${fight.fighterWhite?.firstname || 'N/A'} ${fight.fighterWhite?.lastname || 'N/A'}`}</td>
-                  <td>{`${fight.winner?.firstname || 'Kampf nicht gestartet'} ${fight.winner?.lastname || ''}`}</td>
-                  <td>
-                    <div className="buttonContainer">
-                    <button className="blueButton" onClick={() => handleOpenModal(fight.id)}>
-                          Kampf starten
-                    </button>
-                    </div>
-                  </td>
-                </tr>
-            ))}
-            </tbody>
-          </table>
-        </div>
 
-        {showConfirmDeletePopup && (
-          <Modal size="small" onClose={handleModalClose}>
-            <ConfirmDelete
-              onClose={handleModalClose}
-              onConfirmDelete={handleConfirmed}
-              text="Möchten Sie den Kampf wirklich starten?"
-              subTextAvailable = {true}
-              subText="Hinweis: Nach Kampfstart können die Turnierklassen nicht mehr geändert werden! Sofern einer Turniergruppe nur ein Teilnehmer zugeordnet ist, sollten die Gewichts-klassen in den Einstellungen des Turniers entsprechend angepasst werden."
-              topButtonClassName="#b40000"
-              bottomButtonClassName="#001aff"
-              buttonTextBlue="Nein, Zurück"
-              buttonTextRed="Ja, starten"
-            />
-          </Modal>
-        )}
+        {fightPools.map((pool: Fightpool, poolIndex: number) => (
+            <table className="tableStyle" key={poolIndex}>
+              <caption>{`Pool ${poolIndex + 1}`}</caption>
+              <thead>
+              <tr>
+                <th className="headerCell">Blauer Kämpfer</th>
+                <th className="headerCell">Weißer Kämpfer</th>
+                <th className="headerCell">Gewinner</th>
+                <th className="headerCell">Aktionen</th>
+              </tr>
+              </thead>
+              <tbody>
+              {pool.fights.map((fight: Fight, fightIndex: number) => (
+                  <tr key={fightIndex}>
+                    <td>{`${fight.fighterBlue?.firstname || 'N/A'} ${fight.fighterBlue?.lastname || 'N/A'}`}</td>
+                    <td>{`${fight.fighterWhite?.firstname || 'N/A'} ${fight.fighterWhite?.lastname || 'N/A'}`}</td>
+                    <td>{`${fight.winner?.firstname || 'Kampf nicht gestartet'} ${fight.winner?.lastname || ''}`}</td>
+                    <td>
+                      <div className="buttonContainer">
+                        <button className="blueButton" onClick={() => handleStartFight(fight.id)}>
+                          Kampf starten
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+              ))}
+              </tbody>
+            </table>
+        ))}
+
 
 
         {isModalOpen && selectedFightId && (
@@ -189,10 +212,8 @@ const TreeForTwo: React.FC<TreeForTwoProps> = ({ fightgroupId }) => {
               <FightDetails fightId={selectedFightId} />
             </Modal>
         )}
-
       </div>
   );
-
 };
 
-export default TreeForTwo;
+export default TreeForSevenToEight;

@@ -14,14 +14,12 @@ $screen-normal: 993px;
 }
 
 .cards-container {
-  background-color: rgba(39, 39, 39, 0.5);
   display: grid;
   gap: 15px;
-  padding-bottom: 1rem;
   width: 100%;
 
   @include normal() {
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 33vw 33vw 33vw;
   }
 
   @include small {
@@ -42,7 +40,7 @@ $screen-normal: 993px;
   justify-content: center;
   align-items: center;
   //width: 25em;
-  height: 25em;
+  height: 38vh;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   cursor: pointer;

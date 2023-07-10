@@ -1,0 +1,42 @@
+$screen-mid: 992px;
+$screen-normal: 993px;
+
+@mixin small {
+  @media (max-width: #{$screen-mid}) {
+    @content;
+  }
+}
+
+@mixin normal {
+  @media (min-width: #{$screen-normal}) {
+    @content;
+  }
+}
+
+.mainFightDetails{
+  min-width: 60vh;
+}
+
+.gewicht{
+  font-size: 3rem;
+  font-weight: bold;
+  margin-left: 2rem;
+}
+
+.vorrunde{
+  font-size: 3rem;
+  font-weight: bold;
+  margin-right: 2rem;
+}
+
+.fighterStatsMiddle{
+  display: flex;
+  flex-direction: row;
+  height: 80%;
+
+  @include small{
+    display: grid;
+    grid-template-columns: auto;
+  }
+}
+

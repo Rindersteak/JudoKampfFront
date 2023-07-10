@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Tournament } from "../../../types";
-import { getTotalParticipants } from "../../../API/fighterAPI";
-import { getTournaments, deleteTournament } from "../../../API/tournamentAPI";
+import { getTournaments, deleteTournament, getTournamentFightersList } from "../../../API/tournamentAPI";
 import { FiTrash2 } from "react-icons/fi";
 import Modal from "../../../Tools/Modal/Modal";
 import ConfirmDelete from "../../../Tools/ConfirmDelete/ConfirmDelete";
@@ -14,8 +13,12 @@ interface TournamentListProps {
   onClose: () => void;
 }
 
+interface TournamentExtended extends Tournament {
+  participants: number;
+}
+
 const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
-  const [backendTournaments, setBackendTournaments] = useState<Tournament[]>(
+  const [backendTournaments, setBackendTournaments] = useState<TournamentExtended[]>(
     []
   );
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
@@ -33,7 +36,12 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
       try {
         let tournaments = await getTournaments();
 
-        tournaments = tournaments.sort((a: Tournament, b: Tournament) => {
+        for (let i = 0; i < tournaments.length; i++) {
+          const participantsList = await getTournamentFightersList(tournaments[i].id);
+          tournaments[i].participants = participantsList.length;
+        }
+
+        tournaments = tournaments.sort((a: TournamentExtended, b: TournamentExtended) => {
           if (sortColumn === "name") {
             return sortOrder === "asc"
               ? a.name.localeCompare(b.name)
@@ -49,8 +57,8 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
           } else if (sortColumn === "id") {
             return sortOrder === "asc" ? a.id - b.id : b.id - a.id;
           } else if (sortColumn === "participants") {
-            const aTotalParticipants = getTotalParticipants(a.fighters);
-            const bTotalParticipants = getTotalParticipants(b.fighters);
+            const aTotalParticipants = getTournamentFightersList.length;
+            const bTotalParticipants = getTournamentFightersList.length;
             return sortOrder === "asc"
               ? aTotalParticipants - bTotalParticipants
               : bTotalParticipants - aTotalParticipants;
@@ -118,7 +126,7 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
     const name = tournament.name.toLowerCase();
     const city = tournament.address.city.toLowerCase();
     const id = tournament.id.toString().toLowerCase();
-    const participants = getTotalParticipants(tournament.fighters)
+    const participants = getTournamentFightersList.length
       .toString()
       .toLowerCase();
     const period = formatTournamentPeriod(
@@ -134,6 +142,7 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
       period.includes(searchTerm.toLowerCase())
     );
   });
+
 
   return (
     <div className="entryList">
@@ -231,7 +240,7 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
                 <td>{tournament.name}</td>
                 <td>{tournament.address.city}</td>
                 <td>{tournament.id}</td>
-                <td>{getTotalParticipants(tournament.fighters)}</td>
+                <td>{tournament.participants}</td>
                 <td>
                   {formatTournamentPeriod(
                     tournament.startdate,
@@ -253,12 +262,20 @@ const TournamentList: React.FC<TournamentListProps> = ({ onClose }) => {
         </table>
       </div>
 
+      
+
       {showConfirmDeletePopup && tournamentIdToDelete !== null && (
         <Modal size="small" onClose={handleDeleteCanceled}>
           <ConfirmDelete
             onClose={handleDeleteCanceled}
             onConfirmDelete={handleDeleteConfirmed}
             idToDelete={tournamentIdToDelete}
+            text="Möchten Sie den Eintrag wirklich löschen?"
+            subTextAvailable = {false}
+            topButtonClassName="#b40000"
+            bottomButtonClassName="#001aff"
+            buttonTextBlue="Nein, behalten"
+            buttonTextRed="Ja, löschen"
           />
         </Modal>
       )}
