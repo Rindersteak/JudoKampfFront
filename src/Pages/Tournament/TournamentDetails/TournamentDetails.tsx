@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getTournaments, createFightgroups } from "../../../API/tournamentAPI";
+import { useParams, useNavigate } from "react-router-dom";
+import {
+  getTournaments,
+  createFightgroups
+} from "../../../API/tournamentAPI";
 import "./TournamentDetails.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from "./../../../Tools/Modal/Modal";
@@ -13,6 +16,7 @@ import {
 import { Tournament } from "../../../types";
 import Banner from "../../../Tools/Banner/Banner";
 import ConfirmDelete from "../../../Tools/ConfirmDelete/ConfirmDelete";
+import { create } from "domain";
 
 // Definition der Eigenschaften für die TournamentDetails-Komponente
 interface TournamentDetailsProps {
@@ -47,6 +51,7 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({
   };
   const [hasFightGroups, setHasFightGroups] = useState(false);
 
+
   // Effekt, der beim Start ausgeführt wird und die Turnierdaten abruft
   useEffect(() => {
     const fetchTournaments = async () => {
@@ -55,13 +60,9 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({
         setBackendTournaments(tournaments);
         const tournament = getTournamentDetailsById(tournamentId, tournaments);
         setTournament(tournament);
-
+  
         // Überprüfen, ob das Turnier mindestens eine Kampfgruppe hat
-        if (
-          tournament &&
-          tournament.fightgroups &&
-          tournament.fightgroups.length > 0
-        ) {
+        if (tournament && tournament.fightgroups && tournament.fightgroups.length > 0) {
           setHasFightGroups(true);
         } else {
           setHasFightGroups(false);
@@ -70,9 +71,11 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({
         console.error("Error loading tournaments:", error);
       }
     };
-
+  
     fetchTournaments();
   }, [tournamentId]);
+  
+  
 
   const handleOpenFightGroupList = () => {
     onOpenFightGroupList(tournamentId || "");
@@ -98,8 +101,8 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({
   };
 
   const handleConfirmed = async () => {
-    onOpenFightGroupList(tournamentId || "");
-    createFightgroups(tournamentId || "");
+    onOpenFightGroupList(tournamentId||"");
+    createFightgroups(tournamentId||"");
     handleModalClose();
   };
 
@@ -114,12 +117,13 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({
       {/* Für den Edit-Button kann hier einfach der Button aus der Banner.tsx aufgerufen werden */}
       {/* Container für die Karten */}
       <div className="cards-container">
-        <CardOne
-          hasFightGroups={hasFightGroups}
-          setShowConfirmDeletePopup={setShowConfirmDeletePopup}
-          onOpenFightGroupList={onOpenFightGroupList}
-          tournamentId={tournamentId}
-        />
+      <CardOne
+  hasFightGroups={hasFightGroups}
+  setShowConfirmDeletePopup={setShowConfirmDeletePopup}
+  onOpenFightGroupList={onOpenFightGroupList} 
+  tournamentId={tournamentId} 
+/>
+
 
         <CardTwo
           tournamentId={tournamentId || ""}
@@ -144,36 +148,37 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({
       </div>
 
       {showConfirmDeletePopup && (
-        <Modal size="small" onClose={handleModalClose}>
-          <ConfirmDelete
-            onClose={handleModalClose}
-            onConfirmDelete={handleConfirmed}
-            text="Möchten Sie die Turniergruppen wirklich erzeugen?"
-            subTextAvailable={true}
-            subText="Hinweis: Die Teilnehmer werden den Kampfgruppen automatisch zugeordnet. Es können anschießend keine weiteren Teilnehmer hinzugefügt werden!"
-            topButtonClassName="#b40000"
-            bottomButtonClassName="#001aff"
-            buttonTextBlue="Nein, zurück"
-            buttonTextRed="Ja, erzeugen"
-          />
-        </Modal>
-      )}
+          <Modal size="small" onClose={handleModalClose}>
+            <ConfirmDelete
+              onClose={handleModalClose}
+              onConfirmDelete={handleConfirmed}
+              text="Möchten Sie die Turniergruppen wirklich erzeugen?"
+              subTextAvailable = {true}
+              subText="Hinweis: Die Teilnehmer werden den Kampfgruppen automatisch zugeordnet. Es können anschießend keine weiteren Teilnehmer hinzugefügt werden!"
+              topButtonClassName="#b40000"
+              bottomButtonClassName="#001aff"
+              buttonTextBlue="Nein, zurück"
+              buttonTextRed="Ja, erzeugen"
+            />
+          </Modal>
+        )}
     </div>
   );
 };
 
+
 interface CardOneProps {
   hasFightGroups: boolean;
   setShowConfirmDeletePopup: React.Dispatch<React.SetStateAction<boolean>>;
-  onOpenFightGroupList: (tournamentId: string) => void;
-  tournamentId: string | undefined;
+  onOpenFightGroupList: (tournamentId: string) => void;  
+  tournamentId: string | undefined; 
 }
 
-const CardOne: React.FC<CardOneProps> = ({
-  hasFightGroups,
-  setShowConfirmDeletePopup,
-  onOpenFightGroupList,
-  tournamentId,
+const CardOne: React.FC<CardOneProps> = ({ 
+  hasFightGroups, 
+  setShowConfirmDeletePopup, 
+  onOpenFightGroupList, 
+  tournamentId  
 }) => {
   const handleCardOneClick = () => {
     if (!hasFightGroups) {
@@ -182,6 +187,7 @@ const CardOne: React.FC<CardOneProps> = ({
       onOpenFightGroupList(tournamentId || "");
     }
   };
+  
 
   return (
     <div className="card-one" onClick={handleCardOneClick}>
@@ -194,6 +200,7 @@ const CardOne: React.FC<CardOneProps> = ({
     </div>
   );
 };
+
 
 const CardTwo = ({
   tournamentId,
