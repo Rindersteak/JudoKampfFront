@@ -41,10 +41,6 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({
   );
   const [tournament, setTournament] = useState<Tournament | null>(null);
   const [showFightGroupList, setShowFightGroupList] = useState(false); // Neuer Zustand
-  const handleOpenFightGroupListClick = () => {
-    onOpenFightGroupList(tournamentId || "");
-    setShowFightGroupList(true);
-  };
   const [hasFightGroups, setHasFightGroups] = useState(false);
 
   // Effekt, der beim Start ausgeführt wird und die Turnierdaten abruft
@@ -73,11 +69,6 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({
 
     fetchTournaments();
   }, [tournamentId]);
-
-  const handleOpenFightGroupList = () => {
-    onOpenFightGroupList(tournamentId || "");
-    setShowFightGroupList(true); // Zustand auf true setzen
-  };
 
   // Funktion zum Abrufen der Turnierdetails anhand der ID
   const getTournamentDetailsById = (
@@ -244,7 +235,6 @@ const CardThree = ({
 };
 
 const CardFour = ({
-  tournamentId,
   onOpenClubList,
 }: {
   tournamentId: string;
@@ -267,7 +257,6 @@ const CardFour = ({
 };
 
 const CardFive = ({
-  tournamentId,
   onOpenClubManager,
 }: {
   tournamentId: string;
