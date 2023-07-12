@@ -79,7 +79,7 @@ const TournamentDetails: React.FC<TournamentDetailsProps> = ({
 
   const handleOpenFightGroupList = () => {
     onOpenFightGroupList(tournamentId || "");
-    setShowFightGroupList(true);
+    setShowFightGroupList(true); // Zustand auf true setzen
   };
 
   // Funktion zum Abrufen der Turnierdetails anhand der ID
