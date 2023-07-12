@@ -235,7 +235,6 @@ const CardThree = ({
 };
 
 const CardFour = ({
-  tournamentId,
   onOpenClubList,
 }: {
   tournamentId: string;
@@ -258,7 +257,6 @@ const CardFour = ({
 };
 
 const CardFive = ({
-  tournamentId,
   onOpenClubManager,
 }: {
   tournamentId: string;
