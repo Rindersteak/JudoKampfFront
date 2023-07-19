@@ -4,6 +4,8 @@ Welcome to Kodokan! This is a repository for a project named Kodokan. Here you w
 
 ## Installation
 
+Node Version mind. v18
+
 To install all the necessary dependencies for Kodokan, you can use npm. Make sure you have npm (Node Package Manager) installed on your system. Here are the steps to install the dependencies:
 
 1. Open your terminal or command prompt.
